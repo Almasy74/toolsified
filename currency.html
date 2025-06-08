@@ -1,20 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<style>
-.swap-btn {
-  padding: 10px 16px;
-  background: #10b981; /* emerald green */
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 500;
-}
-.swap-btn:hover {
-  background: #059669;
-}
-</style>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Currency Converter – Toolsified</title>
@@ -22,6 +8,20 @@
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <style>
+    .swap-btn {
+      padding: 10px 16px;
+      background: #10b981;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    .swap-btn:hover {
+      background: #059669;
+    }
+  </style>
 </head>
 <body>
   <div class="card">
@@ -83,10 +83,9 @@
       }
 
       try {
-        const res = await axios.get(`https://api.exchangerate.host/latest?base=${from}&symbols=${to}`);
-        const rate = res.data.rates[to];
-        const date = res.data.date;
-        const converted = (amount * rate).toFixed(2);
+        const res = await axios.get(`/api/convert?from=${from}&to=${to}&amount=${amount}`);
+        const converted = res.data.result.toFixed(2);
+        const date = res.data.date || "unknown";
         document.getElementById('result').textContent = `${amount} ${from} = ${converted} ${to}`;
         document.getElementById('lastUpdated').textContent = `Exchange rate last updated: ${date}`;
       } catch (err) {
