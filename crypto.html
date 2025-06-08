@@ -114,16 +114,31 @@
 
       try {
         if (fiat === 'NOK') targetFiat = 'USD';
-        const cryptoRes = await fetch(`https://min-api.cryptocompare.com/data/pricehistorical?fsym=${crypto}&tsyms=${targetFiat}&ts=${timestamp}&api_key=${apiKey}`);
+
+        const cryptoUrl = `https://min-api.cryptocompare.com/data/pricehistorical?fsym=${crypto}&tsyms=${targetFiat}&ts=${timestamp}&api_key=${apiKey}`;
+        const cryptoRes = await fetch(cryptoUrl);
         const cryptoData = await cryptoRes.json();
         const rawRate = cryptoData[crypto]?.[targetFiat];
         if (!rawRate) return null;
 
         if (fiat === 'NOK') {
-          const exchangeRes = await fetch(`https://api.exchangerate.host/${date}?base=USD&symbols=NOK`);
+          const fxUrl = `https://api.exchangerate.host/${date}?base=USD&symbols=NOK`;
+          console.log("Henter valutakurs fra:", fxUrl);
+
+          let exchangeRes = await fetch(fxUrl);
+          if (!exchangeRes.ok) {
+            console.warn("Ingen valutakurs for valgt dato, prøver dagens kurs");
+            const todayDateStr = new Date().toISOString().split("T")[0];
+            exchangeRes = await fetch(`https://api.exchangerate.host/${todayDateStr}?base=USD&symbols=NOK`);
+          }
+
           const exchangeData = await exchangeRes.json();
           conversionRate = exchangeData?.rates?.NOK || null;
-          if (!conversionRate) return null;
+
+          if (!conversionRate) {
+            console.error("Ingen valutakurs (NOK)", exchangeData);
+            return null;
+          }
         }
 
         return rawRate * conversionRate;
@@ -149,8 +164,8 @@
       const buyRate = await getRate(crypto, fiat, buyDate);
       const sellRate = await getRate(crypto, fiat, sellDate);
 
-      buyRateCell.textContent = buyRate ? buyRate.toFixed(2) : '-';
-      sellRateCell.textContent = sellRate ? sellRate.toFixed(2) : '-';
+      buyRateCell.textContent = buyRate ? buyRate.toFixed(2) : (buyDate ? 'Feil/NOK?' : '-');
+      sellRateCell.textContent = sellRate ? sellRate.toFixed(2) : (sellDate ? 'Feil/NOK?' : '-');
 
       if (buyRate !== null && sellRate !== null) {
         const diff = (sellRate - buyRate) * amount;
