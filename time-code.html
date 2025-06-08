@@ -17,6 +17,9 @@
  
 </head>
 <body>
+      <!-- Header -->
+  <div data-include="header.html"></div>
+  <main>
   <div class="card">
     <h1>Time‑code Converter</h1>
 
@@ -35,7 +38,17 @@
       <thead><tr><th>Time zone</th><th>Time formats</th></tr></thead>
       <tbody id="resultBody"></tbody>
     </table>
-  </div>
+  </div></main>
+    <div data-include="footer.html"></div>
+
+  <script>
+    // Simple include loader
+    document.querySelectorAll('[data-include]').forEach(el => {
+      fetch(el.getAttribute('data-include'))
+        .then(res => res.text())
+        .then(html => el.innerHTML = html);
+    });
+  </script>
 
 <script>
 const { DateTime } = luxon;
