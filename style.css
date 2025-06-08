@@ -35,9 +35,7 @@ a {
   box-shadow: 0 6px 18px rgba(0,0,0,.06);
   padding: 32px;
 }
-.card p {
-  min-height: 48px; /* eller høyden teksten normalt har */
-}
+
 
 
 /* Headings and text */
