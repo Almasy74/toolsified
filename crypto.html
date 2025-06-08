@@ -37,6 +37,11 @@
   <script>
     const supportedCryptos = ['BTC', 'ETH', 'SOL'];
     const supportedFiats = ['NOK', 'USD', 'EUR'];
+    const coinGeckoIds = {
+      BTC: 'bitcoin',
+      ETH: 'ethereum',
+      SOL: 'solana'
+    };
 
     function addRow() {
       const tbody = document.querySelector("#cryptoTable tbody");
@@ -73,17 +78,26 @@
 
     async function updateRow(row) {
       const amount = parseFloat(row.querySelector(".amount").value);
-      const crypto = row.querySelector(".crypto").value.toLowerCase();
+      const cryptoSymbol = row.querySelector(".crypto").value;
       const fiat = row.querySelector(".fiat").value.toLowerCase();
       const date = row.querySelector(".date").value;
 
       const rateCell = row.querySelector(".rate");
       const convertedCell = row.querySelector(".converted");
 
-      if (!amount || !crypto || !fiat || !date) return;
+      if (!amount || !cryptoSymbol || !fiat || !date) return;
+
+      const cryptoId = coinGeckoIds[cryptoSymbol];
+      if (!cryptoId) {
+        rateCell.textContent = 'Ukjent valuta';
+        convertedCell.textContent = '-';
+        return;
+      }
 
       const today = new Date();
       const selectedDate = new Date(date);
+      today.setHours(0,0,0,0);
+      selectedDate.setHours(0,0,0,0);
 
       if (selectedDate > today) {
         rateCell.textContent = 'Ugyldig dato';
@@ -94,16 +108,16 @@
       try {
         let rate;
 
-        const isToday = today.toISOString().slice(0, 10) === date;
+        const isToday = selectedDate.getTime() === today.getTime();
         if (isToday) {
           // Bruk dagens kurs
-          const urlNow = `https://api.coingecko.com/api/v3/simple/price?ids=${crypto}&vs_currencies=${fiat}`;
+          const urlNow = `https://api.coingecko.com/api/v3/simple/price?ids=${cryptoId}&vs_currencies=${fiat}`;
           const res = await fetch(urlNow);
           const data = await res.json();
-          rate = data[crypto][fiat];
+          rate = data[cryptoId]?.[fiat];
         } else {
           // Bruk historisk kurs
-          const urlHistory = `https://api.coingecko.com/api/v3/coins/${crypto}/history?date=${formatDateForAPI(date)}`;
+          const urlHistory = `https://api.coingecko.com/api/v3/coins/${cryptoId}/history?date=${formatDateForAPI(date)}`;
           const res = await fetch(urlHistory);
           const data = await res.json();
           rate = data.market_data?.current_price?.[fiat];
@@ -113,8 +127,8 @@
           rateCell.textContent = rate.toFixed(2);
           convertedCell.textContent = (rate * amount).toFixed(2);
         } else {
-          rateCell.textContent = 'N/A';
-          convertedCell.textContent = 'N/A';
+          rateCell.textContent = 'Ingen data';
+          convertedCell.textContent = '-';
         }
       } catch (err) {
         rateCell.textContent = 'Feil';
