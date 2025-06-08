@@ -6,29 +6,53 @@
   <title>Smart Crypto Converter</title>
   <link rel="stylesheet" href="/style.css" />
   <style>
-    .table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-    .table th, .table td { border: 1px solid #ddd; padding: 0.5rem; text-align: center; }
-    .row-controls { margin-top: 1rem; display: flex; gap: 1rem; }
-    .input-group { display: flex; flex-direction: column; gap: 0.25rem; }
+    main.container {
+      max-width: 100%;
+      padding: 1rem;
+    }
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      table-layout: auto;
+    }
+    .table th, .table td {
+      border: 1px solid #ddd;
+      padding: 0.5rem;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .row-controls {
+      margin-top: 1rem;
+      display: flex;
+      gap: 1rem;
+    }
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
   </style>
 </head>
 <body>
   <main class="container">
     <h1>Smart Crypto Converter</h1>
-    <table class="table" id="cryptoTable">
-      <thead>
-        <tr>
-          <th>Beløp</th>
-          <th>Krypto</th>
-          <th>Fiat</th>
-          <th>Dato</th>
-          <th>Kurs</th>
-          <th>Verdi i Fiat</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+    <div style="overflow-x: auto">
+      <table class="table" id="cryptoTable">
+        <thead>
+          <tr>
+            <th>Beløp</th>
+            <th>Krypto</th>
+            <th>Fiat</th>
+            <th>Dato</th>
+            <th>Kurs</th>
+            <th>Verdi i Fiat</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
     <div class="row-controls">
       <button onclick="addRow()">Legg til rad</button>
     </div>
