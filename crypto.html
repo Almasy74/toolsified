@@ -44,9 +44,11 @@
             <th>Beløp</th>
             <th>Krypto</th>
             <th>Fiat</th>
-            <th>Dato</th>
-            <th>Kurs</th>
-            <th>Verdi i Fiat</th>
+            <th>Kjøpsdato</th>
+            <th>Salgsdato</th>
+            <th>Kjøpskurs</th>
+            <th>Salgskurs</th>
+            <th>Gevinst/tap</th>
             <th></th>
           </tr>
         </thead>
@@ -79,9 +81,11 @@
             ${supportedFiats.map(f => `<option>${f}</option>`).join('')}
           </select>
         </td>
-        <td><input type="date" class="date" /></td>
-        <td class="rate">-</td>
-        <td class="converted">-</td>
+        <td><input type="date" class="buy-date" /></td>
+        <td><input type="date" class="sell-date" /></td>
+        <td class="buy-rate">-</td>
+        <td class="sell-rate">-</td>
+        <td class="diff">-</td>
         <td><button onclick="removeRow(this)">X</button></td>
       `;
 
@@ -96,70 +100,68 @@
       btn.closest("tr").remove();
     }
 
-    async function updateRow(row) {
-      const amount = parseFloat(row.querySelector(".amount").value);
-      const cryptoSymbol = row.querySelector(".crypto").value;
-      const fiat = row.querySelector(".fiat").value.toUpperCase();
-      const date = row.querySelector(".date").value;
-
-      const rateCell = row.querySelector(".rate");
-      const convertedCell = row.querySelector(".converted");
-
-      if (!amount || !cryptoSymbol || !fiat || !date) return;
-
-      const today = new Date();
+    async function getRate(crypto, fiat, date) {
+      if (!date) return null;
       const selectedDate = new Date(date);
+      const today = new Date();
       today.setHours(0, 0, 0, 0);
       selectedDate.setHours(0, 0, 0, 0);
+      if (selectedDate > today) return null;
 
-      if (selectedDate > today) {
-        rateCell.textContent = 'Ugyldig dato';
-        convertedCell.textContent = '-';
-        return;
-      }
+      const timestamp = Math.floor(selectedDate.getTime() / 1000);
+      let targetFiat = fiat;
+      let conversionRate = 1;
 
       try {
-        const timestamp = Math.floor(selectedDate.getTime() / 1000);
-
-        let targetFiat = fiat;
-        let conversionRate = 1;
-
-        if (fiat === 'NOK') {
-          targetFiat = 'USD';
-        }
-
-        const cryptoRes = await fetch(`https://min-api.cryptocompare.com/data/pricehistorical?fsym=${cryptoSymbol}&tsyms=${targetFiat}&ts=${timestamp}&api_key=${apiKey}`);
+        if (fiat === 'NOK') targetFiat = 'USD';
+        const cryptoRes = await fetch(`https://min-api.cryptocompare.com/data/pricehistorical?fsym=${crypto}&tsyms=${targetFiat}&ts=${timestamp}&api_key=${apiKey}`);
         const cryptoData = await cryptoRes.json();
-        const rawRate = cryptoData[cryptoSymbol]?.[targetFiat];
-
-        if (!rawRate) throw new Error("Manglende kryptokurs");
+        const rawRate = cryptoData[crypto]?.[targetFiat];
+        if (!rawRate) return null;
 
         if (fiat === 'NOK') {
-          const exchangeUrl = `https://api.exchangerate.host/${date}?base=USD&symbols=NOK`;
-          const exchangeRes = await fetch(exchangeUrl);
-          if (!exchangeRes.ok) throw new Error("Exchange API-feil");
+          const exchangeRes = await fetch(`https://api.exchangerate.host/${date}?base=USD&symbols=NOK`);
           const exchangeData = await exchangeRes.json();
-          conversionRate = exchangeData?.rates?.NOK;
-
-          if (!conversionRate) {
-            rateCell.textContent = `Ingen valutakurs (NOK)`;
-            convertedCell.textContent = '-';
-            return;
-          }
+          conversionRate = exchangeData?.rates?.NOK || null;
+          if (!conversionRate) return null;
         }
 
-        const finalRate = rawRate * conversionRate;
-        rateCell.textContent = finalRate.toFixed(2);
-        convertedCell.textContent = (finalRate * amount).toFixed(2);
-
+        return rawRate * conversionRate;
       } catch (err) {
-        console.error("Feil under oppslag:", err);
-        rateCell.textContent = 'Feil';
-        convertedCell.textContent = 'Feil';
+        console.error("Feil ved henting av kurs", err);
+        return null;
       }
     }
 
-    // Legg til én tom rad ved oppstart
+    async function updateRow(row) {
+      const amount = parseFloat(row.querySelector(".amount").value);
+      const crypto = row.querySelector(".crypto").value;
+      const fiat = row.querySelector(".fiat").value.toUpperCase();
+      const buyDate = row.querySelector(".buy-date").value;
+      const sellDate = row.querySelector(".sell-date").value;
+
+      const buyRateCell = row.querySelector(".buy-rate");
+      const sellRateCell = row.querySelector(".sell-rate");
+      const diffCell = row.querySelector(".diff");
+
+      if (!crypto || !fiat || !amount) return;
+
+      const buyRate = await getRate(crypto, fiat, buyDate);
+      const sellRate = await getRate(crypto, fiat, sellDate);
+
+      buyRateCell.textContent = buyRate ? buyRate.toFixed(2) : '-';
+      sellRateCell.textContent = sellRate ? sellRate.toFixed(2) : '-';
+
+      if (buyRate !== null && sellRate !== null) {
+        const diff = (sellRate - buyRate) * amount;
+        diffCell.textContent = diff.toFixed(2);
+        diffCell.style.color = diff >= 0 ? 'green' : 'red';
+      } else {
+        diffCell.textContent = '-';
+        diffCell.style.color = 'inherit';
+      }
+    }
+
     addRow();
   </script>
 </body>
