@@ -83,7 +83,7 @@
       }
 
       try {
-        const res = await axios.get(`/api/convert?from=${from}&to=${to}&amount=${amount}`);
+        const res = await axios.get(`/.netlify/functions/convert?from=${from}&to=${to}&amount=${amount}`);
         const converted = res.data.result.toFixed(2);
         const date = res.data.date || "unknown";
         document.getElementById('result').textContent = `${amount} ${from} = ${converted} ${to}`;
