@@ -15,6 +15,10 @@
   <script src="https://cdn.jsdelivr.net/npm/luxon@3/build/global/luxon.min.js"></script>
 </head>
 <body>
+      <!-- Header -->
+  <div data-include="header.html"></div>
+  <!-- Main Content -->
+  <main>
   <div class="container">
     <h1>Multi Time Zone Converter</h1>
     
@@ -55,6 +59,17 @@
 
   <div id="matrixTitle" style="display:none;">Difference other time zones</div>
   <div id="matrixWrapper" style="overflow-x: auto; display:none;"></div>
+  </main>
+       <div data-include="footer.html"></div>
+
+  <script>
+    // Simple include loader
+    document.querySelectorAll('[data-include]').forEach(el => {
+      fetch(el.getAttribute('data-include'))
+        .then(res => res.text())
+        .then(html => el.innerHTML = html);
+    });
+  </script>
 
   <script>
     const { DateTime } = luxon;
