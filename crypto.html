@@ -116,6 +116,7 @@
         if (fiat === 'NOK') targetFiat = 'USD';
 
         const cryptoUrl = `https://min-api.cryptocompare.com/data/pricehistorical?fsym=${crypto}&tsyms=${targetFiat}&ts=${timestamp}&api_key=${apiKey}`;
+        console.log("Henter kryptokurs fra:", cryptoUrl);
         const cryptoRes = await fetch(cryptoUrl);
         const cryptoData = await cryptoRes.json();
         const rawRate = cryptoData[crypto]?.[targetFiat];
@@ -126,18 +127,21 @@
           console.log("Henter valutakurs fra:", fxUrl);
 
           let exchangeRes = await fetch(fxUrl);
-          if (!exchangeRes.ok) {
-            console.warn("Ingen valutakurs for valgt dato, prøver dagens kurs");
+          let exchangeData = await exchangeRes.json();
+
+          if (!exchangeData?.rates?.NOK) {
+            console.warn("Historisk NOK mangler, prøver dagens kurs.");
             const todayDateStr = new Date().toISOString().split("T")[0];
-            exchangeRes = await fetch(`https://api.exchangerate.host/${todayDateStr}?base=USD&symbols=NOK`);
+            const fallbackUrl = `https://api.exchangerate.host/${todayDateStr}?base=USD&symbols=NOK`;
+            console.log("Fallback til:", fallbackUrl);
+            exchangeRes = await fetch(fallbackUrl);
+            exchangeData = await exchangeRes.json();
           }
 
-          const exchangeData = await exchangeRes.json();
-          conversionRate = exchangeData?.rates?.NOK || null;
-
+          conversionRate = exchangeData?.rates?.NOK;
           if (!conversionRate) {
-            console.error("Ingen valutakurs (NOK)", exchangeData);
-            return null;
+            console.error("Valutakurs ikke tilgjengelig (NOK)", exchangeData);
+            return 'VALUTAFEIL';
           }
         }
 
@@ -164,10 +168,10 @@
       const buyRate = await getRate(crypto, fiat, buyDate);
       const sellRate = await getRate(crypto, fiat, sellDate);
 
-      buyRateCell.textContent = buyRate ? buyRate.toFixed(2) : (buyDate ? 'Feil/NOK?' : '-');
-      sellRateCell.textContent = sellRate ? sellRate.toFixed(2) : (sellDate ? 'Feil/NOK?' : '-');
+      buyRateCell.textContent = buyRate === 'VALUTAFEIL' ? 'Valutakurs mangler' : (buyRate ? buyRate.toFixed(2) : (buyDate ? 'Feil' : '-'));
+      sellRateCell.textContent = sellRate === 'VALUTAFEIL' ? 'Valutakurs mangler' : (sellRate ? sellRate.toFixed(2) : (sellDate ? 'Feil' : '-'));
 
-      if (buyRate !== null && sellRate !== null) {
+      if (typeof buyRate === 'number' && typeof sellRate === 'number') {
         const diff = (sellRate - buyRate) * amount;
         diffCell.textContent = diff.toFixed(2);
         diffCell.style.color = diff >= 0 ? 'green' : 'red';
