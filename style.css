@@ -3,6 +3,19 @@
 * {
   box-sizing: border-box;
 }
+
+.site-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px 0;
+}
+
+.site-header .logo {
+  max-width: 220px;
+  height: auto;
+}
+
 header {
   padding: 16px;
   background: #ffffff;
