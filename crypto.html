@@ -77,26 +77,48 @@
       const fiat = row.querySelector(".fiat").value.toLowerCase();
       const date = row.querySelector(".date").value;
 
+      const rateCell = row.querySelector(".rate");
+      const convertedCell = row.querySelector(".converted");
+
       if (!amount || !crypto || !fiat || !date) return;
 
-      const timestamp = Math.floor(new Date(date).getTime() / 1000);
-      const url = `https://api.coingecko.com/api/v3/coins/${crypto}/history?date=${formatDateForAPI(date)}`;
+      const today = new Date();
+      const selectedDate = new Date(date);
+
+      if (selectedDate > today) {
+        rateCell.textContent = 'Ugyldig dato';
+        convertedCell.textContent = '-';
+        return;
+      }
 
       try {
-        const res = await fetch(url);
-        const data = await res.json();
-        const rate = data.market_data.current_price[fiat];
+        let rate;
+
+        const isToday = today.toISOString().slice(0, 10) === date;
+        if (isToday) {
+          // Bruk dagens kurs
+          const urlNow = `https://api.coingecko.com/api/v3/simple/price?ids=${crypto}&vs_currencies=${fiat}`;
+          const res = await fetch(urlNow);
+          const data = await res.json();
+          rate = data[crypto][fiat];
+        } else {
+          // Bruk historisk kurs
+          const urlHistory = `https://api.coingecko.com/api/v3/coins/${crypto}/history?date=${formatDateForAPI(date)}`;
+          const res = await fetch(urlHistory);
+          const data = await res.json();
+          rate = data.market_data?.current_price?.[fiat];
+        }
 
         if (rate) {
-          row.querySelector(".rate").textContent = rate.toFixed(2);
-          row.querySelector(".converted").textContent = (rate * amount).toFixed(2);
+          rateCell.textContent = rate.toFixed(2);
+          convertedCell.textContent = (rate * amount).toFixed(2);
         } else {
-          row.querySelector(".rate").textContent = 'N/A';
-          row.querySelector(".converted").textContent = 'N/A';
+          rateCell.textContent = 'N/A';
+          convertedCell.textContent = 'N/A';
         }
       } catch (err) {
-        row.querySelector(".rate").textContent = 'Feil';
-        row.querySelector(".converted").textContent = 'Feil';
+        rateCell.textContent = 'Feil';
+        convertedCell.textContent = 'Feil';
       }
     }
 
