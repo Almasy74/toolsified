@@ -105,12 +105,21 @@
         if (!usdRate) throw new Error("Manglende kryptokurs");
 
         let conversionRate = 1;
+
         if (fiat !== 'USD') {
-          // Hent valutakurs fra USD til valgt fiat via exchangerate.host
-          const exchangeRes = await fetch(`https://api.exchangerate.host/${date}?base=USD&symbols=${fiat}`);
+          const exchangeUrl = `https://api.exchangerate.host/${date}?base=USD&symbols=${fiat}`;
+          const exchangeRes = await fetch(exchangeUrl);
+
+          if (!exchangeRes.ok) throw new Error("Exchange API-feil");
+
           const exchangeData = await exchangeRes.json();
-          conversionRate = exchangeData.rates?.[fiat];
-          if (!conversionRate) throw new Error("Manglende valutakurs");
+          conversionRate = exchangeData?.rates?.[fiat];
+
+          if (!conversionRate) {
+            rateCell.textContent = `Ingen valutakurs (${fiat})`;
+            convertedCell.textContent = '-';
+            return;
+          }
         }
 
         const finalRate = usdRate * conversionRate;
