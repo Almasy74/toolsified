@@ -3,13 +3,18 @@
 * {
   box-sizing: border-box;
 }
-header img {
-  height: 48px;
-  margin-bottom: 16px;
+header {
+  padding: 16px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e5e7eb;
+  height: 80px;
 }
-header img {
+
+.logo {
   height: 48px;
-  margin-bottom: 16px;
+  width: auto;
 }
 
 
