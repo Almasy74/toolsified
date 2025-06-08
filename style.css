@@ -1,0 +1,145 @@
+
+/* Base styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: #f9fafb;
+  color: #1f2937;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Layout container */
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 16px;
+}
+
+.card {
+  max-width: 680px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.06);
+  padding: 32px;
+}
+
+/* Headings and text */
+h1 {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+p {
+  text-align: center;
+  font-size: 1.1rem;
+  margin-bottom: 48px;
+}
+
+label {
+  font-weight: 600;
+  margin-top: 20px;
+  display: block;
+}
+
+input, select, button {
+  font-size: 1rem;
+  border-radius: 8px;
+}
+
+input, select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #ccd0d5;
+  margin-top: 8px;
+}
+
+/* Button styles */
+button.primary {
+  width: 100%;
+  padding: 12px 14px;
+  background: #0052cc;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  margin-top: 24px;
+}
+
+button.primary:hover {
+  background: #003d99;
+}
+
+.remove-btn {
+  padding: 10px 16px;
+  background: #ef4444;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.remove-btn:hover {
+  background: #dc2626;
+}
+
+/* Tool card list */
+.tool-list {
+  display: grid;
+  gap: 16px;
+}
+
+a.tool {
+  display: block;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 20px;
+  font-weight: 600;
+  transition: box-shadow 0.2s;
+}
+
+a.tool:hover {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+}
+
+/* Table styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 32px;
+}
+
+th, td {
+  padding: 12px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: center;
+}
+
+th {
+  background: #e0f0fe;
+  font-weight: 600;
+}
+
+/* Flex rows */
+.row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.row select {
+  flex: 1;
+}
