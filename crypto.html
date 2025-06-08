@@ -97,32 +97,34 @@
       try {
         const timestamp = Math.floor(selectedDate.getTime() / 1000);
 
-        // Hent kryptokurs i USD
-        const cryptoRes = await fetch(`https://min-api.cryptocompare.com/data/pricehistorical?fsym=${cryptoSymbol}&tsyms=USD&ts=${timestamp}&api_key=${apiKey}`);
-        const cryptoData = await cryptoRes.json();
-        const usdRate = cryptoData[cryptoSymbol]?.USD;
-
-        if (!usdRate) throw new Error("Manglende kryptokurs");
-
+        let targetFiat = fiat;
         let conversionRate = 1;
 
-        if (fiat !== 'USD') {
-          const exchangeUrl = `https://api.exchangerate.host/${date}?base=USD&symbols=${fiat}`;
+        if (fiat === 'NOK') {
+          targetFiat = 'USD';
+        }
+
+        const cryptoRes = await fetch(`https://min-api.cryptocompare.com/data/pricehistorical?fsym=${cryptoSymbol}&tsyms=${targetFiat}&ts=${timestamp}&api_key=${apiKey}`);
+        const cryptoData = await cryptoRes.json();
+        const rawRate = cryptoData[cryptoSymbol]?.[targetFiat];
+
+        if (!rawRate) throw new Error("Manglende kryptokurs");
+
+        if (fiat === 'NOK') {
+          const exchangeUrl = `https://api.exchangerate.host/${date}?base=USD&symbols=NOK`;
           const exchangeRes = await fetch(exchangeUrl);
-
           if (!exchangeRes.ok) throw new Error("Exchange API-feil");
-
           const exchangeData = await exchangeRes.json();
-          conversionRate = exchangeData?.rates?.[fiat];
+          conversionRate = exchangeData?.rates?.NOK;
 
           if (!conversionRate) {
-            rateCell.textContent = `Ingen valutakurs (${fiat})`;
+            rateCell.textContent = `Ingen valutakurs (NOK)`;
             convertedCell.textContent = '-';
             return;
           }
         }
 
-        const finalRate = usdRate * conversionRate;
+        const finalRate = rawRate * conversionRate;
         rateCell.textContent = finalRate.toFixed(2);
         convertedCell.textContent = (finalRate * amount).toFixed(2);
 
