@@ -10,6 +10,13 @@ exports.handler = async (event) => {
       body: JSON.stringify(res.data)
     };
   } catch (e) {
-    return { statusCode: 500, body: 'Error retrieving exchange rate.' };
+    return {
+      statusCode: 500,
+      body: JSON.stringify({
+        error: 'Error retrieving exchange rate',
+        details: e.message || e.toString()
+      })
+    };
   }
+
 };
