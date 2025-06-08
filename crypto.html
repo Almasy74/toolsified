@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Crypto Converter</title>
+  <link rel="stylesheet" href="/style.css" />
+  <style>
+    .table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    .table th, .table td { border: 1px solid #ddd; padding: 0.5rem; text-align: center; }
+    .row-controls { margin-top: 1rem; display: flex; gap: 1rem; }
+    .input-group { display: flex; flex-direction: column; gap: 0.25rem; }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <h1>Smart Crypto Converter</h1>
+    <table class="table" id="cryptoTable">
+      <thead>
+        <tr>
+          <th>Beløp</th>
+          <th>Krypto</th>
+          <th>Fiat</th>
+          <th>Dato</th>
+          <th>Kurs</th>
+          <th>Verdi i Fiat</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <div class="row-controls">
+      <button onclick="addRow()">Legg til rad</button>
+    </div>
+  </main>
+
+  <script>
+    const supportedCryptos = ['BTC', 'ETH', 'SOL'];
+    const supportedFiats = ['NOK', 'USD', 'EUR'];
+
+    function addRow() {
+      const tbody = document.querySelector("#cryptoTable tbody");
+      const row = document.createElement("tr");
+
+      row.innerHTML = `
+        <td><input type="number" step="any" class="amount" /></td>
+        <td>
+          <select class="crypto">
+            ${supportedCryptos.map(c => `<option>${c}</option>`).join('')}
+          </select>
+        </td>
+        <td>
+          <select class="fiat">
+            ${supportedFiats.map(f => `<option>${f}</option>`).join('')}
+          </select>
+        </td>
+        <td><input type="date" class="date" /></td>
+        <td class="rate">-</td>
+        <td class="converted">-</td>
+        <td><button onclick="removeRow(this)">X</button></td>
+      `;
+
+      tbody.appendChild(row);
+
+      row.querySelectorAll("input, select").forEach(el => {
+        el.addEventListener("change", () => updateRow(row));
+      });
+    }
+
+    function removeRow(btn) {
+      btn.closest("tr").remove();
+    }
+
+    async function updateRow(row) {
+      const amount = parseFloat(row.querySelector(".amount").value);
+      const crypto = row.querySelector(".crypto").value.toLowerCase();
+      const fiat = row.querySelector(".fiat").value.toLowerCase();
+      const date = row.querySelector(".date").value;
+
+      if (!amount || !crypto || !fiat || !date) return;
+
+      const timestamp = Math.floor(new Date(date).getTime() / 1000);
+      const url = `https://api.coingecko.com/api/v3/coins/${crypto}/history?date=${formatDateForAPI(date)}`;
+
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+        const rate = data.market_data.current_price[fiat];
+
+        if (rate) {
+          row.querySelector(".rate").textContent = rate.toFixed(2);
+          row.querySelector(".converted").textContent = (rate * amount).toFixed(2);
+        } else {
+          row.querySelector(".rate").textContent = 'N/A';
+          row.querySelector(".converted").textContent = 'N/A';
+        }
+      } catch (err) {
+        row.querySelector(".rate").textContent = 'Feil';
+        row.querySelector(".converted").textContent = 'Feil';
+      }
+    }
+
+    function formatDateForAPI(date) {
+      const d = new Date(date);
+      const day = ('' + d.getDate()).padStart(2, '0');
+      const month = ('' + (d.getMonth() + 1)).padStart(2, '0');
+      const year = d.getFullYear();
+      return `${day}-${month}-${year}`;
+    }
+
+    // Legg til én tom rad ved oppstart
+    addRow();
+  </script>
+</body>
+</html>
