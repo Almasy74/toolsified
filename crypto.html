@@ -96,23 +96,29 @@
 
       try {
         const timestamp = Math.floor(selectedDate.getTime() / 1000);
-        const url = `https://min-api.cryptocompare.com/data/pricehistorical?fsym=${cryptoSymbol}&tsyms=${fiat}&ts=${timestamp}&api_key=${apiKey}`;
 
-        const res = await fetch(url);
-        const data = await res.json();
+        // Hent kryptokurs i USD
+        const cryptoRes = await fetch(`https://min-api.cryptocompare.com/data/pricehistorical?fsym=${cryptoSymbol}&tsyms=USD&ts=${timestamp}&api_key=${apiKey}`);
+        const cryptoData = await cryptoRes.json();
+        const usdRate = cryptoData[cryptoSymbol]?.USD;
 
-        const rate = data[cryptoSymbol]?.[fiat];
+        if (!usdRate) throw new Error("Manglende kryptokurs");
 
-        if (rate) {
-          rateCell.textContent = rate.toFixed(2);
-          convertedCell.textContent = (rate * amount).toFixed(2);
-        } else {
-          console.warn("API-respons uten gyldig kurs:", data);
-          rateCell.textContent = 'Ingen data';
-          convertedCell.textContent = '-';
+        let conversionRate = 1;
+        if (fiat !== 'USD') {
+          // Hent valutakurs fra USD til valgt fiat via exchangerate.host
+          const exchangeRes = await fetch(`https://api.exchangerate.host/${date}?base=USD&symbols=${fiat}`);
+          const exchangeData = await exchangeRes.json();
+          conversionRate = exchangeData.rates?.[fiat];
+          if (!conversionRate) throw new Error("Manglende valutakurs");
         }
+
+        const finalRate = usdRate * conversionRate;
+        rateCell.textContent = finalRate.toFixed(2);
+        convertedCell.textContent = (finalRate * amount).toFixed(2);
+
       } catch (err) {
-        console.error("API-feil:", err);
+        console.error("Feil under oppslag:", err);
         rateCell.textContent = 'Feil';
         convertedCell.textContent = 'Feil';
       }
