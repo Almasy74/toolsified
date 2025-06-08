@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+ <title>Multi Time Zone Converter – Compare world clocks</title>
+<meta name="description" content="See the current time in multiple time zones, add or remove cities, and easily compare times. Great for meetings." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.jsdelivr.net/npm/luxon@3/build/global/luxon.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+
+</head>
+<body>
+  <div class="container">
+    <h1>Multi Time Zone Converter</h1>
+    
+
+  <label for="inputTime">Time (auto-filled to now):</label>
+  <input type="datetime-local" id="inputTime" style="width:100%;">
+
+  <label for="fromTz">Your time zone (reference):</label>
+  <select id="fromTz" style="width:100%;"></select>
+
+  <h3>Time zones to compare:</h3>
+  <div class="timezone-row" id="firstZoneRow">
+    <select></select>
+  </div>
+  <div id="zonesContainer"></div>
+
+  <button onclick="addTimeZone()" class="primary">Add time zone</button>
+
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" id="showMatrix">
+      Show differences between all time zones
+    </label>
+  </div>
+
+  <button onclick="showAll()" class="primary">Show all times</button>
+
+  <table id="resultsTable" style="display:none;">
+    <thead>
+      <tr>
+        <th>Time Zone (UTC offset)</th>
+        <th>Local Time</th>
+        <th>Difference from reference</th>
+      </tr>
+    </thead>
+    <tbody id="resultsBody"></tbody>
+  </table>
+
+  <div id="matrixTitle" style="display:none;">Difference other time zones</div>
+  <div id="matrixWrapper" style="overflow-x: auto; display:none;"></div>
+
+  <script>
+    const { DateTime } = luxon;
+    const allZones = Intl.supportedValuesOf("timeZone");
+
+    const fromTz = document.getElementById("fromTz");
+    const inputTime = document.getElementById("inputTime");
+    const zonesContainer = document.getElementById("zonesContainer");
+    const resultsTable = document.getElementById("resultsTable");
+    const resultsBody = document.getElementById("resultsBody");
+    const matrixWrapper = document.getElementById("matrixWrapper");
+    const matrixTitle = document.getElementById("matrixTitle");
+    const showMatrixCheckbox = document.getElementById("showMatrix");
+    const firstZoneRow = document.getElementById("firstZoneRow");
+
+    // Sett nåtid og referansesone
+    const userTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    fromTz.innerHTML = allZones.map(tz => `<option value="${tz}">${tz}</option>`).join('');
+    fromTz.value = userTz;
+    inputTime.value = DateTime.now().setZone(userTz).toFormat("yyyy-MM-dd'T'HH:mm");
+
+    // Første sammenligningsfelt: alfabetisk første
+    const firstSelect = firstZoneRow.querySelector("select");
+    firstSelect.innerHTML = allZones.map(tz => `<option value="${tz}">${tz}</option>`).join('');
+    firstSelect.value = allZones[0];
+
+    function addTimeZone() {
+      const row = document.createElement("div");
+      row.className = "timezone-row";
+
+      const select = document.createElement("select");
+      select.innerHTML = allZones.map(tz => `<option value="${tz}">${tz}</option>`).join('');
+      row.appendChild(select);
+
+      const removeBtn = document.createElement("button");
+      removeBtn.textContent = "Remove";
+      removeBtn.onclick = () => row.remove();
+      row.appendChild(removeBtn);
+
+      zonesContainer.appendChild(row);
+    }
+
+    function showAll() {
+      resultsBody.innerHTML = "";
+      matrixWrapper.innerHTML = "";
+      matrixTitle.style.display = "none";
+
+      const [datePart, timePart] = inputTime.value.split("T");
+      const [year, month, day] = datePart.split("-").map(Number);
+      const [hour, minute] = timePart.split(":").map(Number);
+
+      const refZone = fromTz.value;
+      const refTime = DateTime.fromObject({ year, month, day, hour, minute }, { zone: refZone });
+
+      const timeZones = [{ label: refZone, time: refTime }];
+      const first = firstSelect.value;
+      if (!timeZones.find(t => t.label === first)) {
+        timeZones.push({ label: first, time: refTime.setZone(first) });
+      }
+
+      const selects = zonesContainer.querySelectorAll("select");
+      selects.forEach(sel => {
+        const zone = sel.value;
+        if (!timeZones.find(t => t.label === zone)) {
+          timeZones.push({ label: zone, time: refTime.setZone(zone) });
+        }
+      });
+
+      // Resultattabell
+      timeZones.forEach(({ label, time }) => {
+        const offsetHours = time.offset / 60;
+        const offsetStr = offsetHours >= 0 ? `UTC+${offsetHours}` : `UTC${offsetHours}`;
+        const diff = (time.offset - refTime.offset) / 60;
+        const diffStr = label === refZone ? "–" :
+          diff === 0 ? "Same time" : (diff > 0 ? `+${diff}h` : `${diff}h`);
+        const row = document.createElement("tr");
+        row.innerHTML = `<td>${label} (${offsetStr})</td>
+                         <td>${time.toFormat("cccc dd LLLL yyyy 'at' HH:mm")}</td>
+                         <td>${diffStr}</td>`;
+        resultsBody.appendChild(row);
+      });
+      resultsTable.style.display = "table";
+
+      // Matrise
+      if (showMatrixCheckbox.checked && timeZones.length > 1) {
+        const zonesForMatrix = timeZones.filter(t => t.label !== refZone);
+        matrixTitle.style.display = "block";
+
+        const table = document.createElement("table");
+        const header = document.createElement("tr");
+        header.innerHTML = `<th>From \\ To</th>` +
+          zonesForMatrix.map(z => `<th>${z.label}</th>`).join('');
+        table.appendChild(header);
+
+        zonesForMatrix.forEach(from => {
+          const row = document.createElement("tr");
+          row.innerHTML = `<th>${from.label}</th>` +
+            zonesForMatrix.map(to => {
+              if (from.label === to.label) return `<td>–</td>`;
+              const diff = (to.time.offset - from.time.offset) / 60;
+              return `<td>${diff > 0 ? `+${diff}h` : `${diff}h`}</td>`;
+            }).join('');
+          table.appendChild(row);
+        });
+
+        matrixWrapper.appendChild(table);
+        matrixWrapper.style.display = "block";
+      } else {
+        matrixWrapper.style.display = "none";
+        matrixTitle.style.display = "none";
+      }
+    }
+  </script>
+  </div>
+</body>
+</html>

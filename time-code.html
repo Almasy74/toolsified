@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Time-code Converter – Convert EDT, PST, CEST and more</title>
+<meta name="description" content="Paste a time like '2pm EDT' and get local time instantly. Great for scheduling across time zones." />
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Time‑code Converter</title>
+  <script src="https://cdn.jsdelivr.net/npm/luxon@3/build/global/luxon.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="style.css" />
+
+ 
+</head>
+<body>
+  <div class="card">
+    <h1>Time‑code Converter</h1>
+
+    <label for="codeInput">Time code (e.g. <strong>2pm EDT</strong>, <strong>tomorrow 15 CEST</strong>, or <strong>next monday 08:00 CET</strong>):</label>
+    <input id="codeInput" placeholder="e.g. 2pm edt or 'next friday 09:00 cet'" />
+
+    <label for="zoneRows">Where I am:</label>
+    <div id="zoneRows"></div>
+
+    <label for="addZone">Show also in these time zones:</label>
+    <button id="addZone" class="primary" type="button">Add time zone</button>
+
+    <button id="convertBtn" class="primary" type="button">Convert</button>
+
+    <table id="resultTbl" style="display:none">
+      <thead><tr><th>Time zone</th><th>Time formats</th></tr></thead>
+      <tbody id="resultBody"></tbody>
+    </table>
+  </div>
+
+<script>
+const { DateTime } = luxon;
+const allZones = Intl.supportedValuesOf('timeZone');
+const zoneRows = document.getElementById('zoneRows');
+const localZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+function createSelect(initialValue="") {
+  const sel = document.createElement('select');
+  allZones.forEach(z => {
+    const o = document.createElement('option');
+    o.value = o.textContent = z;
+    if (z === initialValue) o.selected = true;
+    sel.appendChild(o);
+  });
+  return sel;
+}
+
+function addZoneRow(first=false, initialValue="") {
+  const row = document.createElement('div');
+  row.className = 'row';
+  const sel = createSelect(initialValue);
+  row.appendChild(sel);
+  if (!first) {
+    const rm = document.createElement('button');
+    rm.textContent = 'Remove';
+    rm.className = 'remove-btn';
+    rm.onclick = () => row.remove();
+    row.appendChild(rm);
+  }
+  zoneRows.appendChild(row);
+}
+
+addZoneRow(true, localZone);
+document.getElementById('addZone').onclick = () => addZoneRow(false);
+
+const abbrevMap = {
+  PST:'America/Los_Angeles', PDT:'America/Los_Angeles',
+  EST:'America/New_York',    EDT:'America/New_York',
+  CST:'America/Chicago',     CDT:'America/Chicago',
+  MST:'America/Denver',      MDT:'America/Denver',
+  CET:'Europe/Paris',        CEST:'Europe/Paris',
+  GMT:'Etc/GMT',             UTC:'Etc/UTC'
+};
+
+function resolveDate(words, zone) {
+  const now = DateTime.now().setZone(zone);
+  const joined = words.join(' ').toLowerCase();
+
+  if (joined.includes('tomorrow')) return now.plus({ days: 1 });
+  if (joined.includes('yesterday')) return now.minus({ days: 1 });
+  if (joined.includes('today')) return now;
+
+  const weekdays = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
+  const match = joined.match(/next\s+(monday|tuesday|wednesday|thursday|friday|saturday|sunday)/i);
+  if (match) {
+    const target = weekdays.indexOf(match[1].toLowerCase());
+    const diff = (target + 7 - now.weekday) % 7 || 7;
+    return now.plus({ days: diff });
+  }
+
+  const formats = ['d LLL yyyy','d LLL','d LLLL yyyy','d LLLL','LLL d yyyy','LLL d'];
+  for (const fmt of formats) {
+    const tryDate = DateTime.fromFormat(joined, fmt, { zone });
+    if (tryDate.isValid) return tryDate;
+  }
+
+  return now;
+}
+
+document.getElementById('convertBtn').onclick = () => {
+  const raw = document.getElementById('codeInput').value.trim();
+  if (!raw) return alert('Please enter a time code.');
+
+  const cleaned = raw.replace(/[.,!?]/g, '');
+  const upper = cleaned.toUpperCase();
+  const abbr = Object.keys(abbrevMap).find(a =>
+    upper.includes(` ${a}`) || upper.startsWith(`${a} `) || upper.endsWith(` ${a}`)
+  );
+  if (!abbr) return alert('Could not detect time zone abbreviation. Try “2pm EDT”.');
+
+  const zone = abbrevMap[abbr];
+  const rawWithoutAbbr = raw.replace(new RegExp(`\\b${abbr}\\b`, 'i'), '').trim();
+
+  const timeMatch = rawWithoutAbbr.match(/(\d{1,2})(?::(\d{2}))?\s*(am|pm)?/i);
+  if (!timeMatch) return alert('Missing time (e.g. 2pm or 14:00)');
+
+  let [full, hh, mm, ap] = timeMatch;
+  let hour = parseInt(hh, 10), minute = parseInt(mm || '0', 10);
+  if (ap) {
+    ap = ap.toLowerCase();
+    if (ap === 'pm' && hour !== 12) hour += 12;
+    if (ap === 'am' && hour === 12) hour = 0;
+  }
+
+  const words = rawWithoutAbbr.replace(full, '').trim().split(/\s+/);
+  const baseDate = resolveDate(words, zone);
+  const dt = baseDate.set({ hour, minute, second: 0, millisecond: 0 });
+  render(dt);
+};
+
+function render(base) {
+  const out = document.getElementById('resultBody');
+  out.innerHTML = '';
+  const added = new Set();
+
+  function add(z) {
+    if (added.has(z)) return;
+    added.add(z);
+    const dt = base.setZone(z);
+    const isToday = dt.hasSame(DateTime.now().setZone(z), 'day');
+    const localStr = dt.toFormat('cccc dd LLL yyyy · HH:mm') + (isToday ? ' (today)' : '');
+    const isoStr = dt.toISO();
+    const offset = dt.toFormat("ZZ");
+
+    const content = `Local: ${localStr}\nISO: ${isoStr}\nOffset: UTC${offset}`;
+
+    const tr = document.createElement('tr');
+    const formatsCell = document.createElement('td');
+    formatsCell.innerHTML = `
+      <div><strong>Local:</strong> ${localStr}</div>
+      <div><strong>ISO:</strong> ${isoStr}</div>
+      <div><strong>Offset:</strong> UTC${offset}</div>
+      <button class="copy-btn">Copy</button><span class="copied-msg" style="display:none">Copied!</span>
+    `;
+
+    formatsCell.querySelector('.copy-btn').onclick = () => {
+      navigator.clipboard.writeText(content);
+      const msg = formatsCell.querySelector('.copied-msg');
+      msg.style.display = 'inline';
+      setTimeout(() => msg.style.display = 'none', 1000);
+    };
+
+    tr.innerHTML = `<td>${z}</td>`;
+    tr.appendChild(formatsCell);
+    out.appendChild(tr);
+  }
+
+  add(localZone);
+  zoneRows.querySelectorAll('select').forEach(sel => add(sel.value));
+  document.getElementById('resultTbl').style.display = 'table';
+}
+</script>
+</body>
+</html>

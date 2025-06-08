@@ -1,0 +1,121 @@
+  <style>
+    :root {
+      --primary: #0052cc;
+      --accent: #e0f0ff;
+      --bg: #f8f9fb;
+      --text: #1c1e21;
+      --border: #d1d5db;
+      --radius: 12px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background-color: var(--bg);
+      color: var(--text);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      padding: 2rem;
+      border-radius: var(--radius);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    label {
+      font-weight: 600;
+      margin-top: 1.5rem;
+      display: block;
+    }
+
+    input, select {
+      width: 100%;
+      margin-top: 0.5rem;
+      padding: 0.75rem;
+      font-size: 1rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background-color: #fff;
+    }
+
+    .timezone-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .timezone-row button {
+      background-color: #ef4444;
+      color: white;
+      border: none;
+      padding: 0.5rem 0.75rem;
+      border-radius: var(--radius);
+      cursor: pointer;
+    }
+
+    button.primary {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.75rem;
+      border-radius: var(--radius);
+      cursor: pointer;
+      width: 100%;
+      margin-top: 1.5rem;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+
+    button.primary:hover {
+      background-color: #003d99;
+    }
+
+    .checkbox label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .checkbox input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 2rem;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 1rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      background-color: var(--accent);
+    }
+
+    #matrixTitle {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-top: 2rem;
+    }
+  </style>

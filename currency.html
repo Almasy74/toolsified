@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+.swap-btn {
+  padding: 10px 16px;
+  background: #10b981; /* emerald green */
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+}
+.swap-btn:hover {
+  background: #059669;
+}
+</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Currency Converter – Toolsified</title>
+  <meta name="description" content="Convert currencies instantly with live exchange rates. Smart, fast and free currency tool from Toolsified." />
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <div class="card">
+    <h1>Currency Converter</h1>
+
+    <label for="amount">Amount:</label>
+    <input type="number" id="amount" placeholder="Enter amount" />
+
+    <label for="fromCurrency">From:</label>
+    <div class="row">
+      <select id="fromCurrency"></select>
+      <button id="swapBtn" class="swap-btn" title="Swap currencies">↔</button>
+    </div>
+
+    <label for="toCurrency">To:</label>
+    <select id="toCurrency"></select>
+
+    <button id="convertBtn" class="primary">Convert</button>
+
+    <div id="result" style="margin-top: 24px; font-size: 1.25rem; font-weight: 600;"></div>
+    <div id="lastUpdated" style="margin-top: 12px; font-size: 0.95rem; color: #555;"></div>
+  </div>
+
+  <script>
+    const currencies = [
+      "USD", "EUR", "GBP", "NOK", "SEK", "DKK", "JPY", "AUD", "CAD", "INR",
+      "CHF", "CNY", "NZD", "HKD", "SGD", "KRW", "TRY", "ZAR", "BRL", "PLN"
+    ];
+    const fromSelect = document.getElementById('fromCurrency');
+    const toSelect = document.getElementById('toCurrency');
+
+    currencies.forEach(cur => {
+      const opt1 = document.createElement('option');
+      opt1.value = opt1.textContent = cur;
+      fromSelect.appendChild(opt1);
+
+      const opt2 = document.createElement('option');
+      opt2.value = opt2.textContent = cur;
+      toSelect.appendChild(opt2);
+    });
+
+    fromSelect.value = "USD";
+    toSelect.value = "EUR";
+
+    document.getElementById('swapBtn').onclick = () => {
+      const temp = fromSelect.value;
+      fromSelect.value = toSelect.value;
+      toSelect.value = temp;
+    };
+
+    document.getElementById('convertBtn').onclick = async () => {
+      const amount = parseFloat(document.getElementById('amount').value);
+      const from = fromSelect.value;
+      const to = toSelect.value;
+
+      if (!amount || amount <= 0) {
+        alert("Please enter a valid amount");
+        return;
+      }
+
+      try {
+        const res = await axios.get(`https://api.exchangerate.host/latest?base=${from}&symbols=${to}`);
+        const rate = res.data.rates[to];
+        const date = res.data.date;
+        const converted = (amount * rate).toFixed(2);
+        document.getElementById('result').textContent = `${amount} ${from} = ${converted} ${to}`;
+        document.getElementById('lastUpdated').textContent = `Exchange rate last updated: ${date}`;
+      } catch (err) {
+        document.getElementById('result').textContent = "Could not retrieve exchange rate. Please try again later.";
+        document.getElementById('lastUpdated').textContent = "";
+      }
+    };
+  </script>
+</body>
+</html>
