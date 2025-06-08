@@ -1,0 +1,9 @@
+/currency          /currency.html        200
+/time-code         /time-code.html       200
+/multi-timezone    /multi-timezone.html  200
+
+# Valgfritt: Redirect www to root domain
+https://www.toolsified.com/* https://toolsified.com/:splat 301!
+
+# Optional: fallback to index.html on 404
+# /* /index.html 200
