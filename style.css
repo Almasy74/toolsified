@@ -8,11 +8,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 32px 0;
+  padding: 16px 0; /* tidligere 32px */
 }
 
 .logo-container {
   text-align: center;
+  margin: 0 auto; /* sentrering og fjerning av vertikal luft */
 }
 
 .logo {
@@ -20,7 +21,9 @@
   width: 100%;
   height: auto;
   display: block;
+  margin: 0 auto; /* fjern evt. ekstra margin her også */
 }
+
 
 
 
