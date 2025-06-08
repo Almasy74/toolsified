@@ -3,25 +3,23 @@ const axios = require('axios');
 exports.handler = async (event) => {
   const { from, to, amount } = event.queryStringParameters;
 
-  console.log("Input params:", { from, to, amount });
-
   try {
-    const url = `https://api.exchangerate.host/convert?from=${from}&to=${to}&amount=${amount}`;
-    console.log("Fetching:", url);
-
+    const url = `https://open.er-api.com/v6/latest/${from}`;
     const res = await axios.get(url);
-    console.log("API response:", res.data);
 
-    if (!res.data || typeof res.data.result !== 'number') {
-      throw new Error("Unexpected API response format");
+    if (!res.data || !res.data.rates[to]) {
+      throw new Error("Invalid response or unknown currency");
     }
+
+    const rate = res.data.rates[to];
+    const result = parseFloat(amount) * rate;
 
     return {
       statusCode: 200,
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        result: res.data.result,
-        date: res.data.date
+        result,
+        date: res.data.time_last_update_utc
       })
     };
   } catch (error) {
@@ -32,3 +30,4 @@ exports.handler = async (event) => {
     };
   }
 };
+
