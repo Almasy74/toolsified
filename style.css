@@ -8,27 +8,24 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 24px 0;
+  padding: 32px 0;
 }
 
-.site-header .logo {
-  max-width: 220px;
-  height: auto;
-}
-
-header {
-  padding: 16px;
-  background: #ffffff;
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid #e5e7eb;
-  height: 80px;
+.logo-container {
+  text-align: center;
 }
 
 .logo {
-  height: 48px;
-  width: auto;
+  max-width: 240px;
+  width: 100%;
+  height: auto;
+  display: block;
 }
+
+
+
+
+
 
 
 body {
