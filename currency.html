@@ -31,6 +31,10 @@
   </style>
 </head>
 <body>
+      <!-- Header -->
+  <div data-include="header.html"></div>
+  <!-- Main Content -->
+  <main>
   <div class="card">
     <h1>Currency Converter</h1>
 
@@ -51,6 +55,18 @@
     <div id="result" style="margin-top: 24px; font-size: 1.25rem; font-weight: 600;"></div>
     <div id="lastUpdated" style="margin-top: 12px; font-size: 0.95rem; color: #555;"></div>
   </div>
+
+    </main>
+    <div data-include="footer.html"></div>
+
+  <script>
+    // Simple include loader
+    document.querySelectorAll('[data-include]').forEach(el => {
+      fetch(el.getAttribute('data-include'))
+        .then(res => res.text())
+        .then(html => el.innerHTML = html);
+    });
+  </script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer></script>
 
   <script>
