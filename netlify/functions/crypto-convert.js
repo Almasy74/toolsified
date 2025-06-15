@@ -31,9 +31,16 @@ exports.handler = async (event) => {
     const url = `https://api.coingecko.com/api/v3/coins/${coinId}/history?date=${date.split('-').reverse().join('-')}`;
     const res = await axios.get(url);
 
-    // CoinGecko gir kursen i valgt fiat under market_data.current_price
-    const price = res.data?.market_data?.current_price?.[fiat.toLowerCase()];
-    if (!price) {
+    // Sjekk om vi har market_data og current_price
+    if (!res.data || !res.data.market_data || !res.data.market_data.current_price) {
+      return {
+        statusCode: 404,
+        body: JSON.stringify({ error: `Ingen kursdata funnet for ${crypto} til ${fiat} på ${date}` })
+      };
+    }
+
+    const price = res.data.market_data.current_price[fiat.toLowerCase()];
+    if (typeof price !== 'number') {
       return {
         statusCode: 404,
         body: JSON.stringify({ error: `Fant ikke kurs for ${crypto} til ${fiat} på ${date}` })
@@ -49,6 +56,14 @@ exports.handler = async (event) => {
       })
     };
   } catch (error) {
+    // CoinGecko rate limit gir ofte status 429
+    if (error.response && error.response.status === 429) {
+      return {
+        statusCode: 429,
+        body: JSON.stringify({ error: 'CoinGecko rate limit nådd. Prøv igjen om litt.' })
+      };
+    }
+    // Andre feil
     return {
       statusCode: 500,
       body: JSON.stringify({ error: error.message })
