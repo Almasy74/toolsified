@@ -1,5 +1,12 @@
 const axios = require('axios');
 
+// Oppslagstabell for CoinGecko-navn
+const COINGECKO_IDS = {
+  BTC: 'bitcoin',
+  ETH: 'ethereum',
+  SOL: 'solana',
+};
+
 exports.handler = async (event) => {
   const { crypto, fiat, date } = event.queryStringParameters;
 
@@ -10,9 +17,18 @@ exports.handler = async (event) => {
     };
   }
 
+  // Finn riktig CoinGecko-id
+  const coinId = COINGECKO_IDS[crypto.toUpperCase()];
+  if (!coinId) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ error: `Ukjent krypto-symbol: ${crypto}` })
+    };
+  }
+
   try {
-    // CoinGecko krever format yyyy-mm-dd
-    const url = `https://api.coingecko.com/api/v3/coins/${crypto.toLowerCase()}/history?date=${date.split('-').reverse().join('-')}`;
+    // CoinGecko krever format dd-mm-yyyy
+    const url = `https://api.coingecko.com/api/v3/coins/${coinId}/history?date=${date.split('-').reverse().join('-')}`;
     const res = await axios.get(url);
 
     // CoinGecko gir kursen i valgt fiat under market_data.current_price
