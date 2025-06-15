@@ -113,15 +113,15 @@
       let conversionRate = 1;
 
       try {
-        if (fiat === 'NOK') targetFiat = 'USD';
-
-        const cryptoUrl = `https://min-api.cryptocompare.com/data/pricehistorical?fsym=${crypto}&tsyms=${targetFiat}&ts=${timestamp}&api_key=${apiKey}`;
+        // Alltid hent i USD først
+        const cryptoUrl = `https://min-api.cryptocompare.com/data/pricehistorical?fsym=${crypto}&tsyms=USD&ts=${timestamp}&api_key=${apiKey}`;
         console.log("Henter kryptokurs fra:", cryptoUrl);
         const cryptoRes = await fetch(cryptoUrl);
         const cryptoData = await cryptoRes.json();
-        const rawRate = cryptoData[crypto]?.[targetFiat];
-        if (!rawRate) return null;
+        const usdRate = cryptoData[crypto]?.['USD'];
+        if (!usdRate) return null;
 
+        // Hvis vi trenger NOK, konverter fra USD
         if (fiat === 'NOK') {
           const fxUrl = `https://api.exchangerate.host/${date}?base=USD&symbols=NOK`;
           console.log("Henter valutakurs fra:", fxUrl);
@@ -143,9 +143,15 @@
             console.error("Valutakurs ikke tilgjengelig (NOK)", exchangeData);
             return 'VALUTAFEIL';
           }
+        } else if (fiat === 'EUR') {
+          // Håndter EUR på samme måte
+          const fxUrl = `https://api.exchangerate.host/${date}?base=USD&symbols=EUR`;
+          const exchangeRes = await fetch(fxUrl);
+          const exchangeData = await exchangeRes.json();
+          conversionRate = exchangeData?.rates?.EUR || 1;
         }
 
-        return rawRate * conversionRate;
+        return usdRate * conversionRate;
       } catch (err) {
         console.error("Feil ved henting av kurs", err);
         return null;
