@@ -37,6 +37,7 @@
 <body>
   <main class="container">
     <h1>Smart Crypto Converter</h1>
+    <div id="cryptoError" style="color: #b91c1c; font-weight: 600; margin-bottom: 1rem;"></div>
     <div style="overflow-x: auto">
       <table class="table" id="cryptoTable">
         <thead>
@@ -109,26 +110,31 @@
       if (selectedDate > today) return null;
 
       try {
-        // Bruk Netlify-funksjon for konvertering
         const url = `/.netlify/functions/crypto-convert?crypto=${crypto}&fiat=${fiat}&date=${date}`;
         console.log("Henter kurs fra:", url);
         const response = await fetch(url);
-        
+        const errorDiv = document.getElementById("cryptoError");
+        errorDiv.textContent = "";
         if (!response.ok) {
-          console.error("Feil ved henting av kurs:", await response.text());
+          const errText = await response.text();
+          let msg = "Feil ved henting av kurs.";
+          try {
+            const errJson = JSON.parse(errText);
+            if (errJson.error) msg = errJson.error;
+          } catch {}
+          errorDiv.textContent = msg;
+          console.error("Feil ved henting av kurs:", errText);
           return null;
         }
-        
         const data = await response.json();
-        console.log("Kurs data:", data);
-        
         if (!data.rate) {
+          errorDiv.textContent = "Ingen kurs funnet for valgt dato eller valuta.";
           console.error("Ingen kurs funnet for", crypto, "til", fiat, "på dato", date);
           return null;
         }
-
         return data.rate;
       } catch (err) {
+        document.getElementById("cryptoError").textContent = "Uventet feil ved henting av kurs.";
         console.error("Feil ved henting av kurs:", err);
         return null;
       }
