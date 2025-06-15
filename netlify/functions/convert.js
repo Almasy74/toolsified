@@ -1,13 +1,20 @@
 const axios = require('axios');
 
 exports.handler = async (event) => {
-  const { from, to, amount } = event.queryStringParameters;
+  const { from, to, amount, date } = event.queryStringParameters;
 
   try {
-    const url = `https://open.er-api.com/v6/latest/${from}`;
+    let url;
+    if (date) {
+      // Hent historisk kurs
+      url = `https://api.exchangerate.host/${date}?base=${from}&symbols=${to}`;
+    } else {
+      // Hent dagens kurs
+      url = `https://api.exchangerate.host/latest?base=${from}&symbols=${to}`;
+    }
     const res = await axios.get(url);
 
-    if (!res.data || !res.data.rates[to]) {
+    if (!res.data || !res.data.rates || !res.data.rates[to]) {
       throw new Error("Invalid response or unknown currency");
     }
 
@@ -19,7 +26,7 @@ exports.handler = async (event) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         result,
-        date: res.data.time_last_update_utc
+        date: date || res.data.date
       })
     };
   } catch (error) {
