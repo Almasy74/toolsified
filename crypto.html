@@ -108,85 +108,26 @@
       selectedDate.setHours(0, 0, 0, 0);
       if (selectedDate > today) return null;
 
-      const timestamp = Math.floor(selectedDate.getTime() / 1000);
-      let targetFiat = fiat;
-      let conversionRate = 1;
-
       try {
-        // Bruk dagens kurs hvis datoen er i dag
-        const isToday = selectedDate.getTime() === today.getTime();
-        let usdRate;
-
-        if (isToday) {
-          // Bruk dagens kurs API
-          const todayUrl = `https://min-api.cryptocompare.com/data/price?fsym=${crypto}&tsyms=USD`;
-          console.log("Henter dagens kryptokurs fra:", todayUrl);
-          const todayRes = await fetch(todayUrl);
-          if (!todayRes.ok) {
-            console.error("Feil ved henting av dagens kryptokurs:", await todayRes.text());
-            return null;
-          }
-          const todayData = await todayRes.json();
-          console.log("Dagens kryptokurs data:", todayData);
-          usdRate = todayData['USD'];
-        } else {
-          // Bruk historisk kurs API
-          const cryptoUrl = `https://min-api.cryptocompare.com/data/pricehistorical?fsym=${crypto}&tsyms=USD&ts=${timestamp}`;
-          console.log("Henter historisk kryptokurs fra:", cryptoUrl);
-          const cryptoRes = await fetch(cryptoUrl);
-          if (!cryptoRes.ok) {
-            console.error("Feil ved henting av historisk kryptokurs:", await cryptoRes.text());
-            return null;
-          }
-          const cryptoData = await cryptoRes.json();
-          console.log("Historisk kryptokurs data:", cryptoData);
-          usdRate = cryptoData[crypto]?.['USD'];
+        // Bruk Netlify-funksjon for konvertering
+        const url = `/.netlify/functions/crypto-convert?crypto=${crypto}&fiat=${fiat}&date=${date}`;
+        console.log("Henter kurs fra:", url);
+        const response = await fetch(url);
+        
+        if (!response.ok) {
+          console.error("Feil ved henting av kurs:", await response.text());
+          return null;
         }
-
-        if (!usdRate) {
-          console.error("Ingen USD kurs funnet for", crypto, "på dato", date);
+        
+        const data = await response.json();
+        console.log("Kurs data:", data);
+        
+        if (!data.rate) {
+          console.error("Ingen kurs funnet for", crypto, "til", fiat, "på dato", date);
           return null;
         }
 
-        // Hvis vi trenger NOK eller EUR, konverter fra USD
-        if (fiat === 'NOK' || fiat === 'EUR') {
-          let fxRate;
-          if (isToday) {
-            // Bruk dagens valutakurs
-            const todayFxUrl = `https://min-api.cryptocompare.com/data/price?fsym=USD&tsyms=${fiat}`;
-            console.log("Henter dagens valutakurs fra:", todayFxUrl);
-            const todayFxRes = await fetch(todayFxUrl);
-            if (!todayFxRes.ok) {
-              console.error("Feil ved henting av dagens valutakurs:", await todayFxRes.text());
-              return null;
-            }
-            const todayFxData = await todayFxRes.json();
-            console.log("Dagens valutakurs data:", todayFxData);
-            fxRate = todayFxData[fiat];
-          } else {
-            // Bruk historisk valutakurs
-            const fxUrl = `https://min-api.cryptocompare.com/data/pricehistorical?fsym=USD&tsyms=${fiat}&ts=${timestamp}`;
-            console.log("Henter historisk valutakurs fra:", fxUrl);
-            const fxRes = await fetch(fxUrl);
-            if (!fxRes.ok) {
-              console.error("Feil ved henting av historisk valutakurs:", await fxRes.text());
-              return null;
-            }
-            const fxData = await fxRes.json();
-            console.log("Historisk valutakurs data:", fxData);
-            fxRate = fxData['USD']?.[fiat];
-          }
-
-          if (!fxRate) {
-            console.error("Ingen valutakurs funnet for USD til", fiat, "på dato", date);
-            return null;
-          }
-          conversionRate = fxRate;
-        }
-
-        const finalRate = usdRate * conversionRate;
-        console.log("Final rate:", finalRate, "USD:", usdRate, "Conversion:", conversionRate);
-        return finalRate;
+        return data.rate;
       } catch (err) {
         console.error("Feil ved henting av kurs:", err);
         return null;
