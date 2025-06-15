@@ -117,9 +117,18 @@
         const cryptoUrl = `https://min-api.cryptocompare.com/data/pricehistorical?fsym=${crypto}&tsyms=USD&ts=${timestamp}&api_key=${apiKey}`;
         console.log("Henter kryptokurs fra:", cryptoUrl);
         const cryptoRes = await fetch(cryptoUrl);
+        if (!cryptoRes.ok) {
+          console.error("Feil ved henting av kryptokurs:", await cryptoRes.text());
+          return null;
+        }
         const cryptoData = await cryptoRes.json();
+        console.log("Kryptokurs data:", cryptoData);
+        
         const usdRate = cryptoData[crypto]?.['USD'];
-        if (!usdRate) return null;
+        if (!usdRate) {
+          console.error("Ingen USD kurs funnet for", crypto, "på dato", date);
+          return null;
+        }
 
         // Hvis vi trenger NOK eller EUR, konverter fra USD
         if (fiat === 'NOK' || fiat === 'EUR') {
@@ -127,18 +136,25 @@
           const fxUrl = `https://min-api.cryptocompare.com/data/pricehistorical?fsym=USD&tsyms=${fiat}&ts=${timestamp}&api_key=${apiKey}`;
           console.log("Henter valutakurs fra:", fxUrl);
           const fxRes = await fetch(fxUrl);
+          if (!fxRes.ok) {
+            console.error("Feil ved henting av valutakurs:", await fxRes.text());
+            return null;
+          }
           const fxData = await fxRes.json();
-          conversionRate = fxData['USD']?.[fiat];
+          console.log("Valutakurs data:", fxData);
           
+          conversionRate = fxData['USD']?.[fiat];
           if (!conversionRate) {
-            console.error("Valutakurs ikke tilgjengelig", fxData);
-            return 'VALUTAFEIL';
+            console.error("Ingen valutakurs funnet for USD til", fiat, "på dato", date);
+            return null;
           }
         }
 
-        return usdRate * conversionRate;
+        const finalRate = usdRate * conversionRate;
+        console.log("Final rate:", finalRate, "USD:", usdRate, "Conversion:", conversionRate);
+        return finalRate;
       } catch (err) {
-        console.error("Feil ved henting av kurs", err);
+        console.error("Feil ved henting av kurs:", err);
         return null;
       }
     }
