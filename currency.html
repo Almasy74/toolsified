@@ -50,6 +50,9 @@
     <label for="toCurrency">To:</label>
     <select id="toCurrency"></select>
 
+    <label for="date">Date (historisk):</label>
+    <input type="date" id="date" />
+
     <button id="convertBtn" class="primary">Convert</button>
 
     <div id="result" style="margin-top: 24px; font-size: 1.25rem; font-weight: 600;"></div>
@@ -100,6 +103,7 @@
       const amount = parseFloat(document.getElementById('amount').value);
       const from = fromSelect.value;
       const to = toSelect.value;
+      const date = document.getElementById('date').value;
 
       if (!amount || amount <= 0) {
         alert("Please enter a valid amount");
@@ -107,11 +111,13 @@
       }
 
       try {
-        const res = await axios.get(`/.netlify/functions/convert?from=${from}&to=${to}&amount=${amount}`);
+        let url = `/.netlify/functions/convert?from=${from}&to=${to}&amount=${amount}`;
+        if (date) url += `&date=${date}`;
+        const res = await axios.get(url);
         const converted = res.data.result.toFixed(2);
-        const date = res.data.date || "unknown";
+        const dateStr = res.data.date || "unknown";
         document.getElementById('result').textContent = `${amount} ${from} = ${converted} ${to}`;
-        document.getElementById('lastUpdated').textContent = `Exchange rate last updated: ${date}`;
+        document.getElementById('lastUpdated').textContent = `Exchange rate for: ${dateStr}`;
       } catch (err) {
         document.getElementById('result').textContent = "Could not retrieve exchange rate. Please try again later.";
         document.getElementById('lastUpdated').textContent = "";
