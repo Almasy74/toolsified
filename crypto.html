@@ -121,34 +121,19 @@
         const usdRate = cryptoData[crypto]?.['USD'];
         if (!usdRate) return null;
 
-        // Hvis vi trenger NOK, konverter fra USD
-        if (fiat === 'NOK') {
-          const fxUrl = `https://api.exchangerate.host/${date}?base=USD&symbols=NOK`;
+        // Hvis vi trenger NOK eller EUR, konverter fra USD
+        if (fiat === 'NOK' || fiat === 'EUR') {
+          // Bruk CryptoCompare for valutakurser også
+          const fxUrl = `https://min-api.cryptocompare.com/data/pricehistorical?fsym=USD&tsyms=${fiat}&ts=${timestamp}&api_key=${apiKey}`;
           console.log("Henter valutakurs fra:", fxUrl);
-
-          let exchangeRes = await fetch(fxUrl);
-          let exchangeData = await exchangeRes.json();
-
-          if (!exchangeData?.rates?.NOK) {
-            console.warn("Historisk NOK mangler, prøver dagens kurs.");
-            const todayDateStr = new Date().toISOString().split("T")[0];
-            const fallbackUrl = `https://api.exchangerate.host/${todayDateStr}?base=USD&symbols=NOK`;
-            console.log("Fallback til:", fallbackUrl);
-            exchangeRes = await fetch(fallbackUrl);
-            exchangeData = await exchangeRes.json();
-          }
-
-          conversionRate = exchangeData?.rates?.NOK;
+          const fxRes = await fetch(fxUrl);
+          const fxData = await fxRes.json();
+          conversionRate = fxData['USD']?.[fiat];
+          
           if (!conversionRate) {
-            console.error("Valutakurs ikke tilgjengelig (NOK)", exchangeData);
+            console.error("Valutakurs ikke tilgjengelig", fxData);
             return 'VALUTAFEIL';
           }
-        } else if (fiat === 'EUR') {
-          // Håndter EUR på samme måte
-          const fxUrl = `https://api.exchangerate.host/${date}?base=USD&symbols=EUR`;
-          const exchangeRes = await fetch(fxUrl);
-          const exchangeData = await exchangeRes.json();
-          conversionRate = exchangeData?.rates?.EUR || 1;
         }
 
         return usdRate * conversionRate;
