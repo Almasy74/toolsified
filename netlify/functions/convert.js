@@ -1,7 +1,9 @@
 const axios = require('axios');
 
 exports.handler = async (event) => {
-  const { from, to, amount, date } = event.queryStringParameters;
+  let { from, to, amount, date } = event.queryStringParameters;
+  from = from ? from.toUpperCase() : '';
+  to = to ? to.toUpperCase() : '';
 
   try {
     let url;
@@ -14,8 +16,10 @@ exports.handler = async (event) => {
     }
     const res = await axios.get(url);
 
-    if (!res.data || !res.data.rates || !res.data.rates[to]) {
-      throw new Error("Invalid response or unknown currency");
+    if (!res.data || !res.data.rates || typeof res.data.rates[to] !== 'number') {
+      // Logg hele svaret for feilsøking
+      console.error('API response:', JSON.stringify(res.data));
+      throw new Error(res.data.error || "Invalid response or unknown currency");
     }
 
     const rate = res.data.rates[to];
