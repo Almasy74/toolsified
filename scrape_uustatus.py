@@ -18,7 +18,7 @@ SIST_OPPDATERT_RE = re.compile(r"sist oppdatert\s+(\d{1,2}\.\s*\w+\s*\d{4})", re
 OPPRETTET_RE = re.compile(r"opprettet (?:første\s*gang|første gang)\s+(\d{1,2}\.\s*\w+\s*\d{4})", re.IGNORECASE)
 
 # Tre-nivå WCAG-koder (fanger f.eks. 1.4.3, 4.1.2)
-WCAG_CODE_RE = re.compile(r"\b[1-4]\.[0-9]\.[0-9]\b")
+WCAG_CODE_RE = re.compile(r"\b[1-4]\.\d{1,2}\.\d{1,2}\b")
 
 MONTHS = {
     "januar":"January","februar":"February","mars":"March","april":"April",
@@ -73,7 +73,7 @@ def scrape_one(name, url):
     for a in soup.find_all("a", href=True):
         href = a["href"]
         # typisk /wcag/4.1.2 eller lignende
-        m = re.search(r"/wcag/([1-4]\.[0-9]\.[0-9])", href)
+        m = re.search(r"/wcag/([1-4]\.\d{1,2}\.\d{1,2})(?:\D|$)", href)
         if m:
             codes.add(m.group(1))
 
@@ -138,3 +138,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
