@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>UU-status</title>
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --card: #11161d;
+      --muted: #9fb0c3;
+      --text: #e7eef7;
+      --accent: #6fb3ff;
+      --ok: #28a745;
+      --warn: #f0ad4e;
+      --bad: #dc3545;
+      --border: #1f2a36;
+      --focus: #9dd1ff;
+    }
+    html, body { background: var(--bg); color: var(--text); font: 14px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif; }
+    .wrap { max-width: 1100px; margin: 32px auto; padding: 0 16px; }
+    h1 { font-size: 28px; margin: 0 0 8px; }
+    .muted { color: var(--muted); }
+    .toolbar {
+      display: grid; gap: 12px; grid-template-columns: 1fr 160px 160px 160px; align-items: end; margin: 18px 0 14px;
+    }
+    .toolbar .field { display: flex; flex-direction: column; gap: 6px; }
+    .toolbar input, .toolbar select, .toolbar button {
+      background: var(--card); border: 1px solid var(--border); color: var(--text);
+      padding: 10px 12px; border-radius: 10px; outline: none;
+    }
+    .toolbar input:focus, .toolbar select:focus, .toolbar button:focus { box-shadow: 0 0 0 3px var(--focus); }
+    .toolbar button { cursor: pointer; }
+    .cards { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 12px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 10px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    th { text-align: left; font-weight: 600; user-select: none; }
+    th.sortable { cursor: pointer; }
+    th.sortable .arrow { opacity: .5; margin-left: 6px; font-size: 11px; }
+    tr:hover td { background: rgba(255,255,255,0.02); }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .pill { display: inline-block; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--border); }
+    .pill.ok { color: var(--ok); border-color: rgba(40,167,69,.3); }
+    .pill.warn { color: var(--warn); border-color: rgba(240,173,78,.3); }
+    .pill.bad { color: var(--bad); border-color: rgba(220,53,69,.3); }
+    .footer { display:flex; justify-content: space-between; align-items:center; margin-top: 10px; color: var(--m
