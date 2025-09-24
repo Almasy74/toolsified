@@ -29,7 +29,7 @@ jobs:
 
       - name: Build UU-status CSV
         run: |
-          python scrape_uustatus.py  # <-- bytt til ditt faktiske filnavn
+          python scrape_uustatus.py
 
       - name: Commit updated CSV (if changed)
         run: |
