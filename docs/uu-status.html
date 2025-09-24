@@ -44,4 +44,280 @@
     .pill.ok { color: var(--ok); border-color: rgba(40,167,69,.3); }
     .pill.warn { color: var(--warn); border-color: rgba(240,173,78,.3); }
     .pill.bad { color: var(--bad); border-color: rgba(220,53,69,.3); }
-    .footer { display:flex; justify-content: space-between; align-items:center; margin-top: 10px; color: var(--m
+    .footer { display:flex; justify-content: space-between; align-items:center; margin-top: 10px; color: var(--muted); font-size: 12px; }
+    .hidden { display: none !important; }
+    @media (max-width: 900px) {
+      .toolbar { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>UU-status</h1>
+    <div class="muted">Samlet oversikt over tilgjengelighetserklæringer (hentes fra uustatus.no). Oppdateres automatisk via GitHub Actions.</div>
+
+    <div class="toolbar" role="region" aria-label="Filtre og søk">
+      <div class="field">
+        <label for="search">Søk (navn/URL)</label>
+        <input id="search" type="search" placeholder="Søk..." autocomplete="off" />
+      </div>
+      <div class="field">
+        <label for="violFilter">Filtrer: brudd</label>
+        <select id="violFilter">
+          <option value="">Alle</option>
+          <option value="0">0 brudd</option>
+          <option value="1-5">1–5 brudd</option>
+          <option value="6-10">6–10 brudd</option>
+          <option value="11+">11+ brudd</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="updateFilter">Oppdatert siden</label>
+        <select id="updateFilter">
+          <option value="">Når som helst</option>
+          <option value="30">Siste 30 dager</option>
+          <option value="90">Siste 90 dager</option>
+          <option value="365">Siste 12 mnd</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>&nbsp;</label>
+        <button id="downloadBtn" type="button" title="Last ned CSV">Last ned CSV</button>
+      </div>
+    </div>
+
+    <div class="cards" role="region" aria-label="Tabell med resultater">
+      <table id="tbl">
+        <thead>
+          <tr>
+            <th class="sortable" data-key="Navn">Navn <span class="arrow">↕</span></th>
+            <th>URL</th>
+            <th class="sortable" data-key="Brudd">Brudd</th>
+            <th class="sortable" data-key="KravTotalt">Krav</th>
+            <th class="sortable" data-key="SistOppdatert">Sist oppdatert</th>
+            <th class="sortable" data-key="Opprettet">Opprettet</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+          <tr><td colspan="7" class="muted">Laster data…</td></tr>
+        </tbody>
+      </table>
+      <div class="footer">
+        <div id="summary" class="muted"></div>
+        <div id="asof" class="muted"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Konfig: sti til CSV som workflowen legger i /docs
+    const CSV_URL = 'uu-status.csv'; // relativ til denne html-fila
+
+    // Enkel CSV-parser for semikolon
+    function parseCSV(text, delimiter=';') {
+      const lines = text.trim().split(/\r?\n/);
+      const headers = lines[0].split(delimiter).map(h => h.trim());
+      const rows = lines.slice(1).map(line => {
+        // støtt semikolon i data ved enkle cases? Vi antar ingen ; inne i felt.
+        const cols = line.split(delimiter).map(c => c.trim());
+        const obj = {};
+        headers.forEach((h, i) => obj[h] = cols[i] ?? '');
+        return obj;
+      });
+      return { headers, rows };
+    }
+
+    function fmtDate(iso) {
+      if (!iso) return '';
+      try {
+        const d = new Date(iso + 'T12:00:00Z'); // unngå tz-problemer
+        return d.toLocaleDateString('no-NO', { year: 'numeric', month: 'short', day: '2-digit' });
+      } catch { return iso; }
+    }
+
+    function pillClass(brudd) {
+      const n = Number(brudd || 0);
+      if (isNaN(n)) return 'pill';
+      if (n === 0) return 'pill ok';
+      if (n <= 5) return 'pill warn';
+      return 'pill bad';
+    }
+
+    function daysSince(iso) {
+      if (!iso) return Infinity;
+      const then = new Date(iso + 'T00:00:00Z').getTime();
+      const now = Date.now();
+      return Math.floor((now - then) / (1000 * 60 * 60 * 24));
+    }
+
+    function matchesFilters(row, q, violFilter, updateFilter) {
+      const hay = (row.Navn + ' ' + row.Url).toLowerCase();
+      if (q && !hay.includes(q)) return false;
+
+      // brudd-filter
+      const n = Number(row.Brudd || 0);
+      if (violFilter === '0' && n !== 0) return false;
+      if (violFilter === '1-5' && !(n >= 1 && n <= 5)) return false;
+      if (violFilter === '6-10' && !(n >= 6 && n <= 10)) return false;
+      if (violFilter === '11+' && !(n >= 11)) return false;
+
+      // oppdatert-filter
+      if (updateFilter) {
+        const days = daysSince(row.SistOppdatert);
+        if (!(days <= Number(updateFilter))) return false;
+      }
+
+      return true;
+    }
+
+    function sortRows(rows, key, asc) {
+      const numKeys = new Set(['Brudd','KravTotalt']);
+      const dateKeys = new Set(['SistOppdatert','Opprettet']);
+      const dir = asc ? 1 : -1;
+      return rows.slice().sort((a, b) => {
+        let va = a[key] || '', vb = b[key] || '';
+        if (numKeys.has(key)) {
+          va = Number(va || 0); vb = Number(vb || 0);
+          return (va - vb) * dir;
+        }
+        if (dateKeys.has(key)) {
+          // tomme datoer nederst
+          if (!va && !vb) return 0;
+          if (!va) return 1;
+          if (!vb) return -1;
+          return (new Date(va) - new Date(vb)) * dir;
+        }
+        // default: streng
+        return String(va).localeCompare(String(vb), 'no', { sensitivity:'base' }) * dir;
+      });
+    }
+
+    (async function init() {
+      const tbody = document.getElementById('tbody');
+      const search = document.getElementById('search');
+      const violFilter = document.getElementById('violFilter');
+      const updateFilter = document.getElementById('updateFilter');
+      const downloadBtn = document.getElementById('downloadBtn');
+      const summary = document.getElementById('summary');
+      const asof = document.getElementById('asof');
+      const ths = Array.from(document.querySelectorAll('th.sortable'));
+
+      let data = [];
+      let view = [];
+      let sortKey = 'Navn';
+      let sortAsc = true;
+
+      try {
+        const res = await fetch(CSV_URL, { cache: 'no-store' });
+        if (!res.ok) throw new Error('Kunne ikke hente CSV');
+        const txt = await res.text();
+        const parsed = parseCSV(txt, ';');
+        data = parsed.rows;
+
+        // Oppsummering
+        const count = data.length;
+        const totalBrudd = data.reduce((s, r) => s + (Number(r.Brudd || 0) || 0), 0);
+        const zeroCount = data.filter(r => Number(r.Brudd||0) === 0).length;
+        summary.textContent = `${count} erklæringer • ${totalBrudd} brudd totalt • ${zeroCount} med 0 brudd`;
+
+        // "As of" fra feltet SistSjekket (tar nyeste)
+        const asOfIso = data.map(r => r.SistSjekket).filter(Boolean).sort().slice(-1)[0];
+        if (asOfIso) {
+          const d = new Date(asOfIso);
+          asof.textContent = `Sist sjekket: ${d.toLocaleString('no-NO')}`;
+        }
+
+        const apply = () => {
+          const q = search.value.trim().toLowerCase();
+          const vf = violFilter.value;
+          const uf = updateFilter.value;
+          view = data.filter(r => matchesFilters(r, q, vf, uf));
+          view = sortRows(view, sortKey, sortAsc);
+          render();
+        };
+
+        const render = () => {
+          tbody.innerHTML = '';
+          if (view.length === 0) {
+            const tr = document.createElement('tr');
+            const td = document.createElement('td');
+            td.colSpan = 7;
+            td.className = 'muted';
+            td.textContent = 'Ingen treff på valgt filter.';
+            tr.appendChild(td);
+            tbody.appendChild(tr);
+            return;
+          }
+          for (const r of view) {
+            const tr = document.createElement('tr');
+
+            const tdName = document.createElement('td');
+            tdName.textContent = r.Navn || '';
+            tr.appendChild(tdName);
+
+            const tdUrl = document.createElement('td');
+            const a = document.createElement('a');
+            a.href = r.Url; a.target = '_blank'; a.rel = 'noopener';
+            a.textContent = r.Url;
+            tdUrl.appendChild(a);
+            tr.appendChild(tdUrl);
+
+            const tdBrudd = document.createElement('td');
+            const pill = document.createElement('span');
+            pill.className = pillClass(r.Brudd);
+            pill.textContent = r.Brudd === '' ? '—' : r.Brudd;
+            tdBrudd.appendChild(pill);
+            tr.appendChild(tdBrudd);
+
+            const tdKrav = document.createElement('td');
+            tdKrav.textContent = r.KravTotalt || '';
+            tr.appendChild(tdKrav);
+
+            const tdUpd = document.createElement('td');
+            tdUpd.textContent = fmtDate(r.SistOppdatert);
+            tr.appendChild(tdUpd);
+
+            const tdCreate = document.createElement('td');
+            tdCreate.textContent = fmtDate(r.Opprettet);
+            tr.appendChild(tdCreate);
+
+            const tdStatus = document.createElement('td');
+            const sc = Number(r.Statuskode||0);
+            tdStatus.textContent = sc ? sc : '';
+            tr.appendChild(tdStatus);
+
+            tbody.appendChild(tr);
+          }
+        };
+
+        // Interaksjoner
+        search.addEventListener('input', apply);
+        violFilter.addEventListener('change', apply);
+        updateFilter.addEventListener('change', apply);
+        ths.forEach(th => {
+          th.addEventListener('click', () => {
+            const key = th.dataset.key;
+            if (sortKey === key) sortAsc = !sortAsc; else { sortKey = key; sortAsc = true; }
+            apply();
+          });
+        });
+
+        downloadBtn.addEventListener('click', () => {
+          // Last ned CSV direkte fra docs/
+          const link = document.createElement('a');
+          link.href = CSV_URL;
+          link.download = 'uu-status.csv';
+          document.body.appendChild(link);
+          link.click();
+          link.remove();
+        });
+
+        apply(); // første render
+      } catch (e) {
+        tbody.innerHTML = `<tr><td colspan="7" class="muted">Feil ved lasting: ${e.message}</td></tr>`;
+      }
+    })();
+  </script>
+</body>
+</html>
