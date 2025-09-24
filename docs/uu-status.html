@@ -24,7 +24,7 @@
     h1 { font-size: 28px; margin: 0 0 8px; }
     .muted { color: var(--muted); }
     .toolbar {
-      display: grid; gap: 12px; grid-template-columns: 1fr 160px 160px 220px 180px 120px; align-items: end; margin: 18px 0 14px;
+      display: grid; gap: 12px; grid-template-columns: 1fr 160px 160px 220px 160px; align-items: end; margin: 18px 0 14px;
     }
     .toolbar .field { display: flex; flex-direction: column; gap: 6px; }
     .toolbar input, .toolbar select, .toolbar button {
@@ -76,29 +76,22 @@
     .brudd-wrap { display: inline-flex; align-items: baseline; gap: 8px; }
     .brudd-total { color: var(--muted); font-size: 12px; }
 
-    /* Frist-badger ved "Sist oppdatert" */
-    .badge { padding: 2px 6px; border-radius: 999px; border: 1px solid var(--border); font-size: 12px; }
-    .badge.ok { color: var(--muted); border-color: rgba(255,255,255,.12); }
-    .badge.due-soon { color: var(--warn); border-color: rgba(240,173,78,.4); }
-    .badge.overdue { color: var(--bad); border-color: rgba(220,53,69,.4); }
-    .update-cell { display: inline-flex; align-items: center; gap: 8px; }
-
     /* Topp-brudd seksjon */
-    .agg { margin-top: 20px; }
-    .agg h2 { font-size: 16px; margin: 20px 0 8px; }
+    .agg { margin-top: 14px; }
+    .agg h2 { font-size: 16px; margin: 0 0 8px; }
     .agg table { width: auto; min-width: 280px; border-collapse: collapse; }
     .agg th, .agg td { padding: 6px 10px; border: 1px solid var(--border); }
     .agg th { background: rgba(255,255,255,0.03); }
     .agg a { cursor: pointer; }
 
-    @media (max-width: 1200px) {
+    @media (max-width: 1100px) {
       .toolbar { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <h1>UU-status</h1>
+    <h1>UU-status Skatteetaten</h1>
     <div class="muted">Samlet oversikt over tilgjengelighetserklæringer (hentes fra uustatus.no). Oppdateres automatisk via GitHub Actions.</div>
 
     <div class="toolbar" role="region" aria-label="Filtre og søk">
@@ -129,15 +122,6 @@
         <label for="wcagFilter">Filter: WCAG-krav</label>
         <select id="wcagFilter">
           <option value="">Alle</option>
-        </select>
-      </div>
-      <div class="field">
-        <label for="dueFilter">Filter: friststatus</label>
-        <select id="dueFilter">
-          <option value="">Alle</option>
-          <option value="overdue">Over frist</option>
-          <option value="due-soon">Snart frist (≤ 8 uker)</option>
-          <option value="ok">OK</option>
         </select>
       </div>
       <div class="field">
@@ -210,27 +194,6 @@
       return Math.floor((now - then) / (1000 * 60 * 60 * 24));
     }
 
-    // Frist = sistOppdatert + 1 år. Varsel når <= 56 dager igjen.
-    function computeDueFlag(updatedIso) {
-      if (!updatedIso) return { state: 'ok', label: '', due: null, daysLeft: null };
-
-      const updated = new Date(updatedIso + 'T00:00:00Z');
-      const due = new Date(updated);
-      due.setFullYear(due.getFullYear() + 1);
-
-      const today = new Date();
-      const ms = due - today;
-      const daysLeft = Math.floor(ms / (1000 * 60 * 60 * 24));
-
-      if (daysLeft < 0) return { state: 'overdue', label: 'Frist utløpt', due, daysLeft };
-      if (daysLeft <= 56) return { state: 'due-soon', label: `${daysLeft} d igjen`, due, daysLeft };
-      return { state: 'ok', label: 'OK', due, daysLeft };
-    }
-
-    function fmtDateShort(d) {
-      return d ? d.toLocaleDateString('no-NO', { year: 'numeric', month: 'short', day: '2-digit' }) : '';
-    }
-
     function aggregateByCode(detailsArr) {
       const map = new Map();
       for (const d of detailsArr) {
@@ -240,36 +203,26 @@
       return Array.from(map.entries()).sort((a,b) => b[1]-a[1]);
     }
 
-    function matchesFilters(row, q, violFilter, updateFilter, wcagCode, dueFilter, detByUrl) {
+    function matchesFilters(row, q, violFilter, updateFilter, wcagCode, detByUrl) {
       const hay = (row.Navn).toLowerCase();
       if (q && !hay.includes(q)) return false;
 
-      // brudd-filter
       const n = Number(row.Brudd || 0);
       if (violFilter === '0' && n !== 0) return false;
       if (violFilter === '1-5' && !(n >= 1 && n <= 5)) return false;
       if (violFilter === '6-10' && !(n >= 6 && n <= 10)) return false;
       if (violFilter === '11+' && !(n >= 11)) return false;
 
-      // oppdatert-filter (siste X dager)
       if (updateFilter) {
         const days = daysSince(row.SistOppdatert);
         if (!(days <= Number(updateFilter))) return false;
       }
 
-      // wcag-filter
       if (wcagCode) {
         const d = detByUrl.get(row.Url);
         const codes = (d && d.codes) || [];
         if (!codes.includes(wcagCode)) return false;
       }
-
-      // friststatus-filter
-      if (dueFilter) {
-        const flag = computeDueFlag(row.SistOppdatert);
-        if (flag.state !== dueFilter) return false;
-      }
-
       return true;
     }
 
@@ -299,7 +252,6 @@
       const violFilter = document.getElementById('violFilter');
       const updateFilter = document.getElementById('updateFilter');
       const wcagFilter = document.getElementById('wcagFilter');
-      const dueFilter = document.getElementById('dueFilter');
       const downloadBtn = document.getElementById('downloadBtn');
       const summary = document.getElementById('summary');
       const asof = document.getElementById('asof');
@@ -346,10 +298,11 @@
         }
         summary.textContent = `${count} erklæringer • ${totalBrudd} brudd totalt • ${zeroCount} med 0 brudd`;
 
-        // Agg-tabell (med Vis alle / Vis færre)
+        // Agg-tabell (alltid med Vis alle / Vis færre)
         const box = document.createElement('div');
         const h2 = document.createElement('h2');
         h2.textContent = 'Topp brudd (WCAG-krav)';
+        h2.style.marginTop = '35px';   // legg til ekstra avstand
         box.appendChild(h2);
 
         const tbl = document.createElement('table');
@@ -406,8 +359,7 @@
           const vf = violFilter.value;
           const uf = updateFilter.value;
           const wc = wcagFilter.value;
-          const df = dueFilter.value;
-          view = data.filter(r => matchesFilters(r, q, vf, uf, wc, df, detByUrl));
+          view = data.filter(r => matchesFilters(r, q, vf, uf, wc, detByUrl));
           view = sortRows(view, sortKey, sortAsc);
           render();
         };
@@ -453,29 +405,8 @@
             tdBrudd.appendChild(wrap);
             tr.appendChild(tdBrudd);
 
-            // Sist oppdatert (+ fristbadge)
             const tdUpd = document.createElement('td');
-            const updWrap = document.createElement('span');
-            updWrap.className = 'update-cell';
-
-            const updTxt = document.createElement('span');
-            updTxt.textContent = fmtDate(r.SistOppdatert);
-            updWrap.appendChild(updTxt);
-
-            const flag = computeDueFlag(r.SistOppdatert);
-            if (flag.label) {
-              const badge = document.createElement('span');
-              badge.className = 'badge ' + flag.state;
-              badge.textContent = flag.label;
-              const dueStr = flag.due ? fmtDateShort(flag.due) : '';
-              badge.title = flag.state === 'overdue'
-                ? `Frist utløpt (frist: ${dueStr})`
-                : `Frist: ${dueStr}`;
-              badge.setAttribute('aria-label', badge.title);
-              updWrap.appendChild(badge);
-            }
-
-            tdUpd.appendChild(updWrap);
+            tdUpd.textContent = fmtDate(r.SistOppdatert);
             tr.appendChild(tdUpd);
 
             const tdCreate = document.createElement('td');
@@ -542,7 +473,7 @@
             tdDetAll.appendChild(box);
             trDet.appendChild(tdDetAll);
 
-            const toggleRow = (ev) => {
+            const toggle = (ev) => {
               if (ev) ev.stopPropagation();
               const show = tdDetAll.style.display === 'none';
               tdDetAll.style.display = show ? '' : 'none';
@@ -550,11 +481,11 @@
               btn.querySelector('.label').textContent = show ? 'Skjul detaljer' : 'Vis detaljer';
             };
 
-            btn.addEventListener('click', toggleRow);
+            btn.addEventListener('click', toggle);
             tr.addEventListener('click', (e) => {
               const tag = e.target.tagName.toLowerCase();
-              if (tag === 'a' || e.target.closest('button')) return;
-              toggleRow(e);
+              if (tag === 'a' || e.target.closest('button')) return; // ikke stjel klikk
+              toggle(e);
             });
 
             tbody.appendChild(tr);
@@ -563,41 +494,27 @@
         };
 
         // Interaksjoner
-        function wire() {
-          search.addEventListener('input', apply);
-          violFilter.addEventListener('change', apply);
-          updateFilter.addEventListener('change', apply);
-          wcagFilter.addEventListener('change', apply);
-          dueFilter.addEventListener('change', apply);
-          ths.forEach(th => {
-            th.addEventListener('click', () => {
-              const key = th.dataset.key;
-              if (sortKey === key) sortAsc = !sortAsc; else { sortKey = key; sortAsc = true; }
-              apply();
-            });
+        search.addEventListener('input', apply);
+        violFilter.addEventListener('change', apply);
+        updateFilter.addEventListener('change', apply);
+        wcagFilter.addEventListener('change', apply);
+        ths.forEach(th => {
+          th.addEventListener('click', () => {
+            const key = th.dataset.key;
+            if (sortKey === key) sortAsc = !sortAsc; else { sortKey = key; sortAsc = true; }
+            apply();
           });
-          downloadBtn.addEventListener('click', () => {
-            const link = document.createElement('a');
-            link.href = CSV_URL;
-            link.download = 'uu-status.csv';
-            document.body.appendChild(link);
-            link.click();
-            link.remove();
-          });
-        }
+        });
 
-        const apply = () => {
-          const q = search.value.trim().toLowerCase();
-          const vf = violFilter.value;
-          const uf = updateFilter.value;
-          const wc = wcagFilter.value;
-          const df = dueFilter.value;
-          view = data.filter(r => matchesFilters(r, q, vf, uf, wc, df, detByUrl));
-          view = sortRows(view, sortKey, sortAsc);
-          render();
-        };
+        downloadBtn.addEventListener('click', () => {
+          const link = document.createElement('a');
+          link.href = CSV_URL;
+          link.download = 'uu-status.csv';
+          document.body.appendChild(link);
+          link.click();
+          link.remove();
+        });
 
-        wire();
         apply();
       } catch (e) {
         tbody.innerHTML = `<tr><td colspan="5" class="muted">Feil ved lasting: ${e.message}</td></tr>`;
