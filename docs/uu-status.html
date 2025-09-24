@@ -577,5 +577,117 @@ if (ref) {
       }
     })();
   </script>
+  <!-- Agent UI -->
+<style>
+  .ai-fab{position:fixed;right:18px;bottom:18px;border-radius:999px;padding:12px 14px;background:#2a7de1;color:#fff;border:none;box-shadow:0 8px 24px rgba(0,0,0,.25);cursor:pointer}
+  .ai-panel{position:fixed;right:18px;bottom:78px;width:360px;max-width:92vw;background:#0e1420;border:1px solid #1f2a36;border-radius:14px;box-shadow:0 12px 32px rgba(0,0,0,.35);display:none}
+  .ai-panel header{padding:10px 12px;border-bottom:1px solid #1f2a36;font-weight:600}
+  .ai-body{max-height:50vh;overflow:auto;padding:10px 12px}
+  .ai-msg{background:#11161d;border:1px solid #1f2a36;border-radius:10px;padding:8px 10px;margin:8px 0}
+  .ai-src{font-size:12px;color:#9fb0c3;margin-top:6px}
+  .ai-input{display:flex;gap:8px;border-top:1px solid #1f2a36;padding:10px 12px}
+  .ai-input input{flex:1;background:#11161d;border:1px solid #1f2a36;border-radius:10px;color:#e7eef7;padding:10px}
+  .ai-input button{background:#2a7de1;color:#fff;border:none;border-radius:10px;padding:10px 12px;cursor:pointer}
+</style>
+
+<button class="ai-fab" id="aiFab" aria-expanded="false" aria-controls="aiPanel">Hjelp?</button>
+<div class="ai-panel" id="aiPanel" role="dialog" aria-label="Tilgjengelighetsassistent">
+  <header>Tilgjengelighetsassistent</header>
+  <div class="ai-body" id="aiBody">
+    <div class="ai-msg">Hei! Spør meg om WCAG-krav, fargene på brudd-pillene, “Sist oppdatert”, CSV, osv.</div>
+  </div>
+  <form class="ai-input" id="aiForm">
+    <input id="aiQ" type="text" placeholder="Skriv et spørsmål …" autocomplete="off" />
+    <button type="submit">Send</button>
+  </form>
+</div>
+<!-- Fuse.js fra CDN (liten, ingen kostnad) -->
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
+
+<script>
+(async function agent(){
+  const fab   = document.getElementById('aiFab');
+  const panel = document.getElementById('aiPanel');
+  const body  = document.getElementById('aiBody');
+  const form  = document.getElementById('aiForm');
+  const input = document.getElementById('aiQ');
+
+  // 1) Hent kunnskapsbase (ligger i /kb.json i repoet ditt)
+  let kb = [];
+  try {
+    const res = await fetch('kb.json', { cache: 'no-store' });
+    kb = await res.json();
+  } catch(e) {
+    kb = [{ q:'Feil', a:'Fant ikke kb.json. Legg den i rotmappen.', tags:['system'] }];
+  }
+
+  // 2) Bygg søkeindeks
+  const fuse = new Fuse(kb, {
+    keys: ['q','a','tags'],
+    threshold: 0.36,      // lavere = mer presis
+    includeScore: true,
+    minMatchCharLength: 2,
+  });
+
+  function toggle() {
+    const open = panel.style.display === 'block';
+    panel.style.display = open ? 'none' : 'block';
+    fab.setAttribute('aria-expanded', String(!open));
+    if (!open) input.focus();
+  }
+  fab.addEventListener('click', toggle);
+
+  // 3) Svar-funksjon
+  function answer(html, src=[]) {
+    const box = document.createElement('div');
+    box.className = 'ai-msg';
+    box.innerHTML = html;
+    if (src.length){
+      const meta = document.createElement('div');
+      meta.className = 'ai-src';
+      meta.textContent = 'Kilder: ' + src.join(' • ');
+      box.appendChild(meta);
+    }
+    body.appendChild(box);
+    body.scrollTop = body.scrollHeight;
+  }
+
+  // 4) Håndter spørsmål
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const q = input.value.trim();
+    if (!q) return;
+    answer('<strong>Du:</strong> ' + q);
+    input.value = '';
+
+    // Spesialkroker direkte fra siden (gratis bonus)
+    if (/farge|pill|brudd|badge/i.test(q)) {
+      // Hent fra dine egne regler i koden
+      const html = `
+        <div><strong>Fargekoder på brudd:</strong></div>
+        <ul>
+          <li><span class="pill ok">0</span>: Ingen brudd</li>
+          <li><span class="pill warn">1–5</span>: Noen brudd</li>
+          <li><span class="pill bad">6+</span>: Mange brudd</li>
+        </ul>
+        <div><strong>Deadline-badger:</strong> Oransje når det er ≤ 56 dager igjen, rød når fristen (1 år etter oppdatering/opprettelse) er utløpt.</div>
+      `;
+      answer(html);
+      return;
+    }
+
+    const results = fuse.search(q, { limit: 3 });
+    if (!results.length) {
+      answer('Beklager, jeg fant ikke et godt svar. Prøv å spørre på en annen måte eller se lenkene i resultatlisten på siden.');
+      return;
+    }
+    results.forEach(r => {
+      const item = r.item;
+      answer(item.a, item.src || []);
+    });
+  });
+})();
+</script>
+
 </body>
 </html>
