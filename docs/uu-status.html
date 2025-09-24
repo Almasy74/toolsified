@@ -16,6 +16,8 @@
       --bad: #dc3545;
       --border: #1f2a36;
       --focus: #9dd1ff;
+      --detail-bg: #0e1420;
+      --detail-accent: #2a7de1;
     }
     html, body { background: var(--bg); color: var(--text); font: 14px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif; }
     .wrap { max-width: 1100px; margin: 32px auto; padding: 0 16px; }
@@ -47,7 +49,34 @@
     .btn-link { background: none; border: 1px solid var(--border); color: var(--text); padding: 6px 10px; border-radius: 10px; cursor: pointer; }
     .footer { display:flex; justify-content: space-between; align-items:center; margin-top: 10px; color: var(--muted); font-size: 12px; gap: 12px; flex-wrap: wrap; }
     .hidden { display: none !important; }
-    .kpis { display:flex; gap:10px; align-items:center; flex-wrap: wrap; }
+
+    /* Detaljseksjon styling for tydelig grouping */
+    .detail-row td {
+      padding: 0; border: none;
+    }
+    .detail-box {
+      margin: 0 0 10px 0;
+      background: var(--detail-bg);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--detail-accent);
+      border-radius: 12px;
+      padding: 10px 12px;
+    }
+    .detail-title {
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .detail-tags {
+      display: flex; flex-wrap: wrap; gap: 8px;
+    }
+
+    /* Agg-tabell for topp brudd */
+    .agg { margin-top: 14px; }
+    .agg h2 { font-size: 16px; margin: 0 0 8px; }
+    .agg table { width: auto; min-width: 280px; border-collapse: collapse; }
+    .agg th, .agg td { padding: 6px 10px; border: 1px solid var(--border); }
+    .agg th { background: rgba(255,255,255,0.03); }
+    .agg a { cursor: pointer; }
     @media (max-width: 1100px) {
       .toolbar { grid-template-columns: 1fr 1fr; }
     }
@@ -60,7 +89,7 @@
 
     <div class="toolbar" role="region" aria-label="Filtre og søk">
       <div class="field">
-        <label for="search">Søk (navn/URL)</label>
+        <label for="search">Søk (navn)</label>
         <input id="search" type="search" placeholder="Søk..." autocomplete="off" />
       </div>
       <div class="field">
@@ -99,32 +128,31 @@
         <thead>
           <tr>
             <th class="sortable" data-key="Navn">Navn <span class="arrow">↕</span></th>
-            <th>URL</th>
-            <th class="sortable" data-key="Brudd">Brudd</th>
-            <th class="sortable" data-key="KravTotalt">Krav</th>
+            <th class="sortable" data-key="Brudd">Brudd (av X)</th>
             <th class="sortable" data-key="SistOppdatert">Sist oppdatert</th>
             <th class="sortable" data-key="Opprettet">Opprettet</th>
-            <th>Status</th>
             <th>Detaljer</th>
           </tr>
         </thead>
         <tbody id="tbody">
-          <tr><td colspan="8" class="muted">Laster data…</td></tr>
+          <tr><td colspan="5" class="muted">Laster data…</td></tr>
         </tbody>
       </table>
+
       <div class="footer">
         <div id="summary" class="muted"></div>
         <div id="asof" class="muted"></div>
       </div>
+
+      <!-- Agg-seksjon for “Topp brudd” som liten tabell -->
+      <div class="agg" id="agg"></div>
     </div>
   </div>
 
   <script>
-    // Filer publisert av workflowen
-    const CSV_URL = 'uu-status.csv';                 // ligger i docs/
-    const DETAILS_URL = 'uu-status-details.json';    // ligger i docs/
+    const CSV_URL = 'uu-status.csv';
+    const DETAILS_URL = 'uu-status-details.json';
 
-    // Enkel CSV-parser for semikolon
     function parseCSV(text, delimiter=';') {
       const lines = text.trim().split(/\r?\n/);
       const headers = lines[0].split(delimiter).map(h => h.trim());
@@ -140,7 +168,7 @@
     function fmtDate(iso) {
       if (!iso) return '';
       try {
-        const d = new Date(iso + 'T12:00:00Z'); // unngå tz-variasjoner
+        const d = new Date(iso + 'T12:00:00Z');
         return d.toLocaleDateString('no-NO', { year: 'numeric', month: 'short', day: '2-digit' });
       } catch { return iso; }
     }
@@ -170,7 +198,7 @@
     }
 
     function matchesFilters(row, q, violFilter, updateFilter, wcagCode, detByUrl) {
-      const hay = (row.Navn + ' ' + row.Url).toLowerCase();
+      const hay = (row.Navn).toLowerCase();
       if (q && !hay.includes(q)) return false;
 
       const n = Number(row.Brudd || 0);
@@ -193,7 +221,7 @@
     }
 
     function sortRows(rows, key, asc) {
-      const numKeys = new Set(['Brudd','KravTotalt']);
+      const numKeys = new Set(['Brudd']);
       const dateKeys = new Set(['SistOppdatert','Opprettet']);
       const dir = asc ? 1 : -1;
       return rows.slice().sort((a, b) => {
@@ -221,6 +249,7 @@
       const downloadBtn = document.getElementById('downloadBtn');
       const summary = document.getElementById('summary');
       const asof = document.getElementById('asof');
+      const agg = document.getElementById('agg');
       const ths = Array.from(document.querySelectorAll('th.sortable'));
 
       let data = [];
@@ -237,7 +266,7 @@
         if (!detRes.ok) throw new Error('Kunne ikke hente detaljer');
 
         const txt = await csvRes.text();
-        const details = await detRes.json(); // [{url, name, codes[], last_checked}]
+        const details = await detRes.json();
         const detByUrl = new Map(details.map(d => [d.url, d]));
         const parsed = parseCSV(txt, ';');
         data = parsed.rows;
@@ -251,21 +280,58 @@
           wcagFilter.appendChild(opt);
         }
 
-        // Oppsummering
+        // Oppsummerings-KPIer
         const count = data.length;
         const totalBrudd = data.reduce((s, r) => s + (Number(r.Brudd || 0) || 0), 0);
         const zeroCount = data.filter(r => Number(r.Brudd||0) === 0).length;
 
-        // "As of" fra SistSjekket (nyeste)
         const asOfIso = data.map(r => r.SistSjekket).filter(Boolean).sort().slice(-1)[0];
         if (asOfIso) {
           const d = new Date(asOfIso);
           asof.textContent = `Sist sjekket: ${d.toLocaleString('no-NO')}`;
         }
+        summary.textContent = `${count} erklæringer • ${totalBrudd} brudd totalt • ${zeroCount} med 0 brudd`;
 
-        // Toppbrudd (topp 10)
-        const top = wcagAgg.slice(0, 10).map(([code, count]) => `${code} (${count})`).join(' • ');
-        summary.textContent = `${count} erklæringer • ${totalBrudd} brudd totalt • ${zeroCount} med 0 brudd${top ? ' • Topp brudd: ' + top : ''}`;
+        // Agg-tabell i egen seksjon
+        if (wcagAgg.length) {
+          const top = wcagAgg.slice(0, 15); // topp 15
+          const box = document.createElement('div');
+          const h2 = document.createElement('h2');
+          h2.textContent = 'Topp brudd (WCAG-krav)';
+          box.appendChild(h2);
+
+          const tbl = document.createElement('table');
+          const thead = document.createElement('thead');
+          const hr = document.createElement('tr');
+          const h1 = document.createElement('th'); h1.textContent = 'Krav';
+          const h2c = document.createElement('th'); h2c.textContent = 'Antall løsninger';
+          hr.appendChild(h1); hr.appendChild(h2c); thead.appendChild(hr);
+          tbl.appendChild(thead);
+
+          const tb = document.createElement('tbody');
+          for (const [code, count] of top) {
+            const tr = document.createElement('tr');
+            const td1 = document.createElement('td');
+            const link = document.createElement('a');
+            link.textContent = code;
+            link.title = 'Klikk for å filtrere på ' + code;
+            link.addEventListener('click', () => {
+              wcagFilter.value = code;
+              apply();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            td1.appendChild(link);
+            const td2 = document.createElement('td');
+            td2.textContent = count;
+            tr.appendChild(td1); tr.appendChild(td2);
+            tb.appendChild(tr);
+          }
+          tbl.appendChild(tb);
+          box.className = 'agg';
+          box.appendChild(tbl);
+          agg.innerHTML = '';
+          agg.appendChild(box);
+        }
 
         const apply = () => {
           const q = search.value.trim().toLowerCase();
@@ -282,7 +348,7 @@
           if (view.length === 0) {
             const tr = document.createElement('tr');
             const td = document.createElement('td');
-            td.colSpan = 8;
+            td.colSpan = 5;
             td.className = 'muted';
             td.textContent = 'Ingen treff på valgt filter.';
             tr.appendChild(td);
@@ -292,27 +358,23 @@
           for (const r of view) {
             const tr = document.createElement('tr');
 
+            // Navn som klikkbar lenke (erstatter URL-kolonnen)
             const tdName = document.createElement('td');
-            tdName.textContent = r.Navn || '';
-            tr.appendChild(tdName);
-
-            const tdUrl = document.createElement('td');
             const a = document.createElement('a');
             a.href = r.Url; a.target = '_blank'; a.rel = 'noopener';
-            a.textContent = r.Url;
-            tdUrl.appendChild(a);
-            tr.appendChild(tdUrl);
+            a.textContent = r.Navn || r.Url;
+            tdName.appendChild(a);
+            tr.appendChild(tdName);
 
+            // Brudd (av X)
             const tdBrudd = document.createElement('td');
+            const n = Number(r.Brudd || 0);
+            const total = r.KravTotalt || '48';
             const pill = document.createElement('span');
-            pill.className = pillClass(r.Brudd);
-            pill.textContent = r.Brudd === '' ? '—' : r.Brudd;
+            pill.className = pillClass(n);
+            pill.textContent = isNaN(n) ? '—' : `${n} / ${total}`;
             tdBrudd.appendChild(pill);
             tr.appendChild(tdBrudd);
-
-            const tdKrav = document.createElement('td');
-            tdKrav.textContent = r.KravTotalt || '';
-            tr.appendChild(tdKrav);
 
             const tdUpd = document.createElement('td');
             tdUpd.textContent = fmtDate(r.SistOppdatert);
@@ -322,11 +384,6 @@
             tdCreate.textContent = fmtDate(r.Opprettet);
             tr.appendChild(tdCreate);
 
-            const tdStatus = document.createElement('td');
-            const sc = Number(r.Statuskode||0);
-            tdStatus.textContent = sc ? sc : '';
-            tr.appendChild(tdStatus);
-
             const tdDet = document.createElement('td');
             const btn = document.createElement('button');
             btn.textContent = 'Vis detaljer';
@@ -335,26 +392,27 @@
             tdDet.appendChild(btn);
             tr.appendChild(tdDet);
 
-            // detaljerad (skjult)
+            // Detaljerad med tydelig visuelt skille
             const trDet = document.createElement('tr');
+            trDet.className = 'detail-row';
             const tdDetAll = document.createElement('td');
-            tdDetAll.colSpan = 8;
-            tdDetAll.className = 'muted';
+            tdDetAll.colSpan = 5;
             tdDetAll.style.display = 'none';
+
+            const box = document.createElement('div');
+            box.className = 'detail-box';
+
+            const title = document.createElement('div');
+            title.className = 'detail-title';
+            title.textContent = 'WCAG-brudd funnet:';
+            box.appendChild(title);
 
             const d = detByUrl.get(r.Url);
             const codes = (d && d.codes && d.codes.length) ? d.codes : [];
+            const tags = document.createElement('div');
+            tags.className = 'detail-tags';
+
             if (codes.length) {
-              const wrap = document.createElement('div');
-              wrap.style.display = 'flex';
-              wrap.style.flexWrap = 'wrap';
-              wrap.style.gap = '8px';
-              wrap.style.padding = '6px 2px';
-
-              const label = document.createElement('strong');
-              label.textContent = 'WCAG-brudd funnet: ';
-              tdDetAll.appendChild(label);
-
               for (const c of codes) {
                 const badge = document.createElement('span');
                 badge.className = 'pill bad';
@@ -364,16 +422,20 @@
                 badge.addEventListener('click', () => {
                   wcagFilter.value = c;
                   apply();
-                  tdDetAll.style.display = ''; // behold åpnet
+                  tdDetAll.style.display = ''; // behold åpen
                   btn.textContent = 'Skjul detaljer';
                 });
-                wrap.appendChild(badge);
+                tags.appendChild(badge);
               }
-              tdDetAll.appendChild(wrap);
             } else {
-              tdDetAll.textContent = 'Ingen detaljer funnet for denne erklæringen.';
+              const none = document.createElement('span');
+              none.className = 'muted';
+              none.textContent = 'Ingen detaljer funnet for denne erklæringen.';
+              tags.appendChild(none);
             }
 
+            box.appendChild(tags);
+            tdDetAll.appendChild(box);
             trDet.appendChild(tdDetAll);
 
             btn.addEventListener('click', () => {
@@ -409,9 +471,9 @@
           link.remove();
         });
 
-        apply(); // første render
+        apply();
       } catch (e) {
-        tbody.innerHTML = `<tr><td colspan="8" class="muted">Feil ved lasting: ${e.message}</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="5" class="muted">Feil ved lasting: ${e.message}</td></tr>`;
       }
     })();
   </script>
