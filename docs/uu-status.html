@@ -22,7 +22,7 @@
     h1 { font-size: 28px; margin: 0 0 8px; }
     .muted { color: var(--muted); }
     .toolbar {
-      display: grid; gap: 12px; grid-template-columns: 1fr 160px 160px 160px; align-items: end; margin: 18px 0 14px;
+      display: grid; gap: 12px; grid-template-columns: 1fr 160px 160px 220px 160px; align-items: end; margin: 18px 0 14px;
     }
     .toolbar .field { display: flex; flex-direction: column; gap: 6px; }
     .toolbar input, .toolbar select, .toolbar button {
@@ -34,7 +34,7 @@
     .cards { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 12px; }
     table { width: 100%; border-collapse: collapse; }
     th, td { padding: 10px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
-    th { text-align: left; font-weight: 600; user-select: none; }
+    th { text-align: left; font-weight: 600; user-select: none; white-space: nowrap; }
     th.sortable { cursor: pointer; }
     th.sortable .arrow { opacity: .5; margin-left: 6px; font-size: 11px; }
     tr:hover td { background: rgba(255,255,255,0.02); }
@@ -44,9 +44,11 @@
     .pill.ok { color: var(--ok); border-color: rgba(40,167,69,.3); }
     .pill.warn { color: var(--warn); border-color: rgba(240,173,78,.3); }
     .pill.bad { color: var(--bad); border-color: rgba(220,53,69,.3); }
-    .footer { display:flex; justify-content: space-between; align-items:center; margin-top: 10px; color: var(--muted); font-size: 12px; }
+    .btn-link { background: none; border: 1px solid var(--border); color: var(--text); padding: 6px 10px; border-radius: 10px; cursor: pointer; }
+    .footer { display:flex; justify-content: space-between; align-items:center; margin-top: 10px; color: var(--muted); font-size: 12px; gap: 12px; flex-wrap: wrap; }
     .hidden { display: none !important; }
-    @media (max-width: 900px) {
+    .kpis { display:flex; gap:10px; align-items:center; flex-wrap: wrap; }
+    @media (max-width: 1100px) {
       .toolbar { grid-template-columns: 1fr 1fr; }
     }
   </style>
@@ -81,6 +83,12 @@
         </select>
       </div>
       <div class="field">
+        <label for="wcagFilter">Filter: WCAG-krav</label>
+        <select id="wcagFilter">
+          <option value="">Alle</option>
+        </select>
+      </div>
+      <div class="field">
         <label>&nbsp;</label>
         <button id="downloadBtn" type="button" title="Last ned CSV">Last ned CSV</button>
       </div>
@@ -97,10 +105,11 @@
             <th class="sortable" data-key="SistOppdatert">Sist oppdatert</th>
             <th class="sortable" data-key="Opprettet">Opprettet</th>
             <th>Status</th>
+            <th>Detaljer</th>
           </tr>
         </thead>
         <tbody id="tbody">
-          <tr><td colspan="7" class="muted">Laster data…</td></tr>
+          <tr><td colspan="8" class="muted">Laster data…</td></tr>
         </tbody>
       </table>
       <div class="footer">
@@ -111,15 +120,15 @@
   </div>
 
   <script>
-    // Konfig: sti til CSV som workflowen legger i /docs
-    const CSV_URL = 'uu-status.csv'; // relativ til denne html-fila
+    // Filer publisert av workflowen
+    const CSV_URL = 'uu-status.csv';                 // ligger i docs/
+    const DETAILS_URL = 'uu-status-details.json';    // ligger i docs/
 
     // Enkel CSV-parser for semikolon
     function parseCSV(text, delimiter=';') {
       const lines = text.trim().split(/\r?\n/);
       const headers = lines[0].split(delimiter).map(h => h.trim());
       const rows = lines.slice(1).map(line => {
-        // støtt semikolon i data ved enkle cases? Vi antar ingen ; inne i felt.
         const cols = line.split(delimiter).map(c => c.trim());
         const obj = {};
         headers.forEach((h, i) => obj[h] = cols[i] ?? '');
@@ -131,7 +140,7 @@
     function fmtDate(iso) {
       if (!iso) return '';
       try {
-        const d = new Date(iso + 'T12:00:00Z'); // unngå tz-problemer
+        const d = new Date(iso + 'T12:00:00Z'); // unngå tz-variasjoner
         return d.toLocaleDateString('no-NO', { year: 'numeric', month: 'short', day: '2-digit' });
       } catch { return iso; }
     }
@@ -151,23 +160,35 @@
       return Math.floor((now - then) / (1000 * 60 * 60 * 24));
     }
 
-    function matchesFilters(row, q, violFilter, updateFilter) {
+    function aggregateByCode(detailsArr) {
+      const map = new Map();
+      for (const d of detailsArr) {
+        const uniq = new Set(d.codes || []);
+        for (const c of uniq) map.set(c, (map.get(c) || 0) + 1);
+      }
+      return Array.from(map.entries()).sort((a,b) => b[1]-a[1]);
+    }
+
+    function matchesFilters(row, q, violFilter, updateFilter, wcagCode, detByUrl) {
       const hay = (row.Navn + ' ' + row.Url).toLowerCase();
       if (q && !hay.includes(q)) return false;
 
-      // brudd-filter
       const n = Number(row.Brudd || 0);
       if (violFilter === '0' && n !== 0) return false;
       if (violFilter === '1-5' && !(n >= 1 && n <= 5)) return false;
       if (violFilter === '6-10' && !(n >= 6 && n <= 10)) return false;
       if (violFilter === '11+' && !(n >= 11)) return false;
 
-      // oppdatert-filter
       if (updateFilter) {
         const days = daysSince(row.SistOppdatert);
         if (!(days <= Number(updateFilter))) return false;
       }
 
+      if (wcagCode) {
+        const d = detByUrl.get(row.Url);
+        const codes = (d && d.codes) || [];
+        if (!codes.includes(wcagCode)) return false;
+      }
       return true;
     }
 
@@ -182,13 +203,11 @@
           return (va - vb) * dir;
         }
         if (dateKeys.has(key)) {
-          // tomme datoer nederst
           if (!va && !vb) return 0;
           if (!va) return 1;
           if (!vb) return -1;
           return (new Date(va) - new Date(vb)) * dir;
         }
-        // default: streng
         return String(va).localeCompare(String(vb), 'no', { sensitivity:'base' }) * dir;
       });
     }
@@ -198,6 +217,7 @@
       const search = document.getElementById('search');
       const violFilter = document.getElementById('violFilter');
       const updateFilter = document.getElementById('updateFilter');
+      const wcagFilter = document.getElementById('wcagFilter');
       const downloadBtn = document.getElementById('downloadBtn');
       const summary = document.getElementById('summary');
       const asof = document.getElementById('asof');
@@ -209,30 +229,50 @@
       let sortAsc = true;
 
       try {
-        const res = await fetch(CSV_URL, { cache: 'no-store' });
-        if (!res.ok) throw new Error('Kunne ikke hente CSV');
-        const txt = await res.text();
+        const [csvRes, detRes] = await Promise.all([
+          fetch(CSV_URL, { cache: 'no-store' }),
+          fetch(DETAILS_URL, { cache: 'no-store' })
+        ]);
+        if (!csvRes.ok) throw new Error('Kunne ikke hente CSV');
+        if (!detRes.ok) throw new Error('Kunne ikke hente detaljer');
+
+        const txt = await csvRes.text();
+        const details = await detRes.json(); // [{url, name, codes[], last_checked}]
+        const detByUrl = new Map(details.map(d => [d.url, d]));
         const parsed = parseCSV(txt, ';');
         data = parsed.rows;
+
+        // WCAG-agg + fyll drop-down
+        const wcagAgg = aggregateByCode(details);
+        for (const [code, count] of wcagAgg) {
+          const opt = document.createElement('option');
+          opt.value = code;
+          opt.textContent = `${code} (${count})`;
+          wcagFilter.appendChild(opt);
+        }
 
         // Oppsummering
         const count = data.length;
         const totalBrudd = data.reduce((s, r) => s + (Number(r.Brudd || 0) || 0), 0);
         const zeroCount = data.filter(r => Number(r.Brudd||0) === 0).length;
-        summary.textContent = `${count} erklæringer • ${totalBrudd} brudd totalt • ${zeroCount} med 0 brudd`;
 
-        // "As of" fra feltet SistSjekket (tar nyeste)
+        // "As of" fra SistSjekket (nyeste)
         const asOfIso = data.map(r => r.SistSjekket).filter(Boolean).sort().slice(-1)[0];
         if (asOfIso) {
           const d = new Date(asOfIso);
           asof.textContent = `Sist sjekket: ${d.toLocaleString('no-NO')}`;
         }
 
+        // Toppbrudd (topp 10)
+        const top = wcagAgg.slice(0, 10).map(([code, count]) => `${code} (${count})`).join(' • ');
+        summary.textContent = `${count} erklæringer • ${totalBrudd} brudd totalt • ${zeroCount} med 0 brudd${top ? ' • Topp brudd: ' + top : ''}`;
+
         const apply = () => {
           const q = search.value.trim().toLowerCase();
           const vf = violFilter.value;
           const uf = updateFilter.value;
-          view = data.filter(r => matchesFilters(r, q, vf, uf));
+          const wc = wcagFilter.value;
+          view = data.filter(r => matchesFilters(r, q, vf, uf, wc, detByUrl));
           view = sortRows(view, sortKey, sortAsc);
           render();
         };
@@ -242,7 +282,7 @@
           if (view.length === 0) {
             const tr = document.createElement('tr');
             const td = document.createElement('td');
-            td.colSpan = 7;
+            td.colSpan = 8;
             td.className = 'muted';
             td.textContent = 'Ingen treff på valgt filter.';
             tr.appendChild(td);
@@ -287,7 +327,63 @@
             tdStatus.textContent = sc ? sc : '';
             tr.appendChild(tdStatus);
 
+            const tdDet = document.createElement('td');
+            const btn = document.createElement('button');
+            btn.textContent = 'Vis detaljer';
+            btn.type = 'button';
+            btn.className = 'btn-link';
+            tdDet.appendChild(btn);
+            tr.appendChild(tdDet);
+
+            // detaljerad (skjult)
+            const trDet = document.createElement('tr');
+            const tdDetAll = document.createElement('td');
+            tdDetAll.colSpan = 8;
+            tdDetAll.className = 'muted';
+            tdDetAll.style.display = 'none';
+
+            const d = detByUrl.get(r.Url);
+            const codes = (d && d.codes && d.codes.length) ? d.codes : [];
+            if (codes.length) {
+              const wrap = document.createElement('div');
+              wrap.style.display = 'flex';
+              wrap.style.flexWrap = 'wrap';
+              wrap.style.gap = '8px';
+              wrap.style.padding = '6px 2px';
+
+              const label = document.createElement('strong');
+              label.textContent = 'WCAG-brudd funnet: ';
+              tdDetAll.appendChild(label);
+
+              for (const c of codes) {
+                const badge = document.createElement('span');
+                badge.className = 'pill bad';
+                badge.style.cursor = 'pointer';
+                badge.textContent = c;
+                badge.title = 'Klikk for å filtrere på ' + c;
+                badge.addEventListener('click', () => {
+                  wcagFilter.value = c;
+                  apply();
+                  tdDetAll.style.display = ''; // behold åpnet
+                  btn.textContent = 'Skjul detaljer';
+                });
+                wrap.appendChild(badge);
+              }
+              tdDetAll.appendChild(wrap);
+            } else {
+              tdDetAll.textContent = 'Ingen detaljer funnet for denne erklæringen.';
+            }
+
+            trDet.appendChild(tdDetAll);
+
+            btn.addEventListener('click', () => {
+              const show = tdDetAll.style.display === 'none';
+              tdDetAll.style.display = show ? '' : 'none';
+              btn.textContent = show ? 'Skjul detaljer' : 'Vis detaljer';
+            });
+
             tbody.appendChild(tr);
+            tbody.appendChild(trDet);
           }
         };
 
@@ -295,6 +391,7 @@
         search.addEventListener('input', apply);
         violFilter.addEventListener('change', apply);
         updateFilter.addEventListener('change', apply);
+        wcagFilter.addEventListener('change', apply);
         ths.forEach(th => {
           th.addEventListener('click', () => {
             const key = th.dataset.key;
@@ -304,7 +401,6 @@
         });
 
         downloadBtn.addEventListener('click', () => {
-          // Last ned CSV direkte fra docs/
           const link = document.createElement('a');
           link.href = CSV_URL;
           link.download = 'uu-status.csv';
@@ -315,7 +411,7 @@
 
         apply(); // første render
       } catch (e) {
-        tbody.innerHTML = `<tr><td colspan="7" class="muted">Feil ved lasting: ${e.message}</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="8" class="muted">Feil ved lasting: ${e.message}</td></tr>`;
       }
     })();
   </script>
