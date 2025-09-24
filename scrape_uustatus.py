@@ -5,13 +5,13 @@ from pathlib import Path
 import requests
 from bs4 import BeautifulSoup
 
-# INPUT og OUTPUT
-INPUT_CSV = Path("uustatus-urls.csv")  # <-- gi kildelista di dette navnet
-OUTPUT_CSV = Path("uu-status.csv")
+# Input og output
+INPUT_CSV = Path("uustatus-urls.csv")  # kildelista
+OUTPUT_CSV = Path("uu-status.csv")     # resultat
 
 HEADERS = {"User-Agent": "toolsified-uustatus-scraper (+https://github.com/Almasy74/toolsified)"}
 
-# Mønstre (norske tekster på uustatus.no)
+# Regex-mønstre for å finne data i teksten
 BRUDD_RE = re.compile(r"Det er brudd på\s+(\d+)\s+av\s+(\d+)\s+krav", re.IGNORECASE)
 SIST_OPPDATERT_RE = re.compile(r"sist oppdatert\s+(\d{1,2}\.\s*\w+\s*\d{4})", re.IGNORECASE)
 OPPRETTET_RE = re.compile(r"opprettet (?:første\s*gang|første gang)\s+(\d{1,2}\.\s*\w+\s*\d{4})", re.IGNORECASE)
@@ -70,7 +70,7 @@ def scrape_one(name, url):
     }
 
 def read_sources(path: Path):
-    # tåler UTF-8 med/uten BOM
+    # tåler UTF-8 med BOM
     with path.open("r", encoding="utf-8-sig", newline="") as f:
         reader = csv.DictReader(f, delimiter=';')
         for row in reader:
@@ -86,7 +86,7 @@ def main():
     rows = []
     for name, url in read_sources(INPUT_CSV):
         rows.append(scrape_one(name, url))
-        time.sleep(0.8)  # vær høflig
+        time.sleep(0.8)
 
     fieldnames = ["Navn","Url","Brudd","KravTotalt","SistOppdatert","Opprettet","Statuskode","Feil","SistSjekket"]
     with OUTPUT_CSV.open("w", encoding="utf-8", newline="") as f:
