@@ -1,17 +1,54 @@
 Navn;Url;Brudd;KravTotalt;SistOppdatert;Opprettet;Statuskode;Feil;SistSjekket;WCAGCodes
-skatteetaten.no;https://uustatus.no/nb/erklaringer/publisert/0193e69a-7038-4809-9859-e71ddc747071;11;48;2024-12-10;2023-01-05;200;;2025-09-24T19:21:32.634986+00:00;1.1.1|1.2.1|1.3.1|1.3.5|1.4.11|1.4.3|2.4.1|3.1.2|3.3.1|4.1.2|4.1.3
-Tips oss;https://uustatus.no/nb/erklaringer/publisert/461f43ab-f826-46b5-a664-8caea74d7e0c;1;48;2025-01-23;2023-01-20;200;;2025-09-24T19:21:33.939416+00:00;1.4.10
-Tabelltrekk;https://uustatus.no/nb/erklaringer/publisert/39f00367-5950-4917-8521-6c2faf74f784;;;2025-03-07;2023-01-11;200;;2025-09-24T19:21:35.245215+00:00;
-Skatteetaten designsystem - Github;https://uustatus.no/nb/erklaringer/publisert/90be03a3-13e4-4979-8c88-f38727fb77e0;1;48;2025-01-30;2023-01-12;200;;2025-09-24T19:21:36.527860+00:00;3.1.2
-Beregn skatt;https://uustatus.no/nb/erklaringer/publisert/47f7a6da-c7f3-4f1f-a5ae-ce4eee7c4c8a;9;48;2025-07-03;2024-11-12;200;;2025-09-24T19:21:37.840596+00:00;1.3.1|1.4.10|2.4.3|2.4.7|3.1.2|3.3.1|3.3.2|4.1.2|4.1.3
-Beregn skatten din for 2023;https://uustatus.no/nb/erklaringer/publisert/8174d150-d11c-4685-a6a1-12024c7bf2ba;;;2025-04-30;2023-01-12;200;;2025-09-24T19:21:39.118074+00:00;
-Min side;https://uustatus.no/nb/erklaringer/publisert/85917b0d-c897-4f1c-a9cb-94e7ff359c4b;3;48;2024-09-30;2023-09-29;200;;2025-09-24T19:21:40.426403+00:00;1.3.1|2.4.3|4.1.2
-Selvbetjening motorvogn;https://uustatus.no/nb/erklaringer/publisert/e1c1e944-48f2-47ac-be68-21824d833339;14;48;2025-01-23;2023-01-25;200;;2025-09-24T19:21:41.741767+00:00;1.1.1|1.3.1|1.3.2|2.1.2|2.4.1|2.4.2|2.4.3|2.4.5|2.4.6|2.5.3|3.1.1|3.2.2|3.3.1|3.3.2
-Innboks;https://uustatus.no/nb/erklaringer/publisert/a677a1b4-b156-4e05-8754-e62c218f056e;9;48;2025-08-29;2025-01-28;200;;2025-09-24T19:21:43.029473+00:00;1.1.1|1.3.1|1.4.1|1.4.10|2.4.3|3.3.1|3.3.2|4.1.2|4.1.3
-Min side virksomhet;https://uustatus.no/nb/erklaringer/publisert/85917b0d-c897-4f1c-a9cb-94e7ff359c4b;3;48;2024-09-30;2023-09-29;200;;2025-09-24T19:21:44.341679+00:00;1.3.1|2.4.3|4.1.2
-Min skatt og mine skattedokumenter;https://uustatus.no/nb/erklaringer/publisert/4fd1edd9-7157-4e62-bd8c-63a991c4102a;2;48;2024-06-25;2023-01-18;200;;2025-09-24T19:21:45.627072+00:00;2.4.2|4.1.3
-Folkeregister;https://uustatus.no/nb/erklaringer/publisert/3eea216f-0c8c-4d81-ba12-c63aa7e16e4c;10;48;2024-05-24;2023-01-27;200;;2025-09-24T19:21:46.937336+00:00;1.3.1|2.1.1|2.4.3|2.4.4|3.3.1|3.3.2|3.3.3|4.1.1|4.1.2|4.1.3
-Aksjeoppgaven;https://uustatus.no/nb/erklaringer/publisert/8c79a29b-693a-432c-b404-b2dc280ff7bc;2;48;;2025-03-10;200;;2025-09-24T19:21:48.246360+00:00;1.3.1|2.4.3
-Endre skattekort;https://uustatus.no/nb/erklaringer/publisert/2e9af915-796a-4b03-8f51-fe1d0f76850a;11;48;2024-12-09;2023-01-20;200;;2025-09-24T19:21:49.533070+00:00;1.3.1|1.4.11|2.1.1|2.4.3|2.4.5|2.4.7|3.3.1|3.3.2|4.1.1|4.1.2|4.1.3
-Skatt delegering;https://uustatus.no/nb/erklaringer/publisert/a220a476-5308-4a4f-91f8-2589cfb4cd52;2;48;2024-06-25;2023-01-18;200;;2025-09-24T19:21:50.843557+00:00;2.4.3|4.1.2
-Mine inntekter og arbeidsforhold;https://uustatus.no/nb/erklaringer/publisert/d2083279-2df2-46a7-9ea9-63fd71a58af0;2;48;2024-06-25;2023-01-20;200;;2025-09-24T19:21:52.133107+00:00;2.4.3|4.1.3
+skatteetaten.no;https://uustatus.no/nb/erklaringer/publisert/0193e69a-7038-4809-9859-e71ddc747071;11;48;2024-12-10;2023-01-05;200;;2025-09-24T19:47:55.131655+00:00;1.1.1|1.2.1|1.3.1|1.3.5|1.4.11|1.4.3|2.4.1|3.1.2|3.3.1|4.1.2|4.1.3
+Tips oss;https://uustatus.no/nb/erklaringer/publisert/461f43ab-f826-46b5-a664-8caea74d7e0c;1;48;2025-01-23;2023-01-20;200;;2025-09-24T19:47:56.281332+00:00;1.4.10
+Tabelltrekk;https://uustatus.no/nb/erklaringer/publisert/39f00367-5950-4917-8521-6c2faf74f784;;;2025-03-07;2023-01-11;200;;2025-09-24T19:47:57.436959+00:00;
+Skatteetaten designsystem - Github;https://uustatus.no/nb/erklaringer/publisert/90be03a3-13e4-4979-8c88-f38727fb77e0;1;48;2025-01-30;2023-01-12;200;;2025-09-24T19:47:58.608781+00:00;3.1.2
+Beregn skatt;https://uustatus.no/nb/erklaringer/publisert/47f7a6da-c7f3-4f1f-a5ae-ce4eee7c4c8a;9;48;2025-07-03;2024-11-12;200;;2025-09-24T19:47:59.769745+00:00;1.3.1|1.4.10|2.4.3|2.4.7|3.1.2|3.3.1|3.3.2|4.1.2|4.1.3
+Beregn skatten din for 2023;https://uustatus.no/nb/erklaringer/publisert/8174d150-d11c-4685-a6a1-12024c7bf2ba;;;2025-04-30;2023-01-12;200;;2025-09-24T19:48:00.976869+00:00;
+Min side;https://uustatus.no/nb/erklaringer/publisert/85917b0d-c897-4f1c-a9cb-94e7ff359c4b;3;48;2024-09-30;2023-09-29;200;;2025-09-24T19:48:02.133337+00:00;1.3.1|2.4.3|4.1.2
+Selvbetjening motorvogn;https://uustatus.no/nb/erklaringer/publisert/e1c1e944-48f2-47ac-be68-21824d833339;14;48;2025-01-23;2023-01-25;200;;2025-09-24T19:48:03.288928+00:00;1.1.1|1.3.1|1.3.2|2.1.2|2.4.1|2.4.2|2.4.3|2.4.5|2.4.6|2.5.3|3.1.1|3.2.2|3.3.1|3.3.2
+Innboks;https://uustatus.no/nb/erklaringer/publisert/a677a1b4-b156-4e05-8754-e62c218f056e;9;48;2025-08-29;2025-01-28;200;;2025-09-24T19:48:04.447477+00:00;1.1.1|1.3.1|1.4.1|1.4.10|2.4.3|3.3.1|3.3.2|4.1.2|4.1.3
+Min side virksomhet;https://uustatus.no/nb/erklaringer/publisert/85917b0d-c897-4f1c-a9cb-94e7ff359c4b;3;48;2024-09-30;2023-09-29;200;;2025-09-24T19:48:05.623201+00:00;1.3.1|2.4.3|4.1.2
+Min skatt og mine skattedokumenter;https://uustatus.no/nb/erklaringer/publisert/4fd1edd9-7157-4e62-bd8c-63a991c4102a;2;48;2024-06-25;2023-01-18;200;;2025-09-24T19:48:06.780795+00:00;2.4.2|4.1.3
+Folkeregister;https://uustatus.no/nb/erklaringer/publisert/3eea216f-0c8c-4d81-ba12-c63aa7e16e4c;10;48;2024-05-24;2023-01-27;200;;2025-09-24T19:48:07.934120+00:00;1.3.1|2.1.1|2.4.3|2.4.4|3.3.1|3.3.2|3.3.3|4.1.1|4.1.2|4.1.3
+Aksjeoppgaven;https://uustatus.no/nb/erklaringer/publisert/8c79a29b-693a-432c-b404-b2dc280ff7bc;2;48;;2025-03-10;200;;2025-09-24T19:48:09.090764+00:00;1.3.1|2.4.3
+Endre skattekort;https://uustatus.no/nb/erklaringer/publisert/2e9af915-796a-4b03-8f51-fe1d0f76850a;11;48;2024-12-09;2023-01-20;200;;2025-09-24T19:48:10.244747+00:00;1.3.1|1.4.11|2.1.1|2.4.3|2.4.5|2.4.7|3.3.1|3.3.2|4.1.1|4.1.2|4.1.3
+Skatt delegering;https://uustatus.no/nb/erklaringer/publisert/a220a476-5308-4a4f-91f8-2589cfb4cd52;2;48;2024-06-25;2023-01-18;200;;2025-09-24T19:48:11.400033+00:00;2.4.3|4.1.2
+Mine inntekter og arbeidsforhold;https://uustatus.no/nb/erklaringer/publisert/d2083279-2df2-46a7-9ea9-63fd71a58af0;2;48;2024-06-25;2023-01-20;200;;2025-09-24T19:48:12.577026+00:00;2.4.3|4.1.3
+Melding om kildeskatt på renter, royalty og leiebetalinger;https://uustatus.no/nb/erklaringer/publisert/46f94252-a1d0-4161-9192-5fe073f98228;4;48;;2025-09-19;200;;2025-09-24T19:48:13.786840+00:00;1.3.1|1.4.10|2.4.3|4.1.1
+Skattelister for mediehus;https://uustatus.no/nb/erklaringer/publisert/f8134272-66a6-4139-85e7-eeb9c64e1cb0;6;48;2025-09-17;2024-11-22;200;;2025-09-24T19:48:14.991002+00:00;1.4.10|2.4.3|3.3.2|3.3.3|4.1.2|4.1.3
+Internasjonal rapportering CRS/FATCA;https://uustatus.no/nb/erklaringer/publisert/23a46c06-1d7f-46ce-aff3-ff2367d9f86f;;;;2025-09-04;200;;2025-09-24T19:48:16.143888+00:00;
+Tredjepartsopplysninger - tilskudd til vitenskapelig forskning eller yrkesopplæring;https://uustatus.no/nb/erklaringer/publisert/65d9e9e9-1611-4fd6-bcca-1fd5ca56646d;1;48;2025-09-02;2025-02-07;200;;2025-09-24T19:48:17.347820+00:00;2.4.3
+Tredjepartsopplysninger - nye opplysninger til oppgavegiverregisteret;https://uustatus.no/nb/erklaringer/publisert/9026f9d6-8ab5-4fb8-bba6-88aaeb18dbcf;;;2025-08-25;2025-05-14;200;;2025-09-24T19:48:18.553329+00:00;
+Søknad om eller klage på motregning i fremtidige bidrag;https://uustatus.no/nb/erklaringer/publisert/9328d70e-f881-42e6-9028-b8e6a043d145;;;2025-08-06;2025-08-06;200;;2025-09-24T19:48:19.772800+00:00;
+Fullmakt - bidrag og tilbakebetaling;https://uustatus.no/nb/erklaringer/publisert/d2a884f4-b624-4b42-aaa8-ffd0a42e24b3;;;;2025-08-06;200;;2025-09-24T19:48:20.973854+00:00;
+Klage på eller henvendelse om motregning - bidrag og tilbakebetaling;https://uustatus.no/nb/erklaringer/publisert/d2a884f4-b624-4b42-aaa8-ffd0a42e24b3;;;;2025-08-06;200;;2025-09-24T19:48:22.128375+00:00;
+Søknad om fritak for solidaransvar;https://uustatus.no/nb/erklaringer/publisert/474734e3-a0fa-4021-98c1-3f80f5029f0f;;;;2025-08-06;200;;2025-09-24T19:48:23.330571+00:00;
+Rettighetspakke innsyn web;https://uustatus.no/nb/erklaringer/publisert/96c10424-bbb7-4a19-8ce1-d75e1a146666;5;48;2025-07-08;2025-07-08;200;;2025-09-24T19:48:24.526579+00:00;1.1.1|1.4.10|1.4.3|3.3.2|4.1.2
+Oversikt over innhold i skattemeldingen;https://uustatus.no/nb/erklaringer/publisert/3cda10ad-635e-457c-8fe1-c90c5b4bab4f;6;48;;2025-07-03;200;;2025-09-24T19:48:25.738947+00:00;1.3.1|1.4.10|1.4.3|2.4.1|4.1.2|4.1.3
+Betalinger til selvstendig næringsdrivende;https://uustatus.no/nb/erklaringer/publisert/6ff36d85-dfeb-4701-8f46-1fdb8293c33f;;;2025-07-01;2025-02-21;200;;2025-09-24T19:48:26.960064+00:00;
+Utskrift av skattemelding og skatteoppgjør;https://uustatus.no/nb/erklaringer/publisert/032a655f-22dc-40ad-95ac-749baecf04dd;;;2025-07-01;2025-06-05;200;;2025-09-24T19:48:28.153087+00:00;
+Konto for utbetalinger fra Skatteetaten;https://uustatus.no/nb/erklaringer/publisert/93d6de46-3b5d-4ecc-9149-b0d27af706fa;2;48;2025-06-20;2023-01-20;200;;2025-09-24T19:48:29.354103+00:00;3.3.1|4.1.3
+Tredjepartsopplysninger - boligsparing for ungdom;https://uustatus.no/nb/erklaringer/publisert/46477ae1-0ba8-46bc-a2f4-2591f9b60593;;;2025-06-18;2024-11-15;200;;2025-09-24T19:48:30.553884+00:00;
+Skattelister;https://uustatus.no/nb/erklaringer/publisert/a49940f0-d273-4728-8ff4-4adce824cadf;2;48;2025-06-17;2023-01-09;200;;2025-09-24T19:48:31.754903+00:00;2.4.3|4.1.2
+Tredjepartsopplysninger - betaling for pass og stell av barn;https://uustatus.no/nb/erklaringer/publisert/62611290-2cdd-44d9-a3ca-d317adbb6711;;;2025-06-16;2024-09-19;200;;2025-09-24T19:48:32.955519+00:00;
+Søknad om dagsoppgjør eller månedsoppgjør;https://uustatus.no/nb/erklaringer/publisert/4d3f5dbd-e902-48a6-aa6e-0b0533a5de9b;;;2025-06-06;2023-11-01;200;;2025-09-24T19:48:34.172588+00:00;
+Søknad om å endre, gjenåpne eller avslutte dagsoppgjør eller månedsoppgjør;https://uustatus.no/nb/erklaringer/publisert/d8127968-6877-47fc-8201-abe46d54439f;;;;2025-06-06;200;;2025-09-24T19:48:35.374970+00:00;
+Søknad om å endre, gjenåpne eller avslutte kreditt for engangsavgift;https://uustatus.no/nb/erklaringer/publisert/a6397693-d147-4941-83d0-09d638989c1e;;;;2025-06-06;200;;2025-09-24T19:48:36.565550+00:00;
+Søknad om kreditt for engangsavgift;https://uustatus.no/nb/erklaringer/publisert/70e51ceb-3ded-416b-b647-251d634ea738;;;;2025-06-06;200;;2025-09-24T19:48:37.763138+00:00;
+Tredjepartsopplysninger - innskudd, utlån og renter mv;https://uustatus.no/nb/erklaringer/publisert/ea01a748-09dc-45d3-8eaa-a220ac38eb3c;;;;2025-06-05;200;;2025-09-24T19:48:38.961027+00:00;
+Attest for skatt og avgift;https://uustatus.no/nb/erklaringer/publisert/4d87bd2a-a5d3-4b8e-ae7a-1212fb6e2811;;;2025-05-26;2025-05-09;200;;2025-09-24T19:48:40.164828+00:00;
+Utsatt frist søknad;https://uustatus.no/nb/erklaringer/publisert/dd668d30-1d3f-4cc4-bf56-e34feac2a220;2;48;2025-05-23;2023-01-18;200;;2025-09-24T19:48:41.339772+00:00;2.4.2|4.1.2
+Tredjepartsopplysninger - boligsameie;https://uustatus.no/nb/erklaringer/publisert/c4742d76-f848-48ea-b12d-4b45a5bfde48;12;48;2025-05-23;2025-01-29;200;;2025-09-24T19:48:42.556190+00:00;1.3.1|1.3.2|1.3.5|1.4.10|1.4.12|1.4.4|2.4.6|3.1.2|3.3.1|3.3.3|4.1.1|4.1.2
+Tredjepartsopplysninger - boligselskap;https://uustatus.no/nb/erklaringer/publisert/db6ea2aa-9391-4db4-b6c7-14f4663be109;13;48;2025-05-23;2025-01-29;200;;2025-09-24T19:48:43.767301+00:00;1.3.1|1.3.2|1.3.5|1.4.10|1.4.12|1.4.4|2.1.1|2.4.6|3.1.2|3.3.1|3.3.3|4.1.1|4.1.2
+Skriv til oss;https://uustatus.no/nb/erklaringer/publisert/18bd7a08-517c-4ef7-8bec-06cd6568563b;;;2025-05-23;2024-08-27;200;;2025-09-24T19:48:44.969105+00:00;
+Tredjepartsopplysninger - gaver til visse frivillige organisasjoner og tros- og livssynssamfunn;https://uustatus.no/nb/erklaringer/publisert/27230555-3e1d-43a8-bbbe-4b3566d62b57;;;2025-05-23;2024-09-19;200;;2025-09-24T19:48:46.164572+00:00;
+Søknad om tollkreditt;https://uustatus.no/nb/erklaringer/publisert/19bc325d-4200-4f68-9788-e4d478a9c49e;;;2025-05-23;2025-03-21;200;;2025-09-24T19:48:47.366315+00:00;
+Søknad om å endre, gjenåpne eller avslutte tollkreditt;https://uustatus.no/nb/erklaringer/publisert/bd86d295-ad04-4c36-bfe2-fe88231f2de5;;;2025-05-23;2025-03-21;200;;2025-09-24T19:48:48.577995+00:00;
+Kjøp fra produsent – egg;https://uustatus.no/nb/erklaringer/publisert/ff1db11a-0c6e-4289-9a59-1cf56b03898f;;;2025-05-23;2025-03-21;200;;2025-09-24T19:48:49.783164+00:00;
+Kjøp fra produsent – korn;https://uustatus.no/nb/erklaringer/publisert/aeeb6601-3230-49a1-8376-da89724fb1e2;;;2025-05-23;2025-03-21;200;;2025-09-24T19:48:50.977500+00:00;
+Kjøp fra produsent – melk;https://uustatus.no/nb/erklaringer/publisert/a9727a41-37f8-4c21-ba2b-c82cd5f4a52c;;;2025-05-23;2025-03-21;200;;2025-09-24T19:48:52.190294+00:00;
+Kjøp fra produsent – slakt;https://uustatus.no/nb/erklaringer/publisert/97188853-f36e-441f-abf3-0cc7cd444fb1;;;2025-05-23;2025-03-21;200;;2025-09-24T19:48:53.382147+00:00;
+Kjøp fra produsent – Jord- og hagebruk;https://uustatus.no/nb/erklaringer/publisert/d7e02a17-9f66-4ea6-8b47-894de9a774b4;;;2025-05-23;2025-03-21;200;;2025-09-24T19:48:54.578745+00:00;
+Tenor Testdatasøk;https://uustatus.no/nb/erklaringer/publisert/70c131d2-31de-4af7-b2cf-bf2a2ae4b144;5;48;2025-05-23;2025-03-26;200;;2025-09-24T19:48:55.810129+00:00;1.3.1|2.2.1|3.1.1|3.3.2|3.3.3
+Godtgjøring til opphaver til åndsverk;https://uustatus.no/nb/erklaringer/publisert/78176632-e3c1-4a2d-8640-6f3810536b99;;;2025-05-23;2025-04-24;200;;2025-09-24T19:48:57.014875+00:00;
