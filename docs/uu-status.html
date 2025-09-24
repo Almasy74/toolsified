@@ -51,8 +51,14 @@
 .pill.deadline { margin-left: 8px; padding: 1px 6px; font-size: 12px; }
 
     /* Eksternlenke-ikon ved WCAG-koder */
+/* Lenke-stil for pill som WCAG-lenke */
+.pill-link { text-decoration: none; }
+.pill-link:focus { box-shadow: 0 0 0 3px var(--focus); outline: none; }
+
+/* Lite ekstern-lenkeikon */
 .wcag-ext { margin-left: 6px; font-size: 12px; opacity:.9; }
 .wcag-ext:hover { opacity: 1; text-decoration: none; }
+
 
 
     .btn-link { background: none; border: 1px solid var(--border); color: var(--text); padding: 6px 10px; border-radius: 10px; cursor: pointer; }
@@ -166,7 +172,7 @@
     const CSV_URL = 'uu-status.csv';
     const DETAILS_URL = 'uu-status-details.json';
 
-    // Direkte-lenker for kjente koder (kan fylles på etter behov)
+   // Direkte-lenker for kjente koder (kan fylles på etter behov)
 const WCAG_LINKS = {
   '1.1.1': 'https://www.uutilsynet.no/wcag-standarden/111-ikke-tekstlig-innhold-niva/87',
   '1.2.1': 'https://www.uutilsynet.no/wcag-standarden/121-bare-lyd-og-bare-video-forhandsinnspilt-niva/88',
@@ -219,7 +225,6 @@ const WCAG_LINKS = {
 };
 
 function wcagUrl(code) {
-  // Finn direkte-lenke hvis vi har den, ellers fall tilbake til søk i WCAG-standarden
   return WCAG_LINKS[code] ||
     `https://www.uutilsynet.no/search?search=${encodeURIComponent(code)}&f%5B0%5D=global_taxonomy%3A10&sort_by=search_api_relevance&sort_order=DESC`;
 }
@@ -566,26 +571,20 @@ if (ref) {
 
 if (codes.length) {
   for (const c of codes) {
-    // Badge: klikker = filtrerer på koden (som før)
-    const badge = document.createElement('span');
-    badge.className = 'pill bad';
-    badge.style.cursor = 'pointer';
-    badge.textContent = c;
-    badge.title = 'Klikk for å filtrere på ' + c;
-    badge.addEventListener('click', (ev) => {
-      ev.stopPropagation();
-      wcagFilter.value = c;
-      apply();
-      tdDetAll.style.display = '';
-      btn.setAttribute('aria-expanded', 'true');
-      btn.querySelector('.label').textContent = 'Skjul detaljer';
-    });
-    tags.appendChild(badge);
+    // Gjør selve "pill"-koden til en lenke til UU-tilsynet
+    const link = document.createElement('a');
+    link.href = wcagUrl(c);
+    link.target = '_blank';
+    link.rel = 'noopener';
+    link.className = 'pill bad pill-link';
+    link.setAttribute('aria-label', `Åpne UU-tilsynets side for WCAG ${c} i ny fane`);
+    link.textContent = c;
+    tags.appendChild(link);
 
-    // Ekstern lenke til UU-tilsynets side for koden
+    // Ekstra ↗-ikon som også lenker til samme side
     const ext = document.createElement('a');
     ext.className = 'wcag-ext';
-    ext.href = wcagUrl(c);           // <- bruker helperen fra steg 2
+    ext.href = wcagUrl(c);
     ext.target = '_blank';
     ext.rel = 'noopener';
     ext.setAttribute('aria-label', `Åpne UU-tilsynets side for ${c} i ny fane`);
@@ -598,6 +597,7 @@ if (codes.length) {
   none.textContent = 'Ingen detaljer funnet for denne erklæringen.';
   tags.appendChild(none);
 }
+
 
 
             box.appendChild(tags);
