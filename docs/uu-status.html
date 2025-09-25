@@ -51,9 +51,23 @@
 .pill.deadline { margin-left: 8px; padding: 1px 6px; font-size: 12px; }
 
     /* Eksternlenke-ikon ved WCAG-koder */
-/* Lenke-stil for pill som WCAG-lenke */
-.pill-link { text-decoration: none; }
+    /* WCAG-lenke som pill + innebygd pilikon */
+.pill-link {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;                /* avstand mellom kode og pil */
+}
 .pill-link:focus { box-shadow: 0 0 0 3px var(--focus); outline: none; }
+
+/* Pilikon inni samme lenke (ikke fokusbar) */
+.wcag-link::after {
+  content: '↗';
+  font-size: 12px;
+  opacity: .9;
+}
+.wcag-link:hover::after { opacity: 1; }
+
 
 /* Lite ekstern-lenkeikon */
 .wcag-ext { margin-left: 6px; font-size: 12px; opacity:.9; }
@@ -571,25 +585,14 @@ if (ref) {
 
 if (codes.length) {
   for (const c of codes) {
-    // Gjør selve "pill"-koden til en lenke til UU-tilsynet
-    const link = document.createElement('a');
-    link.href = wcagUrl(c);
-    link.target = '_blank';
-    link.rel = 'noopener';
-    link.className = 'pill bad pill-link';
-    link.setAttribute('aria-label', `Åpne UU-tilsynets side for WCAG ${c} i ny fane`);
-    link.textContent = c;
-    tags.appendChild(link);
-
-    // Ekstra ↗-ikon som også lenker til samme side
-    const ext = document.createElement('a');
-    ext.className = 'wcag-ext';
-    ext.href = wcagUrl(c);
-    ext.target = '_blank';
-    ext.rel = 'noopener';
-    ext.setAttribute('aria-label', `Åpne UU-tilsynets side for ${c} i ny fane`);
-    ext.textContent = '↗';
-    tags.appendChild(ext);
+    const a = document.createElement('a');
+    a.href = wcagUrl(c);
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.className = 'pill bad pill-link wcag-link';
+    a.setAttribute('aria-label', `Åpne UU-tilsynets side for WCAG ${c} i ny fane`);
+    a.textContent = c; // ↗ legges på via CSS ::after
+    tags.appendChild(a);
   }
 } else {
   const none = document.createElement('span');
@@ -597,6 +600,7 @@ if (codes.length) {
   none.textContent = 'Ingen detaljer funnet for denne erklæringen.';
   tags.appendChild(none);
 }
+
 
 
 
