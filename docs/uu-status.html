@@ -527,17 +527,6 @@
           // Diagram 1 – topp WCAG-koder
           const top = aggregateByCode(details).slice(0,8);
           const ctx1 = document.getElementById('chTopCodes');
-
-          const colText  = cs.getPropertyValue('--text').trim()  || '#e7eef7';
-const colMuted = cs.getPropertyValue('--muted').trim() || '#9fb0c3';
-const borderCol = cs.getPropertyValue('--border').trim() || '#1f2a36';
-
-// Sett Chart.js default-tekster til lys farge (gjelder legend + tooltips + aksers tekst)
-Chart.defaults.color = colText;
-Chart.defaults.borderColor = borderCol;
-Chart.defaults.font.family = getComputedStyle(document.body).fontFamily;
-
-          
         const ch1 = new Chart(ctx1, {
   type: 'bar',
   data: {
@@ -592,13 +581,9 @@ const labels = ['0 brudd', '1–5 brudd', '6–10 brudd', '11+ brudd'];
 const values = [z, a, b, c];
 
 // Rosa for 6–10 (ikke rød)
-
+const colPink = '#E66EB2';
 const borderCol = getComputedStyle(document.documentElement)
   .getPropertyValue('--border').trim() || '#1f2a36';
-
-const labels = ['0 brudd', '1–5 brudd', '6–10 brudd', '11+ brudd'];
-const values = [z, a, b, c];
-const colPink = '#E66EB2'; // ny farge for 6–10
 
 const ch2 = new Chart(ctx2, {
   type: 'doughnut',
@@ -616,10 +601,11 @@ const ch2 = new Chart(ctx2, {
     plugins: {
       legend: {
         position: 'bottom',
-        onClick: null,                 // slå AV toggling i legend
+        onClick: () => {},          // deaktiver toggling i legend
         labels: {
-          color: colText,              // lys grå/hvit tekst
+          color: '#e7eef7',         // lys grå/hvit for kontrast
           font: { size: 13, weight: '600' },
+          // legg tall inn i teksten: "1–5 brudd (32)"
           generateLabels(chart) {
             const ds = chart.data.datasets[0];
             return chart.data.labels.map((text, i) => {
@@ -642,7 +628,6 @@ const ch2 = new Chart(ctx2, {
     }
   }
 });
-
 
 
           // Klikk = sett brudd-filter
