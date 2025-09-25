@@ -47,33 +47,15 @@
     .pill.ok { color: var(--ok); border-color: rgba(40,167,69,.3); }
     .pill.warn { color: var(--warn); border-color: rgba(240,173,78,.3); }
     .pill.bad { color: var(--bad); border-color: rgba(220,53,69,.3); }
+
     /* Frist-badge */
-.pill.deadline { margin-left: 8px; padding: 1px 6px; font-size: 12px; }
+    .pill.deadline { margin-left: 8px; padding: 1px 6px; font-size: 12px; }
 
-    /* Eksternlenke-ikon ved WCAG-koder */
-    /* WCAG-lenke som pill + innebygd pilikon */
-.pill-link {
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;                /* avstand mellom kode og pil */
-}
-.pill-link:focus { box-shadow: 0 0 0 3px var(--focus); outline: none; }
-
-/* Pilikon inni samme lenke (ikke fokusbar) */
-.wcag-link::after {
-  content: '↗';
-  font-size: 12px;
-  opacity: .9;
-}
-.wcag-link:hover::after { opacity: 1; }
-
-
-/* Lite ekstern-lenkeikon */
-.wcag-ext { margin-left: 6px; font-size: 12px; opacity:.9; }
-.wcag-ext:hover { opacity: 1; text-decoration: none; }
-
-
+    /* WCAG-lenke som pill + innebygd pilikon (ett tabstopp) */
+    .pill-link { text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+    .pill-link:focus { box-shadow: 0 0 0 3px var(--focus); outline: none; }
+    .wcag-link::after { content: '↗'; font-size: 12px; opacity: .9; }
+    .wcag-link:hover::after { opacity: 1; }
 
     .btn-link { background: none; border: 1px solid var(--border); color: var(--text); padding: 6px 10px; border-radius: 10px; cursor: pointer; }
     .btn-link.toggle { display: inline-flex; align-items: center; gap: 6px; }
@@ -82,7 +64,7 @@
 
     .footer { display:flex; justify-content: space-between; align-items:center; margin-top: 10px; color: var(--muted); font-size: 12px; gap: 12px; flex-wrap: wrap; }
 
-    /* Detaljseksjon med tydelig grouping */
+    /* Detaljseksjon */
     .detail-row td { padding: 0; border: none; }
     .detail-box {
       margin: 6px 8px 12px 8px;
@@ -110,6 +92,27 @@
     .agg th, .agg td { padding: 6px 10px; border: 1px solid var(--border); }
     .agg th { background: rgba(255,255,255,0.03); }
     .agg a { cursor: pointer; }
+
+    /* Paginering */
+    .pager {
+      display:flex; justify-content: space-between; align-items:center;
+      padding:10px 6px; gap:12px; flex-wrap:wrap;
+    }
+    .pager-left { display:flex; align-items:center; gap:8px; }
+    .pager select {
+      background: var(--card); border:1px solid var(--border); color: var(--text);
+      padding:6px 8px; border-radius:10px;
+    }
+    .pages { display:flex; gap:6px; flex-wrap:wrap; }
+    .btn-page {
+      background:none; border:1px solid var(--border); color:var(--text);
+      padding:6px 10px; border-radius:10px; cursor:pointer;
+    }
+    .btn-page[disabled] { opacity:.5; cursor:default; }
+    .btn-page.active, .btn-page[aria-current="page"] {
+      border-color: var(--accent); box-shadow:0 0 0 2px rgba(111,179,255,.25);
+    }
+    .pager-info { color: var(--muted); font-size: 12px; }
 
     @media (max-width: 1100px) {
       .toolbar { grid-template-columns: 1fr 1fr; }
@@ -173,6 +176,22 @@
         </tbody>
       </table>
 
+      <!-- Paginering -->
+      <div class="pager" role="navigation" aria-label="Sideveksler">
+        <div class="pager-left">
+          <label for="pageSize" class="muted">Vis per side:</label>
+          <select id="pageSize" aria-label="Velg antall rader per side" title="Antall rader per side">
+            <option value="20" selected>20</option>
+            <option value="30">30</option>
+            <option value="40">40</option>
+            <option value="50">50</option>
+            <option value="all">Alle</option>
+          </select>
+          <span id="pageInfo" class="pager-info"></span>
+        </div>
+        <div class="pages" id="pagerBtns"></div>
+      </div>
+
       <div class="footer">
         <div id="summary" class="muted" aria-live="polite"></div>
         <div id="asof" class="muted"></div>
@@ -186,63 +205,61 @@
     const CSV_URL = 'uu-status.csv';
     const DETAILS_URL = 'uu-status-details.json';
 
-   // Direkte-lenker for kjente koder (kan fylles på etter behov)
-const WCAG_LINKS = {
-  '1.1.1': 'https://www.uutilsynet.no/wcag-standarden/111-ikke-tekstlig-innhold-niva/87',
-  '1.2.1': 'https://www.uutilsynet.no/wcag-standarden/121-bare-lyd-og-bare-video-forhandsinnspilt-niva/88',
-  '1.2.2': 'https://www.uutilsynet.no/wcag-standarden/122-teksting-forhandsinnspilt-niva/89',
-  '1.2.5': 'https://www.uutilsynet.no/wcag-standarden/125-synstolking-forhandsinnspilt-niva-aa/842',
-  '1.3.1': 'https://www.uutilsynet.no/wcag-standarden/131-informasjon-og-relasjoner-niva/90',
-  '1.3.2': 'https://www.uutilsynet.no/wcag-standarden/132-meningsfylt-rekkefolge-niva/91',
-  '1.3.3': 'https://www.uutilsynet.no/wcag-standarden/133-sensoriske-egenskaper-niva/92',
-  '1.3.4': 'https://www.uutilsynet.no/wcag-standarden/134-visningsretning-niva-aa/141',
-  '1.3.5': 'https://www.uutilsynet.no/wcag-standarden/135-identifiser-formal-med-inndata-niva-aa/142',
-  '1.4.1': 'https://www.uutilsynet.no/wcag-standarden/141-bruk-av-farge-niva/93',
-  '1.4.2': 'https://www.uutilsynet.no/wcag-standarden/142-styring-av-lyd-niva/94',
-  '1.4.3': 'https://www.uutilsynet.no/wcag-standarden/143-kontrast-minimum-niva-aa/95',
-  '1.4.4': 'https://www.uutilsynet.no/wcag-standarden/144-endring-av-tekststorrelse-niva-aa/96',
-  '1.4.5': 'https://www.uutilsynet.no/wcag-standarden/145-bilder-av-tekst-niva-aa/97',
-  '1.4.10': 'https://www.uutilsynet.no/wcag-standarden/1410-dynamisk-tilpasning-reflow-niva-aa/144',
-  '1.4.11': 'https://www.uutilsynet.no/wcag-standarden/1411-kontrast-ikke-tekstlig-innhold-niva-aa/145',
-  '1.4.12': 'https://www.uutilsynet.no/wcag-standarden/1412-tekstavstand-niva-aa/146',
-  '1.4.13': 'https://www.uutilsynet.no/wcag-standarden/1413-pekerfolsomt-innhold-eller-innhold-ved-tastaturfokus-niva-aa/147',
-  '2.1.1': 'https://www.uutilsynet.no/wcag-standarden/211-tastatur-niva/98',
-  '2.1.2': 'https://www.uutilsynet.no/wcag-standarden/212-ingen-tastaturfelle-niva/99',
-  '2.1.4': 'https://www.uutilsynet.no/wcag-standarden/214-hurtigtaster-som-bestar-av-ett-tegn-niva/782',
-  '2.2.1': 'https://www.uutilsynet.no/wcag-standarden/221-justerbar-hastighet-niva/100',
-  '2.2.2': 'https://www.uutilsynet.no/wcag-standarden/222-pause-stopp-skjul-niva/101',
-  '2.3.1': 'https://www.uutilsynet.no/wcag-standarden/231-terskelverdi-pa-maksimalt-tre-glimt-niva/102',
-  '2.4.1': 'https://www.uutilsynet.no/wcag-standarden/241-hoppe-over-blokker-niva/103',
-  '2.4.2': 'https://www.uutilsynet.no/wcag-standarden/242-sidetitler-niva/104',
-  '2.4.3': 'https://www.uutilsynet.no/wcag-standarden/243-fokusrekkefolge-niva/105',
-  '2.4.4': 'https://www.uutilsynet.no/wcag-standarden/244-formal-med-lenke-i-kontekst-niva/106',
-  '2.4.5': 'https://www.uutilsynet.no/wcag-standarden/245-flere-mater-niva-aa/107',
-  '2.4.6': 'https://www.uutilsynet.no/wcag-standarden/246-overskrifter-og-ledetekster-niva-aa/108',
-  '2.4.7': 'https://www.uutilsynet.no/wcag-standarden/247-synlig-fokus-niva-aa/109',
-  '2.5.1': 'https://www.uutilsynet.no/wcag-standarden/251-pekerbevegelser-niva/148',
-  '2.5.2': 'https://www.uutilsynet.no/wcag-standarden/252-pekeravbrytelse-niva/149',
-  '2.5.3': 'https://www.uutilsynet.no/wcag-standarden/253-ledetekst-i-navn-niva/150',
-  '2.5.4': 'https://www.uutilsynet.no/wcag-standarden/254-bevegelsesaktivering-niva/151',
-  '3.1.1': 'https://www.uutilsynet.no/wcag-standarden/311-sprak-pa-siden-niva/110',
-  '3.1.2': 'https://www.uutilsynet.no/wcag-standarden/312-sprak-pa-deler-av-innhold-niva-aa/111',
-  '3.2.1': 'https://www.uutilsynet.no/wcag-standarden/321-fokus-niva/112',
-  '3.2.2': 'https://www.uutilsynet.no/wcag-standarden/322-inndata-niva/114',
-  '3.2.3': 'https://www.uutilsynet.no/wcag-standarden/323-konsekvent-navigering-niva-aa/113',
-  '3.2.4': 'https://www.uutilsynet.no/wcag-standarden/324-konsekvent-identifikasjon-niva-aa/115',
-  '3.3.1': 'https://www.uutilsynet.no/wcag-standarden/331-identifikasjon-av-feil-niva/116',
-  '3.3.2': 'https://www.uutilsynet.no/wcag-standarden/332-ledetekster-eller-instruksjoner-niva/117',
-  '3.3.3': 'https://www.uutilsynet.no/wcag-standarden/333-forslag-ved-feil-niva-aa/118',
-  '3.3.4': 'https://www.uutilsynet.no/wcag-standarden/334-forhindring-av-feil-juridiske-feil-okonomiske-feil-datafeil-niva-aa/119',
-  '4.1.1': 'https://www.uutilsynet.no/wcag-standarden/411-parsing-oppdeling-niva/120',
-  '4.1.2': 'https://www.uutilsynet.no/wcag-standarden/412-navn-rolle-verdi-niva/121',
-  '4.1.3': 'https://www.uutilsynet.no/wcag-standarden/413-statusbeskjeder-niva-aa/152'
-};
-
-function wcagUrl(code) {
-  return WCAG_LINKS[code] ||
-    `https://www.uutilsynet.no/search?search=${encodeURIComponent(code)}&f%5B0%5D=global_taxonomy%3A10&sort_by=search_api_relevance&sort_order=DESC`;
-}
-
+    // Direkte-lenker for kjente koder (kan fylles på etter behov)
+    const WCAG_LINKS = {
+      '1.1.1': 'https://www.uutilsynet.no/wcag-standarden/111-ikke-tekstlig-innhold-niva/87',
+      '1.2.1': 'https://www.uutilsynet.no/wcag-standarden/121-bare-lyd-og-bare-video-forhandsinnspilt-niva/88',
+      '1.2.2': 'https://www.uutilsynet.no/wcag-standarden/122-teksting-forhandsinnspilt-niva/89',
+      '1.2.5': 'https://www.uutilsynet.no/wcag-standarden/125-synstolking-forhandsinnspilt-niva-aa/842',
+      '1.3.1': 'https://www.uutilsynet.no/wcag-standarden/131-informasjon-og-relasjoner-niva/90',
+      '1.3.2': 'https://www.uutilsynet.no/wcag-standarden/132-meningsfylt-rekkefolge-niva/91',
+      '1.3.3': 'https://www.uutilsynet.no/wcag-standarden/133-sensoriske-egenskaper-niva/92',
+      '1.3.4': 'https://www.uutilsynet.no/wcag-standarden/134-visningsretning-niva-aa/141',
+      '1.3.5': 'https://www.uutilsynet.no/wcag-standarden/135-identifiser-formal-med-inndata-niva-aa/142',
+      '1.4.1': 'https://www.uutilsynet.no/wcag-standarden/141-bruk-av-farge-niva/93',
+      '1.4.2': 'https://www.uutilsynet.no/wcag-standarden/142-styring-av-lyd-niva/94',
+      '1.4.3': 'https://www.uutilsynet.no/wcag-standarden/143-kontrast-minimum-niva-aa/95',
+      '1.4.4': 'https://www.uutilsynet.no/wcag-standarden/144-endring-av-tekststorrelse-niva-aa/96',
+      '1.4.5': 'https://www.uutilsynet.no/wcag-standarden/145-bilder-av-tekst-niva-aa/97',
+      '1.4.10': 'https://www.uutilsynet.no/wcag-standarden/1410-dynamisk-tilpasning-reflow-niva-aa/144',
+      '1.4.11': 'https://www.uutilsynet.no/wcag-standarden/1411-kontrast-ikke-tekstlig-innhold-niva-aa/145',
+      '1.4.12': 'https://www.uutilsynet.no/wcag-standarden/1412-tekstavstand-niva-aa/146',
+      '1.4.13': 'https://www.uutilsynet.no/wcag-standarden/1413-pekerfolsomt-innhold-eller-innhold-ved-tastaturfokus-niva-aa/147',
+      '2.1.1': 'https://www.uutilsynet.no/wcag-standarden/211-tastatur-niva/98',
+      '2.1.2': 'https://www.uutilsynet.no/wcag-standarden/212-ingen-tastaturfelle-niva/99',
+      '2.1.4': 'https://www.uutilsynet.no/wcag-standarden/214-hurtigtaster-som-bestar-av-ett-tegn-niva/782',
+      '2.2.1': 'https://www.uutilsynet.no/wcag-standarden/221-justerbar-hastighet-niva/100',
+      '2.2.2': 'https://www.uutilsynet.no/wcag-standarden/222-pause-stopp-skjul-niva/101',
+      '2.3.1': 'https://www.uutilsynet.no/wcag-standarden/231-terskelverdi-pa-maksimalt-tre-glimt-niva/102',
+      '2.4.1': 'https://www.uutilsynet.no/wcag-standarden/241-hoppe-over-blokker-niva/103',
+      '2.4.2': 'https://www.uutilsynet.no/wcag-standarden/242-sidetitler-niva/104',
+      '2.4.3': 'https://www.uutilsynet.no/wcag-standarden/243-fokusrekkefolge-niva/105',
+      '2.4.4': 'https://www.uutilsynet.no/wcag-standarden/244-formal-med-lenke-i-kontekst-niva/106',
+      '2.4.5': 'https://www.uutilsynet.no/wcag-standarden/245-flere-mater-niva-aa/107',
+      '2.4.6': 'https://www.uutilsynet.no/wcag-standarden/246-overskrifter-og-ledetekster-niva-aa/108',
+      '2.4.7': 'https://www.uutilsynet.no/wcag-standarden/247-synlig-fokus-niva-aa/109',
+      '2.5.1': 'https://www.uutilsynet.no/wcag-standarden/251-pekerbevegelser-niva/148',
+      '2.5.2': 'https://www.uutilsynet.no/wcag-standarden/252-pekeravbrytelse-niva/149',
+      '2.5.3': 'https://www.uutilsynet.no/wcag-standarden/253-ledetekst-i-navn-niva/150',
+      '2.5.4': 'https://www.uutilsynet.no/wcag-standarden/254-bevegelsesaktivering-niva/151',
+      '3.1.1': 'https://www.uutilsynet.no/wcag-standarden/311-sprak-pa-siden-niva/110',
+      '3.1.2': 'https://www.uutilsynet.no/wcag-standarden/312-sprak-pa-deler-av-innhold-niva-aa/111',
+      '3.2.1': 'https://www.uutilsynet.no/wcag-standarden/321-fokus-niva/112',
+      '3.2.2': 'https://www.uutilsynet.no/wcag-standarden/322-inndata-niva/114',
+      '3.2.3': 'https://www.uutilsynet.no/wcag-standarden/323-konsekvent-navigering-niva-aa/113',
+      '3.2.4': 'https://www.uutilsynet.no/wcag-standarden/324-konsekvent-identifikasjon-niva-aa/115',
+      '3.3.1': 'https://www.uutilsynet.no/wcag-standarden/331-identifikasjon-av-feil-niva/116',
+      '3.3.2': 'https://www.uutilsynet.no/wcag-standarden/332-ledetekster-eller-instruksjoner-niva/117',
+      '3.3.3': 'https://www.uutilsynet.no/wcag-standarden/333-forslag-ved-feil-niva-aa/118',
+      '3.3.4': 'https://www.uutilsynet.no/wcag-standarden/334-forhindring-av-feil-juridiske-feil-okonomiske-feil-datafeil-niva-aa/119',
+      '4.1.1': 'https://www.uutilsynet.no/wcag-standarden/411-parsing-oppdeling-niva/120',
+      '4.1.2': 'https://www.uutilsynet.no/wcag-standarden/412-navn-rolle-verdi-niva/121',
+      '4.1.3': 'https://www.uutilsynet.no/wcag-standarden/413-statusbeskjeder-niva-aa/152'
+    };
+    function wcagUrl(code) {
+      return WCAG_LINKS[code] ||
+        `https://www.uutilsynet.no/search?search=${encodeURIComponent(code)}&f%5B0%5D=global_taxonomy%3A10&sort_by=search_api_relevance&sort_order=DESC`;
+    }
 
     function parseCSV(text, delimiter=';') {
       const lines = text.trim().split(/\r?\n/);
@@ -280,49 +297,46 @@ function wcagUrl(code) {
     }
 
     function pickRefDate(row) {
-  // Bruk "SistOppdatert" hvis finnes, ellers "Opprettet"
-  const upd = (row.SistOppdatert || '').trim();
-  const crt = (row.Opprettet || '').trim();
-  if (upd) return { col: 'SistOppdatert', iso: upd };
-  if (crt) return { col: 'Opprettet', iso: crt };
-  return null;
-}
+      const upd = (row.SistOppdatert || '').trim();
+      const crt = (row.Opprettet || '').trim();
+      if (upd) return { col: 'SistOppdatert', iso: upd };
+      if (crt) return { col: 'Opprettet', iso: crt };
+      return null;
+    }
 
-function dueFrom(iso) {
-  // Frist = 1 år etter datoen
-  const base = new Date(iso + 'T00:00:00Z');
-  if (isNaN(base)) return null;
-  const due = new Date(base);
-  due.setFullYear(due.getFullYear() + 1);
-  const msPerDay = 1000 * 60 * 60 * 24;
-  const daysLeft = Math.ceil((due - Date.now()) / msPerDay);
-  return { due, daysLeft };
-}
+    function dueFrom(iso) {
+      const base = new Date(iso + 'T00:00:00Z');
+      if (isNaN(base)) return null;
+      const due = new Date(base);
+      due.setFullYear(due.getFullYear() + 1);
+      const msPerDay = 1000 * 60 * 60 * 24;
+      const daysLeft = Math.ceil((due - Date.now()) / msPerDay);
+      return { due, daysLeft };
+    }
 
-function addDeadlineBadge(cell, iso) {
-  const info = dueFrom(iso);
-  if (!info) return;
-  const { due, daysLeft } = info;
+    function addDeadlineBadge(cell, iso) {
+      const info = dueFrom(iso);
+      if (!info) return;
+      const { due, daysLeft } = info;
 
-  let cls = null;
-  let label = null;
-  if (daysLeft <= 0) {
-    cls = 'pill bad deadline';
-    label = 'Frist utløpt';
-  } else if (daysLeft <= 56) {
-    cls = 'pill warn deadline';
-    label = `Frist om ${daysLeft} d`;
-  }
-  if (!cls) return;
+      let cls = null;
+      let label = null;
+      if (daysLeft <= 0) {
+        cls = 'pill bad deadline';
+        label = 'Frist utløpt';
+      } else if (daysLeft <= 56) {
+        cls = 'pill warn deadline';
+        label = `Frist om ${daysLeft} d`;
+      }
+      if (!cls) return;
 
-  const badge = document.createElement('span');
-  badge.className = cls;
-  badge.textContent = label;
-  badge.title = 'Frist: ' + due.toLocaleDateString('no-NO');
-  cell.appendChild(document.createTextNode(' '));
-  cell.appendChild(badge);
-}
-
+      const badge = document.createElement('span');
+      badge.className = cls;
+      badge.textContent = label;
+      badge.title = 'Frist: ' + due.toLocaleDateString('no-NO');
+      cell.appendChild(document.createTextNode(' '));
+      cell.appendChild(badge);
+    }
 
     function aggregateByCode(detailsArr) {
       const map = new Map();
@@ -388,10 +402,32 @@ function addDeadlineBadge(cell, iso) {
       const agg = document.getElementById('agg');
       const ths = Array.from(document.querySelectorAll('th.sortable'));
 
+      // Paginering DOM
+      const pageSizeSel = document.getElementById('pageSize');
+      const pagerBtns = document.getElementById('pagerBtns');
+      const pageInfo = document.getElementById('pageInfo');
+
+      // State
       let data = [];
       let view = [];
       let sortKey = 'Navn';
       let sortAsc = true;
+      let page = 1;
+      let pageSize = 20; // default
+
+      // Helpers for paginering
+      function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
+      function buildPageList(totalPages, current){
+        if (totalPages <= 9) return Array.from({length: totalPages}, (_,i)=> i+1);
+        const pages = [1];
+        const start = Math.max(2, current - 2);
+        const end   = Math.min(totalPages - 1, current + 2);
+        if (start > 2) pages.push('…');
+        for (let i=start; i<=end; i++) pages.push(i);
+        if (end < totalPages - 1) pages.push('…');
+        pages.push(totalPages);
+        return pages;
+      }
 
       try {
         const [csvRes, detRes] = await Promise.all([
@@ -428,11 +464,11 @@ function addDeadlineBadge(cell, iso) {
         }
         summary.textContent = `${count} erklæringer • ${totalBrudd} brudd totalt • ${zeroCount} med 0 brudd`;
 
-        // Agg-tabell (alltid med Vis alle / Vis færre)
+        // Agg-tabell
         const box = document.createElement('div');
         const h2 = document.createElement('h2');
         h2.textContent = 'Topp brudd (WCAG-krav)';
-        h2.style.marginTop = '35px';   // legg til ekstra avstand
+        h2.style.marginTop = '35px';
         box.appendChild(h2);
 
         const tbl = document.createElement('table');
@@ -491,12 +527,24 @@ function addDeadlineBadge(cell, iso) {
           const wc = wcagFilter.value;
           view = data.filter(r => matchesFilters(r, q, vf, uf, wc, detByUrl));
           view = sortRows(view, sortKey, sortAsc);
+          page = 1; // reset ved nye kriterier
           render();
         };
 
         const render = () => {
           tbody.innerHTML = '';
-          if (view.length === 0) {
+
+          const total = view.length;
+          const isAll = (pageSize === Infinity);
+          const totalPages = isAll ? 1 : Math.max(1, Math.ceil(total / pageSize));
+
+          page = clamp(page, 1, totalPages);
+
+          const startIdx = isAll ? 0 : (page - 1) * pageSize;
+          const endIdx   = isAll ? total : Math.min(startIdx + pageSize, total);
+          const pageRows = view.slice(startIdx, endIdx);
+
+          if (pageRows.length === 0) {
             const tr = document.createElement('tr');
             const td = document.createElement('td');
             td.colSpan = 5;
@@ -504,127 +552,167 @@ function addDeadlineBadge(cell, iso) {
             td.textContent = 'Ingen treff på valgt filter.';
             tr.appendChild(td);
             tbody.appendChild(tr);
-            return;
+          } else {
+            for (const r of pageRows) {
+              const tr = document.createElement('tr');
+              tr.classList.add('row-toggle');
+
+              // Navn
+              const tdName = document.createElement('td');
+              const a = document.createElement('a');
+              a.href = r.Url; a.target = '_blank'; a.rel = 'noopener';
+              a.innerHTML = (r.Navn || r.Url) + ' ↗';
+              tdName.appendChild(a);
+              tr.appendChild(tdName);
+
+              // Brudd (av X)
+              const tdBrudd = document.createElement('td');
+              const n = Number(r.Brudd || 0);
+              const totalKrav = r.KravTotalt || '48';
+              const wrap = document.createElement('span');
+              wrap.className = 'brudd-wrap';
+              const pill = document.createElement('span');
+              pill.className = pillClass(n);
+              pill.textContent = isNaN(n) ? '—' : String(n);
+              const totalEl = document.createElement('span');
+              totalEl.className = 'brudd-total';
+              totalEl.textContent = `/ ${totalKrav}`;
+              wrap.appendChild(pill); wrap.appendChild(totalEl);
+              tdBrudd.appendChild(wrap);
+              tr.appendChild(tdBrudd);
+
+              // Datoer
+              const tdUpd = document.createElement('td');
+              tdUpd.textContent = fmtDate(r.SistOppdatert);
+              tr.appendChild(tdUpd);
+
+              const tdCreate = document.createElement('td');
+              tdCreate.textContent = fmtDate(r.Opprettet);
+              tr.appendChild(tdCreate);
+
+              // Frist-badge
+              const ref = pickRefDate(r);
+              if (ref) {
+                if (ref.col === 'SistOppdatert') addDeadlineBadge(tdUpd, ref.iso);
+                else addDeadlineBadge(tdCreate, ref.iso);
+              }
+
+              // Detaljer-knapp
+              const tdDet = document.createElement('td');
+              const btn = document.createElement('button');
+              btn.innerHTML = '<span class="caret">▶</span><span class="label">Vis detaljer</span>';
+              btn.type = 'button';
+              btn.className = 'btn-link toggle';
+              btn.setAttribute('aria-expanded', 'false');
+              tdDet.appendChild(btn);
+              tr.appendChild(tdDet);
+
+              // Detaljerad
+              const trDet = document.createElement('tr');
+              trDet.className = 'detail-row';
+              const tdDetAll = document.createElement('td');
+              tdDetAll.colSpan = 5;
+              tdDetAll.style.display = 'none';
+              const detailId = 'detaljer-' + Math.random().toString(36).slice(2);
+              tdDetAll.id = detailId;
+              btn.setAttribute('aria-controls', detailId);
+
+              const box = document.createElement('div');
+              box.className = 'detail-box';
+
+              const title = document.createElement('div');
+              title.className = 'detail-title';
+              title.textContent = 'WCAG-brudd funnet:';
+              box.appendChild(title);
+
+              const d = detByUrl.get(r.Url);
+              const codes = (d && d.codes && d.codes.length) ? d.codes : [];
+              const tags = document.createElement('div');
+              tags.className = 'detail-tags';
+
+              if (codes.length) {
+                for (const c of codes) {
+                  const link = document.createElement('a');
+                  link.href = wcagUrl(c);
+                  link.target = '_blank';
+                  link.rel = 'noopener';
+                  link.className = 'pill bad pill-link wcag-link';
+                  link.setAttribute('aria-label', `Åpne UU-tilsynets side for WCAG ${c} i ny fane`);
+                  link.textContent = c; // ↗ via CSS ::after
+                  tags.appendChild(link);
+                }
+              } else {
+                const none = document.createElement('span');
+                none.className = 'muted';
+                none.textContent = 'Ingen detaljer funnet for denne erklæringen.';
+                tags.appendChild(none);
+              }
+
+              box.appendChild(tags);
+              tdDetAll.appendChild(box);
+              trDet.appendChild(tdDetAll);
+
+              const toggleRow = (ev) => {
+                if (ev) ev.stopPropagation();
+                const show = tdDetAll.style.display === 'none';
+                tdDetAll.style.display = show ? '' : 'none';
+                btn.setAttribute('aria-expanded', String(show));
+                btn.querySelector('.label').textContent = show ? 'Skjul detaljer' : 'Vis detaljer';
+              };
+
+              btn.addEventListener('click', toggleRow);
+              tr.addEventListener('click', (e) => {
+                const tag = e.target.tagName.toLowerCase();
+                if (tag === 'a' || e.target.closest('button')) return; // ikke stjel klikk
+                toggleRow(e);
+              });
+
+              tbody.appendChild(tr);
+              tbody.appendChild(trDet);
+            }
           }
-          for (const r of view) {
-            const tr = document.createElement('tr');
-            tr.classList.add('row-toggle');
 
-            // Navn (lenke, skjult rå-URL)
-            const tdName = document.createElement('td');
-            const a = document.createElement('a');
-            a.href = r.Url; a.target = '_blank'; a.rel = 'noopener';
-            a.innerHTML = (r.Navn || r.Url) + ' ↗';
-            tdName.appendChild(a);
-            tr.appendChild(tdName);
+          // Page info
+          if (total === 0) {
+            pageInfo.textContent = '';
+          } else {
+            const a = isAll ? 1 : startIdx + 1;
+            const b = isAll ? total : endIdx;
+            pageInfo.textContent = `Viser ${a}–${b} av ${total}`;
+          }
 
-            // Brudd (av X)
-            const tdBrudd = document.createElement('td');
-            const n = Number(r.Brudd || 0);
-            const total = r.KravTotalt || '48';
-            const wrap = document.createElement('span');
-            wrap.className = 'brudd-wrap';
-            const pill = document.createElement('span');
-            pill.className = pillClass(n);
-            pill.textContent = isNaN(n) ? '—' : String(n);
-            const totalEl = document.createElement('span');
-            totalEl.className = 'brudd-total';
-            totalEl.textContent = `/ ${total}`;
-            wrap.appendChild(pill);
-            wrap.appendChild(totalEl);
-            tdBrudd.appendChild(wrap);
-            tr.appendChild(tdBrudd);
-
-    const tdUpd = document.createElement('td');
-tdUpd.textContent = fmtDate(r.SistOppdatert);
-tr.appendChild(tdUpd);
-
-const tdCreate = document.createElement('td');
-tdCreate.textContent = fmtDate(r.Opprettet);
-tr.appendChild(tdCreate);
-
-// Frist-badge (1 år siden sist oppdatert / opprettet)
-const ref = pickRefDate(r);
-if (ref) {
-  if (ref.col === 'SistOppdatert') addDeadlineBadge(tdUpd, ref.iso);
-  else addDeadlineBadge(tdCreate, ref.iso);
-}
-
-
-            const tdDet = document.createElement('td');
-            const btn = document.createElement('button');
-            btn.innerHTML = '<span class="caret">▶</span><span class="label">Vis detaljer</span>';
-            btn.type = 'button';
-            btn.className = 'btn-link toggle';
-            btn.setAttribute('aria-expanded', 'false');
-            tdDet.appendChild(btn);
-            tr.appendChild(tdDet);
-
-            // Detaljerad
-            const trDet = document.createElement('tr');
-            trDet.className = 'detail-row';
-            const tdDetAll = document.createElement('td');
-            tdDetAll.colSpan = 5;
-            tdDetAll.style.display = 'none';
-            const detailId = 'detaljer-' + Math.random().toString(36).slice(2);
-            tdDetAll.id = detailId;
-            btn.setAttribute('aria-controls', detailId);
-
-            const box = document.createElement('div');
-            box.className = 'detail-box';
-
-            const title = document.createElement('div');
-            title.className = 'detail-title';
-            title.textContent = 'WCAG-brudd funnet:';
-            box.appendChild(title);
-
-            const d = detByUrl.get(r.Url);
-            const codes = (d && d.codes && d.codes.length) ? d.codes : [];
-            const tags = document.createElement('div');
-            tags.className = 'detail-tags';
-
-if (codes.length) {
-  for (const c of codes) {
-    const a = document.createElement('a');
-    a.href = wcagUrl(c);
-    a.target = '_blank';
-    a.rel = 'noopener';
-    a.className = 'pill bad pill-link wcag-link';
-    a.setAttribute('aria-label', `Åpne UU-tilsynets side for WCAG ${c} i ny fane`);
-    a.textContent = c; // ↗ legges på via CSS ::after
-    tags.appendChild(a);
-  }
-} else {
-  const none = document.createElement('span');
-  none.className = 'muted';
-  none.textContent = 'Ingen detaljer funnet for denne erklæringen.';
-  tags.appendChild(none);
-}
-
-
-
-
-            box.appendChild(tags);
-            tdDetAll.appendChild(box);
-            trDet.appendChild(tdDetAll);
-
-            const toggle = (ev) => {
-              if (ev) ev.stopPropagation();
-              const show = tdDetAll.style.display === 'none';
-              tdDetAll.style.display = show ? '' : 'none';
-              btn.setAttribute('aria-expanded', String(show));
-              btn.querySelector('.label').textContent = show ? 'Skjul detaljer' : 'Vis detaljer';
+          // Pager-knapper
+          pagerBtns.innerHTML = '';
+          if (!isAll && totalPages > 1) {
+            const makeBtn = (txt, label, disabled, onClick) => {
+              const b = document.createElement('button');
+              b.className = 'btn-page';
+              b.textContent = txt;
+              if (label) b.setAttribute('aria-label', label);
+              b.disabled = !!disabled;
+              if (!disabled) b.addEventListener('click', onClick);
+              return b;
             };
 
-            btn.addEventListener('click', toggle);
-            tr.addEventListener('click', (e) => {
-              const tag = e.target.tagName.toLowerCase();
-              if (tag === 'a' || e.target.closest('button')) return; // ikke stjel klikk
-              toggle(e);
-            });
+            pagerBtns.appendChild(makeBtn('«', 'Første side', page === 1, () => { page = 1; render(); }));
+            pagerBtns.appendChild(makeBtn('‹', 'Forrige side', page === 1, () => { page = Math.max(1, page - 1); render(); }));
 
-            tbody.appendChild(tr);
-            tbody.appendChild(trDet);
+            for (const p of buildPageList(totalPages, page)) {
+              if (p === '…') {
+                const dot = document.createElement('span');
+                dot.className = 'btn-page'; dot.style.cursor='default';
+                dot.textContent = '…';
+                dot.setAttribute('aria-hidden','true');
+                pagerBtns.appendChild(dot);
+              } else {
+                const b = makeBtn(String(p), null, false, () => { page = p; render(); });
+                if (p === page) { b.classList.add('active'); b.setAttribute('aria-current','page'); }
+                pagerBtns.appendChild(b);
+              }
+            }
+
+            pagerBtns.appendChild(makeBtn('›', 'Neste side', page === totalPages, () => { page = Math.min(totalPages, page + 1); render(); }));
+            pagerBtns.appendChild(makeBtn('»', 'Siste side', page === totalPages, () => { page = totalPages; render(); }));
           }
         };
 
@@ -633,6 +721,7 @@ if (codes.length) {
         violFilter.addEventListener('change', apply);
         updateFilter.addEventListener('change', apply);
         wcagFilter.addEventListener('change', apply);
+
         ths.forEach(th => {
           th.addEventListener('click', () => {
             const key = th.dataset.key;
@@ -650,123 +739,124 @@ if (codes.length) {
           link.remove();
         });
 
+        pageSizeSel.addEventListener('change', () => {
+          const v = pageSizeSel.value;
+          pageSize = (v === 'all') ? Infinity : Number(v);
+          page = 1;
+          render();
+        });
+
         apply();
       } catch (e) {
         tbody.innerHTML = `<tr><td colspan="5" class="muted">Feil ved lasting: ${e.message}</td></tr>`;
       }
     })();
   </script>
+
   <!-- Agent UI -->
-<style>
-  .ai-fab{position:fixed;right:18px;bottom:18px;border-radius:999px;padding:12px 14px;background:#2a7de1;color:#fff;border:none;box-shadow:0 8px 24px rgba(0,0,0,.25);cursor:pointer}
-  .ai-panel{position:fixed;right:18px;bottom:78px;width:360px;max-width:92vw;background:#0e1420;border:1px solid #1f2a36;border-radius:14px;box-shadow:0 12px 32px rgba(0,0,0,.35);display:none}
-  .ai-panel header{padding:10px 12px;border-bottom:1px solid #1f2a36;font-weight:600}
-  .ai-body{max-height:50vh;overflow:auto;padding:10px 12px}
-  .ai-msg{background:#11161d;border:1px solid #1f2a36;border-radius:10px;padding:8px 10px;margin:8px 0}
-  .ai-src{font-size:12px;color:#9fb0c3;margin-top:6px}
-  .ai-input{display:flex;gap:8px;border-top:1px solid #1f2a36;padding:10px 12px}
-  .ai-input input{flex:1;background:#11161d;border:1px solid #1f2a36;border-radius:10px;color:#e7eef7;padding:10px}
-  .ai-input button{background:#2a7de1;color:#fff;border:none;border-radius:10px;padding:10px 12px;cursor:pointer}
-</style>
+  <style>
+    .ai-fab{position:fixed;right:18px;bottom:18px;border-radius:999px;padding:12px 14px;background:#2a7de1;color:#fff;border:none;box-shadow:0 8px 24px rgba(0,0,0,.25);cursor:pointer}
+    .ai-panel{position:fixed;right:18px;bottom:78px;width:360px;max-width:92vw;background:#0e1420;border:1px solid #1f2a36;border-radius:14px;box-shadow:0 12px 32px rgba(0,0,0,.35);display:none}
+    .ai-panel header{padding:10px 12px;border-bottom:1px solid #1f2a36;font-weight:600}
+    .ai-body{max-height:50vh;overflow:auto;padding:10px 12px}
+    .ai-msg{background:#11161d;border:1px solid #1f2a36;border-radius:10px;padding:8px 10px;margin:8px 0}
+    .ai-src{font-size:12px;color:#9fb0c3;margin-top:6px}
+    .ai-input{display:flex;gap:8px;border-top:1px solid #1f2a36;padding:10px 12px}
+    .ai-input input{flex:1;background:#11161d;border:1px solid #1f2a36;border-radius:10px;color:#e7eef7;padding:10px}
+    .ai-input button{background:#2a7de1;color:#fff;border:none;border-radius:10px;padding:10px 12px;cursor:pointer}
+  </style>
 
-<button class="ai-fab" id="aiFab" aria-expanded="false" aria-controls="aiPanel">Hjelp?</button>
-<div class="ai-panel" id="aiPanel" role="dialog" aria-label="Tilgjengelighetsassistent">
-  <header>Tilgjengelighetsassistent</header>
-  <div class="ai-body" id="aiBody">
-    <div class="ai-msg">Hei! Spør meg om WCAG-krav, fargene på brudd-pillene, “Sist oppdatert”, CSV, osv.</div>
+  <button class="ai-fab" id="aiFab" aria-expanded="false" aria-controls="aiPanel">Hjelp?</button>
+  <div class="ai-panel" id="aiPanel" role="dialog" aria-label="Tilgjengelighetsassistent">
+    <header>Tilgjengelighetsassistent</header>
+    <div class="ai-body" id="aiBody">
+      <div class="ai-msg">Hei! Spør meg om WCAG-krav, fargene på brudd-pillene, “Sist oppdatert”, CSV, osv.</div>
+    </div>
+    <form class="ai-input" id="aiForm">
+      <input id="aiQ" type="text" placeholder="Skriv et spørsmål …" autocomplete="off" />
+      <button type="submit">Send</button>
+    </form>
   </div>
-  <form class="ai-input" id="aiForm">
-    <input id="aiQ" type="text" placeholder="Skriv et spørsmål …" autocomplete="off" />
-    <button type="submit">Send</button>
-  </form>
-</div>
-<!-- Fuse.js fra CDN (liten, ingen kostnad) -->
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
 
-<script>
-(async function agent(){
-  const fab   = document.getElementById('aiFab');
-  const panel = document.getElementById('aiPanel');
-  const body  = document.getElementById('aiBody');
-  const form  = document.getElementById('aiForm');
-  const input = document.getElementById('aiQ');
+  <!-- Fuse.js fra CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
+  <script>
+  (async function agent(){
+    const fab   = document.getElementById('aiFab');
+    const panel = document.getElementById('aiPanel');
+    const body  = document.getElementById('aiBody');
+    const form  = document.getElementById('aiForm');
+    const input = document.getElementById('aiQ');
 
-  // 1) Hent kunnskapsbase (ligger i /kb.json i repoet ditt)
-  let kb = [];
-  try {
-    const res = await fetch('kb.json', { cache: 'no-store' });
-    kb = await res.json();
-  } catch(e) {
-    kb = [{ q:'Feil', a:'Fant ikke kb.json. Legg den i rotmappen.', tags:['system'] }];
-  }
-
-  // 2) Bygg søkeindeks
-  const fuse = new Fuse(kb, {
-    keys: ['q','a','tags'],
-    threshold: 0.36,      // lavere = mer presis
-    includeScore: true,
-    minMatchCharLength: 2,
-  });
-
-  function toggle() {
-    const open = panel.style.display === 'block';
-    panel.style.display = open ? 'none' : 'block';
-    fab.setAttribute('aria-expanded', String(!open));
-    if (!open) input.focus();
-  }
-  fab.addEventListener('click', toggle);
-
-  // 3) Svar-funksjon
-  function answer(html, src=[]) {
-    const box = document.createElement('div');
-    box.className = 'ai-msg';
-    box.innerHTML = html;
-    if (src.length){
-      const meta = document.createElement('div');
-      meta.className = 'ai-src';
-      meta.textContent = 'Kilder: ' + src.join(' • ');
-      box.appendChild(meta);
-    }
-    body.appendChild(box);
-    body.scrollTop = body.scrollHeight;
-  }
-
-  // 4) Håndter spørsmål
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const q = input.value.trim();
-    if (!q) return;
-    answer('<strong>Du:</strong> ' + q);
-    input.value = '';
-
-    // Spesialkroker direkte fra siden (gratis bonus)
-    if (/farge|pill|brudd|badge/i.test(q)) {
-      // Hent fra dine egne regler i koden
-      const html = `
-        <div><strong>Fargekoder på brudd:</strong></div>
-        <ul>
-          <li><span class="pill ok">0</span>: Ingen brudd</li>
-          <li><span class="pill warn">1–5</span>: Noen brudd</li>
-          <li><span class="pill bad">6+</span>: Mange brudd</li>
-        </ul>
-        <div><strong>Deadline-badger:</strong> Oransje når det er ≤ 56 dager igjen, rød når fristen (1 år etter oppdatering/opprettelse) er utløpt.</div>
-      `;
-      answer(html);
-      return;
+    let kb = [];
+    try {
+      const res = await fetch('kb.json', { cache: 'no-store' });
+      kb = await res.json();
+    } catch(e) {
+      kb = [{ q:'Feil', a:'Fant ikke kb.json. Legg den i rotmappen.', tags:['system'] }];
     }
 
-    const results = fuse.search(q, { limit: 3 });
-    if (!results.length) {
-      answer('Beklager, jeg fant ikke et godt svar. Prøv å spørre på en annen måte eller se lenkene i resultatlisten på siden.');
-      return;
-    }
-    results.forEach(r => {
-      const item = r.item;
-      answer(item.a, item.src || []);
+    const fuse = new Fuse(kb, {
+      keys: ['q','a','tags'],
+      threshold: 0.36,
+      includeScore: true,
+      minMatchCharLength: 2,
     });
-  });
-})();
-</script>
 
+    function toggle() {
+      const open = panel.style.display === 'block';
+      panel.style.display = open ? 'none' : 'block';
+      fab.setAttribute('aria-expanded', String(!open));
+      if (!open) input.focus();
+    }
+    fab.addEventListener('click', toggle);
+
+    function answer(html, src=[]) {
+      const box = document.createElement('div');
+      box.className = 'ai-msg';
+      box.innerHTML = html;
+      if (src.length){
+        const meta = document.createElement('div');
+        meta.className = 'ai-src';
+        meta.textContent = 'Kilder: ' + src.join(' • ');
+        box.appendChild(meta);
+      }
+      body.appendChild(box);
+      body.scrollTop = body.scrollHeight;
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const q = input.value.trim();
+      if (!q) return;
+      answer('<strong>Du:</strong> ' + q);
+      input.value = '';
+
+      if (/farge|pill|brudd|badge/i.test(q)) {
+        const html = `
+          <div><strong>Fargekoder på brudd:</strong></div>
+          <ul>
+            <li><span class="pill ok">0</span>: Ingen brudd</li>
+            <li><span class="pill warn">1–5</span>: Noen brudd</li>
+            <li><span class="pill bad">6+</span>: Mange brudd</li>
+          </ul>
+          <div><strong>Deadline-badger:</strong> Oransje når det er ≤ 56 dager igjen, rød når fristen (1 år etter oppdatering/opprettelse) er utløpt.</div>
+        `;
+        answer(html);
+        return;
+      }
+
+      const results = fuse.search(q, { limit: 3 });
+      if (!results.length) {
+        answer('Beklager, jeg fant ikke et godt svar. Prøv å spørre på en annen måte eller se lenkene i resultatlisten på siden.');
+        return;
+      }
+      results.forEach(r => {
+        const item = r.item;
+        answer(item.a, item.src || []);
+      });
+    });
+  })();
+  </script>
 </body>
 </html>
