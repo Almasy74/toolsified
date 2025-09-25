@@ -2,7 +2,7 @@ name: Build UU-status (CSV + Details + Page)
 
 on:
   schedule:
-    - cron: "12 4 * * 1"   # hver mandag 04:12 UTC
+    - cron: "27 1 * * *"   # daglig 01:27 UTC (02:27/03:27 i Norge)
   workflow_dispatch:
 
 permissions:
@@ -22,6 +22,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+          cache: "pip"
 
       - name: Install dependencies
         run: |
