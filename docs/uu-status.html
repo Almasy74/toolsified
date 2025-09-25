@@ -23,6 +23,7 @@
     .wrap { max-width: 1100px; margin: 32px auto; padding: 0 16px; }
     h1 { font-size: 28px; margin: 0 0 8px; }
     .muted { color: var(--muted); }
+
     .toolbar {
       display: grid; gap: 12px; grid-template-columns: 1fr 160px 160px 220px 160px; align-items: end; margin: 18px 0 14px;
     }
@@ -33,6 +34,7 @@
     }
     .toolbar input:focus, .toolbar select:focus, .toolbar button:focus { box-shadow: 0 0 0 3px var(--focus); }
     .toolbar button { cursor: pointer; }
+
     .cards { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 12px; }
     table { width: 100%; border-collapse: collapse; }
     th, td { padding: 10px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
@@ -94,28 +96,26 @@
     .agg a { cursor: pointer; }
 
     /* Paginering */
-    .pager {
-      display:flex; justify-content: space-between; align-items:center;
-      padding:10px 6px; gap:12px; flex-wrap:wrap;
-    }
+    .pager { display:flex; justify-content: space-between; align-items:center; padding:10px 6px; gap:12px; flex-wrap:wrap; }
     .pager-left { display:flex; align-items:center; gap:8px; }
-    .pager select {
-      background: var(--card); border:1px solid var(--border); color: var(--text);
-      padding:6px 8px; border-radius:10px;
-    }
+    .pager select { background: var(--card); border:1px solid var(--border); color: var(--text); padding:6px 8px; border-radius:10px; }
     .pages { display:flex; gap:6px; flex-wrap:wrap; }
-    .btn-page {
-      background:none; border:1px solid var(--border); color:var(--text);
-      padding:6px 10px; border-radius:10px; cursor:pointer;
-    }
+    .btn-page { background:none; border:1px solid var(--border); color:var(--text); padding:6px 10px; border-radius:10px; cursor:pointer; }
     .btn-page[disabled] { opacity:.5; cursor:default; }
-    .btn-page.active, .btn-page[aria-current="page"] {
-      border-color: var(--accent); box-shadow:0 0 0 2px rgba(111,179,255,.25);
-    }
+    .btn-page.active, .btn-page[aria-current="page"] { border-color: var(--accent); box-shadow:0 0 0 2px rgba(111,179,255,.25); }
     .pager-info { color: var(--muted); font-size: 12px; }
+
+    /* DASHBOARD (infografikk) */
+    .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:12px}
+    .kpi{background: rgba(255,255,255,.02); border:1px solid var(--border); border-radius:12px; padding:10px 12px}
+    .kpi-num{font-size:22px;font-weight:700;margin-top:4px}
+    .chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .chart-card{background:var(--detail-bg); border:1px solid var(--border); border-radius:12px; padding:10px}
 
     @media (max-width: 1100px) {
       .toolbar { grid-template-columns: 1fr 1fr; }
+      .chart-grid{grid-template-columns:1fr}
+      .kpi-grid{grid-template-columns:repeat(2,1fr)}
     }
   </style>
 </head>
@@ -124,6 +124,34 @@
     <h1>UU-status Skatteetaten</h1>
     <div class="muted">Samlet oversikt over tilgjengelighetserklæringer (hentes fra uustatus.no). Oppdateres automatisk via GitHub Actions.</div>
 
+    <!-- Toggle + DASHBOARD rett under ingressen -->
+    <div style="text-align:right;margin:8px 0 10px;">
+      <button id="toggleDash" class="btn-link" type="button" aria-expanded="false" aria-controls="dash">
+        Vis dashboard
+      </button>
+    </div>
+
+    <div class="cards" id="dash" role="region" aria-label="Dashboard" style="display:none">
+      <div class="kpi-grid">
+        <div class="kpi"><div class="muted">Erklæringer</div><div id="kpi-count" class="kpi-num"></div></div>
+        <div class="kpi"><div class="muted">Brudd totalt</div><div id="kpi-viol" class="kpi-num"></div></div>
+        <div class="kpi"><div class="muted">0 brudd</div><div id="kpi-zero" class="kpi-num"></div></div>
+        <div class="kpi"><div class="muted">Frister utløpt</div><div id="kpi-exp" class="kpi-num"></div></div>
+      </div>
+
+      <div class="chart-grid">
+        <div class="chart-card">
+          <div class="muted" style="margin-bottom:6px">Topp WCAG-brudd</div>
+          <canvas id="chTopCodes" aria-label="Topp WCAG-brudd" role="img"></canvas>
+        </div>
+        <div class="chart-card">
+          <div class="muted" style="margin-bottom:6px">Fordeling av brudd per løsning</div>
+          <canvas id="chBuckets" aria-label="Fordeling av brudd per løsning" role="img"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- FILTRE -->
     <div class="toolbar" role="region" aria-label="Filtre og søk">
       <div class="field">
         <label for="search">Søk (navn)</label>
@@ -160,6 +188,7 @@
       </div>
     </div>
 
+    <!-- TABELL + PAGINERING -->
     <div class="cards" role="region" aria-label="Tabell med resultater">
       <table id="tbl">
         <thead>
@@ -176,7 +205,6 @@
         </tbody>
       </table>
 
-      <!-- Paginering -->
       <div class="pager" role="navigation" aria-label="Sideveksler">
         <div class="pager-left">
           <label for="pageSize" class="muted">Vis per side:</label>
@@ -200,6 +228,9 @@
       <div class="agg" id="agg"></div>
     </div>
   </div>
+
+  <!-- Chart.js for infografikk -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
   <script>
     const CSV_URL = 'uu-status.csv';
@@ -407,6 +438,10 @@
       const pagerBtns = document.getElementById('pagerBtns');
       const pageInfo = document.getElementById('pageInfo');
 
+      // DASHBOARD DOM
+      const dashEl = document.getElementById('dash');
+      const toggleDash = document.getElementById('toggleDash');
+
       // State
       let data = [];
       let view = [];
@@ -464,7 +499,87 @@
         }
         summary.textContent = `${count} erklæringer • ${totalBrudd} brudd totalt • ${zeroCount} med 0 brudd`;
 
-        // Agg-tabell
+        // --- Dashboard (bygges første gang bruker åpner) ---
+        function buildDashboard(){
+          // KPI’er
+          document.getElementById('kpi-count').textContent = count;
+          document.getElementById('kpi-viol').textContent  = totalBrudd;
+          document.getElementById('kpi-zero').textContent  = zeroCount;
+
+          // Friststatus
+          let expired=0, soon=0, ok=0;
+          for (const r of data){
+            const ref = pickRefDate(r);
+            if (!ref) continue;
+            const info = dueFrom(ref.iso);
+            if (!info) continue;
+            if (info.daysLeft <= 0) expired++; else if (info.daysLeft <= 56) soon++; else ok++;
+          }
+          document.getElementById('kpi-exp').textContent = expired;
+
+          // Farger fra CSS-variabler
+          const cs = getComputedStyle(document.documentElement);
+          const colAccent = cs.getPropertyValue('--accent').trim() || '#6fb3ff';
+          const colOk     = cs.getPropertyValue('--ok').trim()     || '#28a745';
+          const colWarn   = cs.getPropertyValue('--warn').trim()   || '#f0ad4e';
+          const colBad    = cs.getPropertyValue('--bad').trim()    || '#dc3545';
+
+          // Diagram 1 – topp WCAG-koder
+          const top = aggregateByCode(details).slice(0,8);
+          const ctx1 = document.getElementById('chTopCodes');
+          const ch1 = new Chart(ctx1, {
+            type: 'bar',
+            data: { labels: top.map(t=>t[0]), datasets: [{ label:'Antall løsninger', data: top.map(t=>t[1]), backgroundColor: colAccent }]},
+            options: { responsive:true, plugins:{legend:{display:false}}, scales:{x:{ticks:{color:'#9fb0c3'}}, y:{beginAtZero:true,ticks:{color:'#9fb0c3'}}} }
+          });
+          // Klikk = sett WCAG-filter
+          ctx1.onclick = (evt) => {
+            const p = ch1.getElementsAtEventForMode(evt, 'nearest', {intersect:true}, true)[0];
+            if (!p) return;
+            wcagFilter.value = ch1.data.labels[p.index];
+            apply();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          };
+
+          // Diagram 2 – fordeling av brudd
+          let z=0, a=0, b=0, c=0;
+          for (const r of data){
+            const n = Number(r.Brudd||0);
+            if (n===0) z++; else if (n<=5) a++; else if (n<=10) b++; else c++;
+          }
+          const ctx2 = document.getElementById('chBuckets');
+          const ch2 = new Chart(ctx2, {
+            type: 'doughnut',
+            data: {
+              labels: ['0', '1–5', '6–10', '11+'],
+              datasets: [{ data: [z,a,b,c], backgroundColor: [colOk, colWarn, 'rgba(220,53,69,0.6)', colBad] }]
+            },
+            options: { plugins:{legend:{position:'bottom'}}, cutout:'55%' }
+          });
+          // Klikk = sett brudd-filter
+          ctx2.onclick = (evt) => {
+            const p = ch2.getElementsAtEventForMode(evt, 'nearest', {intersect:true}, true)[0];
+            if (!p) return;
+            const bucket = ch2.data.labels[p.index];
+            const map = { '0':'0', '1–5':'1-5', '6–10':'6-10', '11+':'11+' };
+            violFilter.value = map[bucket] || '';
+            apply();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          };
+        }
+
+        toggleDash.addEventListener('click', () => {
+          const open = dashEl.style.display === 'block';
+          dashEl.style.display = open ? 'none' : 'block';
+          toggleDash.setAttribute('aria-expanded', String(!open));
+          toggleDash.textContent = open ? 'Vis dashboard' : 'Skjul dashboard';
+          if (!open && !dashEl.dataset.init) {
+            buildDashboard();       // bygg én gang ved første åpning
+            dashEl.dataset.init = '1';
+          }
+        });
+
+        // Agg-tabell (WCAG topp)
         const box = document.createElement('div');
         const h2 = document.createElement('h2');
         h2.textContent = 'Topp brudd (WCAG-krav)';
@@ -520,6 +635,7 @@
         agg.appendChild(box);
         renderAgg();
 
+        // Apply + Render
         const apply = () => {
           const q = search.value.trim().toLowerCase();
           const vf = violFilter.value;
