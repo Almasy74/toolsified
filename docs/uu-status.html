@@ -528,11 +528,8 @@
 
           // Etter at du har hentet colText i buildDashboard():
 // const colText = cs.getPropertyValue('--text').trim() || '#e7eef7';
+Chart.defaults.color = colText;
 Chart.defaults.plugins.legend.labels.color = colText;
-
-
-          // Lys tekst på diagrammer
-          Chart.defaults.color = colText;
 
           // Diagram 1 – topp WCAG-koder
           const top = aggregateByCode(details).slice(0,8);
@@ -606,6 +603,7 @@ Chart.defaults.plugins.legend.labels.color = colText;
               cutout: '55%',
               plugins: {
                 legend: {
+                  color: colText, 
                   position: 'bottom',
                   onClick: () => {},        // deaktiver toggling via legend
                   labels: {
