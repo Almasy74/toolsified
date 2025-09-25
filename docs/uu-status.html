@@ -73,28 +73,6 @@
 .wcag-ext { margin-left: 6px; font-size: 12px; opacity:.9; }
 .wcag-ext:hover { opacity: 1; text-decoration: none; }
 
-    /* Paginering */
-.pager {
-  display:flex; justify-content: space-between; align-items:center;
-  padding:10px 6px; gap:12px; flex-wrap:wrap;
-}
-.pager-left { display:flex; align-items:center; gap:8px; }
-.pager select {
-  background: var(--card); border:1px solid var(--border); color: var(--text);
-  padding:6px 8px; border-radius:10px;
-}
-.pages { display:flex; gap:6px; flex-wrap:wrap; }
-.btn-page {
-  background:none; border:1px solid var(--border); color:var(--text);
-  padding:6px 10px; border-radius:10px; cursor:pointer;
-}
-.btn-page[disabled] { opacity:.5; cursor:default; }
-.btn-page.active, .btn-page[aria-current="page"] {
-  border-color: var(--accent); box-shadow:0 0 0 2px rgba(111,179,255,.25);
-}
-.pager-info { color: var(--muted); font-size: 12px; }
-
-
 
 
     .btn-link { background: none; border: 1px solid var(--border); color: var(--text); padding: 6px 10px; border-radius: 10px; cursor: pointer; }
@@ -194,23 +172,6 @@
           <tr><td colspan="5" class="muted">Laster data…</td></tr>
         </tbody>
       </table>
-
-      <!-- Paginering -->
-<div class="pager" role="navigation" aria-label="Sideveksler">
-  <div class="pager-left">
-    <label for="pageSize" class="muted">Vis per side:</label>
-    <select id="pageSize" aria-label="Velg antall rader per side" title="Antall rader per side">
-      <option value="20" selected>20</option>
-      <option value="30">30</option>
-      <option value="40">40</option>
-      <option value="50">50</option>
-      <option value="all">Alle</option>
-    </select>
-    <span id="pageInfo" class="pager-info"></span>
-  </div>
-  <div class="pages" id="pagerBtns"></div>
-</div>
-
 
       <div class="footer">
         <div id="summary" class="muted" aria-live="polite"></div>
@@ -415,21 +376,6 @@ function addDeadlineBadge(cell, iso) {
       });
     }
 
-    function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
-
-function buildPageList(totalPages, current){
-  if (totalPages <= 9) return Array.from({length: totalPages}, (_,i)=> i+1);
-  const pages = [1];
-  const start = Math.max(2, current - 2);
-  const end   = Math.min(totalPages - 1, current + 2);
-  if (start > 2) pages.push('…');
-  for (let i=start; i<=end; i++) pages.push(i);
-  if (end < totalPages - 1) pages.push('…');
-  pages.push(totalPages);
-  return pages;
-}
-
-
     (async function init() {
       const tbody = document.getElementById('tbody');
       const search = document.getElementById('search');
@@ -441,19 +387,11 @@ function buildPageList(totalPages, current){
       const asof = document.getElementById('asof');
       const agg = document.getElementById('agg');
       const ths = Array.from(document.querySelectorAll('th.sortable'));
-      const pageSizeSel = document.getElementById('pageSize');
-const pagerBtns = document.getElementById('pagerBtns');
-const pageInfo = document.getElementById('pageInfo');
 
-let data = [];
-let view = [];
-let sortKey = 'Navn';
-let sortAsc = true;
-
-let page = 1;
-let pageSize = 20; // default
-
-
+      let data = [];
+      let view = [];
+      let sortKey = 'Navn';
+      let sortAsc = true;
 
       try {
         const [csvRes, detRes] = await Promise.all([
@@ -553,195 +491,21 @@ let pageSize = 20; // default
           const wc = wcagFilter.value;
           view = data.filter(r => matchesFilters(r, q, vf, uf, wc, detByUrl));
           view = sortRows(view, sortKey, sortAsc);
-          page = 1;        
           render();
         };
 
-const render = () => {
-  tbody.innerHTML = '';
-
-  const total = view.length;
-  const isAll = (pageSize === Infinity);
-  const totalPages = isAll ? 1 : Math.max(1, Math.ceil(total / pageSize));
-
-  page = clamp(page, 1, totalPages);
-
-  const startIdx = isAll ? 0 : (page - 1) * pageSize;
-  const endIdx   = isAll ? total : Math.min(startIdx + pageSize, total);
-  const pageRows = view.slice(startIdx, endIdx);
-
-  if (pageRows.length === 0) {
-    const tr = document.createElement('tr');
-    const td = document.createElement('td');
-    td.colSpan = 5;
-    td.className = 'muted';
-    td.textContent = 'Ingen treff på valgt filter.';
-    tr.appendChild(td);
-    tbody.appendChild(tr);
-  } else {
-    for (const r of pageRows) {
-      const tr = document.createElement('tr');
-      tr.classList.add('row-toggle');
-
-      // Navn
-      const tdName = document.createElement('td');
-      const a = document.createElement('a');
-      a.href = r.Url; a.target = '_blank'; a.rel = 'noopener';
-      a.innerHTML = (r.Navn || r.Url) + ' ↗';
-      tdName.appendChild(a);
-      tr.appendChild(tdName);
-
-      // Brudd (av X)
-      const tdBrudd = document.createElement('td');
-      const n = Number(r.Brudd || 0);
-      const totalKrav = r.KravTotalt || '48';
-      const wrap = document.createElement('span');
-      wrap.className = 'brudd-wrap';
-      const pill = document.createElement('span');
-      pill.className = pillClass(n);
-      pill.textContent = isNaN(n) ? '—' : String(n);
-      const totalEl = document.createElement('span');
-      totalEl.className = 'brudd-total';
-      totalEl.textContent = `/ ${totalKrav}`;
-      wrap.appendChild(pill); wrap.appendChild(totalEl);
-      tdBrudd.appendChild(wrap);
-      tr.appendChild(tdBrudd);
-
-      // Datoer
-      const tdUpd = document.createElement('td');
-      tdUpd.textContent = fmtDate(r.SistOppdatert);
-      tr.appendChild(tdUpd);
-
-      const tdCreate = document.createElement('td');
-      tdCreate.textContent = fmtDate(r.Opprettet);
-      tr.appendChild(tdCreate);
-
-      // Frist-badge (1 år etter sist oppdatert / opprettet)
-      const ref = pickRefDate(r);
-      if (ref) {
-        if (ref.col === 'SistOppdatert') addDeadlineBadge(tdUpd, ref.iso);
-        else addDeadlineBadge(tdCreate, ref.iso);
-      }
-
-      // Detaljer-knapp
-      const tdDet = document.createElement('td');
-      const btn = document.createElement('button');
-      btn.innerHTML = '<span class="caret">▶</span><span class="label">Vis detaljer</span>';
-      btn.type = 'button';
-      btn.className = 'btn-link toggle';
-      btn.setAttribute('aria-expanded', 'false');
-      tdDet.appendChild(btn);
-      tr.appendChild(tdDet);
-
-      // Detaljerad
-      const trDet = document.createElement('tr');
-      trDet.className = 'detail-row';
-      const tdDetAll = document.createElement('td');
-      tdDetAll.colSpan = 5;
-      tdDetAll.style.display = 'none';
-      const detailId = 'detaljer-' + Math.random().toString(36).slice(2);
-      tdDetAll.id = detailId;
-      btn.setAttribute('aria-controls', detailId);
-
-      const box = document.createElement('div');
-      box.className = 'detail-box';
-
-      const title = document.createElement('div');
-      title.className = 'detail-title';
-      title.textContent = 'WCAG-brudd funnet:';
-      box.appendChild(title);
-
-      const d = detByUrl.get(r.Url);
-      const codes = (d && d.codes && d.codes.length) ? d.codes : [];
-      const tags = document.createElement('div');
-      tags.className = 'detail-tags';
-
-      if (codes.length) {
-        for (const c of codes) {
-          const link = document.createElement('a');
-          link.href = wcagUrl(c);
-          link.target = '_blank';
-          link.rel = 'noopener';
-          link.className = 'pill bad pill-link wcag-link';
-          link.setAttribute('aria-label', `Åpne UU-tilsynets side for WCAG ${c} i ny fane`);
-          link.textContent = c; // ↗ via CSS ::after
-          tags.appendChild(link);
-        }
-      } else {
-        const none = document.createElement('span');
-        none.className = 'muted';
-        none.textContent = 'Ingen detaljer funnet for denne erklæringen.';
-        tags.appendChild(none);
-      }
-
-      box.appendChild(tags);
-      tdDetAll.appendChild(box);
-      trDet.appendChild(tdDet);
-
-      const toggle = (ev) => {
-        if (ev) ev.stopPropagation();
-        const show = tdDetAll.style.display === 'none';
-        tdDetAll.style.display = show ? '' : 'none';
-        btn.setAttribute('aria-expanded', String(show));
-        btn.querySelector('.label').textContent = show ? 'Skjul detaljer' : 'Vis detaljer';
-      };
-
-      btn.addEventListener('click', toggle);
-      tr.addEventListener('click', (e) => {
-        const tag = e.target.tagName.toLowerCase();
-        if (tag === 'a' || e.target.closest('button')) return; // ikke stjel klikk
-        toggle(e);
-      });
-
-      tbody.appendChild(tr);
-      tbody.appendChild(trDet);
-    }
-  }
-
-  // Page info
-  if (total === 0) {
-    pageInfo.textContent = '';
-  } else {
-    const a = isAll ? 1 : startIdx + 1;
-    const b = isAll ? total : endIdx;
-    pageInfo.textContent = `Viser ${a}–${b} av ${total}`;
-  }
-
-  // Pager-knapper
-  pagerBtns.innerHTML = '';
-  if (!isAll && totalPages > 1) {
-    const makeBtn = (txt, label, disabled, onClick) => {
-      const b = document.createElement('button');
-      b.className = 'btn-page';
-      b.textContent = txt;
-      if (label) b.setAttribute('aria-label', label);
-      b.disabled = !!disabled;
-      if (!disabled) b.addEventListener('click', onClick);
-      return b;
-    };
-
-    pagerBtns.appendChild(makeBtn('«', 'Første side', page === 1, () => { page = 1; render(); }));
-    pagerBtns.appendChild(makeBtn('‹', 'Forrige side', page === 1, () => { page = Math.max(1, page - 1); render(); }));
-
-    for (const p of buildPageList(totalPages, page)) {
-      if (p === '…') {
-        const dot = document.createElement('span');
-        dot.className = 'btn-page'; dot.style.cursor = 'default';
-        dot.textContent = '…';
-        dot.setAttribute('aria-hidden', 'true');
-        pagerBtns.appendChild(dot);
-      } else {
-        const b = makeBtn(String(p), null, false, () => { page = p; render(); });
-        if (p === page) { b.classList.add('active'); b.setAttribute('aria-current', 'page'); }
-        pagerBtns.appendChild(b);
-      }
-    }
-
-    pagerBtns.appendChild(makeBtn('›', 'Neste side', page === totalPages, () => { page = Math.min(totalPages, page + 1); render(); }));
-    pagerBtns.appendChild(makeBtn('»', 'Siste side', page === totalPages, () => { page = totalPages; render(); }));
-  }
-};
-
+        const render = () => {
+          tbody.innerHTML = '';
+          if (view.length === 0) {
+            const tr = document.createElement('tr');
+            const td = document.createElement('td');
+            td.colSpan = 5;
+            td.className = 'muted';
+            td.textContent = 'Ingen treff på valgt filter.';
+            tr.appendChild(td);
+            tbody.appendChild(tr);
+            return;
+          }
           for (const r of view) {
             const tr = document.createElement('tr');
             tr.classList.add('row-toggle');
@@ -885,13 +649,6 @@ if (codes.length) {
           link.click();
           link.remove();
         });
-
-        pageSizeSel.addEventListener('change', () => {
-  const v = pageSizeSel.value;
-  pageSize = (v === 'all') ? Infinity : Number(v);
-  page = 1;
-  render();
-});
 
         apply();
       } catch (e) {
