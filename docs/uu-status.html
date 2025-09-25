@@ -527,11 +527,38 @@
           // Diagram 1 – topp WCAG-koder
           const top = aggregateByCode(details).slice(0,8);
           const ctx1 = document.getElementById('chTopCodes');
-          const ch1 = new Chart(ctx1, {
-            type: 'bar',
-            data: { labels: top.map(t=>t[0]), datasets: [{ label:'Antall løsninger', data: top.map(t=>t[1]), backgroundColor: colAccent }]},
-            options: { responsive:true, plugins:{legend:{display:false}}, scales:{x:{ticks:{color:'#9fb0c3'}}, y:{beginAtZero:true,ticks:{color:'#9fb0c3'}}} }
-          });
+        const ch1 = new Chart(ctx1, {
+  type: 'bar',
+  data: {
+    labels: top.map(t => t[0]),
+    datasets: [{
+      label: 'Antall løsninger',
+      data: top.map(t => t[1]),
+      backgroundColor: colAccent,
+      borderColor: colAccent,
+      borderWidth: 1
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: {
+        ticks: {
+          color: '#e7eef7',           // bedre kontrast
+          font: { size: 14, weight: '700' }  // større og bold
+        },
+        grid: { display: false }
+      },
+      y: {
+        beginAtZero: true,
+        ticks: { color: '#9fb0c3' },
+        grid: { color: 'rgba(255,255,255,0.06)' }
+      }
+    }
+  }
+});
+
           // Klikk = sett WCAG-filter
           ctx1.onclick = (evt) => {
             const p = ch1.getElementsAtEventForMode(evt, 'nearest', {intersect:true}, true)[0];
@@ -548,14 +575,58 @@
             if (n===0) z++; else if (n<=5) a++; else if (n<=10) b++; else c++;
           }
           const ctx2 = document.getElementById('chBuckets');
-          const ch2 = new Chart(ctx2, {
-            type: 'doughnut',
-            data: {
-              labels: ['0', '1–5', '6–10', '11+'],
-              datasets: [{ data: [z,a,b,c], backgroundColor: [colOk, colWarn, 'rgba(220,53,69,0.6)', colBad] }]
-            },
-            options: { plugins:{legend:{position:'bottom'}}, cutout:'55%' }
-          });
+          
+const labels = ['0 brudd', '1–5 brudd', '6–10 brudd', '11+ brudd'];
+const values = [z, a, b, c];
+
+const ch2 = new Chart(ctx2, {
+  type: 'doughnut',
+  data: {
+    labels,
+    datasets: [{
+      data: values,
+      // ÉN rød for både 6–10 og 11+ (matcher tabellen)
+      backgroundColor: [colOk, colWarn, colBad, colBad],
+      borderColor: getComputedStyle(document.documentElement).getPropertyValue('--border').trim() || '#1f2a36',
+      borderWidth: 1
+    }]
+  },
+  options: {
+    cutout: '55%',
+    plugins: {
+      legend: {
+        position: 'bottom',
+        labels: {
+          color: '#e7eef7',           // bedre kontrast
+          // legg til tall i teksten, f.eks. "1–5 brudd (42)"
+          generateLabels(chart) {
+            const ds = chart.data.datasets[0];
+            return chart.data.labels.map((text, i) => {
+              const color = Array.isArray(ds.backgroundColor) ? ds.backgroundColor[i] : ds.backgroundColor;
+              return {
+                text: `${text} (${ds.data[i]})`,
+                fillStyle: color,
+                strokeStyle: color,
+                lineWidth: 0,
+                hidden: false,
+                index: i
+              };
+            });
+          }
+        }
+      },
+      tooltip: {
+        callbacks: {
+          label(ctx) {
+            const v = ctx.parsed || 0;
+            return `${ctx.label}: ${v}`;
+          }
+        }
+      }
+    }
+  }
+});
+
           // Klikk = sett brudd-filter
           ctx2.onclick = (evt) => {
             const p = ch2.getElementsAtEventForMode(evt, 'nearest', {intersect:true}, true)[0];
