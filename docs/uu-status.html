@@ -298,7 +298,7 @@
       const rows = lines.slice(1).map(line => {
         const cols = line.split(delimiter).map(c => c.trim());
         const obj = {};
-        headers.forEach((h, i) => obj[h] = cols[i] ?? '';
+        headers.forEach((h, i) => obj[h] = cols[i] ?? '');
         return obj;
       });
       return { headers, rows };
@@ -523,45 +523,41 @@
           const colOk     = cs.getPropertyValue('--ok').trim()     || '#28a745';
           const colWarn   = cs.getPropertyValue('--warn').trim()   || '#f0ad4e';
           const colBad    = cs.getPropertyValue('--bad').trim()    || '#dc3545';
-          const colText   = cs.getPropertyValue('--text').trim()   || '#e7eef7';
-
-          // Sørg for lys tekst globalt på diagrammer (legend/tooltip/aksene)
-          Chart.defaults.color = colText;
 
           // Diagram 1 – topp WCAG-koder
           const top = aggregateByCode(details).slice(0,8);
           const ctx1 = document.getElementById('chTopCodes');
-          const ch1 = new Chart(ctx1, {
-            type: 'bar',
-            data: {
-              labels: top.map(t => t[0]),
-              datasets: [{
-                label: 'Antall løsninger',
-                data: top.map(t => t[1]),
-                backgroundColor: colAccent,
-                borderColor: colAccent,
-                borderWidth: 1
-              }]
-            },
-            options: {
-              responsive: true,
-              plugins: { legend: { display: false } },
-              scales: {
-                x: {
-                  ticks: {
-                    color: colText,
-                    font: { size: 14, weight: '700' }
-                  },
-                  grid: { display: false }
-                },
-                y: {
-                  beginAtZero: true,
-                  ticks: { color: '#9fb0c3' },
-                  grid: { color: 'rgba(255,255,255,0.06)' }
-                }
-              }
-            }
-          });
+        const ch1 = new Chart(ctx1, {
+  type: 'bar',
+  data: {
+    labels: top.map(t => t[0]),
+    datasets: [{
+      label: 'Antall løsninger',
+      data: top.map(t => t[1]),
+      backgroundColor: colAccent,
+      borderColor: colAccent,
+      borderWidth: 1
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: {
+        ticks: {
+          color: '#e7eef7',           // bedre kontrast
+          font: { size: 14, weight: '700' }  // større og bold
+        },
+        grid: { display: false }
+      },
+      y: {
+        beginAtZero: true,
+        ticks: { color: '#9fb0c3' },
+        grid: { color: 'rgba(255,255,255,0.06)' }
+      }
+    }
+  }
+});
 
           // Klikk = sett WCAG-filter
           ctx1.onclick = (evt) => {
@@ -579,64 +575,68 @@
             if (n===0) z++; else if (n<=5) a++; else if (n<=10) b++; else c++;
           }
           const ctx2 = document.getElementById('chBuckets');
+          
+// ---- Doughnut (fordeling) – 4 distinkte farger, lys legend, ingen toggle ----
+const labels = ['0 brudd', '1–5 brudd', '6–10 brudd', '11+ brudd'];
+const values = [z, a, b, c];
 
-          const labels = ['0 brudd', '1–5 brudd', '6–10 brudd', '11+ brudd'];
-          const values = [z, a, b, c];
-          const colPink = '#E66EB2'; // egen farge for 6–10
-          const borderCol = cs.getPropertyValue('--border').trim() || '#1f2a36';
+// Rosa for 6–10 (ikke rød)
+const colPink = '#E66EB2';
+const borderCol = getComputedStyle(document.documentElement)
+  .getPropertyValue('--border').trim() || '#1f2a36';
 
-          const ch2 = new Chart(ctx2, {
-            type: 'doughnut',
-            data: {
-              labels,
-              datasets: [{
-                data: values,
-                backgroundColor: [colOk, colWarn, colPink, colBad],
-                borderColor: borderCol,
-                borderWidth: 1
-              }]
-            },
-            options: {
-              cutout: '55%',
-              plugins: {
-                legend: {
-                  position: 'bottom',
-                  onClick: () => {},        // deaktiver toggling via legend
-                  labels: {
-                    color: colText,         // lys tekst for kontrast
-                    font: { size: 13, weight: '600' },
-                    generateLabels(chart) {
-                      const ds = chart.data.datasets[0];
-                      return chart.data.labels.map((text, i) => {
-                        const color = Array.isArray(ds.backgroundColor) ? ds.backgroundColor[i] : ds.backgroundColor;
-                        return {
-                          text: `${text} (${ds.data[i]})`,
-                          fillStyle: color,
-                          strokeStyle: color,
-                          lineWidth: 0,
-                          hidden: false,
-                          index: i
-                        };
-                      });
-                    }
-                  }
-                },
-                tooltip: {
-                  callbacks: { label(ctx) { return `${ctx.label}: ${ctx.parsed}`; } }
-                }
-              }
-            }
-          });
+const ch2 = new Chart(ctx2, {
+  type: 'doughnut',
+  data: {
+    labels,
+    datasets: [{
+      data: values,
+      backgroundColor: [colOk, colWarn, colPink, colBad],
+      borderColor: borderCol,
+      borderWidth: 1
+    }]
+  },
+  options: {
+    cutout: '55%',
+    plugins: {
+      legend: {
+        position: 'bottom',
+        onClick: () => {},          // deaktiver toggling i legend
+        labels: {
+          color: '#e7eef7',         // lys grå/hvit for kontrast
+          font: { size: 13, weight: '600' },
+          // legg tall inn i teksten: "1–5 brudd (32)"
+          generateLabels(chart) {
+            const ds = chart.data.datasets[0];
+            return chart.data.labels.map((text, i) => {
+              const color = Array.isArray(ds.backgroundColor) ? ds.backgroundColor[i] : ds.backgroundColor;
+              return {
+                text: `${text} (${ds.data[i]})`,
+                fillStyle: color,
+                strokeStyle: color,
+                lineWidth: 0,
+                hidden: false,
+                index: i
+              };
+            });
+          }
+        }
+      },
+      tooltip: {
+        callbacks: { label(ctx) { return `${ctx.label}: ${ctx.parsed}`; } }
+      }
+    }
+  }
+});
 
-          // Klikk = sett brudd-filter (robust parsing av label-tekst)
+
+          // Klikk = sett brudd-filter
           ctx2.onclick = (evt) => {
             const p = ch2.getElementsAtEventForMode(evt, 'nearest', {intersect:true}, true)[0];
             if (!p) return;
-            const bucket = ch2.data.labels[p.index] || '';
-            if (bucket.startsWith('0'))       violFilter.value = '0';
-            else if (bucket.startsWith('1'))  violFilter.value = '1-5';
-            else if (bucket.startsWith('6'))  violFilter.value = '6-10';
-            else                              violFilter.value = '11+';
+            const bucket = ch2.data.labels[p.index];
+            const map = { '0':'0', '1–5':'1-5', '6–10':'6-10', '11+':'11+' };
+            violFilter.value = map[bucket] || '';
             apply();
             window.scrollTo({ top: 0, behavior: 'smooth' });
           };
