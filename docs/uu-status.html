@@ -576,8 +576,14 @@
           }
           const ctx2 = document.getElementById('chBuckets');
           
+// ---- Doughnut (fordeling) – 4 distinkte farger, lys legend, ingen toggle ----
 const labels = ['0 brudd', '1–5 brudd', '6–10 brudd', '11+ brudd'];
 const values = [z, a, b, c];
+
+// Rosa for 6–10 (ikke rød)
+const colPink = '#E66EB2';
+const borderCol = getComputedStyle(document.documentElement)
+  .getPropertyValue('--border').trim() || '#1f2a36';
 
 const ch2 = new Chart(ctx2, {
   type: 'doughnut',
@@ -585,9 +591,8 @@ const ch2 = new Chart(ctx2, {
     labels,
     datasets: [{
       data: values,
-      // ÉN rød for både 6–10 og 11+ (matcher tabellen)
-      backgroundColor: [colOk, colWarn, colBad, colBad],
-      borderColor: getComputedStyle(document.documentElement).getPropertyValue('--border').trim() || '#1f2a36',
+      backgroundColor: [colOk, colWarn, colPink, colBad],
+      borderColor: borderCol,
       borderWidth: 1
     }]
   },
@@ -596,9 +601,11 @@ const ch2 = new Chart(ctx2, {
     plugins: {
       legend: {
         position: 'bottom',
+        onClick: () => {},          // deaktiver toggling i legend
         labels: {
-          color: '#e7eef7',           // bedre kontrast
-          // legg til tall i teksten, f.eks. "1–5 brudd (42)"
+          color: '#e7eef7',         // lys grå/hvit for kontrast
+          font: { size: 13, weight: '600' },
+          // legg tall inn i teksten: "1–5 brudd (32)"
           generateLabels(chart) {
             const ds = chart.data.datasets[0];
             return chart.data.labels.map((text, i) => {
@@ -616,16 +623,12 @@ const ch2 = new Chart(ctx2, {
         }
       },
       tooltip: {
-        callbacks: {
-          label(ctx) {
-            const v = ctx.parsed || 0;
-            return `${ctx.label}: ${v}`;
-          }
-        }
+        callbacks: { label(ctx) { return `${ctx.label}: ${ctx.parsed}`; } }
       }
     }
   }
 });
+
 
           // Klikk = sett brudd-filter
           ctx2.onclick = (evt) => {
