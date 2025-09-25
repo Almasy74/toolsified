@@ -526,6 +526,11 @@
           const colBad    = cs.getPropertyValue('--bad').trim()    || '#dc3545';
           const colText   = cs.getPropertyValue('--text').trim()   || '#e7eef7';
 
+          // Etter at du har hentet colText i buildDashboard():
+// const colText = cs.getPropertyValue('--text').trim() || '#e7eef7';
+Chart.defaults.plugins.legend.labels.color = colText;
+
+
           // Lys tekst på diagrammer
           Chart.defaults.color = colText;
 
