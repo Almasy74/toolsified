@@ -53,7 +53,7 @@
 <body>
   <div class="wrap">
     <h1>UU-status – endringsarkiv</h1>
-    <div class="muted">Viser differanser som er oppdaget i nattlig sammenligning mot forrige snapshot.</div>
+    <div class="muted">Viser differanser som er oppdaget i sammenligning mot forrige <code>latest.json</code>. Snapshots lagres kun når noe faktisk endres, og grupperes på <em>sist oppdatert</em> (updatedAt).</div>
     <p><a href="./uu-status.html">← Til oversikten</a></p>
 
     <div class="toolbar" role="region" aria-label="Filtre for endringsarkiv">
@@ -200,10 +200,15 @@
           det.appendChild(pre);
         }
 
+        // Snapshot-lenke basert på updatedDate og snapshots_by_updated/
         const snapLink = document.createElement("div");
-        const yyyyMmDd = (r.ts || "").slice(0,10);
+        const yyyyMmDd = (r.updatedDate || (r.ts || "").slice(0,10));
         snapLink.style.marginTop = ".5rem";
-        snapLink.innerHTML = `<a href="./data/uustatus/snapshots/${yyyyMmDd}.json" target="_blank" rel="noopener">Snapshot ${yyyyMmDd}</a>`;
+        snapLink.innerHTML = `
+          <div class="muted" style="margin-bottom:.25rem;">Sist oppdatert (fra erklæring): ${yyyyMmDd}</div>
+          <a href="./data/uustatus/snapshots_by_updated/${yyyyMmDd}.json" target="_blank" rel="noopener">
+            Snapshot ${yyyyMmDd}
+          </a>`;
         det.appendChild(snapLink);
 
         tdDet.appendChild(det);
