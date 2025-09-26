@@ -40,10 +40,32 @@ jobs:
           cp uu-status.csv docs/uu-status.csv
           cp uu-status-details.json docs/uu-status-details.json
 
+      # NEW: Sørg for arkivmapper + tomme filer første gang
+      - name: Ensure archive folders & seed files
+        run: |
+          mkdir -p docs/data/uustatus/snapshots
+          mkdir -p docs/data/uustatus/logs
+          [ -f docs/data/uustatus/latest.json ] || echo '{ "urls": [] }' > docs/data/uustatus/latest.json
+          [ -f docs/data/uustatus/logs/changes.jsonl ] || : > docs/data/uustatus/logs/changes.jsonl
+
+      # NEW: Bygg arkiv (diff mot forrige snapshot + skriv dagens snapshot)
+      - name: Build archive (diff & snapshot)
+        run: |
+          python build_uu_archive.py
+
       - name: Commit updated CSV, details and page (if changed)
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add uu-status.csv uu-status-details.json docs/uu-status.csv docs/uu-status-details.json docs/uu-status.html
-          git diff --staged --quiet || git commit -m "Update UU-status (csv + details + page)"
+          git add \
+            uu-status.csv \
+            uu-status-details.json \
+            docs/uu-status.csv \
+            docs/uu-status-details.json \
+            docs/uu-status.html \
+            docs/uu-arkiv.html \                       # NEW
+            docs/data/uustatus/latest.json \           # NEW
+            docs/data/uustatus/logs/changes.jsonl \    # NEW
+            docs/data/uustatus/snapshots/*.json        # NEW
+          git diff --staged --quiet || git commit -m "Update UU-status + archive (csv, details, page, snapshots, changes)"
           git push
