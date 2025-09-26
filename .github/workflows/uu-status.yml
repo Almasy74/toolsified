@@ -43,13 +43,14 @@ jobs:
       # Sørg for arkivmapper + tomme filer første gang
       - name: Ensure archive folders & seed files
         run: |
+          mkdir -p docs/data/uustatus/snapshots_by_updated
           mkdir -p docs/data/uustatus/snapshots
           mkdir -p docs/data/uustatus/logs
           [ -f docs/data/uustatus/latest.json ] || echo '{ "urls": [] }' > docs/data/uustatus/latest.json
           [ -f docs/data/uustatus/logs/changes.jsonl ] || : > docs/data/uustatus/logs/changes.jsonl
 
-      # Bygg arkiv (diff mot forrige snapshot + skriv dagens snapshot)
-      - name: Build archive (diff & snapshot)
+      # Bygg arkiv (diff mot forrige latest + skriv hendelsesbaserte snapshots)
+      - name: Build archive (diff & event snapshots)
         run: |
           python build_uu_archive.py
 
@@ -58,13 +59,13 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # Legg til filer (uten linjefortsettelse og kommentarer på samme linje)
+          # Legg til filer
           git add uu-status.csv uu-status-details.json
           git add docs/uu-status.csv docs/uu-status-details.json docs/uu-status.html docs/uu-arkiv.html
           git add docs/data/uustatus/latest.json docs/data/uustatus/logs/changes.jsonl
 
-          # snapshots kan være tom ved første kjøring – ikke feile hvis ingen matcher
-          ggit add docs/data/uustatus/snapshots_by_updated/*.json || true
+          # Hendelsesbaserte snapshots (kan være ingen første gang)
+          git add docs/data/uustatus/snapshots_by_updated/*.json || true
 
           if git diff --staged --quiet; then
             echo "No changes to commit."
