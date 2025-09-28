@@ -49,6 +49,10 @@ jobs:
           [ -f docs/data/uustatus/latest.json ] || echo '{ "urls": [] }' > docs/data/uustatus/latest.json
           [ -f docs/data/uustatus/logs/changes.jsonl ] || : > docs/data/uustatus/logs/changes.jsonl
 
+       - name: Sanity check of archive script
+        run: |
+          grep -n "AUTO_BACKTRACK" build_uu_archive.py || (echo "🛑 Du kjører ikke auto-backtrack-versjonen av build_uu_archive.py" && exit 1)
+
       - name: Build archive (diff & event snapshots)
         env:
           BASELINE_REF: "HEAD~2"                       # sammenlign mot forrige commit (juster ved behov)
