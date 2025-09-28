@@ -1,4 +1,4 @@
-name: Build UU-status (CSV + Details + Page)
+0name: Build UU-status (CSV + Details + Page)
 
 on:
   schedule:
@@ -49,50 +49,14 @@ jobs:
           [ -f docs/data/uustatus/latest.json ] || echo '{ "urls": [] }' > docs/data/uustatus/latest.json
           [ -f docs/data/uustatus/logs/changes.jsonl ] || : > docs/data/uustatus/logs/changes.jsonl
 
-      # --- DEBUG 1: viser hva dagens details.json har for Avstemmingsinformasjon
-      - name: Debug current details for Avstemmingsinformasjon
+      # --- DEBUG A: list alle 'A-meldingen' i dagens details.json
+      - name: Debug scan: list 'A-meldingen' entries in current details.json
         run: |
           python - <<'PY'
           import json
           from pathlib import Path
-          KEY = "avstemmingsinformasjon"
-          data = json.loads(Path("docs/uu-status-details.json").read_text(encoding="utf-8"))
-          rows = data.get("urls") if isinstance(data, dict) else data
-          hit = next((r for r in rows if KEY in (r.get("url","")+r.get("href","")).lower()), None)
-          print("CUR FOUND:", bool(hit))
-          if hit:
-              def codes(obj):
-                  for k in ["nonConformities","violations","wcag","issues","problems"]:
-                      if k in obj:
-                          v = obj[k]
-                          if isinstance(v, str):
-                              return [s.strip() for s in v.split(";") if s.strip()]
-                          if isinstance(v, list):
-                              out=[]
-                              for it in v:
-                                  if isinstance(it, str):
-                                      out.append(it.strip())
-                                  elif isinstance(it, dict):
-                                      for kk in ["code","wcag","criterion","id","wcagId","wcag_id"]:
-                                          if it.get(kk):
-                                              out.append(str(it[kk]).strip()); break
-                              return sorted(set(out))
-                  return []
-              c = codes(hit)
-              t = hit.get("totalNonConformities")
-              ua = hit.get("updatedAt")
-              print("CUR updatedAt:", ua)
-              print("CUR total:", t if t is not None else len(c))
-              print("CUR codes:", c)
-          PY
 
-      # --- DEBUG 2: liten tidslinje for samme URL i latest.json bakover i git-historikken
-      - name: Debug latest.json timeline (HEAD..HEAD~12)
-        run: |
-          python - <<'PY'
-          import subprocess, json
-          KEY = "avstemmingsinformasjon"
-          def codes(obj):
+          def extract_codes(obj):
               for k in ["nonConformities","violations","wcag","issues","problems"]:
                   if k in obj:
                       v = obj[k]
@@ -109,24 +73,60 @@ jobs:
                                           out.append(str(it[kk]).strip()); break
                           return sorted(set(out))
               return []
-          try:
-              shas = subprocess.check_output(
-                  ["git","rev-list","-n","12","HEAD","--","docs/data/uustatus/latest.json"], text=True
-              ).strip().splitlines()
-          except Exception:
-              shas = []
-          for sha in shas:
-              try:
-                  out = subprocess.check_output(["git","show",f"{sha}:docs/data/uustatus/latest.json"], text=True)
-                  j = json.loads(out)
-              except Exception:
-                  continue
-              rows = j.get("urls") if isinstance(j, dict) else j
-              hit = next((r for r in rows if KEY in (r.get("url") or "").lower()), None)
-              if hit:
-                  cc = codes(hit)
-                  tot = hit.get("totalNonConformities") or len(cc)
-                  print(sha[:7], "total=", tot, "codes=", cc)
+
+          data = json.loads(Path("docs/uu-status-details.json").read_text(encoding="utf-8"))
+          rows = data.get("urls") if isinstance(data, dict) else data
+          hits = []
+          for r in rows:
+              title = (r.get("title") or r.get("name") or "").lower()
+              url = (r.get("url") or r.get("href") or "").lower()
+              if "a-meldingen" in title:
+                  hits.append((title, url, extract_codes(r), r.get("totalNonConformities"), r.get("updatedAt")))
+          print("Found A-meldingen entries:", len(hits))
+          for t,u,c,tot,ua in hits:
+              print(" - TITLE:", t)
+              print("   URL:  ", u)
+              print("   total:", tot if tot is not None else len(c), "codes:", c, "updatedAt:", ua)
+          PY
+
+      # --- DEBUG B: finn alt som matcher 'avstemm' i tittel eller URL
+      - name: Debug scan: anything matching 'avstemm' in current details.json
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          KEY = "avstemm"
+          def extract_codes(obj):
+              for k in ["nonConformities","violations","wcag","issues","problems"]:
+                  if k in obj:
+                      v = obj[k]
+                      if isinstance(v, str):
+                          return [s.strip() for s in v.split(";") if s.strip()]
+                      if isinstance(v, list):
+                          out=[]
+                          for it in v:
+                              if isinstance(it, str):
+                                  out.append(it.strip())
+                              elif isinstance(it, dict):
+                                  for kk in ["code","wcag","criterion","id","wcagId","wcag_id"]:
+                                      if it.get(kk):
+                                          out.append(str(it[kk]).strip()); break
+                          return sorted(set(out))
+              return []
+          data = json.loads(Path("docs/uu-status-details.json").read_text(encoding="utf-8"))
+          rows = data.get("urls") if isinstance(data, dict) else data
+          found = []
+          for r in rows:
+              title = (r.get("title") or r.get("name") or "")
+              url = (r.get("url") or r.get("href") or "")
+              if KEY in title.lower() or KEY in url.lower():
+                  c = extract_codes(r)
+                  tot = r.get("totalNonConformities")
+                  print("MATCH title:", title)
+                  print("      url  :", url)
+                  print("      total:", tot if tot is not None else len(c), "codes:", c, "updatedAt:", r.get("updatedAt"))
+                  found.append(1)
+          print("Matches:", len(found))
           PY
 
       - name: Sanity check of archive script
@@ -137,7 +137,7 @@ jobs:
         env:
           AUTO_BACKTRACK: "1"
           MAX_BACKTRACK: "20"
-          DEBUG_URL_CONTAINS: "avstemmingsinformasjon"
+          DEBUG_URL_CONTAINS: "avstemm"     # matcher både i tittel og url i nytt script
         run: |
           python build_uu_archive.py
 
