@@ -30,6 +30,8 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+          # sikrer at vi kan parse HTML
+          pip install beautifulsoup4 requests
 
       - name: Build UU-status CSV + details
         run: |
@@ -41,6 +43,10 @@ jobs:
           cp uu-status.csv docs/uu-status.csv
           cp uu-status-details.json docs/uu-status-details.json
 
+      - name: Enrich details with WCAG codes (all statements)
+        run: |
+          python enrich_uu_details.py
+
       - name: Ensure archive folders & seed files
         run: |
           mkdir -p docs/data/uustatus/snapshots_by_updated
@@ -49,151 +55,7 @@ jobs:
           [ -f docs/data/uustatus/latest.json ] || echo '{ "urls": [] }' > docs/data/uustatus/latest.json
           [ -f docs/data/uustatus/logs/changes.jsonl ] || : > docs/data/uustatus/logs/changes.jsonl
 
-      # -------- GLOBAL DIFF-SJEKK PÅ ALLE ERKLÆRINGER --------
-      - name: Global diff scan (current details.json vs HEAD latest.json)
-        run: |
-          python - <<'PY'
-          import json, subprocess, sys
-          from pathlib import Path
-          from urllib.parse import urlparse, urlunparse
-
-          def canon_url(u: str) -> str:
-              try:
-                  from urllib.parse import urlparse, urlunparse
-                  p = urlparse((u or "").strip())
-                  netloc = (p.hostname or "").lower()
-                  if p.port and not ((p.scheme=="http" and p.port==80) or (p.scheme=="https" and p.port==443)):
-                      netloc = f"{netloc}:{p.port}"
-                  path = p.path or ""
-                  if path != "/" and path.endswith("/"):
-                      path = path[:-1]
-                  return urlunparse((p.scheme, netloc, path, "", "", ""))
-              except Exception:
-                  return (u or "").strip()
-
-          def to_domain(url):
-              try:
-                  return urlparse(url).hostname or ""
-              except Exception:
-                  return ""
-
-          def extract_codes(raw):
-              # prøv mange felt/format
-              for field in ["nonConformities","violations","wcag","wcagCodes","wcag_violations","wcag_nonconformities","issues","problems"]:
-                  if field in raw:
-                      data = raw[field]; break
-              else:
-                  data = None
-                  for k in raw.keys():
-                      lk = k.lower()
-                      if any(s in lk for s in ["wcag","violation","nonconform","issue","problem"]):
-                          data = raw[k]; break
-              codes = set()
-              if data is None: return []
-              if isinstance(data,str):
-                  return [s.strip() for s in data.split(";") if s.strip()]
-              if isinstance(data,list):
-                  out=[]
-                  for it in data:
-                      if isinstance(it,str) and it.strip():
-                          out.append(it.strip())
-                      elif isinstance(it,dict):
-                          for kk in ["code","wcag","criterion","id","wcagId","wcag_id"]:
-                              v = it.get(kk)
-                              if isinstance(v,str) and v.strip():
-                                  out.append(v.strip()); break
-                  return sorted(set(out))
-              if isinstance(data,dict):
-                  return sorted([str(k).strip() for k in data.keys() if str(k).strip()])
-              return []
-
-          def normalize_entry(raw):
-              url = (raw.get("url") or raw.get("href") or "").strip()
-              domain = (raw.get("domain") or to_domain(url)).strip()
-              title = (raw.get("title") or raw.get("name") or "").strip()
-              updatedAt = (raw.get("updatedAt") or raw.get("lastChecked") or "").strip()
-              codes = extract_codes(raw)
-              total = raw.get("totalNonConformities")
-              if not isinstance(total, int):
-                  total = len(codes)
-              return {
-                  "url": url,
-                  "domain": domain,
-                  "title": title,
-                  "updatedAt": updatedAt,
-                  "nonConformities": sorted(codes),
-                  "totalNonConformities": int(total),
-              }
-
-          def make_key(it):
-              url = (it.get("url") or it.get("href") or "").strip()
-              if url:
-                  return "url::" + canon_url(url)
-              title = (it.get("title") or it.get("name") or "").strip().lower()
-              domain = (it.get("domain") or "").strip().lower()
-              if title:
-                  return f"title::{domain}::{title}"
-              return None
-
-          def index_by_key(rows):
-              out = {}
-              for r in rows:
-                  k = make_key(r)
-                  if k: out[k] = r
-              return out
-
-          # les current
-          cur_obj = json.loads(Path("docs/uu-status-details.json").read_text(encoding="utf-8"))
-          cur_rows = cur_obj.get("urls") if isinstance(cur_obj, dict) else cur_obj
-          cur_rows = [normalize_entry(x) for x in cur_rows]
-          cur = index_by_key(cur_rows)
-
-          # les baseline (HEAD)
-          try:
-              base_txt = subprocess.check_output(["git","show","HEAD:docs/data/uustatus/latest.json"], text=True)
-              base_obj = json.loads(base_txt)
-              base_rows = base_obj.get("urls") if isinstance(base_obj, dict) else base_obj
-          except Exception:
-              base_rows = []
-          base = index_by_key(base_rows)
-
-          only_cur = [k for k in cur.keys() if k not in base]
-          only_base = [k for k in base.keys() if k not in cur]
-
-          changed = []
-          for k in cur.keys() & base.keys():
-              a = base[k]; b = cur[k]
-              a_codes = set(a.get("nonConformities") or [])
-              b_codes = set(b.get("nonConformities") or [])
-              if a.get("title") != b.get("title") or a.get("updatedAt") != b.get("updatedAt") \
-                 or a.get("totalNonConformities") != b.get("totalNonConformities") \
-                 or a_codes != b_codes:
-                  changed.append((k, a, b, sorted(list(b_codes - a_codes)), sorted(list(a_codes - b_codes))))
-
-          print(f"GLOBAL DIFF — current vs HEAD")
-          print(f"  only in current : {len(only_cur)}")
-          print(f"  only in baseline: {len(only_base)}")
-          print(f"  changed entries : {len(changed)}")
-
-          # vis noen eksempler
-          for k, a, b, added, removed in changed[:10]:
-              print("-"*60)
-              print("KEY   :", k)
-              print("TITLE :", (a.get('title') or b.get('title')))
-              print("URL   :", (a.get('url') or b.get('url')))
-              print("total :", a.get('totalNonConformities'), "->", b.get('totalNonConformities'))
-              if added or removed:
-                  print("added :", added)
-                  print("removed:", removed)
-              print("updatedAt:", a.get('updatedAt'), "->", b.get('updatedAt'))
-
-          # ekstra sanity: hvor mange har tom/ingen koder i current?
-          empty_codes = sum(1 for r in cur_rows if not (r.get("nonConformities") or []))
-          print(f"  current entries with NO codes: {empty_codes}")
-          PY
-
       - name: Build archive (diff & event snapshots)
-        # Normal drift: ingen env nødvendig
         run: |
           python build_uu_archive.py
 
