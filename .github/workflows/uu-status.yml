@@ -50,11 +50,12 @@ jobs:
           [ -f docs/data/uustatus/logs/changes.jsonl ] || : > docs/data/uustatus/logs/changes.jsonl
 
 - name: Build archive (diff & event snapshots)
+  run: |
+    python build_uu_archive.py
   env:
     BASELINE_REF: "HEAD~1"   # sammenlign mot forrige commit
     DEBUG_URL_CONTAINS: "veldedig-eller-allmennyttig"  # unik bit av URLen du endret
-  run: |
-    python build_uu_archive.py
+
 
 
       - name: Commit updated CSV, details and page (if changed)
