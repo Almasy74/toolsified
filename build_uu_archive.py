@@ -148,13 +148,25 @@ def normalize_entry(raw):
 def sha1(obj):
     return hashlib.sha1(json.dumps(obj, sort_keys=True, ensure_ascii=False).encode("utf-8")).hexdigest()
 
-def index_by_url(items):
+def make_key(it: dict) -> str | None:
+    """Primær nøkkel = URL (kanonisk). Fallback = title+domain om URL mangler."""
+    if not isinstance(it, dict):
+        return None
+    url = (it.get("url") or it.get("href") or "").strip()
+    if url:
+        return canon_url(url)
+    title = (it.get("title") or it.get("name") or "").strip().lower()
+    domain = (it.get("domain") or "").strip().lower()
+    if title:
+        return f"title::{domain}::{title}"
+    return None
+
+def index_by_key(items):
     m = {}
     for it in items:
-        if not isinstance(it, dict): continue
-        u = it.get("url")
-        if not u: continue
-        m[canon_url(u)] = it
+        k = make_key(it)
+        if k:
+            m[k] = it
     return m
 
 def read_current():
@@ -195,28 +207,28 @@ def compute_change(prev_entry, curr_entry):
     return (None, [], [])
 
 def diff_once(prev_rows, curr_rows):
-    prev_by = index_by_url(prev_rows or [])
-    curr_by = index_by_url(curr_rows or [])
+    prev_by = index_by_key(prev_rows or [])
+    curr_by = index_by_key(curr_rows or [])
     changes = []
     now = datetime.datetime.utcnow()
     now_iso = now.isoformat(timespec="seconds") + "Z"
     detected_date = now.strftime("%Y-%m-%d")
 
-    for url, c in curr_by.items():
-        p = prev_by.get(url)
+    for k, c in curr_by.items():
+        p = prev_by.get(k)
         if p is None:
             updated_date = (c.get("updatedAt") or "")[:10] or today_str()
             changes.append({
                 "ts": now_iso,
                 "detectedDate": detected_date,
-                "url": c.get("url") or url,
-                "domain": c.get("domain") or to_domain(c.get("url") or url),
+                "url": c.get("url") or "",
+                "domain": c.get("domain") or to_domain(c.get("url") or ""),
                 "before_hash": None,
                 "after_hash": sha1(c),
                 "added": c.get("nonConformities") or [],
                 "removed": [],
                 "changed": {
-                    "newUrl": True,
+                    "newEntry": True,
                     "totalNonConformities": {"before": 0, "after": c.get("totalNonConformities", 0)}
                 },
                 "updatedDate": updated_date
@@ -228,8 +240,8 @@ def diff_once(prev_rows, curr_rows):
                 changes.append({
                     "ts": now_iso,
                     "detectedDate": detected_date,
-                    "url": c.get("url") or url,
-                    "domain": c.get("domain") or to_domain(c.get("url") or url),
+                    "url": c.get("url") or "",
+                    "domain": c.get("domain") or to_domain(c.get("url") or ""),
                     "before_hash": sha1(dict(p)),
                     "after_hash": sha1(dict(c)),
                     "added": added,
@@ -238,23 +250,24 @@ def diff_once(prev_rows, curr_rows):
                     "updatedDate": updated_date
                 })
 
-    # Fjernede URLer
-    for url, p in prev_by.items():
-        if url in curr_by: continue
+    # Fjernet fra dagens, fantes i prev
+    for k, p in prev_by.items():
+        if k in curr_by: 
+            continue
         p_nc = set(p.get("nonConformities") or [])
         removed = sorted(list(p_nc))
         updated_date = (p.get("updatedAt") or "")[:10] or today_str()
         changes.append({
             "ts": now_iso,
             "detectedDate": detected_date,
-            "url": p.get("url") or url,
-            "domain": p.get("domain") or to_domain(p.get("url") or url),
+            "url": p.get("url") or "",
+            "domain": p.get("domain") or to_domain(p.get("url") or ""),
             "before_hash": sha1(dict(p)),
             "after_hash": None,
             "added": [],
             "removed": removed,
             "changed": {
-                "removedUrl": True,
+                "removedEntry": True,
                 "totalNonConformities": {"before": len(p_nc), "after": 0}
             },
             "updatedDate": updated_date
@@ -264,50 +277,48 @@ def diff_once(prev_rows, curr_rows):
 
 # ---------- main ----------
 def main():
-    # Sørg for mapper
     LOGS_DIR.mkdir(parents=True, exist_ok=True)
     SNAP_BY_UPDATED.mkdir(parents=True, exist_ok=True)
     DATA_DIR.mkdir(parents=True, exist_ok=True)
 
-    # Les dagens datasett
     curr = read_current()
     if not isinstance(curr, list):
         print("Fant ikke gyldig dagsdata i docs/uu-status-details.json eller docs/uu-status.csv", file=sys.stderr)
         sys.exit(1)
 
-    # Bestem baseline-strategi
+    # Baseline-strategi
     forced_ref = os.getenv("BASELINE_REF", "").strip()
     auto_bt = os.getenv("AUTO_BACKTRACK", "").strip().lower() in ("1", "true", "yes", "on")
     max_bt = int(os.getenv("MAX_BACKTRACK", "10"))
 
-    candidate_refs = []
     if forced_ref:
         candidate_refs = [forced_ref]
     elif auto_bt:
         candidate_refs = ["HEAD"] + [f"HEAD~{i}" for i in range(1, max_bt+1)]
     else:
-        candidate_refs = ["HEAD"]  # standard, sammenlign mot forrige commit
+        candidate_refs = ["HEAD"]
 
     used_ref = None
     final_changes = []
     last_curr_by = {}
 
-    # Prøv refs til vi finner endringer
     for ref in candidate_refs:
         prev_rows = read_prev_from_ref(ref)
         if prev_rows is None:
             continue
         changes, prev_by, curr_by = diff_once(prev_rows, curr)
 
-        # Valgfri debug for en bestemt URL
-        dbg = os.getenv("DEBUG_URL_CONTAINS", "").strip()
+        dbg = os.getenv("DEBUG_URL_CONTAINS", "").strip().lower()
         if dbg:
-            for url, c in curr_by.items():
-                if dbg.lower() in (c.get("url") or url).lower():
-                    p = prev_by.get(url)
+            # match i tittel ELLER url
+            for key, c in curr_by.items():
+                url = (c.get("url") or "").lower()
+                title = (c.get("title") or "").lower()
+                if dbg in url or dbg in title:
+                    p = prev_by.get(key)
                     prev_codes = sorted((p or {}).get("nonConformities") or [])
                     curr_codes = sorted(c.get("nonConformities") or [])
-                    print(f"DEBUG URL (ref={ref}):", c.get("url") or url)
+                    print(f"DEBUG ENTRY (ref={ref}): title='{c.get('title')}', url='{c.get('url')}'")
                     print("  prev codes:", prev_codes)
                     print("  curr codes:", curr_codes)
                     print("  prev total:", (p or {}).get("totalNonConformities"))
@@ -332,19 +343,33 @@ def main():
         # Skriv snapshots per updatedDate
         changed_by_date = defaultdict(list)
         for ch in final_changes:
-            u = last_curr_by.get(canon_url(ch["url"]))
-            if not u:
-                continue
+            # finn entry'en for denne endringen ut fra nøkkelen vi brukte
+            # (bruk make_key for samsvar)
+            # NB: ch["url"] kan være tom – snapshot bruker hele entry fra curr
+            for k, entry in last_curr_by.items():
+                if (entry.get("url") or "") == (ch.get("url") or "") and \
+                   (entry.get("domain") or "") == (ch.get("domain") or "") and \
+                   (entry.get("title") or "") == (entry.get("title") or ""):
+                    candidate = entry
+                    break
+            else:
+                candidate = None
+
+            if not candidate:
+                # best-effort: legg inn via URL hvis satt
+                candidate = {"url": ch.get("url",""), "domain": ch.get("domain","")}
             key = ch.get("updatedDate") or today_str()
-            changed_by_date[key].append(u)
+            changed_by_date[key].append(candidate)
 
         for date_key, entries in changed_by_date.items():
             out_fp = SNAP_BY_UPDATED / f"{date_key}.json"
             existing = load_json(out_fp, fallback={"urls": []})
             existing_urls = existing.get("urls", [])
-            exist_by = index_by_url(existing_urls)
+            exist_by = index_by_key(existing_urls)
             for e in entries:
-                exist_by[canon_url(e["url"])] = e
+                kk = make_key(e)
+                if kk:
+                    exist_by[kk] = e
             merged = {"urls": list(exist_by.values())}
             out_fp.write_text(json.dumps(merged, ensure_ascii=False, indent=2), encoding="utf-8")
             print(f"Skrev snapshot for updatedDate={date_key}: {out_fp}")
