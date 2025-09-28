@@ -2,7 +2,7 @@ name: Build UU-status (CSV + Details + Page)
 
 on:
   schedule:
-    - cron: "27 1 * * *"   # daglig 01:27 UTC (02:27/03:27 i Norge)
+    - cron: "27 1 * * *"
   workflow_dispatch:
 
 permissions:
@@ -49,15 +49,95 @@ jobs:
           [ -f docs/data/uustatus/latest.json ] || echo '{ "urls": [] }' > docs/data/uustatus/latest.json
           [ -f docs/data/uustatus/logs/changes.jsonl ] || : > docs/data/uustatus/logs/changes.jsonl
 
+      # --- DEBUG 1: viser hva dagens details.json har for Avstemmingsinformasjon
+      - name: Debug current details for Avstemmingsinformasjon
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          KEY = "avstemmingsinformasjon"
+          data = json.loads(Path("docs/uu-status-details.json").read_text(encoding="utf-8"))
+          rows = data.get("urls") if isinstance(data, dict) else data
+          hit = next((r for r in rows if KEY in (r.get("url","")+r.get("href","")).lower()), None)
+          print("CUR FOUND:", bool(hit))
+          if hit:
+              def codes(obj):
+                  for k in ["nonConformities","violations","wcag","issues","problems"]:
+                      if k in obj:
+                          v = obj[k]
+                          if isinstance(v, str):
+                              return [s.strip() for s in v.split(";") if s.strip()]
+                          if isinstance(v, list):
+                              out=[]
+                              for it in v:
+                                  if isinstance(it, str):
+                                      out.append(it.strip())
+                                  elif isinstance(it, dict):
+                                      for kk in ["code","wcag","criterion","id","wcagId","wcag_id"]:
+                                          if it.get(kk):
+                                              out.append(str(it[kk]).strip()); break
+                              return sorted(set(out))
+                  return []
+              c = codes(hit)
+              t = hit.get("totalNonConformities")
+              ua = hit.get("updatedAt")
+              print("CUR updatedAt:", ua)
+              print("CUR total:", t if t is not None else len(c))
+              print("CUR codes:", c)
+          PY
+
+      # --- DEBUG 2: liten tidslinje for samme URL i latest.json bakover i git-historikken
+      - name: Debug latest.json timeline (HEAD..HEAD~12)
+        run: |
+          python - <<'PY'
+          import subprocess, json
+          KEY = "avstemmingsinformasjon"
+          def codes(obj):
+              for k in ["nonConformities","violations","wcag","issues","problems"]:
+                  if k in obj:
+                      v = obj[k]
+                      if isinstance(v, str):
+                          return [s.strip() for s in v.split(";") if s.strip()]
+                      if isinstance(v, list):
+                          out=[]
+                          for it in v:
+                              if isinstance(it, str):
+                                  out.append(it.strip())
+                              elif isinstance(it, dict):
+                                  for kk in ["code","wcag","criterion","id","wcagId","wcag_id"]:
+                                      if it.get(kk):
+                                          out.append(str(it[kk]).strip()); break
+                          return sorted(set(out))
+              return []
+          try:
+              shas = subprocess.check_output(
+                  ["git","rev-list","-n","12","HEAD","--","docs/data/uustatus/latest.json"], text=True
+              ).strip().splitlines()
+          except Exception:
+              shas = []
+          for sha in shas:
+              try:
+                  out = subprocess.check_output(["git","show",f"{sha}:docs/data/uustatus/latest.json"], text=True)
+                  j = json.loads(out)
+              except Exception:
+                  continue
+              rows = j.get("urls") if isinstance(j, dict) else j
+              hit = next((r for r in rows if KEY in (r.get("url") or "").lower()), None)
+              if hit:
+                  cc = codes(hit)
+                  tot = hit.get("totalNonConformities") or len(cc)
+                  print(sha[:7], "total=", tot, "codes=", cc)
+          PY
+
       - name: Sanity check of archive script
         run: |
           grep -n "AUTO_BACKTRACK" build_uu_archive.py || (echo "ERROR: build_uu_archive.py mangler AUTO_BACKTRACK-støtte" && exit 1)
 
       - name: Build archive (diff & event snapshots)
         env:
-          AUTO_BACKTRACK: "1"          # prøv HEAD, HEAD~1, ... til endringer finnes
-          MAX_BACKTRACK: "20"          # hvor langt tilbake vi leter
-          DEBUG_URL_CONTAINS: "avstemmings"   # valgfri debug for spesifikk URL
+          AUTO_BACKTRACK: "1"
+          MAX_BACKTRACK: "20"
+          DEBUG_URL_CONTAINS: "avstemmingsinformasjon"
         run: |
           python build_uu_archive.py
 
@@ -66,11 +146,8 @@ jobs:
           set -e
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          # Stage endringer (robust – ingen glob-feil)
           git add uu-status.csv uu-status-details.json || true
           git add -A docs
-
           if git diff --staged --quiet; then
             echo "No changes to commit."
           else
