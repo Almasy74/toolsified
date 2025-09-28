@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import csv, json, sys, hashlib, datetime
+import csv, json, sys, hashlib, datetime, subprocess, os
 from pathlib import Path
 from urllib.parse import urlparse
 from collections import defaultdict
@@ -164,10 +164,20 @@ def read_current():
     return [normalize_entry(x) for x in rows]
 
 def read_previous_full():
-    """Les forrige baseline fra latest.json (bruk tomt sett om mangler)."""
-    js = load_json(LATEST_JSON, fallback={"urls": []})
-    urls = js.get("urls") if isinstance(js, dict) else []
-    return urls if isinstance(urls, list) else []
+    """Les forrige baseline fra GIT HEAD (sikrest). Fallback til latest.json på disk."""
+    try:
+        out = subprocess.check_output(
+            ["git", "show", f"HEAD:{LATEST_JSON.as_posix()}"],
+            text=True
+        )
+        js = json.loads(out)
+        urls = js.get("urls") if isinstance(js, dict) else []
+        return urls if isinstance(urls, list) else []
+    except Exception:
+        # Fallback: fil på disk (første kjøring uten HEAD)
+        js = load_json(LATEST_JSON, fallback={"urls": []})
+        urls = js.get("urls") if isinstance(js, dict) else []
+        return urls if isinstance(urls, list) else []
 
 # --------- diff rules ----------
 CHECK_FIELDS = ["title", "status", "updatedAt", "totalNonConformities"]
@@ -215,6 +225,21 @@ def main():
     prev = read_previous_full()
     prev_by = index_by_url(prev)
     curr_by = index_by_url(curr)
+
+    # Valgfri debug: skriv ut koder/total for en bestemt URL (substring-match)
+    dbg = os.getenv("DEBUG_URL_CONTAINS", "").strip()
+    if dbg:
+        for url, c in curr_by.items():
+            if dbg in url:
+                p = prev_by.get(url)
+                prev_codes = sorted((p or {}).get("nonConformities") or [])
+                curr_codes = sorted(c.get("nonConformities") or [])
+                print("DEBUG URL:", url)
+                print("  prev codes:", prev_codes)
+                print("  curr codes:", curr_codes)
+                print("  prev total:", (p or {}).get("totalNonConformities"))
+                print("  curr total:", c.get("totalNonConformities"))
+                break
 
     # 2) Kalkulér endringer URL for URL
     changes = []
