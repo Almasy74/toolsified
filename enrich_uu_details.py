@@ -129,4 +129,38 @@ def scrape_one(url: str, timeout=20):
             upd = m_iso.group(0)
 
     title = soup.title.string.strip() if soup.title else None
-    return codes or None, u
+    return codes or None, upd, title
+
+def main():
+    if not DETAILS_FP.exists():
+        print("Fant ikke docs/uu-status-details.json", file=sys.stderr)
+        sys.exit(1)
+
+    obj = json.loads(DETAILS_FP.read_text(encoding="utf-8"))
+    rows = obj.get("urls") if isinstance(obj, dict) else obj
+
+    updated = 0
+    for i, r in enumerate(rows):
+        url = (r.get("url") or r.get("href") or "").strip()
+        if not url:
+            continue
+        codes, upd, title = scrape_one(url)
+        if codes is not None:
+            r["nonConformities"] = codes
+            r["totalNonConformities"] = len(codes)
+            updated += 1
+        if upd and not r.get("updatedAt"):
+            r["updatedAt"] = upd
+        if title and not r.get("title"):
+            r["title"] = title
+        if not r.get("domain"):
+            r["domain"] = to_domain(url)
+        # høflig throttle for å være snill med tjeneren
+        time.sleep(0.2)
+
+    out = {"urls": rows} if isinstance(obj, dict) else rows
+    DETAILS_FP.write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"Beriket {updated} av {len(rows)} entries med WCAG-koder.")
+
+if __name__ == "__main__":
+    main()
