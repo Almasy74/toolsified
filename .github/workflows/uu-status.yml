@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           persist-credentials: true
-          fetch-depth: 0          # <-- viktig for pull --rebase
+          fetch-depth: 0          # <-- viktig for å kunne hente forrige latest.json fra git
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -51,7 +51,7 @@ jobs:
 
       - name: Build archive (diff & event snapshots)
         run: |
-          python build_uu_archive.py
+          python build_uu_archive.py   # <- denne må du oppdatere med ny kode jeg sendte
 
       - name: Commit updated CSV, details and page (if changed)
         run: |
