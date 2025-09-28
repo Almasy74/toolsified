@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           persist-credentials: true
-          fetch-depth: 0          # <-- viktig for å kunne hente forrige latest.json fra git
+          fetch-depth: 0
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -49,18 +49,17 @@ jobs:
           [ -f docs/data/uustatus/latest.json ] || echo '{ "urls": [] }' > docs/data/uustatus/latest.json
           [ -f docs/data/uustatus/logs/changes.jsonl ] || : > docs/data/uustatus/logs/changes.jsonl
 
-       - name: Sanity check of archive script
+      - name: Sanity check of archive script
         run: |
-          grep -n "AUTO_BACKTRACK" build_uu_archive.py || (echo "🛑 Du kjører ikke auto-backtrack-versjonen av build_uu_archive.py" && exit 1)
+          grep -n "AUTO_BACKTRACK" build_uu_archive.py || (echo "ERROR: build_uu_archive.py mangler AUTO_BACKTRACK-støtte" && exit 1)
 
-       - name: Build archive (diff & event snapshots)
-          env:
-          AUTO_BACKTRACK: "1"        # prøv HEAD, HEAD~1, HEAD~2, ... til den finner endringer
-          MAX_BACKTRACK: "20"        # prøv inntil 20 committer bakover
-          DEBUG_URL_CONTAINS: "avstemmings"  # valgfri: får logg for akkurat denne URL-en
-          run: |
+      - name: Build archive (diff & event snapshots)
+        env:
+          AUTO_BACKTRACK: "1"          # prøv HEAD, HEAD~1, ... til endringer finnes
+          MAX_BACKTRACK: "20"          # hvor langt tilbake vi leter
+          DEBUG_URL_CONTAINS: "avstemmings"   # valgfri debug for spesifikk URL
+        run: |
           python build_uu_archive.py
-
 
       - name: Commit updated CSV, details and page (if changed)
         run: |
@@ -68,7 +67,7 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # Stage endringer (robust – ingen glob som feiler hvis tom)
+          # Stage endringer (robust – ingen glob-feil)
           git add uu-status.csv uu-status-details.json || true
           git add -A docs
 
@@ -79,4 +78,3 @@ jobs:
             git pull --rebase
             git push
           fi
-
