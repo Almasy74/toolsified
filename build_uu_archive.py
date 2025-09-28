@@ -10,7 +10,7 @@ SOURCE_JSON = DOCS / "uu-status-details.json"   # dagens fulle datasett
 SOURCE_CSV  = DOCS / "uu-status.csv"            # fallback om JSON mangler
 DATA_DIR    = DOCS / "data" / "uustatus"
 LOGS_DIR    = DATA_DIR / "logs"
-LATEST_JSON = DATA_DIR / "latest.json"          # forrige baseline for diff
+LATEST_JSON = DATA_DIR / "latest.json"          # forrige baseline for diff (persistert i repo)
 CHANGES_LOG = LOGS_DIR / "changes.jsonl"
 SNAP_BY_UPDATED = DATA_DIR / "snapshots_by_updated"  # hendelsesbaserte snapshots
 
@@ -144,7 +144,7 @@ def main():
     changes = []
     now = datetime.datetime.utcnow()
     now_iso = now.isoformat(timespec="seconds") + "Z"
-    detected_date = now.strftime("%Y-%m-%d")  # nytt felt: når VI oppdaget det
+    detected_date = now.strftime("%Y-%m-%d")  # når VI oppdaget endringen
 
     # Endringer og nye URLer
     for url, c in curr_by.items():
@@ -154,7 +154,7 @@ def main():
             updated_date = (c.get("updatedAt") or "")[:10] or today_str()
             changes.append({
                 "ts": now_iso,
-                "detectedDate": detected_date,   # <--- nytt
+                "detectedDate": detected_date,
                 "url": url,
                 "domain": c.get("domain") or to_domain(url),
                 "before_hash": None,
@@ -173,7 +173,7 @@ def main():
                 updated_date = (c.get("updatedAt") or "")[:10] or today_str()
                 changes.append({
                     "ts": now_iso,
-                    "detectedDate": detected_date,  # <--- nytt
+                    "detectedDate": detected_date,
                     "url": url,
                     "domain": c.get("domain") or to_domain(url),
                     "before_hash": sha1(dict(p)),
@@ -193,7 +193,7 @@ def main():
         updated_date = (p.get("updatedAt") or "")[:10] or today_str()
         changes.append({
             "ts": now_iso,
-            "detectedDate": detected_date,      # <--- nytt
+            "detectedDate": detected_date,
             "url": url,
             "domain": p.get("domain") or to_domain(url),
             "before_hash": sha1(dict(p)),
