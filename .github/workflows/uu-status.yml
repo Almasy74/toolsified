@@ -51,26 +51,26 @@ jobs:
 
       - name: Build archive (diff & event snapshots)
         env:
-          BASELINE_REF: "HEAD~1"
-          DEBUG_URL_CONTAINS: "veldedig-eller-allmennyttig"
+          BASELINE_REF: "HEAD~1"                       # sammenlign mot forrige commit (juster ved behov)
+          DEBUG_URL_CONTAINS: "veldedig-eller-allmennyttig"   # unik del av URL-en du vil debugge
         run: |
           python build_uu_archive.py
 
       - name: Commit updated CSV, details and page (if changed)
         run: |
+          set -e
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # Stage endringer
-          git add uu-status.csv uu-status-details.json
-          git add docs/uu-status.csv docs/uu-status-details.json docs/uu-status.html docs/uu-arkiv.html
-          git add docs/data/uustatus/latest.json docs/data/uustatus/logs/changes.jsonl
-          git add docs/data/uustatus/snapshots_by_updated/*.json || true   # kan være ingen
+          # Stage endringer (robust – ingen glob som feiler hvis tom)
+          git add uu-status.csv uu-status-details.json || true
+          git add -A docs
 
           if git diff --staged --quiet; then
             echo "No changes to commit."
-          else:
+          else
             git commit -m "Update UU-status + archive (csv, details, page, snapshots, changes)"
-            # Rebase på siste main for å unngå 'fetch first'
             git pull --rebase
             git push
+          fi
+
