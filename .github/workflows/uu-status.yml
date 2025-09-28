@@ -1,4 +1,4 @@
-0name: Build UU-status (CSV + Details + Page)
+name: Build UU-status (CSV + Details + Page)
 
 on:
   schedule:
