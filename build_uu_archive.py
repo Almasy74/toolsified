@@ -6,7 +6,7 @@ from collections import defaultdict
 
 # --- konfig ---
 DOCS = Path("docs")
-SOURCE_JSON = DOCS / "uu-status-details.json"   # dagens fulle datasett (fra scrape)
+SOURCE_JSON = DOCS / "uu-status-details.json"   # dagens fulle datasett (fra scrape/enrich)
 SOURCE_CSV  = DOCS / "uu-status.csv"            # fallback hvis JSON mangler
 DATA_DIR    = DOCS / "data" / "uustatus"
 LOGS_DIR    = DATA_DIR / "logs"
@@ -55,7 +55,6 @@ def canon_url(u: str) -> str:
         return (u or "").strip()
 
 def _extract_total(raw):
-    """Finn totalsum fra ulike mulige feltnavn."""
     for k in [
         "totalNonConformities","total_non_conformities",
         "violationsCount","violations_count",
@@ -70,13 +69,10 @@ def _extract_total(raw):
     return None
 
 def _extract_codes(raw):
-    """Plukk WCAG-koder uansett struktur."""
-    # vanlige felt
     for field in ["nonConformities","violations","wcag","wcagCodes","wcag_violations","wcag_nonconformities","issues","problems"]:
         if field in raw:
             data = raw[field]; break
     else:
-        # finn et felt som ser 'wcag-ish' ut
         data = None
         for k in raw.keys():
             lk = k.lower()
@@ -112,7 +108,6 @@ def _extract_codes(raw):
     return []
 
 def normalize_entry(raw):
-    """Konverter en rad fra JSON/CSV til felles format."""
     url = (raw.get("url") or raw.get("href") or "").strip()
     domain = (raw.get("domain") or to_domain(url)).strip()
     title = (raw.get("title") or raw.get("name") or "").strip()
@@ -136,7 +131,7 @@ def sha1(obj):
     return hashlib.sha1(json.dumps(obj, sort_keys=True, ensure_ascii=False).encode("utf-8")).hexdigest()
 
 def make_key(it: dict) -> str | None:
-    """Primær nøkkel = URL (kanonisk). Fallback = title+domain (fordi uustatus-URLer ofte er bare tall)."""
+    """Primær nøkkel = URL (kanonisk). Fallback = title+domain."""
     if not isinstance(it, dict): return None
     url = (it.get("url") or it.get("href") or "").strip()
     if url:
@@ -162,14 +157,18 @@ def read_current():
     return [normalize_entry(x) for x in rows]
 
 def read_prev_from_ref(ref: str):
-    """Les baseline latest.json fra gitt git-ref."""
+    """Les baseline latest.json fra gitt git-ref.
+       VIKTIG: Ved feil/mangel, returner TOM baseline ([]) i stedet for None,
+       slik at vi behandler første kjøring som 'alt er nytt'.
+    """
     try:
         blob = subprocess.check_output(["git", "show", f"{ref}:{LATEST_JSON.as_posix()}"], text=True)
         js = json.loads(blob)
         urls = js.get("urls") if isinstance(js, dict) else []
         return urls if isinstance(urls, list) else []
     except Exception:
-        return None
+        # Baseline finnes ikke i denne ref'en -> behandle som tom baseline
+        return []
 
 # --------- diff ----------
 CHECK_FIELDS = ["title", "status", "updatedAt", "totalNonConformities"]
@@ -274,7 +273,6 @@ def main():
         print("Fant ikke gyldig dagsdata i docs/uu-status-details.json eller docs/uu-status.csv", file=sys.stderr)
         sys.exit(1)
 
-    # Bestem baseline (normal: HEAD; kan overstyres)
     forced_ref = os.getenv("BASELINE_REF", "").strip()
     auto_bt = os.getenv("AUTO_BACKTRACK", "").strip().lower() in ("1", "true", "yes", "on")
     max_bt = int(os.getenv("MAX_BACKTRACK", "10"))
@@ -290,9 +288,7 @@ def main():
     used_ref = None
 
     for ref in refs:
-        prev_rows = read_prev_from_ref(ref)
-        if prev_rows is None:
-            continue
+        prev_rows = read_prev_from_ref(ref)  # NB: alltid liste (kan være tom)
         changes = diff_once(prev_rows, curr)
         if changes:
             used_ref = ref
@@ -305,27 +301,24 @@ def main():
     else:
         print("Ingen endringer oppdaget (refs testet: " + ", ".join(refs) + ").")
 
-    # 1) Logg endringer (append JSONL)
+    # 1) Logg endringer
     if final_changes:
         with CHANGES_LOG.open("a", encoding="utf-8") as f:
             for row in final_changes:
                 f.write(json.dumps(row, ensure_ascii=False) + "\n")
 
-        # 2) Skriv snapshots gruppert på updatedDate (fra dagens data)
+        # 2) Skriv snapshots per updatedDate
         changed_by_date = defaultdict(list)
-        # lag oppslag over dagens rader på samme nøkkel som diff bruker
+        # bygg index for dagens datasett
         curr_index = index_by_key(curr)
         for ch in final_changes:
-            # hent igjen entry fra dagens datasett via URL/title+domain
             candidate = None
-            # prøv via URL-nøkkel
             url = (ch.get("url") or "").strip()
             if url:
-                k = "url::" + canon_url(url)
-                candidate = curr_index.get(k)
+                kk = "url::" + canon_url(url)
+                candidate = curr_index.get(kk)
             if not candidate:
-                # fall tilbake til å matche på domain+title
-                # (vi legger ikke om ch for dette; snapshot er best-effort)
+                # fallback: finn via title+domain
                 for it in curr:
                     if (it.get("url") or "") == url:
                         candidate = it; break
