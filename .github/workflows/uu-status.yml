@@ -51,8 +51,8 @@ jobs:
 
       - name: Build archive (diff & event snapshots)
         env:
-          BASELINE_REF: "HEAD~1"                       # sammenlign mot forrige commit (juster ved behov)
-          DEBUG_URL_CONTAINS: "veldedig-eller-allmennyttig"   # unik del av URL-en du vil debugge
+          BASELINE_REF: "HEAD~2"                       # sammenlign mot forrige commit (juster ved behov)
+          DEBUG_URL_CONTAINS: "avstemmingsinformasjon"   # unik del av URL-en du vil debugge
         run: |
           python build_uu_archive.py
 
