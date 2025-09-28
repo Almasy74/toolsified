@@ -111,6 +111,17 @@
     .kpi-num{font-size:22px;font-weight:700;margin-top:4px}
     .chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
     .chart-card{background:var(--detail-bg); border:1px solid var(--border); border-radius:12px; padding:10px}
+    /* HTML-legend for doughnut */
+.legend{
+  display:flex;flex-wrap:wrap;gap:16px;margin-top:10px;font-weight:600;color:var(--text);
+}
+.legend__item{display:flex;align-items:center;gap:8px}
+.legend__swatch{width:18px;height:10px;border-radius:2px;border:1px solid var(--border)}
+.legend__swatch--ok{background:var(--ok)}
+.legend__swatch--warn{background:var(--warn)}
+.legend__swatch--pink{background:#E66EB2}  /* egen farge for 6–10 */
+.legend__swatch--bad{background:var(--bad)}
+
 
     @media (max-width: 1100px) {
       .toolbar { grid-template-columns: 1fr 1fr; }
@@ -145,9 +156,11 @@
           <canvas id="chTopCodes" aria-label="Topp WCAG-brudd" role="img"></canvas>
         </div>
         <div class="chart-card">
-          <div class="muted" style="margin-bottom:6px">Fordeling av brudd per løsning</div>
-          <canvas id="chBuckets" aria-label="Fordeling av brudd per løsning" role="img"></canvas>
-        </div>
+  <div class="muted" style="margin-bottom:6px">Fordeling av brudd per løsning</div>
+  <canvas id="chBuckets" aria-label="Fordeling av brudd per løsning" role="img"></canvas>
+  <div id="legendBuckets" class="legend" aria-label="Forklaring for kakediagram"></div>
+</div>
+
       </div>
     </div>
 
@@ -590,50 +603,36 @@
           const colPink = '#E66EB2'; // egen farge for 6–10
           const borderCol = cs.getPropertyValue('--border').trim() || '#1f2a36';
 
-          const ch2 = new Chart(ctx2, {
-            type: 'doughnut',
-            data: {
-              labels,
-              datasets: [{
-                data: values,
-                backgroundColor: [colOk, colWarn, colPink, colBad],
-                borderColor: borderCol,
-                borderWidth: 1
-              }]
-            },
-            options: {
-              cutout: '55%',
-              plugins: {
-                legend: {
-                  position: 'bottom',
-                  onClick: () => {},
-                  labels: {
-                    color: colText,                 // ← eksplisitt lys legendetekst
-                    font: { size: 13, weight: '600' },
-                    generateLabels(chart) {
-                      const ds = chart.data.datasets[0];
-                      return chart.data.labels.map((text, i) => {
-                        const color = Array.isArray(ds.backgroundColor) ? ds.backgroundColor[i] : ds.backgroundColor;
-                        return {
-                          text: `${text} (${ds.data[i]})`,
-                          fillStyle: color,
-                          strokeStyle: color,
-                          lineWidth: 0,
-                          hidden: false,
-                          index: i
-                        };
-                      });
-                    }
-                  }
-                },
-                tooltip: {
-                  titleColor: colText,
-                  bodyColor: colText,
-                  callbacks: { label(ctx) { return `${ctx.label}: ${ctx.parsed}`; } }
-                }
-              }
-            }
-          });
+const ch2 = new Chart(ctx2, {
+  type: 'doughnut',
+  data: {
+    labels,
+    datasets: [{
+      data: values,
+      backgroundColor: [colOk, colWarn, colPink, colBad],
+      borderColor: borderCol,
+      borderWidth: 1
+    }]
+  },
+  options: {
+    cutout: '55%',
+    plugins: {
+      legend: { display: false }, // viktig: vi bruker HTML-legend
+      tooltip: {
+        titleColor: colText,
+        bodyColor: colText,
+        callbacks: { label(ctx) { return `${ctx.label}: ${ctx.parsed}`; } }
+      }
+    }
+  }
+});
+          const legend = document.getElementById('legendBuckets');
+legend.innerHTML = `
+  <span class="legend__item"><span class="legend__swatch legend__swatch--ok"></span>0 brudd (${values[0]})</span>
+  <span class="legend__item"><span class="legend__swatch legend__swatch--warn"></span>1–5 brudd (${values[1]})</span>
+  <span class="legend__item"><span class="legend__swatch legend__swatch--pink"></span>6–10 brudd (${values[2]})</span>
+  <span class="legend__item"><span class="legend__swatch legend__swatch--bad"></span>11+ brudd (${values[3]})</span>
+`;
 
           // Klikk = sett brudd-filter
           ctx2.onclick = (evt) => {
