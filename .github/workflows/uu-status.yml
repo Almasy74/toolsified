@@ -53,12 +53,14 @@ jobs:
         run: |
           grep -n "AUTO_BACKTRACK" build_uu_archive.py || (echo "🛑 Du kjører ikke auto-backtrack-versjonen av build_uu_archive.py" && exit 1)
 
-      - name: Build archive (diff & event snapshots)
-        env:
-          BASELINE_REF: "HEAD~2"                       # sammenlign mot forrige commit (juster ved behov)
-          DEBUG_URL_CONTAINS: "avstemmingsinformasjon"   # unik del av URL-en du vil debugge
-        run: |
+       - name: Build archive (diff & event snapshots)
+          env:
+          AUTO_BACKTRACK: "1"        # prøv HEAD, HEAD~1, HEAD~2, ... til den finner endringer
+          MAX_BACKTRACK: "20"        # prøv inntil 20 committer bakover
+          DEBUG_URL_CONTAINS: "avstemmings"  # valgfri: får logg for akkurat denne URL-en
+          run: |
           python build_uu_archive.py
+
 
       - name: Commit updated CSV, details and page (if changed)
         run: |
