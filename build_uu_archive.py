@@ -40,6 +40,92 @@ def to_domain(url):
     except Exception:
         return ""
 
+def _extract_possible_total(raw):
+    """
+    Finn totalsum fra ulike mulige felt-navn.
+    """
+    candidates = [
+        "totalNonConformities", "total_non_conformities",
+        "violationsCount", "violations_count",
+        "nonConformitiesCount", "non_conformities_count",
+        "wcagCount", "wcag_count",
+        "wcagViolationsCount", "wcag_violations_count",
+        "ncTotal", "count", "total"
+    ]
+    for k in candidates:
+        v = raw.get(k)
+        if isinstance(v, (int, float)):
+            return int(v)
+        # tall som string
+        if isinstance(v, str) and v.strip().isdigit():
+            return int(v.strip())
+    return None
+
+def _extract_codes(raw):
+    """
+    Ekstraher WCAG-koder fra ulike mulige strukturer/feltnavn.
+    Støtter:
+      - liste av strenger
+      - liste av objekter (bruker 'code' / 'wcag' / 'criterion' / 'id')
+      - dict (tolker nøklene som koder)
+    """
+    # vanlige kandidater til felt som inneholder kodene
+    code_field_candidates = [
+        "nonConformities", "violations", "wcag", "wcagCodes",
+        "wcag_violations", "wcag_nonconformities", "issues", "problems"
+    ]
+    data = None
+    for k in code_field_candidates:
+        if k in raw:
+            data = raw.get(k)
+            break
+
+    # på CSV kan det ligge i et "wcag"-aktig felt som semikolon-separert string
+    if data is None:
+        for k in raw.keys():
+            if "wcag" in k.lower() or "violation" in k.lower() or "nonconform" in k.lower():
+                data = raw.get(k)
+                break
+
+    codes = set()
+
+    if data is None:
+        return []
+
+    # string: "1.1.1; 1.3.1"
+    if isinstance(data, str):
+        for s in data.split(";"):
+            s = s.strip()
+            if s:
+                codes.add(s)
+        return sorted(codes)
+
+    # liste
+    if isinstance(data, list):
+        for item in data:
+            if isinstance(item, str):
+                s = item.strip()
+                if s:
+                    codes.add(s)
+            elif isinstance(item, dict):
+                # prøv vanlige nøkkelnavn for kode
+                for key in ["code", "wcag", "criterion", "id", "wcagId", "wcag_id"]:
+                    v = item.get(key)
+                    if isinstance(v, str) and v.strip():
+                        codes.add(v.strip())
+                        break
+        return sorted(codes)
+
+    # dict: tolk nøkler som koder
+    if isinstance(data, dict):
+        for k in data.keys():
+            ks = str(k).strip()
+            if ks:
+                codes.add(ks)
+        return sorted(codes)
+
+    return []
+
 def normalize_entry(raw):
     """Konverter kilde (JSON/CSV) til felles format. Lister sorteres, whitespace trimmes."""
     url = (raw.get("url") or raw.get("href") or "").strip()
@@ -47,30 +133,20 @@ def normalize_entry(raw):
     title = (raw.get("title") or raw.get("name") or "").strip()
     updatedAt = (raw.get("updatedAt") or raw.get("lastChecked") or "").strip()
 
-    # nonConformities: prøv flere mulige nøkler
-    nc = raw.get("nonConformities") or raw.get("violations") or raw.get("wcag") or []
-    if isinstance(nc, str):
-        nc = [s.strip() for s in nc.split(";") if s.strip()]
-    elif isinstance(nc, list):
-        nc = [str(x).strip() for x in nc if str(x).strip()]
-    else:
-        nc = []
-    nc_sorted = sorted(nc)
+    # Ekstraher koder og total – robust mot ulike strukturer
+    nc_list = _extract_codes(raw)
+    total = _extract_possible_total(raw)
 
-    # totalNonConformities (om finnes), ellers len(nc)
-    total = raw.get("totalNonConformities")
-    try:
-        total = int(total) if total is not None else len(nc_sorted)
-    except Exception:
-        total = len(nc_sorted)
+    if total is None:
+        total = len(nc_list)  # fallback
 
     return {
         "url": url,
         "domain": domain,
         "title": title,
         "updatedAt": updatedAt,
-        "nonConformities": nc_sorted,
-        "totalNonConformities": total,
+        "nonConformities": sorted(nc_list),
+        "totalNonConformities": int(total),
     }
 
 def sha1(obj):
