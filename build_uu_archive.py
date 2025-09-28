@@ -6,13 +6,13 @@ from collections import defaultdict
 
 # --- konfig ---
 DOCS = Path("docs")
-SOURCE_JSON = DOCS / "uu-status-details.json"   # dagens fulle datasett
-SOURCE_CSV  = DOCS / "uu-status.csv"            # fallback om JSON mangler
+SOURCE_JSON = DOCS / "uu-status-details.json"   # dagens fulle datasett (fra scrape)
+SOURCE_CSV  = DOCS / "uu-status.csv"            # fallback hvis JSON mangler
 DATA_DIR    = DOCS / "data" / "uustatus"
 LOGS_DIR    = DATA_DIR / "logs"
-LATEST_JSON = DATA_DIR / "latest.json"          # forrige baseline for diff (persistert i repo)
+LATEST_JSON = DATA_DIR / "latest.json"          # forrige baseline for diff
 CHANGES_LOG = LOGS_DIR / "changes.jsonl"
-SNAP_BY_UPDATED = DATA_DIR / "snapshots_by_updated"  # hendelsesbaserte snapshots
+SNAP_BY_UPDATED = DATA_DIR / "snapshots_by_updated"
 
 # ---------- util ----------
 def today_str():
@@ -41,7 +41,7 @@ def to_domain(url):
         return ""
 
 def canon_url(u: str) -> str:
-    """Normaliser URL så matching blir stabil mellom kjøringer."""
+    """Normaliser URL for stabil matching."""
     try:
         p = urlparse((u or "").strip())
         netloc = (p.hostname or "").lower()
@@ -54,50 +54,37 @@ def canon_url(u: str) -> str:
     except Exception:
         return (u or "").strip()
 
-def _extract_possible_total(raw):
-    candidates = [
-        "totalNonConformities", "total_non_conformities",
-        "violationsCount", "violations_count",
-        "nonConformitiesCount", "non_conformities_count",
-        "wcagCount", "wcag_count",
-        "wcagViolationsCount", "wcag_violations_count",
-        "ncTotal", "count", "total"
-    ]
-    for k in candidates:
+def _extract_total(raw):
+    """Finn totalsum fra ulike mulige feltnavn."""
+    for k in [
+        "totalNonConformities","total_non_conformities",
+        "violationsCount","violations_count",
+        "nonConformitiesCount","non_conformities_count",
+        "wcagCount","wcag_count",
+        "wcagViolationsCount","wcag_violations_count",
+        "ncTotal","count","total"
+    ]:
         v = raw.get(k)
-        if isinstance(v, (int, float)):
-            return int(v)
-        if isinstance(v, str) and v.strip().isdigit():
-            return int(v.strip())
+        if isinstance(v, (int, float)): return int(v)
+        if isinstance(v, str) and v.strip().isdigit(): return int(v.strip())
     return None
 
 def _extract_codes(raw):
-    """
-    Hent WCAG-koder uansett struktur:
-      - liste av strenger
-      - liste av objekter (felter: code/wcag/criterion/id/wcagId/wcag_id)
-      - dict (nøkler anses som koder)
-      - semikolon-separert streng
-    """
-    code_field_candidates = [
-        "nonConformities", "violations", "wcag", "wcagCodes",
-        "wcag_violations", "wcag_nonconformities", "issues", "problems"
-    ]
-    data = None
-    for k in code_field_candidates:
-        if k in raw:
-            data = raw.get(k)
-            break
-    if data is None:
-        # prøv å finne et felt med wcag/violation/nonconform/issue/problem i navnet
+    """Plukk WCAG-koder uansett struktur."""
+    # vanlige felt
+    for field in ["nonConformities","violations","wcag","wcagCodes","wcag_violations","wcag_nonconformities","issues","problems"]:
+        if field in raw:
+            data = raw[field]; break
+    else:
+        # finn et felt som ser 'wcag-ish' ut
+        data = None
         for k in raw.keys():
             lk = k.lower()
-            if any(s in lk for s in ["wcag", "violation", "nonconform", "issue", "problem"]):
-                data = raw.get(k); break
+            if any(s in lk for s in ["wcag","violation","nonconform","issue","problem"]):
+                data = raw[k]; break
 
     codes = set()
-    if data is None:
-        return []
+    if data is None: return []
 
     if isinstance(data, str):
         for s in data.split(";"):
@@ -106,13 +93,12 @@ def _extract_codes(raw):
         return sorted(codes)
 
     if isinstance(data, list):
-        for item in data:
-            if isinstance(item, str):
-                s = item.strip()
-                if s: codes.add(s)
-            elif isinstance(item, dict):
-                for key in ["code", "wcag", "criterion", "id", "wcagId", "wcag_id"]:
-                    v = item.get(key)
+        for it in data:
+            if isinstance(it, str) and it.strip():
+                codes.add(it.strip())
+            elif isinstance(it, dict):
+                for kk in ["code","wcag","criterion","id","wcagId","wcag_id"]:
+                    v = it.get(kk)
                     if isinstance(v, str) and v.strip():
                         codes.add(v.strip()); break
         return sorted(codes)
@@ -126,22 +112,23 @@ def _extract_codes(raw):
     return []
 
 def normalize_entry(raw):
+    """Konverter en rad fra JSON/CSV til felles format."""
     url = (raw.get("url") or raw.get("href") or "").strip()
     domain = (raw.get("domain") or to_domain(url)).strip()
     title = (raw.get("title") or raw.get("name") or "").strip()
     updatedAt = (raw.get("updatedAt") or raw.get("lastChecked") or "").strip()
 
-    nc_list = _extract_codes(raw)
-    total = _extract_possible_total(raw)
+    codes = _extract_codes(raw)
+    total = _extract_total(raw)
     if total is None:
-        total = len(nc_list)
+        total = len(codes)
 
     return {
         "url": url,
         "domain": domain,
         "title": title,
         "updatedAt": updatedAt,
-        "nonConformities": sorted(nc_list),
+        "nonConformities": sorted(codes),
         "totalNonConformities": int(total),
     }
 
@@ -149,12 +136,11 @@ def sha1(obj):
     return hashlib.sha1(json.dumps(obj, sort_keys=True, ensure_ascii=False).encode("utf-8")).hexdigest()
 
 def make_key(it: dict) -> str | None:
-    """Primær nøkkel = URL (kanonisk). Fallback = title+domain om URL mangler."""
-    if not isinstance(it, dict):
-        return None
+    """Primær nøkkel = URL (kanonisk). Fallback = title+domain (fordi uustatus-URLer ofte er bare tall)."""
+    if not isinstance(it, dict): return None
     url = (it.get("url") or it.get("href") or "").strip()
     if url:
-        return canon_url(url)
+        return "url::" + canon_url(url)
     title = (it.get("title") or it.get("name") or "").strip().lower()
     domain = (it.get("domain") or "").strip().lower()
     if title:
@@ -162,12 +148,11 @@ def make_key(it: dict) -> str | None:
     return None
 
 def index_by_key(items):
-    m = {}
+    out = {}
     for it in items:
         k = make_key(it)
-        if k:
-            m[k] = it
-    return m
+        if k: out[k] = it
+    return out
 
 def read_current():
     data = load_json(SOURCE_JSON)
@@ -177,15 +162,16 @@ def read_current():
     return [normalize_entry(x) for x in rows]
 
 def read_prev_from_ref(ref: str):
+    """Les baseline latest.json fra gitt git-ref."""
     try:
-        out = subprocess.check_output(["git", "show", f"{ref}:{LATEST_JSON.as_posix()}"], text=True)
-        js = json.loads(out)
+        blob = subprocess.check_output(["git", "show", f"{ref}:{LATEST_JSON.as_posix()}"], text=True)
+        js = json.loads(blob)
         urls = js.get("urls") if isinstance(js, dict) else []
         return urls if isinstance(urls, list) else []
     except Exception:
-        return None  # ref finnes ikke, eller fila manglet i ref
+        return None
 
-# --------- diff rules ----------
+# --------- diff ----------
 CHECK_FIELDS = ["title", "status", "updatedAt", "totalNonConformities"]
 
 def compute_change(prev_entry, curr_entry):
@@ -198,6 +184,7 @@ def compute_change(prev_entry, curr_entry):
     for f in CHECK_FIELDS:
         if prev_entry.get(f) != curr_entry.get(f):
             changed[f] = {"before": prev_entry.get(f), "after": curr_entry.get(f)}
+
     if added or removed:
         if "totalNonConformities" not in changed and len(p_nc) != len(c_nc):
             changed["totalNonConformities"] = {"before": len(p_nc), "after": len(c_nc)}
@@ -214,6 +201,7 @@ def diff_once(prev_rows, curr_rows):
     now_iso = now.isoformat(timespec="seconds") + "Z"
     detected_date = now.strftime("%Y-%m-%d")
 
+    # Nye/endrede
     for k, c in curr_by.items():
         p = prev_by.get(k)
         if p is None:
@@ -250,9 +238,9 @@ def diff_once(prev_rows, curr_rows):
                     "updatedDate": updated_date
                 })
 
-    # Fjernet fra dagens, fantes i prev
+    # Fjernet
     for k, p in prev_by.items():
-        if k in curr_by: 
+        if k in curr_by:
             continue
         p_nc = set(p.get("nonConformities") or [])
         removed = sorted(list(p_nc))
@@ -273,7 +261,7 @@ def diff_once(prev_rows, curr_rows):
             "updatedDate": updated_date
         })
 
-    return changes, prev_by, curr_by
+    return changes
 
 # ---------- main ----------
 def main():
@@ -286,97 +274,78 @@ def main():
         print("Fant ikke gyldig dagsdata i docs/uu-status-details.json eller docs/uu-status.csv", file=sys.stderr)
         sys.exit(1)
 
-    # Baseline-strategi
+    # Bestem baseline (normal: HEAD; kan overstyres)
     forced_ref = os.getenv("BASELINE_REF", "").strip()
     auto_bt = os.getenv("AUTO_BACKTRACK", "").strip().lower() in ("1", "true", "yes", "on")
     max_bt = int(os.getenv("MAX_BACKTRACK", "10"))
 
     if forced_ref:
-        candidate_refs = [forced_ref]
+        refs = [forced_ref]
     elif auto_bt:
-        candidate_refs = ["HEAD"] + [f"HEAD~{i}" for i in range(1, max_bt+1)]
+        refs = ["HEAD"] + [f"HEAD~{i}" for i in range(1, max_bt+1)]
     else:
-        candidate_refs = ["HEAD"]
+        refs = ["HEAD"]
 
-    used_ref = None
     final_changes = []
-    last_curr_by = {}
+    used_ref = None
 
-    for ref in candidate_refs:
+    for ref in refs:
         prev_rows = read_prev_from_ref(ref)
         if prev_rows is None:
             continue
-        changes, prev_by, curr_by = diff_once(prev_rows, curr)
-
-        dbg = os.getenv("DEBUG_URL_CONTAINS", "").strip().lower()
-        if dbg:
-            # match i tittel ELLER url
-            for key, c in curr_by.items():
-                url = (c.get("url") or "").lower()
-                title = (c.get("title") or "").lower()
-                if dbg in url or dbg in title:
-                    p = prev_by.get(key)
-                    prev_codes = sorted((p or {}).get("nonConformities") or [])
-                    curr_codes = sorted(c.get("nonConformities") or [])
-                    print(f"DEBUG ENTRY (ref={ref}): title='{c.get('title')}', url='{c.get('url')}'")
-                    print("  prev codes:", prev_codes)
-                    print("  curr codes:", curr_codes)
-                    print("  prev total:", (p or {}).get("totalNonConformities"))
-                    print("  curr total:", c.get("totalNonConformities"))
-                    break
-
+        changes = diff_once(prev_rows, curr)
         if changes:
             used_ref = ref
             final_changes = changes
-            last_curr_by = curr_by
             break
 
-    if used_ref is None:
-        print("Ingen endringer oppdaget (prøvde refs: " + ", ".join(candidate_refs) + ").")
+    print(f"Dagens datasett: {len(curr)} elementer.")
+    if used_ref:
+        print(f"Diff-baseline: {used_ref}  |  Endringer funnet: {len(final_changes)}")
     else:
-        print(f"Diff-baseline: {used_ref}")
+        print("Ingen endringer oppdaget (refs testet: " + ", ".join(refs) + ").")
+
+    # 1) Logg endringer (append JSONL)
+    if final_changes:
         with CHANGES_LOG.open("a", encoding="utf-8") as f:
             for row in final_changes:
                 f.write(json.dumps(row, ensure_ascii=False) + "\n")
-        print(f"Endringer logget: {len(final_changes)}")
 
-        # Skriv snapshots per updatedDate
+        # 2) Skriv snapshots gruppert på updatedDate (fra dagens data)
         changed_by_date = defaultdict(list)
+        # lag oppslag over dagens rader på samme nøkkel som diff bruker
+        curr_index = index_by_key(curr)
         for ch in final_changes:
-            # finn entry'en for denne endringen ut fra nøkkelen vi brukte
-            # (bruk make_key for samsvar)
-            # NB: ch["url"] kan være tom – snapshot bruker hele entry fra curr
-            for k, entry in last_curr_by.items():
-                if (entry.get("url") or "") == (ch.get("url") or "") and \
-                   (entry.get("domain") or "") == (ch.get("domain") or "") and \
-                   (entry.get("title") or "") == (entry.get("title") or ""):
-                    candidate = entry
-                    break
-            else:
-                candidate = None
-
+            # hent igjen entry fra dagens datasett via URL/title+domain
+            candidate = None
+            # prøv via URL-nøkkel
+            url = (ch.get("url") or "").strip()
+            if url:
+                k = "url::" + canon_url(url)
+                candidate = curr_index.get(k)
             if not candidate:
-                # best-effort: legg inn via URL hvis satt
-                candidate = {"url": ch.get("url",""), "domain": ch.get("domain","")}
-            key = ch.get("updatedDate") or today_str()
+                # fall tilbake til å matche på domain+title
+                # (vi legger ikke om ch for dette; snapshot er best-effort)
+                for it in curr:
+                    if (it.get("url") or "") == url:
+                        candidate = it; break
+            if not candidate:
+                continue
+            key = (ch.get("updatedDate") or today_str())
             changed_by_date[key].append(candidate)
 
         for date_key, entries in changed_by_date.items():
             out_fp = SNAP_BY_UPDATED / f"{date_key}.json"
             existing = load_json(out_fp, fallback={"urls": []})
-            existing_urls = existing.get("urls", [])
-            exist_by = index_by_key(existing_urls)
+            exist_by = index_by_key(existing.get("urls", []))
             for e in entries:
                 kk = make_key(e)
-                if kk:
-                    exist_by[kk] = e
-            merged = {"urls": list(exist_by.values())}
-            out_fp.write_text(json.dumps(merged, ensure_ascii=False, indent=2), encoding="utf-8")
-            print(f"Skrev snapshot for updatedDate={date_key}: {out_fp}")
+                if kk: exist_by[kk] = e
+            out_fp.write_text(json.dumps({"urls": list(exist_by.values())}, ensure_ascii=False, indent=2), encoding="utf-8")
+            print(f"Skrev snapshot for {date_key}: {out_fp}")
 
-    # Oppdater latest.json (fullt datasett) — ALLTID (etter diff)
-    snap_obj = {"urls": curr}
-    LATEST_JSON.write_text(json.dumps(snap_obj, ensure_ascii=False, indent=2), encoding="utf-8")
+    # 3) Oppdater baseline (ALLTID etter diff)
+    LATEST_JSON.write_text(json.dumps({"urls": curr}, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"Oppdaterte {LATEST_JSON}")
 
 if __name__ == "__main__":
