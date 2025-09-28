@@ -237,7 +237,7 @@
     const DETAILS_URL = 'uu-status-details.json';
 
     // Direkte-lenker for kjente koder (kan fylles på etter behov)
-    const WCAG_LINKS = { /* ... samme som før ... */ 
+    const WCAG_LINKS = {
       '1.1.1':'https://www.uutilsynet.no/wcag-standarden/111-ikke-tekstlig-innhold-niva/87',
       '1.2.1':'https://www.uutilsynet.no/wcag-standarden/121-bare-lyd-og-bare-video-forhandsinnspilt-niva/88',
       '1.2.2':'https://www.uutilsynet.no/wcag-standarden/122-teksting-forhandsinnspilt-niva/89',
@@ -298,7 +298,6 @@
       const rows = lines.slice(1).map(line => {
         const cols = line.split(delimiter).map(c => c.trim());
         const obj = {};
-        // 🔧 FIX: korrekt lukking av forEach
         headers.forEach((h, i) => { obj[h] = cols[i] ?? ''; });
         return obj;
       });
@@ -525,11 +524,14 @@
           const colWarn   = cs.getPropertyValue('--warn').trim()   || '#f0ad4e';
           const colBad    = cs.getPropertyValue('--bad').trim()    || '#dc3545';
           const colText   = cs.getPropertyValue('--text').trim()   || '#e7eef7';
+          const colGrid   = 'rgba(255,255,255,0.06)';
+          const colMuted  = cs.getPropertyValue('--muted').trim()  || '#9fb0c3';
 
-          // Etter at du har hentet colText i buildDashboard():
-// const colText = cs.getPropertyValue('--text').trim() || '#e7eef7';
-Chart.defaults.color = colText;
-Chart.defaults.plugins.legend.labels.color = colText;
+          // Sett globale default-tekster til lys farge (viktig for mørkt tema)
+          Chart.defaults.color = colText;
+          Chart.defaults.plugins.legend.labels.color = colText;
+          Chart.defaults.plugins.tooltip.titleColor = colText;
+          Chart.defaults.plugins.tooltip.bodyColor = colText;
 
           // Diagram 1 – topp WCAG-koder
           const top = aggregateByCode(details).slice(0,8);
@@ -559,8 +561,8 @@ Chart.defaults.plugins.legend.labels.color = colText;
                 },
                 y: {
                   beginAtZero: true,
-                  ticks: { color: '#9fb0c3' },
-                  grid: { color: 'rgba(255,255,255,0.06)' }
+                  ticks: { color: colMuted },
+                  grid: { color: colGrid }
                 }
               }
             }
@@ -603,11 +605,10 @@ Chart.defaults.plugins.legend.labels.color = colText;
               cutout: '55%',
               plugins: {
                 legend: {
-                  color: colText, 
                   position: 'bottom',
-                  onClick: () => {},        // deaktiver toggling via legend
+                  onClick: () => {},
                   labels: {
-                    color: colText,
+                    color: colText,                 // ← eksplisitt lys legendetekst
                     font: { size: 13, weight: '600' },
                     generateLabels(chart) {
                       const ds = chart.data.datasets[0];
@@ -626,6 +627,8 @@ Chart.defaults.plugins.legend.labels.color = colText;
                   }
                 },
                 tooltip: {
+                  titleColor: colText,
+                  bodyColor: colText,
                   callbacks: { label(ctx) { return `${ctx.label}: ${ctx.parsed}`; } }
                 }
               }
