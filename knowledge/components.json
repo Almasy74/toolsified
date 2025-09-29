@@ -1,1 +1,15 @@
-test
+[
+  {
+    "id": "table",
+    "name": "Table",
+    "aliases": ["tabell", "grid", "liste med kolonner"],
+    "links": {
+      "storybook": "https://skatteetaten.github.io/designsystemet/?path=/docs/komponenter-table--docs",
+      "docs": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/table/"
+    },
+    "uu": [
+      "Tastatur-navigasjon mellom celler må være forutsigbar",
+      "Bruk tabelloverskrift (<th>) og scope"
+    ]
+  }
+]
