@@ -1,1 +1,97 @@
-test
+{
+  "generated": true,
+  "components": [
+    {
+      "id": "table",
+      "name": "Table",
+      "aliases": [
+        "tabell",
+        "grid",
+        "liste med kolonner"
+      ],
+      "links": {
+        "storybook": "https://skatteetaten.github.io/designsystemet/?path=/docs/komponenter-table--docs",
+        "docs": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/table/"
+      },
+      "uu": [
+        "Tastatur-navigasjon mellom celler må være forutsigbar",
+        "Bruk tabelloverskrift (<th>) og scope"
+      ]
+    }
+  ],
+  "patterns": [
+    {
+      "id": "table-add-rows",
+      "intent": [
+        "tabell der brukere kan legge til nye rader",
+        "add row to table",
+        "tabell + legg til"
+      ],
+      "summary": "Bruk Table + Toolbar + Dialog/Inline editor.",
+      "components": [
+        "table",
+        "button",
+        "dialog",
+        "textfield",
+        "select"
+      ],
+      "props_must": [
+        "Primærknapp med tekst «Legg til rad»",
+        "Dialog med aria-labelledby og fokus på første felt"
+      ],
+      "uu_check": [
+        "Esc lukker dialog uten fokus-tap",
+        "Feil meldes med aria-describedby"
+      ],
+      "test_charter": [
+        "Tab-rekkefølge: knapp → dialog → felter → lagre/avbryt → fokus tilbake",
+        "SR annonserer dialogtittel og feilmelding"
+      ],
+      "common_pitfalls": [
+        "Inline-redigering uten tydelig fokus",
+        "Manglende fokusretur etter lukking"
+      ],
+      "links": {
+        "pattern": "https://www.skatteetaten.no/stilogtone/monster/",
+        "language": "https://www.skatteetaten.no/stilogtone/skrive/"
+      },
+      "images": [
+        "../screenshots/compositions/table-add.png"
+      ]
+    }
+  ],
+  "crawl": [
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/",
+      "title": "Designsystemet - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/",
+      "title": "Mønstre og maler - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/skrive/",
+      "title": "Språk i Skatteetaten - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/god-praksis/",
+      "title": "God praksis - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/visuelt/",
+      "title": "Visuell identitet - Skatteetaten"
+    }
+  ],
+  "aliases": {
+    "tabell": [
+      "grid",
+      "liste med kolonner",
+      "table"
+    ],
+    "legg til": [
+      "add",
+      "ny rad",
+      "create"
+    ]
+  }
+}

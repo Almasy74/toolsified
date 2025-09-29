@@ -1,0 +1,27 @@
+[
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/",
+    "title": "Designsystemet - Skatteetaten",
+    "type": "nav"
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/",
+    "title": "Mønstre og maler - Skatteetaten",
+    "type": "nav"
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/skrive/",
+    "title": "Språk i Skatteetaten - Skatteetaten",
+    "type": "nav"
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/god-praksis/",
+    "title": "God praksis - Skatteetaten",
+    "type": "nav"
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/visuelt/",
+    "title": "Visuell identitet - Skatteetaten",
+    "type": "nav"
+  }
+]
