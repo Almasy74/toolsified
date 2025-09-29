@@ -788,9 +788,10 @@
       "updatedAt": "",
       "nonConformities": [
         "1.1.1",
+        "1.2.1",
         "2.4.3"
       ],
-      "totalNonConformities": 2
+      "totalNonConformities": 3
     },
     {
       "url": "https://uustatus.no/nb/erklaringer/publisert/f25c6608-37de-4886-913a-3f4144e522a3",
