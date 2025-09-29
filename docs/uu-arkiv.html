@@ -41,12 +41,6 @@
     th { text-align: left; font-weight: 600; white-space: nowrap; }
     tr:hover td { background: rgba(255,255,255,0.02); }
 
-    .pill { display: inline-block; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--border); }
-    .pill.ok { color: var(--ok); border-color: rgba(40,167,69,.3); }
-    .pill.warn { color: var(--warn); border-color: rgba(240,173,78,.3); }
-    .pill.bad { color: var(--bad); border-color: rgba(220,53,69,.3); }
-
-    details summary { cursor: pointer; }
     .footer { display:flex; justify-content: space-between; align-items:center; margin-top: 10px; color: var(--muted); font-size: 12px; gap: 12px; flex-wrap: wrap; }
 
     .truncate { max-width: 540px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: inline-block; vertical-align: bottom; }
@@ -128,6 +122,17 @@
       }
     }
 
+    // Rens vekk støy som på uustatus-sider
+    function cleanTitle(t) {
+      if (!t) return "";
+      let s = String(t).trim();
+      // Fjern "Tilgjengelighetserklæring for " i starten
+      s = s.replace(/^\s*tilgjengelighetserkl(?:æ|ae)ring\s+for\s+/i, "");
+      // Fjern " | uustatus" eller " – uustatus" på slutten
+      s = s.replace(/\s*(?:[\|\u2013-])\s*uustatus\s*$/i, "");
+      return s.trim();
+    }
+
     const titleByUrl = new Map();
 
     async function loadTitleMap() {
@@ -137,7 +142,9 @@
         const rows = Array.isArray(data) ? data : (data.urls || []);
         for (const r of rows) {
           const url = r.url || r.href;
-          const title = r.title || r.name;
+          // Viktig: foretrekk "name" (samme som på statussiden), deretter title
+          const rawTitle = (r.name || r.title || "");
+          const title = cleanTitle(rawTitle);
           if (url && title) {
             titleByUrl.set(canonUrl(url), title);
           }
@@ -158,6 +165,16 @@
         .map(l => JSON.parse(l));
     }
 
+    function resolveTitle(row) {
+      const key = canonUrl(row.url || "");
+      // Hvis vi i framtiden logger title i changes.jsonl: rens den også
+      const fromLog = row.title ? cleanTitle(row.title) : "";
+      const fromMap = titleByUrl.get(key) || "";
+      const removed = (row.changed && (row.changed.removedEntry || row.changed.removedUrl));
+      const fallback = removed ? "Erklæring (fjernet)" : (row.url || "");
+      return fromLog || fromMap || fallback;
+    }
+
     function passesFilters(row, state, resolvedTitle) {
       const q = state.q;
       const hay = (resolvedTitle || "") + " " + (row.domain || "") + " " + (row.url || "");
@@ -173,15 +190,6 @@
         if (ts < state.from) return false;
       }
       return true;
-    }
-
-    function resolveTitle(row) {
-      // Prioritet: tittel i logg (om vi senere skriver den der) -> oppslag fra details -> fjernet -> URL
-      const key = canonUrl(row.url || "");
-      const fromLog = row.title && String(row.title).trim();
-      const fromMap = titleByUrl.get(key);
-      const removed = (row.changed && (row.changed.removedEntry || row.changed.removedUrl));
-      return fromLog || fromMap || (removed ? "Erklæring (fjernet)" : (row.url || ""));
     }
 
     function render(rows) {
@@ -250,7 +258,6 @@
           det.appendChild(pre);
         }
 
-        // Snapshot-lenke basert på updatedDate og snapshots_by_updated/
         const snapLink = document.createElement("div");
         const yyyyMmDd = (r.updatedDate || (r.ts || "").slice(0,10));
         snapLink.style.marginTop = ".5rem";
@@ -279,8 +286,7 @@
       let state = { q: "", mode: "", from: null };
 
       try {
-        // Last tittel-kart først, så loggen
-        await loadTitleMap();
+        await loadTitleMap();           // <- last navn/titler først
         all = await fetchJSONL(LOG_URL);
       } catch (e) {
         const tbody = document.getElementById("tbody");
