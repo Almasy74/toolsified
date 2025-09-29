@@ -35,7 +35,7 @@ manual_patterns   = read_json(os.path.join(args.knowledge, "patterns.json"),   d
 # --- 2) Normaliser crawl og lag tokens ---
 normed = []
 for d in crawl:
-    if not isinstance(d, dict): 
+    if not isinstance(d, dict):
         continue
     url     = d.get("url")
     title   = d.get("title") or ""
@@ -72,7 +72,7 @@ def uniq_by(items, keyfn):
     out = []
     for it in items:
         k = keyfn(it)
-        if k in seen: 
+        if k in seen:
             continue
         seen.add(k)
         out.append(it)
@@ -88,7 +88,7 @@ def pat_key(p):
 
 # Mapper for å bringe manuelle komponenter litt nærmere crawlets format
 def adapt_manual_component(c):
-    # Forventet felter: id, name, aliases, links.docs/storybook, uu
+    # Forventede felter: id, name, aliases, links.docs/storybook, uu
     url = (c.get("links") or {}).get("docs")
     name = c.get("name") or c.get("id")
     return {
@@ -104,7 +104,7 @@ def adapt_manual_component(c):
     }
 
 def adapt_manual_pattern(p):
-    # Forventet felter: id, links.pattern, summary, etc.
+    # Forventede felter: id, links.pattern, summary, etc.
     url = (p.get("links") or {}).get("pattern")
     name = p.get("id") or p.get("title") or url
     tokens = []
@@ -133,10 +133,14 @@ merged_patterns = uniq_by(
 )
 
 # --- 5) (Valgfritt) Legg inn enkle bildekoblinger hvis du har screenshots ---
-# Eksempel: map "button"-komponenten til et lokalt bilde i docs/find/screenshots/
+# Map Button og Table til lokale screenshots (lagt av Playwright)
 for d in merged_components:
-    if d.get("url") and "/komponenter/button" in d["url"]:
-        d["image"] = "./screenshots/button-default.png"
+    if d.get("url"):
+        u = d["url"]
+        if "/komponenter/button" in u:
+            d["image"] = "./screenshots/button-default.png"
+        if "/komponenter/table" in u:
+            d["image"] = "./screenshots/table-default.png"
 
 # --- 6) Bygg endelig index ---
 index = {
@@ -153,7 +157,7 @@ index = {
 }
 
 write_json(args.out, index)
-print(f"Wrote index to {args.out} "
-      f"({len(merged_components)} components, {len(merged_patterns)} patterns, {len(all_docs)} docs)")
-
-
+print(
+    f"Wrote index to {args.out} "
+    f"({len(merged_components)} components, {len(merged_patterns)} patterns, {len(all_docs)} docs)"
+)
