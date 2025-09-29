@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
-import csv, json, sys, hashlib, datetime, subprocess, os
+import csv
+import json
+import sys
+import hashlib
+import datetime
+import subprocess
+import os
 from pathlib import Path
 from urllib.parse import urlparse, urlunparse
 from collections import defaultdict
@@ -18,7 +24,7 @@ SNAP_BY_UPDATED = DATA_DIR / "snapshots_by_updated"
 def today_str():
     return datetime.datetime.utcnow().strftime("%Y-%m-%d")
 
-def load_json(fp, fallback=None):
+def load_json(fp: Path, fallback=None):
     try:
         if not fp.exists():
             return fallback
@@ -27,14 +33,14 @@ def load_json(fp, fallback=None):
     except Exception:
         return fallback
 
-def load_csv(fp):
+def load_csv(fp: Path):
     if not fp.exists():
         return []
     with fp.open("r", encoding="utf-8") as f:
         r = csv.DictReader(f)
         return list(r)
 
-def to_domain(url):
+def to_domain(url: str):
     try:
         return urlparse(url).hostname or ""
     except Exception:
@@ -54,7 +60,7 @@ def canon_url(u: str) -> str:
     except Exception:
         return (u or "").strip()
 
-def _extract_total(raw):
+def _extract_total(raw: dict):
     for k in [
         "totalNonConformities","total_non_conformities",
         "violationsCount","violations_count",
@@ -64,28 +70,36 @@ def _extract_total(raw):
         "ncTotal","count","total"
     ]:
         v = raw.get(k)
-        if isinstance(v, (int, float)): return int(v)
-        if isinstance(v, str) and v.strip().isdigit(): return int(v.strip())
+        if isinstance(v, (int, float)):
+            return int(v)
+        if isinstance(v, str) and v.strip().isdigit():
+            return int(v.strip())
     return None
 
-def _extract_codes(raw):
+def _extract_codes(raw: dict):
+    # prøv kjente feltnavn først
+    data = None
     for field in ["nonConformities","violations","wcag","wcagCodes","wcag_violations","wcag_nonconformities","issues","problems"]:
         if field in raw:
-            data = raw[field]; break
-    else:
-        data = None
+            data = raw[field]
+            break
+    # ellers: finn felt som "ser wcag-ish ut"
+    if data is None:
         for k in raw.keys():
             lk = k.lower()
             if any(s in lk for s in ["wcag","violation","nonconform","issue","problem"]):
-                data = raw[k]; break
+                data = raw[k]
+                break
 
     codes = set()
-    if data is None: return []
+    if data is None:
+        return []
 
     if isinstance(data, str):
         for s in data.split(";"):
             s = s.strip()
-            if s: codes.add(s)
+            if s:
+                codes.add(s)
         return sorted(codes)
 
     if isinstance(data, list):
@@ -96,18 +110,20 @@ def _extract_codes(raw):
                 for kk in ["code","wcag","criterion","id","wcagId","wcag_id"]:
                     v = it.get(kk)
                     if isinstance(v, str) and v.strip():
-                        codes.add(v.strip()); break
+                        codes.add(v.strip())
+                        break
         return sorted(codes)
 
     if isinstance(data, dict):
         for k in data.keys():
             ks = str(k).strip()
-            if ks: codes.add(ks)
+            if ks:
+                codes.add(ks)
         return sorted(codes)
 
     return []
 
-def normalize_entry(raw):
+def normalize_entry(raw: dict):
     url = (raw.get("url") or raw.get("href") or "").strip()
     domain = (raw.get("domain") or to_domain(url)).strip()
     title = (raw.get("title") or raw.get("name") or "").strip()
@@ -132,7 +148,8 @@ def sha1(obj):
 
 def make_key(it: dict) -> str | None:
     """Primær nøkkel = URL (kanonisk). Fallback = title+domain."""
-    if not isinstance(it, dict): return None
+    if not isinstance(it, dict):
+        return None
     url = (it.get("url") or it.get("href") or "").strip()
     if url:
         return "url::" + canon_url(url)
@@ -146,7 +163,8 @@ def index_by_key(items):
     out = {}
     for it in items:
         k = make_key(it)
-        if k: out[k] = it
+        if k:
+            out[k] = it
     return out
 
 def read_current():
@@ -173,7 +191,7 @@ def read_prev_from_ref(ref: str):
 # --------- diff ----------
 CHECK_FIELDS = ["title", "status", "updatedAt", "totalNonConformities"]
 
-def compute_change(prev_entry, curr_entry):
+def compute_change(prev_entry: dict, curr_entry: dict):
     p_nc = set(prev_entry.get("nonConformities") or [])
     c_nc = set(curr_entry.get("nonConformities") or [])
     added = sorted(list(c_nc - p_nc))
@@ -193,7 +211,7 @@ def compute_change(prev_entry, curr_entry):
     return (None, [], [])
 
 def make_initial_changes(curr_rows):
-    """Hvis baseline mangler eller ingen keys kan lages: marker ALT som nytt."""
+    """Hvis baseline mangler/er ulesbar eller ingen nøkler kan lages: marker ALT som nytt."""
     now = datetime.datetime.utcnow()
     now_iso = now.isoformat(timespec="seconds") + "Z"
     detected_date = now.strftime("%Y-%m-%d")
@@ -304,4 +322,81 @@ def main():
 
     curr = read_current()
     if not isinstance(curr, list):
-        print("Fant ikke gyldig dagsdata i docs/uu-status-details.json ell
+        print("Fant ikke gyldig dagsdata i docs/uu-status-details.json eller docs/uu-status.csv", file=sys.stderr)
+        sys.exit(1)
+
+    # Bestem referanser å teste som baseline
+    forced_ref = os.getenv("BASELINE_REF", "").strip()
+    auto_bt = os.getenv("AUTO_BACKTRACK", "").strip().lower() in ("1", "true", "yes", "on")
+    max_bt = int(os.getenv("MAX_BACKTRACK", "10"))
+
+    if forced_ref:
+        refs = [forced_ref]
+    elif auto_bt:
+        refs = ["HEAD"] + [f"HEAD~{i}" for i in range(1, max_bt+1)]
+    else:
+        refs = ["HEAD"]
+
+    print(f"Dagens datasett: {len(curr)} elementer.")
+    final_changes = []
+    used_ref = None
+
+    # Prøv alle refs. diff_once() håndterer tom baseline/0 keys.
+    for ref in refs:
+        prev_rows = read_prev_from_ref(ref)  # alltid liste (kan være tom)
+        changes = diff_once(prev_rows, curr)
+        if changes:
+            used_ref = ref
+            final_changes = changes
+            break
+
+    if not final_changes:
+        # Siste forsvar: snapshot ALT
+        print("Ingen endringer funnet via refs. Tvinger initial snapshot for dagens datasett.")
+        final_changes = make_initial_changes(curr)
+        used_ref = refs[0] if refs else "(n/a)"
+
+    print(f"Diff-baseline: {used_ref}  |  Endringer funnet: {len(final_changes)}")
+
+    # 1) Logg endringer
+    with CHANGES_LOG.open("a", encoding="utf-8") as f:
+        for row in final_changes:
+            f.write(json.dumps(row, ensure_ascii=False) + "\n")
+
+    # 2) Skriv snapshots per updatedDate
+    changed_by_date = defaultdict(list)
+    curr_index = index_by_key(curr)
+    for ch in final_changes:
+        candidate = None
+        url = (ch.get("url") or "").strip()
+        if url:
+            kk = "url::" + canon_url(url)
+            candidate = curr_index.get(kk)
+        if not candidate:
+            # fallback: prøv direkte URL-match
+            for it in curr:
+                if (it.get("url") or "") == url:
+                    candidate = it
+                    break
+        if not candidate:
+            continue
+        key = (ch.get("updatedDate") or today_str())
+        changed_by_date[key].append(candidate)
+
+    for date_key, entries in changed_by_date.items():
+        out_fp = SNAP_BY_UPDATED / f"{date_key}.json"
+        existing = load_json(out_fp, fallback={"urls": []})
+        exist_by = index_by_key(existing.get("urls", []))
+        for e in entries:
+            kk = make_key(e)
+            if kk:
+                exist_by[kk] = e
+        out_fp.write_text(json.dumps({"urls": list(exist_by.values())}, ensure_ascii=False, indent=2), encoding="utf-8")
+        print(f"Skrev snapshot for {date_key}: {out_fp}")
+
+    # 3) Oppdater baseline (ALLTID etter diff)
+    LATEST_JSON.write_text(json.dumps({"urls": curr}, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"Oppdaterte {LATEST_JSON}")
+
+if __name__ == "__main__":
+    main()
