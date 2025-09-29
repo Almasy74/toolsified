@@ -1,6 +1,6 @@
 {
   "generated": true,
-  "generated_at": "2025-09-29T18:05:56.959509+00:00",
+  "generated_at": "2025-09-29T18:28:23.942381+00:00",
   "components": [
     {
       "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/versjonshistorikk",
@@ -2062,7 +2062,8 @@
         "trenger",
         "du",
         "hjelp"
-      ]
+      ],
+      "image": "./screenshots/table-default.png"
     },
     {
       "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/tabs",
@@ -2455,7 +2456,8 @@
         "liste",
         "med",
         "kolonner"
-      ]
+      ],
+      "image": "./screenshots/table-default.png"
     }
   ],
   "patterns": [
@@ -15949,7 +15951,8 @@
         "trenger",
         "du",
         "hjelp"
-      ]
+      ],
+      "image": "./screenshots/table-default.png"
     },
     {
       "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/tabs",
