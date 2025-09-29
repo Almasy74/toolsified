@@ -62,24 +62,624 @@
   ],
   "crawl": [
     {
-      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/",
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet",
       "title": "Designsystemet - Skatteetaten"
     },
     {
-      "url": "https://www.skatteetaten.no/stilogtone/monster/",
+      "url": "https://www.skatteetaten.no/stilogtone/monster",
       "title": "Mønstre og maler - Skatteetaten"
     },
     {
-      "url": "https://www.skatteetaten.no/stilogtone/skrive/",
+      "url": "https://www.skatteetaten.no/stilogtone/skrive",
       "title": "Språk i Skatteetaten - Skatteetaten"
     },
     {
-      "url": "https://www.skatteetaten.no/stilogtone/god-praksis/",
+      "url": "https://www.skatteetaten.no/stilogtone/god-praksis",
       "title": "God praksis - Skatteetaten"
     },
     {
-      "url": "https://www.skatteetaten.no/stilogtone/visuelt/",
+      "url": "https://www.skatteetaten.no/stilogtone/visuelt",
       "title": "Visuell identitet - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/god-praksis/universell-utforming",
+      "title": "Universell utforming i Skatteetaten - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/god-praksis/brukertesting",
+      "title": "Slik brukertester vi i Skatteetaten - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/god-praksis/innholdsarbeid",
+      "title": "Innholdsarbeid i Skatteetaten - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler",
+      "title": "Skriveregler - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/skrive/sprak",
+      "title": "Språkvalg i digitale flater - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno",
+      "title": "Skatteetaten.no og våre digitale flater - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/interaksjon",
+      "title": "Interaksjonsmønstre - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/sideoppsett",
+      "title": "Sideoppsett - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/kom-i-gang",
+      "title": "Kom i gang - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter",
+      "title": "Komponenter - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/skjemadesign",
+      "title": "Retningslinjer for å lage skjemaer og tjenester - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/brev",
+      "title": "Slik skriver vi brev i Skatteetaten - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/interaksjon/brukerutlost",
+      "title": "Brukerutløste feilmeldinger - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/interaksjon/hjelpetekster",
+      "title": "Hjelpetekster - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/interaksjon/inaktive-felt",
+      "title": "Inaktive felt (disabled) - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/interaksjon/ledetekst",
+      "title": "Ledetekst - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/interaksjon/legg_til",
+      "title": "«Legge til» - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/interaksjon/obligatoriske-felt",
+      "title": "Obligatoriske felt - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/interaksjon/knapperoglenker",
+      "title": "Rekkefølge på knapper og lenker - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/interaksjon/ensideapplikasjon",
+      "title": "Styre fokus i ensideapplikasjoner (SPA) - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/interaksjon/systemvarsler",
+      "title": "Systemvarsler - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/interaksjon/flervalg",
+      "title": "Velge flere - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/sideoppsett/sideoppsett-intern",
+      "title": "Sideoppsett interne løsninger - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/sideoppsett/sideoppsett-publikum",
+      "title": "Sideoppsett publikumsløsninger - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/skrive/sprakprofil",
+      "title": "Skatteetatens språkprofil - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/skrive/engelsk",
+      "title": "Engelsk i Skatteetaten - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/skrive/nynorsk",
+      "title": "Nynorsk i Skatteetaten - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/visuelt/font",
+      "title": "Font og typografi i Skatteetaten - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler/navn-pa-tjenester",
+      "title": "Navn på tjenester og produkter - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/god-praksis/maling",
+      "title": "Slik måler vi brukeratferd og brukeropplevelse i Skatteetaten - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/god-praksis/kunstig-intelligens",
+      "title": "Retningslinjer for bruk av generativ kunstig intelligens i kommunikasjon - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/visuelt/logo",
+      "title": "Skatteetatens logo - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/visuelt/farger",
+      "title": "Skatteetatens farger - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/visuelt/ikoner",
+      "title": "Ikoner i Skatteetaten - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/visuelt/illustrasjoner",
+      "title": "Illustrasjoner i Skatteetaten - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/visuelt/infografikk",
+      "title": "Infografikk i Skatteetaten - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/visuelt/presentasjoner",
+      "title": "Presentasjoner - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/god-praksis/universell-utforming/krav-og-standarder",
+      "title": "Krav og standarder for universell utforming - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/god-praksis/universell-utforming/derfor-skal-du-bry-deg",
+      "title": "Derfor skal du bry deg om universell utforming - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/god-praksis/universell-utforming/innhold-design-og-utvikling",
+      "title": "Universell utforming når vi skriver, designer og utvikler innhold - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/god-praksis/universell-utforming/testing",
+      "title": "Teste universell utforming - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/god-praksis/brukertesting/brukerinnvolvering-av-egne-ansatte",
+      "title": "Brukerinnvolvering av egne ansatte - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/god-praksis/brukertesting/testlab",
+      "title": "Brukervennlighetstest i lab - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/god-praksis/brukertesting/geriljatest",
+      "title": "Geriljatest - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/god-praksis/brukertesting/tekst",
+      "title": "Testing av tekster - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/god-praksis/brukertesting/umoderert-brukertesting",
+      "title": "Umoderert brukertesting - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/god-praksis/innholdsarbeid/ki-i-kommunikasjon",
+      "title": "Retningslinjer for bruk av generativ kunstig intelligens i kommunikasjon - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/fremgangsmate/skatteetatenno",
+      "title": "Slik lager vi innhold til Skatteetatens nettsider - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/fremgangsmate/melde-feil",
+      "title": "Melde fra om feil og endringer på nettsidene - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/fremgangsmate/forvaltning",
+      "title": "Innholdsforvaltning på Skatteetatens nettsider - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/type",
+      "title": "Innholdstyper på nettsidene - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/elementer",
+      "title": "Innholdselementer på nettsidene - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/valg",
+      "title": "Valg av sidetyper og virkemidler - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/kom-i-gang/introduksjon",
+      "title": "Introduksjon til designsystemet - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/kom-i-gang/for-utviklere",
+      "title": "For utviklere - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/kom-i-gang/for-designere",
+      "title": "For designere - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/kom-i-gang/nettleserstotte",
+      "title": "Nettleserstøtte - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/kom-i-gang/bruke-designtokens",
+      "title": "Bruk av designtokens - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/versjonshistorikk",
+      "title": "Versjonshistorikk - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/skjemadesign/planlegge-et-nytt-skjema",
+      "title": "Planlegge et nytt skjema - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/skjemadesign/sprak-i-skjemaer",
+      "title": "Språk og elementer i skjemaer - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/skjemadesign/skjema-med-steplist",
+      "title": "Skjema med steg - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/skjemadesign/skjema-med-horisontale-steg",
+      "title": "Skjema med horisontale steg - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/skjemadesign/skjema-med-kort",
+      "title": "Skjema med kort - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/skjemadesign/obligatoriske-felt",
+      "title": "Obligatoriske felt - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/skjemadesign/feilmeldinger-og-varsler-i-skjemaet",
+      "title": "Feilmeldinger og varsler i skjema - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/skrive/sprakprofil/aktivt-sprak",
+      "title": "Aktivt språk - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/skrive/sprakprofil/ordbruk",
+      "title": "Vi bruker ord leseren forstår - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/skrive/sprakprofil/tekstoppsett",
+      "title": "Tekstoppsett - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/brev/fritekst",
+      "title": "Slik skriver vi fritekst når vi bruker brevmaler - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/brev/fraser",
+      "title": "Slik skriver vi fraser som skal brukes i brevmaler - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/errormessage",
+      "title": "ErrorMessage - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/errorsummary",
+      "title": "ErrorSummary - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/openclose",
+      "title": "OpenClose - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/steplist",
+      "title": "StepList - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/inlinebutton",
+      "title": "InlineButton - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/button",
+      "title": "Button - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler/lenker",
+      "title": "Lenker - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler/knapper",
+      "title": "Knapper - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/link",
+      "title": "Link - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/linkgroup",
+      "title": "LinkGroup - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/megabutton",
+      "title": "MegaButton - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/modal",
+      "title": "Modal - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/alert",
+      "title": "Alert - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/radiogroup",
+      "title": "RadioGroup - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/checkboxgroup",
+      "title": "CheckboxGroup - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/chips",
+      "title": "Chips - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/textfield",
+      "title": "TextField - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler/adresse",
+      "title": "Adresse - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler/bindestrek-og-tankestrek",
+      "title": "Bindestrek og tankestrek - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler/forkortelser/stilogtone/skrive/skriveregler/forkortelser",
+      "title": null
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler/klokkeslett",
+      "title": "Klokkeslett og tidspunkt - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler/punktlister",
+      "title": "Punktlister - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler/tall",
+      "title": "Tall - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/god-praksis/maling/toppoppgaver",
+      "title": "Toppoppgaver - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/god-praksis/maling/webanalyse",
+      "title": "Webanalyse - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/god-praksis/kunstig-intelligens/en",
+      "title": "Guidelines for the use of generative AI in communication - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/icon",
+      "title": "Icon - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/type/tema",
+      "title": "Temaside - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/type/skjemaside",
+      "title": "Skjema- og tjenesteside - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/type/navigasjonsside",
+      "title": "Navigasjonsside - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/type/sats",
+      "title": "Sats-sider på skatteetaten.no - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/type/undersokelse",
+      "title": "Undersøkelser og rekruttering til innsikt - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/type/analyseartikkel",
+      "title": "Analyseartikkel - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/elementer/tekst",
+      "title": "Tittel, ingress, mellomtitler og brødtekst - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/elementer/seksjon",
+      "title": "Seksjon - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/elementer/fremheve-innhold",
+      "title": "Informasjonsbokser - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/elementer/fremhevet-topp",
+      "title": "Fremhevet tittel og ingress - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/elementer/kalkulator",
+      "title": "Kalkulator - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/elementer/veiviser",
+      "title": "Veiviser med spørsmål - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/elementer/prosess",
+      "title": "Prosess (steg-for-steg) - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/elementer/ordforklaring",
+      "title": "Ordforklaring - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/elementer/rettskilder",
+      "title": "Rettskilde-henvisninger - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/elementer/satser-og-nokkeltall",
+      "title": "Satser og nøkkeltall i artikler - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/accordion",
+      "title": "Accordion - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/breadcrumbs",
+      "title": "Breadcrumbs - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/card",
+      "title": "Card - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/checkbox",
+      "title": "Checkbox - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/datepicker",
+      "title": "DatePicker - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/descriptionlist",
+      "title": "DescriptionList  - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/divider",
+      "title": "Divider - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/fieldset",
+      "title": "Fieldset - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/fileuploader",
+      "title": "FileUploader - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/footer",
+      "title": "Footer - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/iconbutton",
+      "title": "IconButton - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/navigationtile",
+      "title": "NavigationTile - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/pagination",
+      "title": "Pagination - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/panel",
+      "title": "Panel - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/popover",
+      "title": "Popover - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/rolepicker",
+      "title": "RolePicker - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/scrolltotopbutton",
+      "title": "ScrollToTopButton - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/searchfield",
+      "title": "SearchField - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/select",
+      "title": "Select - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/spinner",
+      "title": "Spinner - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/table",
+      "title": "Table - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/tabs",
+      "title": "Tabs - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/tag",
+      "title": "Tag - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/textarea",
+      "title": "TextArea - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/topbannerexternal",
+      "title": "TopBannerExternal - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/topbanner-internal",
+      "title": "TopBannerInternal - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/typography",
+      "title": "Typografi-komponenter - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler/triggerord",
+      "title": "Triggerord - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler/tittel",
+      "title": "Titler og mellomtitler - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler/avsnitt",
+      "title": "Avsnitt og ingress - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler/ofte-stilte-sporsmal",
+      "title": "Ofte stilte spørsmål (FAQ) - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler/hjelpetekst",
+      "title": "Hjelpetekster og ledetekster - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler/datoer",
+      "title": "Datoer - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler/tidsfrister",
+      "title": "Tidsfrister - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler/matematiske-tegn",
+      "title": "Matematiske tegn og regnestykker - Skatteetaten"
+    },
+    {
+      "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler/prosent",
+      "title": "Prosent - Skatteetaten"
     }
   ],
   "aliases": {

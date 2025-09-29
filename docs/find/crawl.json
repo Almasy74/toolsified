@@ -1,27 +1,2587 @@
 [
   {
-    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/",
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet",
     "title": "Designsystemet - Skatteetaten",
-    "type": "nav"
+    "type": "doc",
+    "depth": 0,
+    "sections": [
+      "Kom i gang",
+      "Komponenter",
+      "Trenger du hjelp?"
+    ]
   },
   {
-    "url": "https://www.skatteetaten.no/stilogtone/monster/",
+    "url": "https://www.skatteetaten.no/stilogtone/monster",
     "title": "Mønstre og maler - Skatteetaten",
-    "type": "nav"
+    "type": "doc",
+    "depth": 0,
+    "sections": [
+      "Innholdstyper",
+      "Interaksjonsmønstre",
+      "Sideoppsett",
+      "Trenger du hjelp?"
+    ]
   },
   {
-    "url": "https://www.skatteetaten.no/stilogtone/skrive/",
+    "url": "https://www.skatteetaten.no/stilogtone/skrive",
     "title": "Språk i Skatteetaten - Skatteetaten",
-    "type": "nav"
+    "type": "doc",
+    "depth": 0,
+    "sections": [
+      "Skatteetatens språkprofil",
+      "Skriveregler",
+      "Engelsk",
+      "Nynorsk",
+      "Språkvalg i digitale flater",
+      "Font og typografi",
+      "Navn på tjenester og produkter",
+      "Innholdstyper",
+      "Trenger du hjelp?"
+    ]
   },
   {
-    "url": "https://www.skatteetaten.no/stilogtone/god-praksis/",
+    "url": "https://www.skatteetaten.no/stilogtone/god-praksis",
     "title": "God praksis - Skatteetaten",
-    "type": "nav"
+    "type": "doc",
+    "depth": 0,
+    "sections": [
+      "Universell utforming",
+      "Måling",
+      "Kunstig intelligens",
+      "Innholdstyper",
+      "Trenger du hjelp?"
+    ]
   },
   {
-    "url": "https://www.skatteetaten.no/stilogtone/visuelt/",
+    "url": "https://www.skatteetaten.no/stilogtone/visuelt",
     "title": "Visuell identitet - Skatteetaten",
-    "type": "nav"
+    "type": "doc",
+    "depth": 0,
+    "sections": [
+      "Font og typografi",
+      "Logo",
+      "Farger",
+      "Ikoner",
+      "Illustrasjoner",
+      "Infografikk",
+      "Presentasjoner",
+      "Kort om den visuelle identiteten",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/god-praksis/universell-utforming",
+    "title": "Universell utforming i Skatteetaten - Skatteetaten",
+    "type": "doc",
+    "depth": 1,
+    "sections": [
+      "Krav og standarder",
+      "Derfor er dette viktig",
+      "Innhold, design og utvikling",
+      "Testing",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/god-praksis/brukertesting",
+    "title": "Slik brukertester vi i Skatteetaten - Skatteetaten",
+    "type": "doc",
+    "depth": 1,
+    "sections": [
+      "Brukerinnvolvering av egne ansatte",
+      "Brukervennlighetstest i lab",
+      "Geriljatest",
+      "Testing av tekster",
+      "Umoderert brukertesting",
+      "Skattekartet"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/god-praksis/innholdsarbeid",
+    "title": "Innholdsarbeid i Skatteetaten - Skatteetaten",
+    "type": "doc",
+    "depth": 1,
+    "sections": [
+      "Bruk av generativ kunstig intelligens i kommunikasjon",
+      "Skattekartet"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler",
+    "title": "Skriveregler - Skatteetaten",
+    "type": "doc",
+    "depth": 1,
+    "sections": [
+      "Skriveregler",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/skrive/sprak",
+    "title": "Språkvalg i digitale flater - Skatteetaten",
+    "type": "doc",
+    "depth": 1,
+    "sections": [
+      "Klarspråk på digitale flater",
+      "Oversetting av løsninger",
+      "Huske språk på tvers",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno",
+    "title": "Skatteetaten.no og våre digitale flater - Skatteetaten",
+    "type": "doc",
+    "depth": 1,
+    "sections": [
+      "Fremgangsmåte",
+      "Lage og forbedre innhold",
+      "Melde feil",
+      "Forvalte innholdet",
+      "Innhold og utforming",
+      "Sidetyper",
+      "Innholdselementer og virkemidler",
+      "Skjema og tjenester",
+      "Valg av sidetyper og virkemidler",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/interaksjon",
+    "title": "Interaksjonsmønstre - Skatteetaten",
+    "type": "doc",
+    "depth": 1,
+    "sections": [
+      "Brukerutløste feilmeldinger",
+      "Hjelpetekster",
+      "Inaktive felt (disabled)",
+      "Ledetekst",
+      "«Legge til»",
+      "Obligatoriske felt",
+      "Rekkefølge på knapper og lenker",
+      "Styre fokus i ensideapplikasjoner (SPA)",
+      "Systemvarsler",
+      "Velge flere",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/sideoppsett",
+    "title": "Sideoppsett - Skatteetaten",
+    "type": "doc",
+    "depth": 1,
+    "sections": [
+      "Sideoppsett interne løsninger",
+      "Sideoppsett publikumsløsninger",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/kom-i-gang",
+    "title": "Kom i gang - Skatteetaten",
+    "type": "doc",
+    "depth": 1,
+    "sections": [
+      "Introduksjon",
+      "For utviklere",
+      "For designere",
+      "Nettleserstøtte",
+      "Bruke designtokens",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter",
+    "title": "Komponenter - Skatteetaten",
+    "type": "doc",
+    "depth": 1,
+    "sections": [
+      "Versjoner og historikk",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/skjemadesign",
+    "title": "Retningslinjer for å lage skjemaer og tjenester - Skatteetaten",
+    "type": "doc",
+    "depth": 1,
+    "sections": [
+      "Planlegge et nytt skjema",
+      "Språk og elementer i skjemaer",
+      "Skjema med steg",
+      "Skjema med horisontale steg",
+      "Skjema med kort",
+      "Obligatoriske felt",
+      "Feilmeldinger og varsler i skjema",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/brev",
+    "title": "Slik skriver vi brev i Skatteetaten - Skatteetaten",
+    "type": "doc",
+    "depth": 1,
+    "sections": [
+      "Sjekkliste for et godt brev",
+      "Slik skriver du godt",
+      "Vi skriver aktivt og direkte",
+      "Vi bruker ord leseren forstår",
+      "Vi sier det viktigste først",
+      "Vi skriver riktig og konsekvent",
+      "Slik bygger du opp brevet",
+      "Tittel Hjelpsom og trygg",
+      "Tekst Det viktigste først",
+      "Mellomtitler og avsnitt God struktur og gode veiskilt",
+      "Lenker Bruk kortlenker",
+      "Faste avsnitt som er med i de fleste brev",
+      "Aktuelt regelverk i dette brevet",
+      "Har du spørsmål? (Kontaktinformasjon)",
+      "Signatur",
+      "Fraser og fritekst i brevmaler",
+      "Skrifttype, størrelse og linjeavstand",
+      "Oversettelser: Skriv på riktig språk",
+      "Brukertest det du skriver",
+      "Følg rutinene",
+      "Bry deg om den du skriver til",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/interaksjon/brukerutlost",
+    "title": "Brukerutløste feilmeldinger - Skatteetaten",
+    "type": "doc",
+    "depth": 1,
+    "sections": [
+      "Feil i enkeltfelt (valideringsfeil)",
+      "Hvordan skrive feilmeldingen",
+      "Lengde",
+      "Lag separate feilmeldinger for ulike feilvarianter",
+      "Tenk på feilmeldingen når du skriver ledeteksten",
+      "Design",
+      "Oppsummering av feil",
+      "Relaterte mønstre",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/interaksjon/hjelpetekster",
+    "title": "Hjelpetekster - Skatteetaten",
+    "type": "doc",
+    "depth": 1,
+    "sections": [
+      "Typer hjelpetekst",
+      "Koblet til skjema eller titler",
+      "Hjelp til utfylling av skjemafelt",
+      "Skriv gode hjelpetekster",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/interaksjon/inaktive-felt",
+    "title": "Inaktive felt (disabled) - Skatteetaten",
+    "type": "doc",
+    "depth": 1,
+    "sections": [
+      "Inaktive radioknapper",
+      "Nesteknapp i veivisere",
+      "Tekst og inputfelt",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/interaksjon/ledetekst",
+    "title": "Ledetekst - Skatteetaten",
+    "type": "doc",
+    "depth": 1,
+    "sections": [
+      "Oppbygging av ledetekster i skjema",
+      "Skjematittel eller spørsmålstekst",
+      "Fremskutt hjelpetekst",
+      "Merkelapp for obligatoriske felt",
+      "Feltnavn",
+      "Plassholder med instruks",
+      "Slik skriver du ledetekster",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/interaksjon/legg_til",
+    "title": "«Legge til» - Skatteetaten",
+    "type": "doc",
+    "depth": 1,
+    "sections": [
+      "Valgfri «legg til»",
+      "«Legg til» som hovedhandling",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/interaksjon/obligatoriske-felt",
+    "title": "Obligatoriske felt - Skatteetaten",
+    "type": "doc",
+    "depth": 1,
+    "sections": [
+      "Alle felt må fylles ut",
+      "Merke valgfrie felt",
+      "Vise feilmelding",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/interaksjon/knapperoglenker",
+    "title": "Rekkefølge på knapper og lenker - Skatteetaten",
+    "type": "doc",
+    "depth": 1,
+    "sections": [
+      "Plasser knapper fra venstre",
+      "Forrige- og nesteknapper",
+      "Når hovedhandling er navigasjon",
+      "Åpne i ny fane eller vindu?",
+      "Lenker skal normalt åpnes i samme vindu",
+      "Unntak: lenker åpnes i ny fane eller som nedlastning",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/interaksjon/ensideapplikasjon",
+    "title": "Styre fokus i ensideapplikasjoner (SPA) - Skatteetaten",
+    "type": "doc",
+    "depth": 1,
+    "sections": [
+      "Hovedregler",
+      "Hva er en ensideappliksjon?",
+      "Tittelen på siden",
+      "Navigasjon mellom sider",
+      "Fokus når du legger til, sletter eller redigerer innhold",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/interaksjon/systemvarsler",
+    "title": "Systemvarsler - Skatteetaten",
+    "type": "doc",
+    "depth": 1,
+    "sections": [
+      "Viktige vurderinger",
+      "Språk",
+      "Ulike nivåer for systemvarsler",
+      "Kritiske systemfeil hvor hele tjenesten er nede",
+      "Deler av tjenesten er utilgjengelig",
+      "Enkeltdata er utilgjengelig",
+      "Ventevarsel",
+      "Midlertidige feil i systemet",
+      "Feilside",
+      "Relaterte mønstre",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/interaksjon/flervalg",
+    "title": "Velge flere - Skatteetaten",
+    "type": "doc",
+    "depth": 1,
+    "sections": [
+      "5 eller færre valg",
+      "5 til 15 valg",
+      "Mange valg",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/sideoppsett/sideoppsett-intern",
+    "title": "Sideoppsett interne løsninger - Skatteetaten",
+    "type": "doc",
+    "depth": 1,
+    "sections": [
+      "Sideoppsett",
+      "Oppbygging av sidelayout",
+      "Brekkpunkter",
+      "Regler for responsivitet",
+      "Relevante containere",
+      "Eksempelkode",
+      "CSS / SCSS",
+      "React / JSX",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/sideoppsett/sideoppsett-publikum",
+    "title": "Sideoppsett publikumsløsninger - Skatteetaten",
+    "type": "doc",
+    "depth": 1,
+    "sections": [
+      "Siteoppsett alle skjermstørrelser",
+      "",
+      "Oppbygging av sidelayout",
+      "Brekkpunkter",
+      "Containere",
+      "Regler for responsivitet",
+      "Eksempler",
+      "Eksempelkode",
+      "CSS / SCSS",
+      "React / JSX",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/skrive/sprakprofil",
+    "title": "Skatteetatens språkprofil - Skatteetaten",
+    "type": "doc",
+    "depth": 1,
+    "sections": [
+      "Ønsket etterlatt inntrykk",
+      "Personlighet",
+      "Prinsipper",
+      "Vi skriver aktivt og direkte",
+      "Vi bruker ord leseren forstår",
+      "Vi sier det viktigste først",
+      "Vi skriver riktig og konsekvent",
+      "Sjekkliste for gode tekster",
+      "Innholdstyper",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/skrive/engelsk",
+    "title": "Engelsk i Skatteetaten - Skatteetaten",
+    "type": "doc",
+    "depth": 1,
+    "sections": [
+      "Standarder for engelsk i Skatteetaten",
+      "Vi bruker britisk engelsk",
+      "Formelt nivå",
+      "Lovnavn og -henvisninger på engelsk",
+      "Derfor er engelsk viktig",
+      "Skriveregler",
+      "Adjektiver",
+      "Adresser",
+      "Artikler",
+      "Bindestrek og tankestrek",
+      "Datoer",
+      "Forbokstav - stor og liten",
+      "Forkortelser",
+      "Klokkeslett",
+      "Komma",
+      "Norske og engelske kommaregler",
+      "Neither/nor og either/or",
+      "Preposisjoner",
+      "Pronomen",
+      "Prosent",
+      "Punktlister",
+      "Tall",
+      "Spesifikke ord og fraser som kan være vanskelige å oversette",
+      "Avslå/avvise",
+      "Den The person, the reporting entity"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/skrive/nynorsk",
+    "title": "Nynorsk i Skatteetaten - Skatteetaten",
+    "type": "doc",
+    "depth": 1,
+    "sections": [
+      "Å skrive nynorsk i Skatteetaten",
+      "Nynorsk førstehjelp",
+      "Førebyggjande tiltak for å redusere risikoen for rusten nynorsk",
+      "Kva skil bokmål og nynorsk?",
+      "Ordforråd",
+      "Setningsoppbygging",
+      "Bestem dobbelt",
+      "Set eigedomsorda etterpå",
+      "Lag passiv med hjelpeverb",
+      "Unngå -ing",
+      "Bruk berre s-genitiv i namn",
+      "Splitt opp laust samansette verb",
+      "Vekk med den",
+      "Bøy i samsvar",
+      "Klassiske nynorskfeller du må unngå",
+      "1. Alt endar på -ar",
+      "2. Ein ekstra -r i fleirtal",
+      "3. Ein e her og ein a der",
+      "4. Einsam -ast",
+      "Ord som er lett å omsetje feil",
+      "Står du heilt fast?",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/visuelt/font",
+    "title": "Font og typografi i Skatteetaten - Skatteetaten",
+    "type": "doc",
+    "depth": 1,
+    "sections": [
+      "Alle brukere kan ikke se alle fonter",
+      "Skriftstørrelse",
+      "Publikumsløsninger",
+      "Interne løsninger",
+      "Farge på font",
+      "Linjeavstand",
+      "Spaltebredde",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler/navn-pa-tjenester",
+    "title": "Navn på tjenester og produkter - Skatteetaten",
+    "type": "doc",
+    "depth": 1,
+    "sections": [
+      "Prinsipper for å navngi tjenester",
+      "Eksempler",
+      "Gjelder også internt",
+      "Vanlige problemstillinger",
+      "Min side, Min skatt og liknende",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/god-praksis/maling",
+    "title": "Slik måler vi brukeratferd og brukeropplevelse i Skatteetaten - Skatteetaten",
+    "type": "doc",
+    "depth": 1,
+    "sections": [
+      "Derfor måler vi",
+      "To metoder",
+      "Toppoppgaver",
+      "Webanalyse",
+      "Statistikk og tall: Toppoppgaver og webanalyse",
+      "Hvis du lurer på noe",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/god-praksis/kunstig-intelligens",
+    "title": "Retningslinjer for bruk av generativ kunstig intelligens i kommunikasjon - Skatteetaten",
+    "type": "doc",
+    "depth": 1,
+    "sections": [
+      "Dette bruker vi KI til",
+      "Dette bruker vi ikke KI til",
+      "Vi merker tydelig",
+      "For tekst som i stor grad er KI-generert:",
+      "For lyd:",
+      "For illustrasjoner og bilder:",
+      "For video:",
+      "Generelle krav til merking:",
+      "All bruk skal kvalitetssikres",
+      "Ansatte skal få opplæring",
+      "Oppdatering av retningslinjene",
+      "Versjoner",
+      "English",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/visuelt/logo",
+    "title": "Skatteetatens logo - Skatteetaten",
+    "type": "doc",
+    "depth": 1,
+    "sections": [
+      "Primærlogo",
+      "Horisontal logo",
+      "Sekundærlogo til bruk på små flater",
+      "Andre språk",
+      "Samisk",
+      "Engelsk",
+      "Andre fremmedspråk",
+      "Logosymbol",
+      "Bruk og plassering av logo",
+      "Bruk av logoen i digitale løsninger",
+      "Bruk av logoen på papir",
+      "Last ned logopakke",
+      "Stor versjon av logoen",
+      "Logopakke",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/visuelt/farger",
+    "title": "Skatteetatens farger - Skatteetaten",
+    "type": "doc",
+    "depth": 1,
+    "sections": [
+      "Fargene",
+      "Profilfarger",
+      "Statusfarger og alias",
+      "Fargekoder",
+      "Profilfarger",
+      "Statusfarger og alias",
+      "Tekniske fargenavn",
+      "Eldre versjoner av fargepaletten",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/visuelt/ikoner",
+    "title": "Ikoner i Skatteetaten - Skatteetaten",
+    "type": "doc",
+    "depth": 1,
+    "sections": [
+      "Ikoner",
+      "Utforming",
+      "Finn og last ned ikoner",
+      "Systemikoner",
+      "Finn systemikon",
+      "Eldre ikonstil",
+      "Se også",
+      "Illustrasjoner",
+      "Infografikk",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/visuelt/illustrasjoner",
+    "title": "Illustrasjoner i Skatteetaten - Skatteetaten",
+    "type": "doc",
+    "depth": 1,
+    "sections": [
+      "Finn illustrasjoner",
+      "Utforming",
+      "Farger",
+      "Ikke bruk som pynt eller navigasjon",
+      "Ikoner",
+      "Infografikk",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/visuelt/infografikk",
+    "title": "Infografikk i Skatteetaten - Skatteetaten",
+    "type": "doc",
+    "depth": 1,
+    "sections": [
+      "Prinsipper når vi lager infografikk",
+      "Infografikk skal være universelt utformet",
+      "Eksempler",
+      "Se også",
+      "Illustrasjoner",
+      "Ikoner",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/visuelt/presentasjoner",
+    "title": "Presentasjoner - Skatteetaten",
+    "type": "doc",
+    "depth": 1,
+    "sections": [
+      "Mal",
+      "Følg visuell profil - også ved bruk av illustrasjoner",
+      "Følg språkprofilen",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/god-praksis/universell-utforming/krav-og-standarder",
+    "title": "Krav og standarder for universell utforming - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Dette er det viktigste du trenger å vite",
+      "Gjeldende lovkrav",
+      "Tidligere lovkrav",
+      "Web Content Accessibility Guidelines (WCAG)",
+      "WAI-ARIA",
+      "Tilsyn",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/god-praksis/universell-utforming/derfor-skal-du-bry-deg",
+    "title": "Derfor skal du bry deg om universell utforming - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Universell utforming angår oss alle",
+      "Derfor snakker vi så mye om universell utforming",
+      "Dette er menneskene med nedsatt funksjonsevne",
+      "Eksempler på midlertidige funksjonsnedsettelser",
+      "Eksempler på aldersrelaterte funksjonsnedsettelser",
+      "Flere tall å ta med seg",
+      "De 4 hovedkategoriene av funksjonsnedsettelser",
+      "Dette har du kanskje ikke tenkt over",
+      "Universell utforming = stygt, vanskelig og dyrt?",
+      "Stygt",
+      "Vanskelig",
+      "Dyrt",
+      "Du bryr deg, men ikke de andre",
+      "Lær og forstå mer",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/god-praksis/universell-utforming/innhold-design-og-utvikling",
+    "title": "Universell utforming når vi skriver, designer og utvikler innhold - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Farger og kontrast",
+      "Kontrast",
+      "Meningsbærende farger",
+      "Lenker og knapper",
+      "Video og lyd",
+      "Synstolking",
+      "Teksting",
+      "Bilder, ikoner og grafikk",
+      "Tips",
+      "Tekst og språk",
+      "Overskrifter og struktur",
+      "Overskrifter",
+      "Annen inndeling og semantikk",
+      "Skjema",
+      "Tastaturnavigasjon",
+      "Skjermflater",
+      "Tabeller",
+      "Faner og rammer",
+      "Dynamisk innhold",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/god-praksis/universell-utforming/testing",
+    "title": "Teste universell utforming - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Om testing av universell utforming",
+      "Validatorer",
+      "Verktøy",
+      "Hjelpemidler",
+      "Tastatur",
+      "Skjermlesere",
+      "Simulatorer",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/god-praksis/brukertesting/brukerinnvolvering-av-egne-ansatte",
+    "title": "Brukerinnvolvering av egne ansatte - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Rekruttering",
+      "Slik går du frem",
+      "Personvern",
+      "Observasjon",
+      "Medlytt",
+      "Fremgangsmåte",
+      "Lurer du på noe?",
+      "Skattekartet"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/god-praksis/brukertesting/testlab",
+    "title": "Brukervennlighetstest i lab - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Derfor gjør vi det",
+      "Planlegging",
+      "Gjennomføring",
+      "Funn og analyse",
+      "Snarveier for Skatteetaten-ansatte",
+      "Skattekartet"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/god-praksis/brukertesting/geriljatest",
+    "title": "Geriljatest - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Derfor gjør vi det",
+      "Planlegging",
+      "Gjennomføring",
+      "Funn og analyse",
+      "Snarveier for Skatteetaten-ansatte",
+      "Skattekartet"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/god-praksis/brukertesting/tekst",
+    "title": "Testing av tekster - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Derfor gjør vi det",
+      "Gjennomføring",
+      "Mikrotest",
+      "Funn og analyse",
+      "Snarveier for Skatteetaten-ansatte",
+      "Skattekartet"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/god-praksis/brukertesting/umoderert-brukertesting",
+    "title": "Umoderert brukertesting - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Derfor gjør vi det",
+      "Planlegging",
+      "Gjennomføring",
+      "Funn og analyse",
+      "Snarveier for Skatteetaten-ansatte",
+      "Hvis du lurer på noe",
+      "Skattekartet"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/god-praksis/innholdsarbeid/ki-i-kommunikasjon",
+    "title": "Retningslinjer for bruk av generativ kunstig intelligens i kommunikasjon - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Dette mener vi med generativ kunstig intelligens",
+      "Dette bruker vi KI til",
+      "Vi merker tydelig",
+      "Dette bruker vi ikke KI til",
+      "All bruk skal kvalitetssikres",
+      "Ansatte skal få opplæring",
+      "Oppdatering av retningslinjene",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/fremgangsmate/skatteetatenno",
+    "title": "Slik lager vi innhold til Skatteetatens nettsider - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Koordinering og overordnede føringer",
+      "Derfor må du ta kontakt",
+      "Før vi starter: Forstå brukernes behov og våre mål",
+      "1. Kartlegg brukerne og brukeroppgavene",
+      "Sjekkliste",
+      "2. Kartlegg Skatteetatens behov og sett mål",
+      "3. Gjør innholdsanalyse",
+      "4. Avklar om andre påvirkes - internt og eksternt",
+      "Når vi skriver: Skrive, designe, teste og kvalitetssikre",
+      "5. Lag utkast, prototyper og struktur",
+      "Plassering av løsningen (struktur)",
+      "6. Produsere, teste, kvalitetssikre",
+      "Kvalitetssikring",
+      "Brukertesting",
+      "7. Språkversjoner og oversettelser",
+      "Hvem kan hjelpe meg?",
+      "Sjekkliste",
+      "Slik gjør du brukerne trygge nok til å hjelpe seg selv:",
+      "Følg språkprofil og designsystem",
+      "Lansere og forvalte",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/fremgangsmate/melde-feil",
+    "title": "Melde fra om feil og endringer på nettsidene - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Skrivefeil, feil lenker eller tekniske feil",
+      "Faktafeil og småoppdateringer",
+      "Forbedringer og større endringer",
+      "Skattekartet"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/fremgangsmate/forvaltning",
+    "title": "Innholdsforvaltning på Skatteetatens nettsider - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Eierskap og ansvar",
+      "Årlig revisjon - alt sjekkes minimum årlig",
+      "Nettredaksjonen har kontroll og oversikt over innholdet",
+      "Rettskilder skiller seg ut",
+      "Skattekartet"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/type",
+    "title": "Innholdstyper på nettsidene - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Temaside",
+      "Skjema- og tjenesteside",
+      "Navigasjonsside (transportside)",
+      "Listeside",
+      "Sats-side",
+      "Undersøkelse eller innsikt",
+      "Analyseartikkel",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/elementer",
+    "title": "Innholdselementer på nettsidene - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Grunnleggende",
+      "Strukturere og fremheve innhold på en god måte",
+      "Funksjonalitet og formater for å gjøre innhold lettere å forstå",
+      "Standardiserte seksjoner og løsningsmønstre som ofte brukes",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/valg",
+    "title": "Valg av sidetyper og virkemidler - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Så – hvordan løser vi dette på best mulig måte?",
+      "Skattekartet"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/kom-i-gang/introduksjon",
+    "title": "Introduksjon til designsystemet - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Dette er designsystemet",
+      "Derfor har vi et designsystem",
+      "Samarbeid, bidrag og hjelp",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/kom-i-gang/for-utviklere",
+    "title": "For utviklere - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Legg til komponentbiblioteket i prosjektet",
+      "Ta så i bruk komponentene i applikasjonen din (App.js):",
+      "Migrering fra Legacy-system",
+      "Designtokens ved samtidig bruk av legacy- og nytt Designsystem",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/kom-i-gang/for-designere",
+    "title": "For designere - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Sette opp figma",
+      "Søk om tilgang",
+      "Bil med i teamet",
+      "Hurtigstartguide",
+      "Aktivere bibliotek",
+      "Samarbeid og forslag",
+      "Designkollokvie",
+      "Forbedring av komponenter",
+      "Betaområde",
+      "Forslagskasse",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/kom-i-gang/nettleserstotte",
+    "title": "Nettleserstøtte - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Internet Explorer",
+      "Skjermbredde",
+      "Varsle når nettleser er gammel",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/kom-i-gang/bruke-designtokens",
+    "title": "Bruk av designtokens - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Designtokens i Figma",
+      "Bruke designtokens i CSS",
+      "Bruke brekkpunkter i CSS",
+      "Teknisk innhold i designtokens-pakken",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/versjonshistorikk",
+    "title": "Versjonshistorikk - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Versjon 2.2.0 – 28. august 2025",
+      "Nye komponenter og funksjoner",
+      "Andre feilrettinger og forbedringer",
+      "Versjon 2.1.0 – 12. juni 2025",
+      "Nye komponenter og funksjoner",
+      "Andre feilrettinger og forbedringer",
+      "Versjon 2.0.1 – 8. mai 2025",
+      "Feilrettinger",
+      "Versjon 2.0.0 – 10. april 2025",
+      "Breaking changes",
+      "Oppdaterte avhengigheter",
+      "Andre feilrettinger og forbedringer",
+      "Versjon 1.6.1 – 8. mai 2025",
+      "Feilrettinger",
+      "Versjon 1.6.0 – 27.02.2025",
+      "Feilrettinger og forbedringer",
+      "Andre forbedringer",
+      "Versjon 1.5.1 – 11.02.2025",
+      "Versjon 1.5.0 – 30.01.2025",
+      "Nye komponenter",
+      "Feilrettinger og forbedringer",
+      "Andre forbedringer",
+      "Versjon 1.4.0 – 28.11.2024",
+      "Feilrettinger og forbedringer",
+      "Andre forbedringer"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/skjemadesign/planlegge-et-nytt-skjema",
+    "title": "Planlegge et nytt skjema - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Forstå brukernes behov",
+      "Tenk godt igjennom spørsmålene",
+      "Mer om skjemadesign",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/skjemadesign/sprak-i-skjemaer",
+    "title": "Språk og elementer i skjemaer - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Elementer i skjemaet",
+      "Tabell",
+      "Ledetekster",
+      "Beskrivelse og hjelpetekster",
+      "Feil og validering",
+      "Før bruker logger inn",
+      "Mer om skjemadesign",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/skjemadesign/skjema-med-steplist",
+    "title": "Skjema med steg - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Stegene i StepList",
+      "Steg med spørsmål",
+      "Lukket steg",
+      "Oppsummering",
+      "Knapper",
+      "Endre ett tidligere steg",
+      "Kvittering",
+      "Lagring og utkast",
+      "Bruker lukker vinduet uten å lagre",
+      "Finne igjen utkast",
+      "Mer om skjemadesign",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/skjemadesign/skjema-med-horisontale-steg",
+    "title": "Skjema med horisontale steg - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Horisontal stegliste",
+      "Knapper",
+      "Kvittering",
+      "Lagring og utkast",
+      "Bruker lukker vinduet uten å lagre",
+      "Finne igjen utkast",
+      "Mer om skjemadesign",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/skjemadesign/skjema-med-kort",
+    "title": "Skjema med kort - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Oppbygning med kort",
+      "Navigasjon og steg",
+      "Stegene",
+      "Kvittering",
+      "Lagring og utkast",
+      "Bruker lukker vinduet uten å lagre",
+      "Finne igjen utkast",
+      "Mer om skjemadesign",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/skjemadesign/obligatoriske-felt",
+    "title": "Obligatoriske felt - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Alle felt må fylles ut",
+      "Merke valgfrie felt",
+      "Vise feilmelding",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/skjemadesign/feilmeldinger-og-varsler-i-skjemaet",
+    "title": "Feilmeldinger og varsler i skjema - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Feil i felt (valideringfeil)",
+      "",
+      "Bruker får ikke gjort handlingen",
+      "Feilen oppstår i selve skjemaet",
+      "Feilen oppstår i en modal",
+      "Hvis det tar tid før handlingen utføres",
+      "Bruker lukker vinduet uten å lagre",
+      "Mer om skjemadesign",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/skrive/sprakprofil/aktivt-sprak",
+    "title": "Aktivt språk - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Derfor skriver vi aktivt",
+      "Slik gjør du det",
+      "1. Vær tydelig på hvem som skal gjøre hva",
+      "2. Bruk du, dere og vi",
+      "3. Bruk verb",
+      "4. Bruk den konkrete formen av substantiv",
+      "5. Bruk imperativ form",
+      "Se også",
+      "Mer hjelp",
+      "Sjekkliste for gode tekster",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/skrive/sprakprofil/ordbruk",
+    "title": "Vi bruker ord leseren forstår - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Unngå fagsjargong",
+      "Bruk triggerord",
+      "Unngå å bruke \"Normalt\" og \"Som regel\"",
+      "Forskjell på veiledningsinformasjon og rettsinformasjon",
+      "Ordbruk i veiledningsinformasjon",
+      "Ordbruk i rettsinformasjon",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/skrive/sprakprofil/tekstoppsett",
+    "title": "Tekstoppsett - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Det viktigste først - den omvendte pyramide",
+      "Prinsipper",
+      "Skap trygghet",
+      "Sjekkliste for gode tekster",
+      "Kort, men ikke for kort",
+      "Se også",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/brev/fritekst",
+    "title": "Slik skriver vi fritekst når vi bruker brevmaler - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Dette er en brevmal",
+      "Dette er fritekst",
+      "Slik skriver du fritekst",
+      "Har du innspill til brevmalen?",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/brev/fraser",
+    "title": "Slik skriver vi fraser som skal brukes i brevmaler - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Dette er en brevmal",
+      "Dette må du tenke på når du skriver fraser",
+      "Slik gjør du det",
+      "Har du innspill til brevmalen?",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/errormessage",
+    "title": "ErrorMessage - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Eksempel",
+      "Egnet til:",
+      "Uegnet til:",
+      "Teknisk dokumentasjon",
+      "Hvordan bruke komponenten",
+      "Feilmelding i kontekst",
+      "Frittstående feilmelding",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/errorsummary",
+    "title": "ErrorSummary - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Eksempel",
+      "Egnet til:",
+      "Uegnet til:",
+      "Teknisk dokumentasjon",
+      "Slik bruker du komponenten",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/openclose",
+    "title": "OpenClose - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Eksempel",
+      "Teknisk dokumentasjon",
+      "Varianter",
+      "Ikon til venstre, stor og liten variant",
+      "Ikon til høyre, stor og liten variant",
+      "Hvordan bruke komponenten",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/steplist",
+    "title": "StepList - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Eksempel",
+      "Egnet til:",
+      "Uegnet til:",
+      "Teknisk dokumentasjon",
+      "Hvordan bruke komponenten:",
+      "Oppsummering før innsending",
+      "Kvittering og bekreftelse",
+      "Varsel av brukerfeil når brukeren klikker «neste»",
+      "Brukeren skal kunne hoppe opp og ned i steglisten",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/inlinebutton",
+    "title": "InlineButton - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Eksempel",
+      "Teknisk dokumentasjon",
+      "Varianter",
+      "Med ikon",
+      "Selvstendige handlinger på siden",
+      "Hvordan bruke komponenten",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/button",
+    "title": "Button - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Eksempler",
+      "Egnet til:",
+      "Uegnet til:",
+      "Teknisk dokumentasjon",
+      "Varianter",
+      "Primær",
+      "Sekundær",
+      "Tertiær",
+      "Advarsel",
+      "Hvordan bruke komponenten",
+      "Skill mellom primær- og sekundærhandlinger",
+      "Advarselknapp for handlinger det ikke går an å angre på",
+      "Unngå inaktive knapper",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler/lenker",
+    "title": "Lenker - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Hovedprinsipper for lenketekster",
+      "Lenketeksten skal være beskrivende Ikke skriv \"Klikk her\"",
+      "Send brukeren direkte til hjelpen",
+      "Spesielt om lenker på nettsider og i digitale tjenester",
+      "Ikke vis hele URL-en",
+      "Plassering av lenker",
+      "Spesielt om lenker i brev, brosjyrer og trykksaker",
+      "Bruk kort-lenker",
+      "Unntak fra regel om kort-url n år brevet kun skal sendes til bedrifter",
+      "Lenker til skjemaer",
+      "Lenker til andre nettsteder",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler/knapper",
+    "title": "Knapper - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Tekst i knappen",
+      "Tekst over knappen",
+      "Slik skal knapper se ut",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/link",
+    "title": "Link - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Eksempel",
+      "Teknisk dokumentasjon",
+      "Varianter",
+      "Vanlig lenke",
+      "Ekstern lenke",
+      "Lenke med ikon",
+      "Ekstern lenke med ikon",
+      "Hvordan bruke komponenten",
+      "Hoveregler",
+      "Slik skriver du lenker riktig",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/linkgroup",
+    "title": "LinkGroup - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Eksempel",
+      "Teknisk dokumentasjon",
+      "Varianter",
+      "Lenker",
+      "Ankre",
+      "Hvordan bruke komponenten",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/megabutton",
+    "title": "MegaButton - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Eksempel",
+      "Teknisk dokumentasjon",
+      "Hvordan bruke komponenten",
+      "MegaButton tar brukeren til et nytt område",
+      "MegaButton tar brukeren til ekstern side",
+      "Hovedhandlingen er på samme side",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/modal",
+    "title": "Modal - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Eksempel",
+      "Egnet til:",
+      "Uegnet til:",
+      "Teknisk dokumentasjon",
+      "Varianter",
+      "Hvordan bruke komponenten",
+      "Obligatorisk tittel",
+      "Lukkekryss og autolukking",
+      "Samtykkemodal",
+      "Ventevarsel",
+      "Illustrasjoner",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/alert",
+    "title": "Alert - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Eksempel",
+      "Egnet til:",
+      "Uegnet til:",
+      "Teknisk dokumentasjon",
+      "Varianter",
+      "Suksess",
+      "Nøytral",
+      "Advarsel",
+      "Feil",
+      "Fare",
+      "Hvordan bruke komponenten",
+      "Farger og ikon for viktighet",
+      "På farget bakgrunn",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/radiogroup",
+    "title": "RadioGroup - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Eksempel",
+      "Teknisk dokumentasjon",
+      "Varianter",
+      "Vertikal",
+      "Horisontal",
+      "Hvordan bruke komponenten",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/checkboxgroup",
+    "title": "CheckboxGroup - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Eksempel",
+      "Komponenter som ligner:",
+      "Teknisk dokumentasjon",
+      "Hvordan bruke komponenten",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/chips",
+    "title": "Chips - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Eksempel",
+      "Egnet til:",
+      "Uegnet til:",
+      "Komponenter som ligner:",
+      "Teknisk dokumentasjon",
+      "Varianter",
+      "Hvordan bruke komponenten",
+      "Chips er en gruppe",
+      "Statisk filter",
+      "Dynamisk filter",
+      "Oversikt over valg",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/textfield",
+    "title": "TextField - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Eksempel",
+      "Egnet til:",
+      "Uegnet til:",
+      "Teknisk dokumentasjon",
+      "Varianter",
+      "Størrelser",
+      "Read-only",
+      "Slik bruker du komponenten",
+      "Ledetekst, beskrivelse og hjelpetekst",
+      "Ikke bruk placeholder-tekst",
+      "Autocomplete",
+      "Typer input",
+      "God praksis",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler/adresse",
+    "title": "Adresse - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "På engelsk",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler/bindestrek-og-tankestrek",
+    "title": "Bindestrek og tankestrek - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Bindestrek",
+      "Bindestrek på engelsk",
+      "Tankestrek",
+      "Tankestrek på engelsk",
+      "Slik lager du tankestrek",
+      "Lær mer",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler/forkortelser/stilogtone/skrive/skriveregler/forkortelser",
+    "error": "404 Client Error: Not Found for url: https://www.skatteetaten.no/stilogtone/skrive/skriveregler/forkortelser/stilogtone/skrive/skriveregler/forkortelser",
+    "type": "error",
+    "depth": 2
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler/klokkeslett",
+    "title": "Klokkeslett og tidspunkt - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Markere tidsperioder",
+      "00:00 eller 24:00?",
+      "På engelsk",
+      "Mer hjelp",
+      "Se også",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler/punktlister",
+    "title": "Punktlister - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Derfor bruker vi punktlister",
+      "Bruk punklister når du ramser opp",
+      "Liten/stor forbokstav, kolon eller punktum?",
+      "Ikke overdriv – punktlister er ikke alltid løsningen",
+      "Mer hjelp",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler/tall",
+    "title": "Tall - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Små og store tall",
+      "Tusenskilletegn",
+      "Beløp",
+      "Fødselsnummer (personnummer)",
+      "Organisasjonsnummer",
+      "Kontonummer",
+      "Telefonnummer",
+      "På engelsk",
+      "Unngå rare linjeskift",
+      "",
+      "Følg Språkrådets skriveregler",
+      "Relaterte temaer",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/god-praksis/maling/toppoppgaver",
+    "title": "Toppoppgaver - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Derfor jobber vi med toppoppgaver",
+      "Slik jobber vi med toppoppgaver",
+      "Vi bruker Skyra som verktøy",
+      "Slik fungerer det",
+      "Slik ser undersøkelsen ut for brukerne",
+      "Slik ser resultatene ut",
+      "Eksempel på resultater",
+      "Hvis du lurer på noe",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/god-praksis/maling/webanalyse",
+    "title": "Webanalyse - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Derfor jobber vi med webanalyse",
+      "Slik jobber vi med webanalyse",
+      "Matomo",
+      "Google Analytics 4",
+      "Samtykke og personvern",
+      "Samtykkeløsning (\"cookie-varsel\")",
+      "Personvernerklæring og informasjonskapsler",
+      "Hvis du lurer på noe",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/god-praksis/kunstig-intelligens/en",
+    "title": "Guidelines for the use of generative AI in communication - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "What we use AI for",
+      "What we do not use AI for",
+      "We must always label our content clearly",
+      "For text that's largely AI-generated:",
+      "For audio:",
+      "For illustrations and images:",
+      "For videos:",
+      "General requirements for labelling:",
+      "All use must be checked",
+      "Employees will receive training",
+      "Policy updates",
+      "Versions",
+      "Translation",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/icon",
+    "title": "Icon - Skatteetaten",
+    "type": "doc",
+    "depth": 2,
+    "sections": [
+      "Eksempel",
+      "Teknisk dokumentasjon",
+      "",
+      "Varianter",
+      "Systemikoner",
+      "Hvordan bruke komponenten",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/type/tema",
+    "title": "Temaside - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Slik ser det ut",
+      "Innhold og oppsett",
+      "Når innholdet er kort og enkelt",
+      "Når vi må si mer",
+      "Seksjonere innholdet",
+      "Lukke overskrifter på et høyt nivå",
+      "Lukke overskrifter på et lavere nivå",
+      "Innholdsfortegnelse",
+      "Veivisere og kalkulatorer",
+      "Dele opp i flere sider",
+      "Elementer og virkemidler",
+      "Helhet og sammenheng",
+      "God struktur og riktig bruk av virkemidler",
+      "Detaljnivå når vi snakker om flere fagområder",
+      "Eksempler",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/type/skjemaside",
+    "title": "Skjema- og tjenesteside - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Slik ser det ut",
+      "Innhold på en skjemaside",
+      "Oppsett",
+      "Tittel Aktiv. Triggerord.",
+      "Ingress Kort om hva det handler om.",
+      "Dette må du gjøre Handlingen brukeren kom for å utføre",
+      "Gjelder det meg?",
+      "Dette skjer etterpå",
+      "Spesielt for deg",
+      "Dette inneholder svaret/attesten/kvitteringen",
+      "Rettskilder",
+      "Sammenheng med skjemaet eller tjenesten",
+      "Plassering i strukturen",
+      "Skal være tilgjengelig i riktig kontekst",
+      "Skal være tilgjengelig i skjemaoversikten",
+      "Trenger alle skjemaer en egen skjemaside?",
+      "Det vanlige er at skjemaer har en egen skjemaside.",
+      "Eksempler",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/type/navigasjonsside",
+    "title": "Navigasjonsside - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Slik ser det ut",
+      "Slik bruker vi det",
+      "Utforming",
+      "Standardoppsett",
+      "Gruppere navigasjonsknapper",
+      "Annet innhold på en navigasjonsside",
+      "Eksempler",
+      "Skattekartet"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/type/sats",
+    "title": "Sats-sider på skatteetaten.no - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Slik ser det ut",
+      "Sats-sidene skal ikke inneholde mye faginformasjon",
+      "Lenker til sats-sidene",
+      "Lenker fra sats-sidene",
+      "Sats-oversikt",
+      "Søkbarhet",
+      "Eksempler",
+      "Skattekartet"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/type/undersokelse",
+    "title": "Undersøkelser og rekruttering til innsikt - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Slik ser det ut",
+      "Eksponering",
+      "Innhold",
+      "Alternativ til egen landingsside: Informasjonsboks med vei direkte inn til undersøkelse",
+      "Retningslinjer for spørreundersøkelser",
+      "Skattekartet"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/type/analyseartikkel",
+    "title": "Analyseartikkel - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Målgruppen",
+      "Slik gjør du det",
+      "Slik skriver vi: Struktur og oppbygging",
+      "Tittel",
+      "Ingress",
+      "Innledning",
+      "Metodedel",
+      "Hoveddel",
+      "Avslutning",
+      "Andre elementer",
+      "Figurer",
+      "Ordforklaringer",
+      "Referanser og kilder",
+      "Eksempler",
+      "Skattekartet"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/elementer/tekst",
+    "title": "Tittel, ingress, mellomtitler og brødtekst - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Slik ser det ut",
+      "Tittel",
+      "Mellomtitler",
+      "Hierarki og struktur",
+      "Punktlister",
+      "Flere virkemidler",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/elementer/seksjon",
+    "title": "Seksjon - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Slik ser det ut",
+      "Slik bruker vi det",
+      "Utforming",
+      "Eksempel",
+      "Seksjonens tittel",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/elementer/fremheve-innhold",
+    "title": "Informasjonsbokser - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Slik ser det ut",
+      "Derfor fremhever vi innhold",
+      "Slik skriver vi",
+      "Tittel og tekst må være direkte, aktiv og meningsbærende",
+      "Fargevalg",
+      "Eksempler",
+      "Så mye koster det",
+      "Finn ut om du skal registrere deg",
+      "Rapporteringsløsningen endres høsten 2022",
+      "Vi moderniserer rapportering av tredjepartsopplysninger.",
+      "Når den nye løsningen er på plass, skal du fortsatt rapportere på samme måte, men du vil oppleve at deler av skjemaet er forenklet.",
+      "Fakta om kompensasjonsordningen",
+      "Avgiften avvikles",
+      "Du kan ikke betale med kredittkort",
+      "Vil du være med på laget?",
+      "Teknologien vi bruker",
+      "Hjelp oss å bli bedre",
+      "Blå ramme",
+      "Sørg for godt samspill mellom blokker",
+      "Forskjellige størrelser",
+      "Regn ut selv",
+      "Kampanjefelt med handlingsknapper og/eller bilder",
+      "Skattekortet for 2022 er klart",
+      "Frikort i sommer?",
+      "All skatteveiledning på ett sted"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/elementer/fremhevet-topp",
+    "title": "Fremhevet tittel og ingress - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Slik ser det ut",
+      "Slik bruker vi det",
+      "Slik bruker vi det ikke",
+      "Hvis flere sider handler om det samme",
+      "Utforming",
+      "Eksempler",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/elementer/kalkulator",
+    "title": "Kalkulator - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Slik ser det ut",
+      "Slik bruker vi det",
+      "Eksempler",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/elementer/veiviser",
+    "title": "Veiviser med spørsmål - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Slik ser det ut",
+      "Slik bruker vi det",
+      "Krav til startsiden",
+      "Krav til spørsmålene og svaralternativer",
+      "Krav til sluttsiden",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/elementer/prosess",
+    "title": "Prosess (steg-for-steg) - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Slik ser det ut",
+      "Slik bruker vi det",
+      "Eksempler",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/elementer/ordforklaring",
+    "title": "Ordforklaring - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Slik ser det ut",
+      "Slik bruker vi det",
+      "Innhold",
+      "Satser og beløpsgrenser",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/elementer/rettskilder",
+    "title": "Rettskilde-henvisninger - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Slik ser det ut",
+      "Slik bruker vi det",
+      "Kun når brukerne har et klart behov for det",
+      "Tekst og lenker",
+      "Utforming",
+      "Eksempler",
+      "Rettskilder",
+      "Rettskilder",
+      "Rettskilder",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/elementer/satser-og-nokkeltall",
+    "title": "Satser og nøkkeltall i artikler - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Derfor er vi oppmerksomme på hvordan vi omtaler satser",
+      "Sats og nøkkeltall er gjerne en seksjon",
+      "Slik viser vi satser",
+      "I løpende tekst",
+      "I informasjonsboks",
+      "I ordforklaring",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/accordion",
+    "title": "Accordion - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Eksempel",
+      "Egnet til:",
+      "Uegnet til:",
+      "Komponenter som ligner:",
+      "Teknisk dokumentasjon",
+      "Varianter",
+      "Farger",
+      "Størrelser",
+      "Hvordan bruke komponenten",
+      "Ikoner",
+      "Gruppere støtteinformasjon",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/breadcrumbs",
+    "title": "Breadcrumbs - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Eksempel",
+      "Egnet til:",
+      "Uegnet til:",
+      "Teknisk dokumentasjon",
+      "Hvordan bruke komponenten",
+      "Plassering",
+      "Når skal den vises?",
+      "Bruk tilbakelenke i stedet for brødsmulesti når:",
+      "Innloggede sider:",
+      "",
+      "Håndtering av lange brødsmulestier:",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/card",
+    "title": "Card - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Eksempel",
+      "Egnet til:",
+      "Uegnet til:",
+      "Komponenter som ligner:",
+      "Teknisk dokumentasjon",
+      "Varianter",
+      "Komponentens oppbygging",
+      "Merknad (Note)",
+      "Tittel (Header)",
+      "Innhold (Content)",
+      "Handlinger (Actions)",
+      "Luft og padding",
+      "Hvordan bruke komponenten",
+      "Forskjellig farge fra bakgrunn",
+      "Bruk samme struktur i kortene",
+      "Relaterte mønstre",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/checkbox",
+    "title": "Checkbox - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Eksempel",
+      "Egnet til:",
+      "Uegnet til:",
+      "Komponenter som ligner:",
+      "Teknisk dokumentasjon",
+      "Hvordan bruke komponenten",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/datepicker",
+    "title": "DatePicker - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Eksempel",
+      "Egnet til:",
+      "Uegnet til:",
+      "Teknisk dokumentasjon",
+      "Varianter",
+      "Hvordan bruke komponenten",
+      "Taste datoer",
+      "Begrense datoer",
+      "Vurder om Datepicker er den rette løsningen for deg",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/descriptionlist",
+    "title": "DescriptionList  - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Eksempler",
+      "Egnet til:",
+      "Uegnet til:",
+      "Komponenter som ligner:",
+      "Teknisk dokumentasjon",
+      "Varianter",
+      "Vertikal og horisontal",
+      "Størrelse",
+      "Uthevet tekst",
+      "Hvordan bruke komponenten",
+      "Vertikal visning på mobil",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/divider",
+    "title": "Divider - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Eksempler",
+      "Egnet til:",
+      "Uegnet til:",
+      "Teknisk dokumentasjon",
+      "Varianter",
+      "Hvordan bruke komponenten",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/fieldset",
+    "title": "Fieldset - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Eksempel",
+      "Egnet til:",
+      "Uegnet til:",
+      "Teknisk dokumentasjon",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/fileuploader",
+    "title": "FileUploader - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Eksempel",
+      "Egnet til:",
+      "Teknisk dokumentasjon",
+      "Hvordan bruke komponenten",
+      "Vis feilmelding hvis økten ikke kan starte",
+      "Forklar at spinner laster",
+      "Varsel når opplasting går bra",
+      "Når opplastingen feiler",
+      "Bruk to filopplastere ved sammensatte krav til filtyper",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/footer",
+    "title": "Footer - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Eksempel",
+      "Egnet til:",
+      "Uegnet til:",
+      "Teknisk dokumentasjon",
+      "Hvordan bruke komponenten",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/iconbutton",
+    "title": "IconButton - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Eksempel",
+      "Teknisk dokumentasjon",
+      "Varianter",
+      "Med sirkel",
+      "Uten sirkel",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/navigationtile",
+    "title": "NavigationTile - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Eksempel",
+      "Egnet til:",
+      "Uegnet til:",
+      "Komponenter som ligner:",
+      "Teknisk dokumentasjon",
+      "Varianter",
+      "Hvordan bruke komponenten",
+      "Ikoner",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/pagination",
+    "title": "Pagination - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Eksempel",
+      "Egnet til:",
+      "Uegnet til:",
+      "Teknisk dokumentasjon",
+      "Hvordan bruke komponenten",
+      "Justere komponenten visuelt",
+      "Gode bruksmønster",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/panel",
+    "title": "Panel - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Eksempler",
+      "Teknisk dokumentasjon",
+      "Varianter",
+      "Panel med bakgrunnsfarge",
+      "Ramme",
+      "Hvordan bruke komponenten",
+      "Farger",
+      "Illustrasjoner og ikon",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/popover",
+    "title": "Popover - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Eksempel",
+      "Egnet til:",
+      "Uegnet til:",
+      "Komponenter som ligner:",
+      "Teknisk dokumentasjon",
+      "Hvordan bruke komponenten",
+      "Innbygget knapp",
+      "Unngå å dekke over",
+      "Mønster",
+      "Farger",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/rolepicker",
+    "title": "RolePicker - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Eksempel",
+      "Egnet til:",
+      "Uegnet til:",
+      "Teknisk dokumentasjon",
+      "Varianter",
+      "Hvordan bruke komponenten",
+      "Direkte fra id-porten",
+      "Vise virksomheter med ulike statuser",
+      "Varsel ved ugyldige valg",
+      "Tjeneste kun for virksomheter",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/scrolltotopbutton",
+    "title": "ScrollToTopButton - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Eksempel",
+      "Teknisk dokumentasjon",
+      "Varianter",
+      "Hvordan bruke komponenten",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/searchfield",
+    "title": "SearchField - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Eksempel",
+      "Egnet til:",
+      "Uegnet til:",
+      "Teknisk dokumentasjon",
+      "Varianter",
+      "Medium",
+      "Large",
+      "ExtraLarge",
+      "Hvordan bruke komponenten",
+      "Placeholder-tekst",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/select",
+    "title": "Select - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Eksempel",
+      "Egnet til:",
+      "Uegnet til:",
+      "Teknisk dokumentasjon",
+      "Varianter",
+      "Størrelser",
+      "Slik bruker du komponenten",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/spinner",
+    "title": "Spinner - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Eksempler",
+      "Egnet til:",
+      "Uegnet til:",
+      "Teknisk dokumentasjon",
+      "Varianter",
+      "Interaktiv",
+      "",
+      "Svart",
+      "Mørk modus",
+      "Spinner med forklarende tekst",
+      "Hvordan bruke komponenten",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/table",
+    "title": "Table - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Eksempel",
+      "Teknisk dokumentasjon",
+      "Varianter",
+      "Standard",
+      "Kompakt",
+      "Hvordan bruke komponenten",
+      "Ekspanderbare rader",
+      "Redigere innhold",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/tabs",
+    "title": "Tabs - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Eksempel",
+      "Egnet til:",
+      "Uegnet til:",
+      "Teknisk dokumentasjon",
+      "Varianter",
+      "Hvordan bruke komponenten",
+      "Arkfaner på mobil",
+      "Lukking og annen avansert funksjonalitet",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/tag",
+    "title": "Tag - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Eksempel",
+      "Egnet til:",
+      "Uegnet til:",
+      "Teknisk dokumentasjon",
+      "Varianter",
+      "Hvordan bruke komponenten",
+      "Fargebruk",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/textarea",
+    "title": "TextArea - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Eksempel",
+      "Egnet til:",
+      "Uegnet til:",
+      "Komponenter som ligner:",
+      "Teknisk dokumentasjon",
+      "Read-only",
+      "Slik bruker du komponenten",
+      "Ledetekst, beskrivelse og hjelpetekst",
+      "Ikke bruk placeholder-tekst",
+      "God praksis og relaterte mønstre",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/topbannerexternal",
+    "title": "TopBannerExternal - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Eksempel",
+      "Egnet til:",
+      "Uegnet til:",
+      "Teknisk dokumentasjon",
+      "Hvordan bruke komponenten",
+      "Funksjon for å hoppe til hovedinnhold",
+      "Innlogging",
+      "Visningslogikk og tilpasninger for innlogget flate",
+      "Språk",
+      "Meny",
+      "Søk",
+      "Responsiv oppførsel",
+      "Brukerskuff",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/topbanner-internal",
+    "title": "TopBannerInternal - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Eksempel",
+      "Egnet til:",
+      "Uegnet til:",
+      "Komponenter som ligner:",
+      "Teknisk dokumentasjon",
+      "Varianter",
+      "Bakgrunnsfarge",
+      "Hvordan bruke komponenten",
+      "Logo og tittel",
+      "Aksjonsmeny",
+      "Funksjon for å hoppe til hovedinnhold",
+      "Knapper og søk",
+      "Testmodus",
+      "Mønster",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/typography",
+    "title": "Typografi-komponenter - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Heading",
+      "Teknisk dokumentasjon for Heading",
+      "Paragraph",
+      "Paragraph som ingress",
+      "Paragraph som vanlig tekstavsnitt",
+      "Teknisk dokumentasjon for Paragraph",
+      "Blockquote",
+      "Teknisk dokumentasjon for Blockquote",
+      "List",
+      "Liste med kulepunkt",
+      "Liste med tall",
+      "Teknisk dokumentasjon for List",
+      "Universell utforming for alle typografi-komponentene",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler/triggerord",
+    "title": "Triggerord - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Slik bruker du triggerord",
+      "Slik finner du gode triggerord",
+      "Slik bruker du Google Trends",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler/tittel",
+    "title": "Titler og mellomtitler - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Prinsipper",
+      "Slik gjør du det",
+      "1. Se saken fra leserens ståsted",
+      "2. Beskriv saken med ord som han eller hun kan forstå",
+      "3. Bruk setninger, ikke etiketter eller stikkord",
+      "Derfor gjør vi det slik",
+      "Formatér mellomtitler riktig",
+      "Se også",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler/avsnitt",
+    "title": "Avsnitt og ingress - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Del opp teksten",
+      "Ingress/første avsnitt",
+      "Se også",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler/ofte-stilte-sporsmal",
+    "title": "Ofte stilte spørsmål (FAQ) - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Dette er \"Ofte stilte spørsmål\"",
+      "Derfor bruker vi det ikke",
+      "Dette kan vi gjøre i stedet",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler/hjelpetekst",
+    "title": "Hjelpetekster og ledetekster - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Slik gjør du det",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler/datoer",
+    "title": "Datoer - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Skriv alltid hele årstallet",
+      "Husk mellomrom etter punktum",
+      "På engelsk",
+      "Se også",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler/tidsfrister",
+    "title": "Tidsfrister - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Se også",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler/matematiske-tegn",
+    "title": "Matematiske tegn og regnestykker - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Forsøk å sette opp et regnestykke hvis du har plass",
+      "Se også",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler/prosent",
+    "title": "Prosent - Skatteetaten",
+    "type": "doc",
+    "depth": 3,
+    "sections": [
+      "Unntak ved oppramsing av mange tall",
+      "Mellomrom foran prosent-tegnet",
+      "På engelsk",
+      "Mer hjelp",
+      "Se også",
+      "Trenger du hjelp?"
+    ]
   }
 ]
