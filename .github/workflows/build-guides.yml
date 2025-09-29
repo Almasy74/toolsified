@@ -10,6 +10,9 @@ on:
       - 'scripts/python/**'
       - '.github/workflows/build-guides.yml'
   workflow_dispatch:
+  # (valgfritt) ukentlig nattlig kjøring:
+  # schedule:
+  #   - cron: '23 3 * * 1'
 
 jobs:
   build-guide:
@@ -30,21 +33,29 @@ jobs:
       - name: Crawl DS
         run: |
           mkdir -p docs/find
-          python scripts/python/crawl_ds.py --sources knowledge/sources.json --out docs/find/crawl.json
+          python scripts/python/crawl_ds.py \
+            --sources knowledge/sources.json \
+            --out docs/find/crawl.json \
+            --max-depth 3 \
+            --max-pages 500 \
+            --timeout 10
           test -s docs/find/crawl.json || (echo "crawl.json missing/empty" && exit 1)
 
       - name: Build index
         run: |
-          python scripts/python/build_index.py --knowledge knowledge --crawl docs/find/crawl.json --out docs/find/index.json
+          python scripts/python/build_index.py \
+            --knowledge knowledge \
+            --crawl docs/find/crawl.json \
+            --out docs/find/index.json
 
       - name: Debug files
         run: |
           echo "== ls docs/find =="
           ls -lah docs/find
           echo "== head crawl.json =="
-          head -n 20 docs/find/crawl.json || true
+          head -n 40 docs/find/crawl.json || true
           echo "== head index.json =="
-          head -n 40 docs/find/index.json || true
+          head -n 60 docs/find/index.json || true
           echo "== git status =="
           git status
           echo "== check-ignore =="
