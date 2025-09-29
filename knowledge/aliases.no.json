@@ -1,1 +1,4 @@
-test
+{
+  "tabell": ["grid", "liste med kolonner", "table"],
+  "legg til": ["add", "ny rad", "create"]
+}
