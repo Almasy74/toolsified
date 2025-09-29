@@ -1054,5 +1054,44 @@ legend.innerHTML = `
     });
   })();
   </script>
+  <!-- CTA: Endringsarkiv -->
+<style>
+  .archive-cta {
+    margin: 28px 0 12px;
+    padding: 16px;
+    background: var(--card, #11161d);
+    border: 1px solid var(--border, #1f2a36);
+    border-radius: 14px;
+    display: flex;
+    justify-content: center;
+  }
+  .btn-archive {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: 12px 20px;
+    border-radius: 999px;
+    font-weight: 700;
+    text-decoration: none;
+    background: var(--accent, #2a7de1);
+    color: #fff;
+  }
+  .btn-archive:hover { filter: brightness(1.1); }
+  .btn-archive:focus-visible {
+    outline: 3px solid var(--focus, #9dd1ff);
+    outline-offset: 3px;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .btn-archive { transition: filter .15s ease, transform .15s ease; }
+    .btn-archive:hover { transform: translateY(-1px); }
+  }
+</style>
+
+<div class="archive-cta" role="complementary" aria-label="Gå til endringsarkivet">
+  <a class="btn-archive" href="./uu-arkiv.html" rel="noopener">
+    Se endringsarkivet <span aria-hidden="true">→</span>
+  </a>
+</div>
+
 </body>
 </html>
