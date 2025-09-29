@@ -24,6 +24,7 @@ jobs:
 
       - name: Crawl DS
         run: |
+          mkdir -p docs/find
           python scripts/python/crawl_ds.py --sources knowledge/sources.json --out docs/find/crawl.json
 
       - name: Build index
