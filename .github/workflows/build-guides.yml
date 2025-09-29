@@ -8,6 +8,7 @@ on:
     paths:
       - 'knowledge/**'
       - 'scripts/python/**'
+      - 'scripts/node/**'
       - '.github/workflows/build-guides.yml'
   workflow_dispatch:
   # (valgfritt) ukentlig nattlig kjøring:
@@ -20,12 +21,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # ---- Python del ----
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Install deps
+      - name: Install Python deps
         run: |
           python -m pip install --upgrade pip
           pip install beautifulsoup4 lxml requests
@@ -48,6 +50,24 @@ jobs:
             --crawl docs/find/crawl.json \
             --out docs/find/index.json
 
+      # ---- Node/Playwright del ----
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Playwright
+        run: |
+          npm -y init >/dev/null 2>&1 || true
+          npm i playwright@1
+          npx playwright install --with-deps chromium
+
+      - name: Snap screenshots
+        run: |
+          node scripts/node/snap-storybook.mjs knowledge/screens.json
+          ls -lah docs/find/screenshots || true
+
+      # ---- Debug og commit ----
       - name: Debug files
         run: |
           echo "== ls docs/find =="
@@ -72,6 +92,6 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           # force-add i tilfelle .gitignore matcher
-          git add -f docs/find/index.json docs/find/crawl.json
-          git commit -m "Update DS guide index" || echo "No changes"
+          git add -f docs/find/index.json docs/find/crawl.json docs/find/screenshots/*.png
+          git commit -m "Update DS guide index + screenshots" || echo "No changes"
           git push
