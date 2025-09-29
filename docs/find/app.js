@@ -3,7 +3,7 @@
 
   function render(hits) {
     const el = $('results');
-    if (!hits || !hits.length) { el.innerHTML = '<p>Ingen treff ennå.</p>'; return; }
+    if (!hits || !hits.length) { el.innerHTML = '<p>Ingen treff.</p>'; return; }
     el.innerHTML = hits.map(h => {
       if (h.type === 'pattern') {
         const p = h.item;
@@ -28,7 +28,7 @@
     }).join('');
   }
 
-  function norm(s){ return (s||'').toLowerCase().trim(); }
+  const norm = (s) => (s||'').toLowerCase().trim();
 
   function match(query, idx) {
     const q = norm(query);
@@ -40,30 +40,23 @@
         hits.push({ type: 'pattern', item: p, score: 100 });
       }
     }
-
     for (const c of idx.components || []) {
       const all = [c.name, ...(c.aliases||[])].map(norm);
       if (all.some(w => q.includes(w) || w.includes(q))) {
         hits.push({ type: 'component', item: c, score: 50 });
       }
     }
-
     for (const d of idx.crawl || []) {
       if (norm(d.title).includes(q)) hits.push({ type: 'doc', item: d, score: 10 });
     }
-
     return hits.sort((a,b) => b.score - a.score);
   }
 
   async function loadIndex() {
     try {
-      console.log('find page at', location.href);
       const res = await fetch('./index.json', { cache: 'no-store' });
-      console.log('fetch index.json ->', res.status, res.url);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json();
-      console.log('index keys:', Object.keys(data));
-      return data;
+      return await res.json();
     } catch (e) {
       console.error('index.json error:', e);
       $('results').innerHTML = `<p>Feil ved lasting av index.json: ${String(e)}</p>`;
@@ -71,16 +64,35 @@
     }
   }
 
+  // enkel debounce for input
+  const debounce = (fn, ms=200) => {
+    let t; return (...args) => { clearTimeout(t); t = setTimeout(()=>fn(...args), ms); };
+  };
+
   window.addEventListener('DOMContentLoaded', async () => {
     const idx = await loadIndex();
-
-    // sanity: vis noe med én gang
-    render(match('tabell', idx));
-
     const input = $('q');
     const go = $('go');
-    const run = () => render(match(input.value, idx));
-    go.addEventListener('click', run);
-    input.addEventListener('keydown', e => { if (e.key === 'Enter') run(); });
+
+    const run = () => {
+      const q = input.value;
+      console.log('RUN search:', q);
+      render(match(q, idx));
+    };
+
+    // 1) Klikk på Søk
+    go.addEventListener('click', () => { console.log('CLICK search'); run(); });
+
+    // 2) Enter i feltet
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { console.log('ENTER search'); e.preventDefault(); run(); }
+    });
+
+    // 3) Live-søk mens man skriver
+    input.addEventListener('input', debounce(run, 150));
+
+    // Demo: vis noe ved første last (uten å låse input)
+    if (!input.value) input.placeholder = 'f.eks. tabell der brukere kan legge til nye rader';
+    render(match('tabell', idx));
   });
 })();
