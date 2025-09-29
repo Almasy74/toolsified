@@ -48,6 +48,8 @@
 
     details summary { cursor: pointer; }
     .footer { display:flex; justify-content: space-between; align-items:center; margin-top: 10px; color: var(--muted); font-size: 12px; gap: 12px; flex-wrap: wrap; }
+
+    .truncate { max-width: 540px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: inline-block; vertical-align: bottom; }
   </style>
 </head>
 <body>
@@ -58,8 +60,8 @@
 
     <div class="toolbar" role="region" aria-label="Filtre for endringsarkiv">
       <div class="field">
-        <label for="q">Søk (domene/URL)</label>
-        <input id="q" type="search" placeholder="Filtrer på domene eller URL…" autocomplete="off" />
+        <label for="q">Søk (navn/domene/URL)</label>
+        <input id="q" type="search" placeholder="Filtrer på navn, domene eller URL…" autocomplete="off" />
       </div>
       <div class="field">
         <label for="onlyAdded">Filtrer</label>
@@ -81,7 +83,7 @@
           <tr>
             <th>Dato/tid</th>
             <th>Domene</th>
-            <th>URL</th>
+            <th>Navn</th>
             <th>+ / −</th>
             <th>Detaljer</th>
           </tr>
@@ -99,6 +101,7 @@
 
   <script type="module">
     const LOG_URL = "./data/uustatus/logs/changes.jsonl";
+    const DETAILS_URL = "./uu-status-details.json";
 
     function escapeHTML(s) {
       return String(s)
@@ -107,6 +110,41 @@
         .replaceAll(">","&gt;")
         .replaceAll('"',"&quot;")
         .replaceAll("'","&#039;");
+    }
+
+    function canonUrl(u) {
+      try {
+        const a = new URL((u || '').trim());
+        a.hash = ''; a.search = '';
+        let host = a.hostname.toLowerCase();
+        if (a.port && !((a.protocol === 'http:' && a.port === '80') || (a.protocol === 'https:' && a.port === '443'))) {
+          host += `:${a.port}`;
+        }
+        let path = a.pathname || '';
+        if (path !== '/' && path.endsWith('/')) path = path.slice(0, -1);
+        return `${a.protocol}//${host}${path}`;
+      } catch {
+        return (u || '').trim();
+      }
+    }
+
+    const titleByUrl = new Map();
+
+    async function loadTitleMap() {
+      try {
+        const res = await fetch(DETAILS_URL, { cache: "no-store" });
+        const data = await res.json();
+        const rows = Array.isArray(data) ? data : (data.urls || []);
+        for (const r of rows) {
+          const url = r.url || r.href;
+          const title = r.title || r.name;
+          if (url && title) {
+            titleByUrl.set(canonUrl(url), title);
+          }
+        }
+      } catch (e) {
+        console.warn("Kunne ikke laste tittel-kart:", e);
+      }
     }
 
     async function fetchJSONL(url) {
@@ -120,9 +158,10 @@
         .map(l => JSON.parse(l));
     }
 
-    function passesFilters(row, state) {
+    function passesFilters(row, state, resolvedTitle) {
       const q = state.q;
-      const hit = !q || (row.domain?.toLowerCase().includes(q) || row.url?.toLowerCase().includes(q));
+      const hay = (resolvedTitle || "") + " " + (row.domain || "") + " " + (row.url || "");
+      const hit = !q || hay.toLowerCase().includes(q);
       if (!hit) return false;
 
       if (state.mode === "added" && !(row.added && row.added.length > 0)) return false;
@@ -134,6 +173,15 @@
         if (ts < state.from) return false;
       }
       return true;
+    }
+
+    function resolveTitle(row) {
+      // Prioritet: tittel i logg (om vi senere skriver den der) -> oppslag fra details -> fjernet -> URL
+      const key = canonUrl(row.url || "");
+      const fromLog = row.title && String(row.title).trim();
+      const fromMap = titleByUrl.get(key);
+      const removed = (row.changed && (row.changed.removedEntry || row.changed.removedUrl));
+      return fromLog || fromMap || (removed ? "Erklæring (fjernet)" : (row.url || ""));
     }
 
     function render(rows) {
@@ -166,12 +214,14 @@
         tdDom.textContent = r.domain || "";
         tr.appendChild(tdDom);
 
-        const tdUrl = document.createElement("td");
-        const a = document.createElement("a");
-        a.href = r.url; a.target = "_blank"; a.rel = "noopener";
-        a.textContent = r.url;
-        tdUrl.appendChild(a);
-        tr.appendChild(tdUrl);
+        const tdName = document.createElement("td");
+        const title = resolveTitle(r);
+        if (r.url) {
+          tdName.innerHTML = `<a class="truncate" href="${escapeHTML(r.url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(title)}</a>`;
+        } else {
+          tdName.innerHTML = `<span class="truncate">${escapeHTML(title)}</span>`;
+        }
+        tr.appendChild(tdName);
 
         const tdDiff = document.createElement("td");
         tdDiff.textContent = `+${plus} / −${minus}`;
@@ -191,11 +241,11 @@
         secRemoved.innerHTML = "<strong>Fjernet:</strong>" + (minus ? `<ul>${r.removed.map(x=>`<li>${escapeHTML(x)}</li>`).join("")}</ul>` : " <span class='muted'>Ingen</span>");
         det.appendChild(secRemoved);
 
-        if (r.changed) {
-          const pre = document.createElement("pre");
-          pre.textContent = JSON.stringify(r.changed, null, 2);
+        if (r.changed && Object.keys(r.changed).length) {
           const hdr = document.createElement("div");
           hdr.innerHTML = "<strong>Andre endringer:</strong>";
+          const pre = document.createElement("pre");
+          pre.textContent = JSON.stringify(r.changed, null, 2);
           det.appendChild(hdr);
           det.appendChild(pre);
         }
@@ -205,9 +255,9 @@
         const yyyyMmDd = (r.updatedDate || (r.ts || "").slice(0,10));
         snapLink.style.marginTop = ".5rem";
         snapLink.innerHTML = `
-          <div class="muted" style="margin-bottom:.25rem;">Sist oppdatert (fra erklæring): ${yyyyMmDd}</div>
-          <a href="./data/uustatus/snapshots_by_updated/${yyyyMmDd}.json" target="_blank" rel="noopener">
-            Snapshot ${yyyyMmDd}
+          <div class="muted" style="margin-bottom:.25rem;">Sist oppdatert (fra erklæring): ${escapeHTML(yyyyMmDd || "")}</div>
+          <a href="./data/uustatus/snapshots_by_updated/${escapeHTML(yyyyMmDd || "")}.json" target="_blank" rel="noopener">
+            Snapshot ${escapeHTML(yyyyMmDd || "")}
           </a>`;
         det.appendChild(snapLink);
 
@@ -229,17 +279,21 @@
       let state = { q: "", mode: "", from: null };
 
       try {
+        // Last tittel-kart først, så loggen
+        await loadTitleMap();
         all = await fetchJSONL(LOG_URL);
       } catch (e) {
         const tbody = document.getElementById("tbody");
-        tbody.innerHTML = `<tr><td colspan="5" class="muted">Feil ved lasting: ${e.message}</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="5" class="muted">Feil ved lasting: ${escapeHTML(e.message)}</td></tr>`;
         return;
       }
 
       function apply(){
         const rows = all
-          .filter(r => passesFilters(r, state))
-          .sort((a,b) => new Date(b.ts) - new Date(a.ts));
+          .map(r => ({ row: r, title: resolveTitle(r) }))
+          .filter(({row, title}) => passesFilters(row, state, title))
+          .sort((a,b) => new Date(b.row.ts) - new Date(a.row.ts))
+          .map(({row}) => row);
         render(rows);
       }
 
