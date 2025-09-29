@@ -29,6 +29,7 @@ jobs:
         run: |
           mkdir -p docs/find
           python scripts/python/crawl_ds.py --sources knowledge/sources.json --out docs/find/crawl.json
+          test -s docs/find/crawl.json || (echo "crawl.json missing/empty" && exit 1)
 
       - name: Build index
         run: |
