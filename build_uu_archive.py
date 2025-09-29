@@ -153,22 +153,22 @@ def read_current():
     data = load_json(SOURCE_JSON)
     if isinstance(data, dict) and isinstance(data.get("urls"), list):
         return [normalize_entry(x) for x in data["urls"]]
+    if isinstance(data, list):
+        return [normalize_entry(x) for x in data]
     rows = load_csv(SOURCE_CSV)
     return [normalize_entry(x) for x in rows]
 
 def read_prev_from_ref(ref: str):
     """Les baseline latest.json fra gitt git-ref.
-       VIKTIG: Ved feil/mangel, returner TOM baseline ([]) i stedet for None,
-       slik at vi behandler første kjøring som 'alt er nytt'.
+       Ved feil/mangel -> TOM baseline ([]) for å trigge 'første gangs' endringer.
     """
     try:
         blob = subprocess.check_output(["git", "show", f"{ref}:{LATEST_JSON.as_posix()}"], text=True)
         js = json.loads(blob)
-        urls = js.get("urls") if isinstance(js, dict) else []
+        urls = js.get("urls") if isinstance(js, dict) else js
         return urls if isinstance(urls, list) else []
     except Exception:
-        # Baseline finnes ikke i denne ref'en -> behandle som tom baseline
-        return []
+        return []  # <- viktig
 
 # --------- diff ----------
 CHECK_FIELDS = ["title", "status", "updatedAt", "totalNonConformities"]
@@ -192,9 +192,43 @@ def compute_change(prev_entry, curr_entry):
         return (changed or None, added, removed)
     return (None, [], [])
 
+def make_initial_changes(curr_rows):
+    """Hvis baseline mangler eller ingen keys kan lages: marker ALT som nytt."""
+    now = datetime.datetime.utcnow()
+    now_iso = now.isoformat(timespec="seconds") + "Z"
+    detected_date = now.strftime("%Y-%m-%d")
+    out = []
+    for c in curr_rows:
+        updated_date = (c.get("updatedAt") or "")[:10] or today_str()
+        out.append({
+            "ts": now_iso,
+            "detectedDate": detected_date,
+            "url": c.get("url") or "",
+            "domain": c.get("domain") or to_domain(c.get("url") or ""),
+            "before_hash": None,
+            "after_hash": sha1(c),
+            "added": c.get("nonConformities") or [],
+            "removed": [],
+            "changed": {
+                "newEntry": True,
+                "totalNonConformities": {"before": 0, "after": c.get("totalNonConformities", 0)}
+            },
+            "updatedDate": updated_date
+        })
+    return out
+
 def diff_once(prev_rows, curr_rows):
     prev_by = index_by_key(prev_rows or [])
     curr_by = index_by_key(curr_rows or [])
+
+    # DEBUG: tell keys
+    print(f"  prev_rows={len(prev_rows or [])} | prev_keys={len(prev_by)}  ||  curr_rows={len(curr_rows or [])} | curr_keys={len(curr_by)}")
+
+    # Hvis vi ikke klarer å lage nøkler for dagens data, fall tilbake: behandle alle som nye.
+    if (curr_rows and not curr_by):
+        print("  WARN: 0 nøkler i dagens datasett. Faller tilbake til 'initial snapshot' for alle.")
+        return make_initial_changes(curr_rows)
+
     changes = []
     now = datetime.datetime.utcnow()
     now_iso = now.isoformat(timespec="seconds") + "Z"
@@ -270,76 +304,4 @@ def main():
 
     curr = read_current()
     if not isinstance(curr, list):
-        print("Fant ikke gyldig dagsdata i docs/uu-status-details.json eller docs/uu-status.csv", file=sys.stderr)
-        sys.exit(1)
-
-    forced_ref = os.getenv("BASELINE_REF", "").strip()
-    auto_bt = os.getenv("AUTO_BACKTRACK", "").strip().lower() in ("1", "true", "yes", "on")
-    max_bt = int(os.getenv("MAX_BACKTRACK", "10"))
-
-    if forced_ref:
-        refs = [forced_ref]
-    elif auto_bt:
-        refs = ["HEAD"] + [f"HEAD~{i}" for i in range(1, max_bt+1)]
-    else:
-        refs = ["HEAD"]
-
-    final_changes = []
-    used_ref = None
-
-    for ref in refs:
-        prev_rows = read_prev_from_ref(ref)  # NB: alltid liste (kan være tom)
-        changes = diff_once(prev_rows, curr)
-        if changes:
-            used_ref = ref
-            final_changes = changes
-            break
-
-    print(f"Dagens datasett: {len(curr)} elementer.")
-    if used_ref:
-        print(f"Diff-baseline: {used_ref}  |  Endringer funnet: {len(final_changes)}")
-    else:
-        print("Ingen endringer oppdaget (refs testet: " + ", ".join(refs) + ").")
-
-    # 1) Logg endringer
-    if final_changes:
-        with CHANGES_LOG.open("a", encoding="utf-8") as f:
-            for row in final_changes:
-                f.write(json.dumps(row, ensure_ascii=False) + "\n")
-
-        # 2) Skriv snapshots per updatedDate
-        changed_by_date = defaultdict(list)
-        # bygg index for dagens datasett
-        curr_index = index_by_key(curr)
-        for ch in final_changes:
-            candidate = None
-            url = (ch.get("url") or "").strip()
-            if url:
-                kk = "url::" + canon_url(url)
-                candidate = curr_index.get(kk)
-            if not candidate:
-                # fallback: finn via title+domain
-                for it in curr:
-                    if (it.get("url") or "") == url:
-                        candidate = it; break
-            if not candidate:
-                continue
-            key = (ch.get("updatedDate") or today_str())
-            changed_by_date[key].append(candidate)
-
-        for date_key, entries in changed_by_date.items():
-            out_fp = SNAP_BY_UPDATED / f"{date_key}.json"
-            existing = load_json(out_fp, fallback={"urls": []})
-            exist_by = index_by_key(existing.get("urls", []))
-            for e in entries:
-                kk = make_key(e)
-                if kk: exist_by[kk] = e
-            out_fp.write_text(json.dumps({"urls": list(exist_by.values())}, ensure_ascii=False, indent=2), encoding="utf-8")
-            print(f"Skrev snapshot for {date_key}: {out_fp}")
-
-    # 3) Oppdater baseline (ALLTID etter diff)
-    LATEST_JSON.write_text(json.dumps({"urls": curr}, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"Oppdaterte {LATEST_JSON}")
-
-if __name__ == "__main__":
-    main()
+        print("Fant ikke gyldig dagsdata i docs/uu-status-details.json ell
