@@ -1,0 +1,14 @@
+{
+  "urls": [
+    {
+      "url": "https://uustatus.no/nb/erklaringer/publisert/0886dcd5-5ce1-4f94-9c3f-2199dc17f445",
+      "domain": "uustatus.no",
+      "title": "Tilgjengelighetserklæring for A-meldingen - Avstemmingsinformasjon | uustatus",
+      "updatedAt": "",
+      "nonConformities": [
+        "2.4.3"
+      ],
+      "totalNonConformities": 1
+    }
+  ]
+}
