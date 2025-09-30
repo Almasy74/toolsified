@@ -1,19 +1,17 @@
 permissions:
   contents: write
-  
+
 name: Build DS guide
 
 on:
   push:
     paths:
       - 'knowledge/**'
-      - 'scripts/python/**'
-      - 'scripts/node/**'
+      - 'scripts/**'
       - '.github/workflows/build-guides.yml'
   workflow_dispatch:
-  # (valgfritt) ukentlig nattlig kjøring:
   # schedule:
-  #   - cron: '23 3 * * 1'
+  #   - cron: '23 3 * * 1'  # ukentlig (valgfritt)
 
 jobs:
   build-guide:
@@ -21,11 +19,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # ---- Python del ----
+      # ---------- Python (crawl + index) ----------
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: pip-${{ runner.os }}-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            pip-${{ runner.os }}-
 
       - name: Install Python deps
         run: |
@@ -38,8 +44,8 @@ jobs:
           python scripts/python/crawl_ds.py \
             --sources knowledge/sources.json \
             --out docs/find/crawl.json \
-            --max-depth 3 \
-            --max-pages 500 \
+            --max-depth 2 \
+            --max-pages 200 \
             --timeout 10
           test -s docs/find/crawl.json || (echo "crawl.json missing/empty" && exit 1)
 
@@ -49,12 +55,21 @@ jobs:
             --knowledge knowledge \
             --crawl docs/find/crawl.json \
             --out docs/find/index.json
+          test -s docs/find/index.json || (echo "index.json missing/empty" && exit 1)
 
-      # ---- Node/Playwright del ----
+      # ---------- Node (Playwright screenshots av preview/canvas) ----------
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+
+      - name: Cache npm
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: npm-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            npm-${{ runner.os }}-
 
       - name: Install Playwright
         run: |
@@ -62,24 +77,24 @@ jobs:
           npm i playwright@1
           npx playwright install --with-deps chromium
 
-      - name: Snap screenshots
+      - name: Capture Storybook stories (preview/canvas)
+        env:
+          STORYBOOK_BASE: https://skatteetaten.github.io/designsystemet
+          OUTPUT_DIR: docs/find/screenshots
         run: |
-          node scripts/node/snap-storybook.mjs knowledge/screens.json
-          ls -lah docs/find/screenshots || true
+          mkdir -p "$OUTPUT_DIR"
+          node scripts/capture-stories.mjs
+          ls -lah "$OUTPUT_DIR" || true
 
-      # ---- Debug og commit ----
+      # ---------- Debug + artefakter + commit ----------
       - name: Debug files
         run: |
-          echo "== ls docs/find =="
-          ls -lah docs/find
+          echo "== docs/find =="
+          ls -lah docs/find || true
           echo "== head crawl.json =="
           head -n 40 docs/find/crawl.json || true
           echo "== head index.json =="
           head -n 60 docs/find/index.json || true
-          echo "== git status =="
-          git status
-          echo "== check-ignore =="
-          git check-ignore -v docs/find/crawl.json || true
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
@@ -91,7 +106,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          # force-add i tilfelle .gitignore matcher
-          git add -f docs/find/index.json docs/find/crawl.json docs/find/screenshots/*.png
-          git commit -m "Update DS guide index + screenshots" || echo "No changes"
-          git push
+          git add -f docs/find/index.json docs/find/crawl.json docs/find/screenshots/*.png 2>/dev/null || true
+          git commit -m "Update DS guide index + screenshots (preview)" || echo "No changes"
+          git push || true
