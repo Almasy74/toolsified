@@ -68,8 +68,10 @@
       "domain": "uustatus.no",
       "title": "Tilgjengelighetserklæring for Skattekalkulator - Beregn skatten din | uustatus",
       "updatedAt": "",
-      "nonConformities": [],
-      "totalNonConformities": 0
+      "nonConformities": [
+        "1.4.10"
+      ],
+      "totalNonConformities": 1
     },
     {
       "url": "https://uustatus.no/nb/erklaringer/publisert/f601d522-c18e-4cde-9c8a-f3c39aa9995e",
