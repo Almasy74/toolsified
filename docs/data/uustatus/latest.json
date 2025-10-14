@@ -243,10 +243,8 @@
       "domain": "uustatus.no",
       "title": "Tilgjengelighetserklæring for Tredjepartsopplysninger - tilskudd til vitenskapelig forskning eller yrkesopplæring | uustatus",
       "updatedAt": "",
-      "nonConformities": [
-        "2.4.3"
-      ],
-      "totalNonConformities": 1
+      "nonConformities": [],
+      "totalNonConformities": 0
     },
     {
       "url": "https://uustatus.no/nb/erklaringer/publisert/9026f9d6-8ab5-4fb8-bba6-88aaeb18dbcf",
