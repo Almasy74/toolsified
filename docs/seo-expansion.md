@@ -50,11 +50,37 @@ Pages generated per signal:
 
 ---
 
+## Early Authority Signal
+
+A cluster is considered an emerging authority when:
+- Multiple queries share impressions across different pages
+- Average position improves ≥5 positions over 28 days
+
+*When detected, prioritize that cluster for the next expansion cycle.*
+
+---
+
 ## Expansion Rate Limit
 
 Maximum new pages per deployment cycle: **15**.
 
 Large expansions must be split across multiple weeks to protect crawl budget and index quality.
+
+---
+
+## Index Confirmation Gate
+
+After expansion, at least **70% of newly generated pages must be indexed within 14 days** before further expansion in the same cluster is allowed.
+
+*This prevents index bloat and ranking stagnation.*
+
+---
+
+## Cluster Cooldown Rule
+
+The same cluster may not be expanded in consecutive deployment cycles. Wait at least one cycle before expanding the same cluster again.
+- ✅ *Currency → Time → Crypto → Currency*
+- ❌ *Currency → Currency → Currency*
 
 ---
 
@@ -133,3 +159,10 @@ Expansion creates new impressions → impressions create signals → signals cre
 ---
 
 **HARD RULE:** Never build pages without a prior GSC signal after Phase 4.
+
+---
+
+## Operator Principle
+
+**Optimization beats invention.**
+Expand what Google rewards, not what feels like a good idea.
