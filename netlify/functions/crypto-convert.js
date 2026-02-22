@@ -1,8 +1,8 @@
 const axios = require('axios');
 
-exports.handler = async function(event, context) {
+exports.handler = async function (event, context) {
   const { crypto, fiat, date } = event.queryStringParameters;
-  
+
   if (!crypto || !fiat || !date) {
     return {
       statusCode: 400,
@@ -39,11 +39,13 @@ exports.handler = async function(event, context) {
     if (fiat === 'NOK' || fiat === 'EUR') {
       let fxRate;
       if (isToday) {
-        const response = await axios.get(`https://min-api.cryptocompare.com/data/price?fsym=USD&tsyms=${fiat}`);
-        fxRate = response.data[fiat];
+        const response = await axios.get(`https://api.frankfurter.dev/v1/latest?base=USD&symbols=${fiat}`);
+        fxRate = response.data.rates[fiat];
       } else {
-        const response = await axios.get(`https://min-api.cryptocompare.com/data/pricehistorical?fsym=USD&tsyms=${fiat}&ts=${timestamp}`);
-        fxRate = response.data.USD?.[fiat];
+        // Frankfurter generally uses YYYY-MM-DD
+        const dateStr = selectedDate.toISOString().split('T')[0];
+        const response = await axios.get(`https://api.frankfurter.dev/v1/${dateStr}?base=USD&symbols=${fiat}`);
+        fxRate = response.data.rates[fiat];
       }
 
       if (!fxRate) {
