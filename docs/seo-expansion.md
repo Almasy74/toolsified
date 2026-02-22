@@ -46,7 +46,7 @@ Pages generated per signal:
 
 - **Score 4** → 5 pages
 - **Score 5** → 8 pages
-- **Score 6+** → 12 pages
+- **Score 6+** → *up to* 12 pages (operator discretion)
 
 ---
 
@@ -133,6 +133,7 @@ New pages must remain within the functional purpose of the parent tool. Expansio
 2. **Set the Time Filter:** Date → Last 28 days. **Compare → Previous period.** (SEO signals are trends, not levels).
 3. **Enable All Columns:** Turn on Clicks, Impressions, CTR, and Position.
 4. **The Critical Filter:** Click + New → Query → Custom (regex). Enter: `(to|convert|timezone|time|crypto|btc|usd|eur)`. This removes noise testing outside our core clusters.
+   - *Note: Regex filters must be reviewed monthly and expanded based on emerging query language.*
 5. **Sort Correctly:** Sort by **Impressions ↓** (Descending), NOT clicks. Impressions indicate the ranking test phase.
 6. **Identify the SIGNAL:** Look for query patterns (e.g., `usd to nok`, `usd to sek` both showing impressions). This means Google is testing the *USD cluster*, not just one page.
 7. **Visual Cluster Check (Pro Move):** Click a query → Pages tab. If multiple pages get impressions from the same query, Google is mapping cluster authority (Green light).
@@ -159,6 +160,7 @@ Expansion creates new impressions → impressions create signals → signals cre
 ---
 
 **HARD RULE:** Never build pages without a prior GSC signal after Phase 4.
+*Exception: structural or hub-strengthening pages may be created without signals if they improve internal linking architecture.*
 
 ---
 
