@@ -73,7 +73,7 @@
             <th>Buy Date</th>
             <th>Sell Date</th>
             <th>Profit/Loss</th>
-            <th>Details</th>
+            <th></th>
             <th></th>
           </tr>
         </thead>
@@ -201,7 +201,7 @@
         <td><input type="date" class="buy-date" /></td>
         <td><input type="date" class="sell-date" /></td>
         <td class="diff" style="font-weight: 600;">-</td>
-        <td><button class="toggle-details-btn" onclick="toggleDetails('${transactionId}')">Details</button></td>
+        <td><button class="toggle-details-btn" onclick="toggleDetails('${transactionId}')">More</button></td>
         <td><button onclick="removeRow('${transactionId}')" style="background:var(--danger-color); color:white; border:none; border-radius:4px; cursor:pointer; padding:4px 8px;">X</button></td>
       `;
 
@@ -239,7 +239,7 @@
         btn.textContent = 'Hide';
       } else {
         detailsRow.style.display = 'none';
-        btn.textContent = 'Details';
+        btn.textContent = 'More';
       }
     }
 

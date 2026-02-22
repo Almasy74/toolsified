@@ -255,6 +255,29 @@ td {
   text-align: center;
 }
 
+/* Compact table inputs */
+.table input,
+.table select {
+  padding: 8px 10px;
+  margin-top: 0;
+  width: 100%;
+}
+
+.table select {
+  padding: 8px 4px;
+  /* Reduced horizontal padding for dropdowns */
+  font-size: 0.9rem;
+  /* Slightly smaller font to fit 3 chars + arrow */
+}
+
+/* Ensure Crypto/Fiat columns have enough space */
+.table th:nth-child(2),
+.table td:nth-child(2),
+.table th:nth-child(3),
+.table td:nth-child(3) {
+  min-width: 80px;
+}
+
 th {
   background: var(--primary-color);
   color: #fff;
