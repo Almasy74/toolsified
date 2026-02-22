@@ -28,6 +28,8 @@ const baseUrls = [
 ];
 const generatedUrls = [];
 
+const currentYear = new Date().getFullYear();
+
 function generatePages(dataList, templateHtml, outDir, fileNameFunc, replaceFunc) {
     console.log(`Building ${dataList.length} pages for ${outDir}...`);
     dataList.forEach(item => {
@@ -53,6 +55,7 @@ generatePages(dataCurrency, tplCurrency, 'currency',
         .replace(/\[TO_NAME\]/g, p.targetName)
         .replace(/\[FROM_VAR\]/g, p.base.toLowerCase())
         .replace(/\[TO_VAR\]/g, p.target.toLowerCase())
+        .replace(/\[YEAR\]/g, currentYear)
 );
 
 // 2. Timezone
@@ -65,6 +68,7 @@ generatePages(dataTz, tplTz, 'time-zone',
         .replace(/\[TO_NAME\]/g, p.targetName)
         .replace(/\[FROM_VAR\]/g, p.baseVar)
         .replace(/\[TO_VAR\]/g, p.targetVar)
+        .replace(/\[YEAR\]/g, currentYear)
 );
 
 // 3. Crypto
@@ -77,6 +81,7 @@ generatePages(dataCrypto, tplCrypto, 'crypto',
         .replace(/\[TO_NAME\]/g, p.targetName)
         .replace(/\[FROM_VAR\]/g, p.baseVar)
         .replace(/\[TO_VAR\]/g, p.targetVar)
+        .replace(/\[YEAR\]/g, currentYear)
 );
 
 // 4. Timecode
@@ -86,6 +91,7 @@ generatePages(dataTimecode, tplTimecode, 'time-code',
         .replace(/\[FORMAT\]/g, p.format)
         .replace(/\[NAME\]/g, p.name)
         .replace(/\[VAR\]/g, p.var)
+        .replace(/\[YEAR\]/g, currentYear)
 );
 
 console.log('Generating sitemap.xml...');
