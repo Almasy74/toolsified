@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Crypto Converter</title>
+  <link rel="stylesheet" href="/style.css" />
+  <style>
+    main.container {
+      max-width: 100%;
+      padding: 1rem;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      table-layout: auto;
+    }
+
+    .table th,
+    .table td {
+      border: 1px solid #ddd;
+      padding: 0.5rem;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .row-controls {
+      margin-top: 1rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+  </style>
+  <link rel="canonical" href="https://toolsified.com/crypto" />
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "How does the crypto converter work?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Our smart crypto converter lets you log your crypto buys and sells (e.g., Bitcoin or Ethereum to USD/EUR/NOK) on specific dates, and it calculates the exact profit or loss using historical exchange rates."
+    }
+  }, {
+    "@type": "Question",
+    "name": "Which cryptocurrencies are supported?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Currently, we support major cryptocurrencies like Bitcoin (BTC), Ethereum (ETH), and Solana (SOL) converting against standard fiat currencies."
+    }
+  }, {
+    "@type": "Question",
+    "name": "Is my portfolio data stored?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "No. Toolsified is fully privacy-focused. All calculations happen instantly in your browser session and your data is never saved or transmitted to our servers."
+    }
+  }]
+}
+</script>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo-container">
+          <a href="/">
+            <img src="/logo.png" alt="Toolsified logo" class="logo" />
+          </a>
+        </div>
+        <nav class="main-nav">
+          <a href="/time-code">Time Code</a>
+          <a href="/multi-timezone">Time Zones</a>
+          <a href="/currency">Currency</a>
+          <a href="/crypto">Crypto</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <main class="container">
+    <h1>Smart Crypto Converter</h1>
+    <div style="overflow-x: auto">
+      <table class="table" id="cryptoTable">
+        <thead>
+          <tr>
+            <th>Beløp</th>
+            <th>Krypto</th>
+            <th>Fiat</th>
+            <th>Kjøpsdato</th>
+            <th>Salgsdato</th>
+            <th>Kjøpskurs</th>
+            <th>Salgskurs</th>
+            <th>Gevinst/tap</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="row-controls">
+      <button onclick="addRow()">Legg til rad</button>
+    </div>
+  </main>
+
+  <div class="card seo-content"
+    style="margin-top: 40px; text-align: left; padding: 32px; max-width: 680px; margin-left: auto; margin-right: auto;">
+    <h2 style="font-size: 1.5rem; margin-bottom: 16px;">Track Your Crypto Gains and Losses</h2>
+    <p style="text-align: left; margin-bottom: 24px;">The Toolsified Smart Crypto Converter is designed for quick,
+      precise portfolio tracking. Whether you bought Bitcoin, Ethereum, or Solana, simply enter the amount and the dates
+      of your purchase and sale. The tool instantly fetches the historical exchange rates between your chosen crypto and
+      fiat currencies (like USD, EUR, or NOK) to calculate your exact profit or loss. It is private, fast, and requires
+      no account.</p>
+
+    <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Supported Cryptocurrencies</h3>
+    <table style="margin-top: 0; margin-bottom: 32px; width: 100%;">
+      <thead>
+        <tr>
+          <th>Asset</th>
+          <th>Symbol</th>
+          <th>Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Bitcoin</td>
+          <td>BTC</td>
+          <td>Layer 1 Store of Value</td>
+        </tr>
+        <tr>
+          <td>Ethereum</td>
+          <td>ETH</td>
+          <td>Smart Contract Platform</td>
+        </tr>
+        <tr>
+          <td>Solana</td>
+          <td>SOL</td>
+          <td>High-Speed Blockchain</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Live Historic Conversion Paths</h3>
+    <div class="internal-links-cluster" style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 32px;">
+      <a href="/crypto/btc-to-usd" style="color: var(--primary-color); text-decoration: underline;">BTC to USD</a>
+      <a href="/crypto/eth-to-usd" style="color: var(--primary-color); text-decoration: underline;">ETH to USD</a>
+      <a href="/crypto/sol-to-usd" style="color: var(--primary-color); text-decoration: underline;">SOL to USD</a>
+      <a href="/crypto/btc-to-eur" style="color: var(--primary-color); text-decoration: underline;">BTC to EUR</a>
+      <a href="/crypto/eth-to-eur" style="color: var(--primary-color); text-decoration: underline;">ETH to EUR</a>
+    </div>
+
+    <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Frequently Asked Questions</h3>
+    <div class="faq-item" style="margin-bottom: 16px;">
+      <strong>How does the crypto converter work?</strong>
+      <p style="text-align: left; margin-bottom: 0;">Log your crypto buys and sells on specific dates. It calculates the
+        profit or loss using exact historical exchange rates.</p>
+    </div>
+    <div class="faq-item" style="margin-bottom: 16px;">
+      <strong>Which cryptocurrencies are supported?</strong>
+      <p style="text-align: left; margin-bottom: 0;">We currently support Bitcoin (BTC), Ethereum (ETH), and Solana
+        (SOL) against major fiat currencies.</p>
+    </div>
+    <div class="faq-item" style="margin-bottom: 16px;">
+      <strong>Is my portfolio data stored?</strong>
+      <p style="text-align: left; margin-bottom: 0;">No. All calculations happen instantly in your browser session and
+        your data is never saved or transmitted to our servers.</p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer style="margin-top: auto; border-top: 1px solid var(--border-color); background: var(--card-bg);">
+    <div class="container" style="text-align: center; padding: 24px 16px; font-size: 0.9rem;">
+      <p style="margin-bottom: 12px;">© 2025 Toolsified. Smart tools for everyday tasks.</p>
+      <div style="display: flex; justify-content: center; gap: 16px; margin-bottom: 12px;">
+        <a href="/privacy" style="color: inherit; text-decoration: underline;">Privacy Policy</a>
+        <a href="/contact" style="color: inherit; text-decoration: underline;">Contact Us</a>
+      </div>
+      <p><a href="mailto:info@toolsified.com"
+          style="color: inherit; text-decoration: underline;">info@toolsified.com</a></p>
+    </div>
+  </footer>
+
+  <script>
+    const supportedCryptos = ['BTC', 'ETH', 'SOL'];
+    const supportedFiats = ['NOK', 'USD', 'EUR'];
+    const apiKey = '61afd9bedcb6a6417369f2bb518b7352f01bb62d0051d9a4803b8aa83acf4227';
+
+    function addRow() {
+      const tbody = document.querySelector("#cryptoTable tbody");
+      const row = document.createElement("tr");
+
+      row.innerHTML = `
+        <td><input type="number" step="any" class="amount" /></td>
+        <td>
+          <select class="crypto">
+            ${supportedCryptos.map(c => `<option>${c}</option>`).join('')}
+          </select>
+        </td>
+        <td>
+          <select class="fiat">
+            ${supportedFiats.map(f => `<option>${f}</option>`).join('')}
+          </select>
+        </td>
+        <td><input type="date" class="buy-date" /></td>
+        <td><input type="date" class="sell-date" /></td>
+        <td class="buy-rate">-</td>
+        <td class="sell-rate">-</td>
+        <td class="diff">-</td>
+        <td><button onclick="removeRow(this)">X</button></td>
+      `;
+
+      tbody.appendChild(row);
+
+      row.querySelectorAll("input, select").forEach(el => {
+        el.addEventListener("change", () => updateRow(row));
+      });
+    }
+
+    function removeRow(btn) {
+      btn.closest("tr").remove();
+    }
+
+    async function getRate(crypto, fiat, date) {
+      if (!date) return null;
+      const selectedDate = new Date(date);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      selectedDate.setHours(0, 0, 0, 0);
+      if (selectedDate > today) return null;
+
+      try {
+        // Bruk Netlify-funksjon for konvertering
+        const url = `/.netlify/functions/crypto-convert?crypto=${crypto}&fiat=${fiat}&date=${date}`;
+        console.log("Henter kurs fra:", url);
+        const response = await fetch(url);
+
+        if (!response.ok) {
+          console.error("Feil ved henting av kurs:", await response.text());
+          return null;
+        }
+
+        const data = await response.json();
+        console.log("Kurs data:", data);
+
+        if (!data.rate) {
+          console.error("Ingen kurs funnet for", crypto, "til", fiat, "på dato", date);
+          return null;
+        }
+
+        return data.rate;
+      } catch (err) {
+        console.error("Feil ved henting av kurs:", err);
+        return null;
+      }
+    }
+
+    async function updateRow(row) {
+      const amount = parseFloat(row.querySelector(".amount").value);
+      const crypto = row.querySelector(".crypto").value;
+      const fiat = row.querySelector(".fiat").value.toUpperCase();
+      const buyDate = row.querySelector(".buy-date").value;
+      const sellDate = row.querySelector(".sell-date").value;
+
+      const buyRateCell = row.querySelector(".buy-rate");
+      const sellRateCell = row.querySelector(".sell-rate");
+      const diffCell = row.querySelector(".diff");
+
+      if (!crypto || !fiat || !amount) return;
+
+      const buyRate = await getRate(crypto, fiat, buyDate);
+      const sellRate = await getRate(crypto, fiat, sellDate);
+
+      buyRateCell.textContent = buyRate === 'VALUTAFEIL' ? 'Valutakurs mangler' : (buyRate ? buyRate.toFixed(2) : (buyDate ? 'Feil' : '-'));
+      sellRateCell.textContent = sellRate === 'VALUTAFEIL' ? 'Valutakurs mangler' : (sellRate ? sellRate.toFixed(2) : (sellDate ? 'Feil' : '-'));
+
+      if (typeof buyRate === 'number' && typeof sellRate === 'number') {
+        const diff = (sellRate - buyRate) * amount;
+        diffCell.textContent = diff.toFixed(2);
+        diffCell.style.color = diff >= 0 ? 'green' : 'red';
+      } else {
+        diffCell.textContent = '-';
+        diffCell.style.color = 'inherit';
+      }
+    }
+
+    addRow();
+  </script>
+</body>
+
+</html>

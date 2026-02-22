@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Convert CEST to Local Time – Central European Summer Time Translator</title>
+    <meta name="description"
+        content="Paste a time abbreviation like '2pm CEST' and convert Central European Summer Time (CEST) to your local time instantly." />
+    <meta name="google-adsense-account" content="ca-pub-6293439009227714">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3/build/global/luxon.min.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6293439009227714"
+        crossorigin="anonymous"></script>
+
+    <link rel="canonical" href="https://toolsified.com/time-code/convert-cest-to-local-time" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "How do I convert CEST to my local time?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Simply paste a time code like '2pm CEST' or 'tomorrow 15:00 CEST'. Our tool instantly translates Central European Summer Time into your local time zone."
+    }
+  }, {
+    "@type": "Question",
+    "name": "Can I convert CEST to other time zones?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes, once you input a CEST time, you can add as many target time zones as you need and the converter will translate it across all of them simultaneously."
+    }
+  }]
+}
+</script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <a href="/">
+                        <img src="/logo.png" alt="Toolsified logo" class="logo" />
+                    </a>
+                </div>
+                <nav class="main-nav">
+                    <a href="/time-code">Time Code</a>
+                    <a href="/multi-timezone">Time Zones</a>
+                    <a href="/currency">Currency</a>
+                    <a href="/crypto">Crypto</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="card">
+            <h1 id="page-title">Convert CEST to Local Time</h1>
+            <p class="subtitle" style="text-align: center; margin-bottom: 32px;">Smart Central European Summer Time (CEST) natural
+                language translator.</p>
+
+            <label for="codeInput">Time code input (e.g. <strong>2pm CEST</strong>, <strong>tomorrow 15
+                    CEST</strong>):</label>
+            <input id="codeInput" placeholder="e.g. 2pm CEST" />
+
+            <label for="zoneRows">Target Local Time Zone:</label>
+            <div id="zoneRows"></div>
+
+            <label for="addZone">Show also in these time zones:</label>
+            <button id="addZone" class="primary" type="button" style="margin-bottom: 16px;">Add time zone</button>
+
+            <button id="convertBtn" class="primary" type="button" style="width: 100%;">Convert CEST to Local
+                Time</button>
+
+            <table id="resultTbl" style="display:none; width: 100%; margin-top: 24px;">
+                <thead>
+                    <tr>
+                        <th>Time zone</th>
+                        <th>Output Format</th>
+                    </tr>
+                </thead>
+                <tbody id="resultBody"></tbody>
+            </table>
+        </div>
+
+        <div class="card seo-content" style="margin-top: 40px; text-align: left; padding: 32px;">
+            <h2 style="font-size: 1.5rem; margin-bottom: 16px;">Smart Central European Summer Time Translator</h2>
+            <p style="text-align: left; margin-bottom: 24px;">Stop struggling with manual time zone math. The Toolsified
+                Time-code Converter lets you paste natural language time formats specifically for <strong>Central European Summer Time
+                    (CEST)</strong>. Instantly translate an invitation like "3pm CEST" into your local time.
+                Perfect for coordinating
+                international meetings, gaming events, or remote work schedules without leaving your browser.</p>
+
+            <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Related Time Tools</h3>
+            <div class="internal-links-cluster" style="margin-bottom: 32px;">
+                <p><a href="/time-code" style="color: var(--primary-color); text-decoration: underline;">Back to
+                        Time-code Translator Hub</a></p>
+            </div>
+
+            <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Frequently Asked Questions</h3>
+            <div class="faq-item" style="margin-bottom: 16px;">
+                <strong>How do I convert CEST to my local time?</strong>
+                <p style="text-align: left; margin-bottom: 0;">Simply paste a time code like '2pm CEST'. Our tool
+                    instantly translates Central European Summer Time into your local time zone.</p>
+            </div>
+            <div class="faq-item" style="margin-bottom: 16px;">
+                <strong>Can I convert CEST to other time zones?</strong>
+                <p style="text-align: left; margin-bottom: 0;">Yes, once you input a CEST time, you can add as many
+                    target time zones as you need and the converter will translate it across all of them.</p>
+            </div>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer style="margin-top: auto; border-top: 1px solid var(--border-color); background: var(--card-bg);">
+        <div class="container" style="text-align: center; padding: 24px 16px; font-size: 0.9rem;">
+            <p style="margin-bottom: 12px;">© 2025 Toolsified. Smart tools for everyday tasks.</p>
+            <div style="display: flex; justify-content: center; gap: 16px; margin-bottom: 12px;">
+                <a href="/privacy" style="color: inherit; text-decoration: underline;">Privacy Policy</a>
+                <a href="/contact" style="color: inherit; text-decoration: underline;">Contact Us</a>
+            </div>
+            <p><a href="mailto:info@toolsified.com"
+                    style="color: inherit; text-decoration: underline;">info@toolsified.com</a></p>
+        </div>
+    </footer>
+
+    <script>
+        const { DateTime } = luxon;
+        const allZones = Intl.supportedValuesOf('timeZone');
+        const zoneRows = document.getElementById('zoneRows');
+        const localZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+        function createSelect(initialValue = "") {
+            const sel = document.createElement('select');
+            sel.style.width = '100%';
+            sel.style.marginBottom = '8px';
+            allZones.forEach(z => {
+                const o = document.createElement('option');
+                o.value = o.textContent = z;
+                if (z === initialValue) o.selected = true;
+                sel.appendChild(o);
+            });
+            return sel;
+        }
+
+        function addZoneRow(first = false, initialValue = "") {
+            const row = document.createElement('div');
+            row.className = 'row';
+            row.style.alignItems = 'center';
+            const sel = createSelect(initialValue);
+            row.appendChild(sel);
+            if (!first) {
+                const rm = document.createElement('button');
+                rm.textContent = 'Remove';
+                rm.className = 'remove-btn';
+                rm.style.marginLeft = '8px';
+                rm.onclick = () => row.remove();
+                row.appendChild(rm);
+            }
+            zoneRows.appendChild(row);
+        }
+
+        addZoneRow(true, localZone);
+        document.getElementById('addZone').onclick = () => addZoneRow(false);
+
+        const abbrevMap = {
+            PST: 'America/Los_Angeles', PDT: 'America/Los_Angeles',
+            EST: 'America/New_York', EDT: 'America/New_York',
+            CST: 'America/Chicago', CDT: 'America/Chicago',
+            MST: 'America/Denver', MDT: 'America/Denver',
+            CET: 'Europe/Paris', CEST: 'Europe/Paris',
+            GMT: 'Etc/GMT', UTC: 'Etc/UTC', BST: 'Europe/London'
+        };
+
+        function resolveDate(words, zone) {
+            const now = DateTime.now().setZone(zone);
+            const joined = words.join(' ').toLowerCase();
+
+            if (joined.includes('tomorrow')) return now.plus({ days: 1 });
+            if (joined.includes('yesterday')) return now.minus({ days: 1 });
+            if (joined.includes('today')) return now;
+
+            const weekdays = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+            const match = joined.match(/next\s+(monday|tuesday|wednesday|thursday|friday|saturday|sunday)/i);
+            if (match) {
+                const target = weekdays.indexOf(match[1].toLowerCase());
+                const diff = (target + 7 - now.weekday) % 7 || 7;
+                return now.plus({ days: diff });
+            }
+
+            const formats = ['d LLL yyyy', 'd LLL', 'd LLLL yyyy', 'd LLLL', 'LLL d yyyy', 'LLL d'];
+            for (const fmt of formats) {
+                const tryDate = DateTime.fromFormat(joined, fmt, { zone });
+                if (tryDate.isValid) return tryDate;
+            }
+
+            return now;
+        }
+
+        document.getElementById('convertBtn').onclick = () => {
+            const raw = document.getElementById('codeInput').value.trim();
+            if (!raw) return alert('Please enter a time code.');
+
+            const cleaned = raw.replace(/[.,!?]/g, '');
+            const upper = cleaned.toUpperCase();
+            const abbr = Object.keys(abbrevMap).find(a =>
+                upper.includes(` ${a}`) || upper.startsWith(`${a} `) || upper.endsWith(` ${a}`)
+            );
+            if (!abbr) return alert('Could not detect time zone abbreviation. Missing "CEST"?');
+
+            const zone = abbrevMap[abbr];
+            if (!zone) return alert('Unsupported Timezone requested.');
+            const rawWithoutAbbr = raw.replace(new RegExp(`\\b${abbr}\\b`, 'i'), '').trim();
+
+            const timeMatch = rawWithoutAbbr.match(/(\d{1,2})(?::(\d{2}))?\s*(am|pm)?/i);
+            if (!timeMatch) return alert('Missing time (e.g. 2pm)');
+
+            let [full, hh, mm, ap] = timeMatch;
+            let hour = parseInt(hh, 10), minute = parseInt(mm || '0', 10);
+            if (ap) {
+                ap = ap.toLowerCase();
+                if (ap === 'pm' && hour !== 12) hour += 12;
+                if (ap === 'am' && hour === 12) hour = 0;
+            }
+
+            const words = rawWithoutAbbr.replace(full, '').trim().split(/\s+/);
+            const baseDate = resolveDate(words, zone);
+            const dt = baseDate.set({ hour, minute, second: 0, millisecond: 0 });
+            render(dt);
+        };
+
+        function render(base) {
+            const out = document.getElementById('resultBody');
+            out.innerHTML = '';
+            const added = new Set();
+
+            function add(z) {
+                if (added.has(z)) return;
+                added.add(z);
+                const dt = base.setZone(z);
+                const isToday = dt.hasSame(DateTime.now().setZone(z), 'day');
+                const localStr = dt.toFormat('cccc dd LLL yyyy · HH:mm') + (isToday ? ' (today)' : '');
+                const isoStr = dt.toISO();
+                const offset = dt.toFormat("ZZ");
+
+                const content = `Local: ${localStr}\nISO: ${isoStr}\nOffset: UTC${offset}`;
+
+                const tr = document.createElement('tr');
+                const formatsCell = document.createElement('td');
+                formatsCell.innerHTML = `
+      <div style="text-align: left; padding: 8px;">
+        <div style="margin-bottom: 4px;"><strong>Local:</strong> ${localStr}</div>
+        <div style="margin-bottom: 4px; font-size: 0.85em; color: #555;"><strong>ISO:</strong> ${isoStr}</div>
+        <div style="margin-bottom: 8px; font-size: 0.85em; color: #555;"><strong>Offset:</strong> UTC${offset}</div>
+        <button class="copy-btn" style="background:#f1f5f9; border: 1px solid #cbd5e1; padding: 4px 12px; border-radius: 4px; cursor:pointer;">Copy String</button><span class="copied-msg" style="display:none; color: var(--primary-color); margin-left:8px; font-size: 0.8em;">Copied!</span>
+      </div>
+    `;
+
+                formatsCell.querySelector('.copy-btn').onclick = () => {
+                    navigator.clipboard.writeText(content);
+                    const msg = formatsCell.querySelector('.copied-msg');
+                    msg.style.display = 'inline';
+                    setTimeout(() => msg.style.display = 'none', 1000);
+                };
+
+                tr.innerHTML = `<td><strong>${z}</strong></td>`;
+                tr.appendChild(formatsCell);
+                out.appendChild(tr);
+            }
+
+            add(localZone);
+            zoneRows.querySelectorAll('select').forEach(sel => add(sel.value));
+            document.getElementById('resultTbl').style.display = 'table';
+        }
+    </script>
+</body>
+
+</html>

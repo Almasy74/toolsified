@@ -1,0 +1,122 @@
+[
+    {
+        "base": "USD",
+        "target": "EUR",
+        "baseName": "US Dollars",
+        "targetName": "Euros"
+    },
+    {
+        "base": "EUR",
+        "target": "USD",
+        "baseName": "Euros",
+        "targetName": "US Dollars"
+    },
+    {
+        "base": "GBP",
+        "target": "USD",
+        "baseName": "British Pounds",
+        "targetName": "US Dollars"
+    },
+    {
+        "base": "USD",
+        "target": "GBP",
+        "baseName": "US Dollars",
+        "targetName": "British Pounds"
+    },
+    {
+        "base": "USD",
+        "target": "JPY",
+        "baseName": "US Dollars",
+        "targetName": "Japanese Yen"
+    },
+    {
+        "base": "EUR",
+        "target": "GBP",
+        "baseName": "Euros",
+        "targetName": "British Pounds"
+    },
+    {
+        "base": "GBP",
+        "target": "EUR",
+        "baseName": "British Pounds",
+        "targetName": "Euros"
+    },
+    {
+        "base": "USD",
+        "target": "CAD",
+        "baseName": "US Dollars",
+        "targetName": "Canadian Dollars"
+    },
+    {
+        "base": "CAD",
+        "target": "USD",
+        "baseName": "Canadian Dollars",
+        "targetName": "US Dollars"
+    },
+    {
+        "base": "USD",
+        "target": "AUD",
+        "baseName": "US Dollars",
+        "targetName": "Australian Dollars"
+    },
+    {
+        "base": "AUD",
+        "target": "USD",
+        "baseName": "Australian Dollars",
+        "targetName": "US Dollars"
+    },
+    {
+        "base": "EUR",
+        "target": "CHF",
+        "baseName": "Euros",
+        "targetName": "Swiss Francs"
+    },
+    {
+        "base": "USD",
+        "target": "CHF",
+        "baseName": "US Dollars",
+        "targetName": "Swiss Francs"
+    },
+    {
+        "base": "EUR",
+        "target": "JPY",
+        "baseName": "Euros",
+        "targetName": "Japanese Yen"
+    },
+    {
+        "base": "EUR",
+        "target": "NOK",
+        "baseName": "Euros",
+        "targetName": "Norwegian Kroner"
+    },
+    {
+        "base": "NOK",
+        "target": "EUR",
+        "baseName": "Norwegian Kroner",
+        "targetName": "Euros"
+    },
+    {
+        "base": "USD",
+        "target": "NOK",
+        "baseName": "US Dollars",
+        "targetName": "Norwegian Kroner"
+    },
+    {
+        "base": "USD",
+        "target": "SEK",
+        "baseName": "US Dollars",
+        "targetName": "Swedish Krona"
+    },
+    {
+        "base": "EUR",
+        "target": "SEK",
+        "baseName": "Euros",
+        "targetName": "Swedish Krona"
+    },
+    {
+        "base": "USD",
+        "target": "INR",
+        "baseName": "US Dollars",
+        "targetName": "Indian Rupees"
+    }
+]

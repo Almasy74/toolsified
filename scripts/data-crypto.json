@@ -1,0 +1,42 @@
+[
+    {
+        "base": "BTC",
+        "target": "USD",
+        "baseName": "Bitcoin",
+        "targetName": "US Dollars",
+        "baseVar": "btc",
+        "targetVar": "usd"
+    },
+    {
+        "base": "ETH",
+        "target": "USD",
+        "baseName": "Ethereum",
+        "targetName": "US Dollars",
+        "baseVar": "eth",
+        "targetVar": "usd"
+    },
+    {
+        "base": "SOL",
+        "target": "USD",
+        "baseName": "Solana",
+        "targetName": "US Dollars",
+        "baseVar": "sol",
+        "targetVar": "usd"
+    },
+    {
+        "base": "BTC",
+        "target": "EUR",
+        "baseName": "Bitcoin",
+        "targetName": "Euros",
+        "baseVar": "btc",
+        "targetVar": "eur"
+    },
+    {
+        "base": "ETH",
+        "target": "EUR",
+        "baseName": "Ethereum",
+        "targetName": "Euros",
+        "baseVar": "eth",
+        "targetVar": "eur"
+    }
+]

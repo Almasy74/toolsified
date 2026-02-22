@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Multi Time Zone Converter – Compare world clocks</title>
+  <meta name="description"
+    content="See the current time in multiple time zones, add or remove cities, and easily compare times. Great for meetings." />
+  <meta name="google-adsense-account" content="ca-pub-6293439009227714">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6293439009227714"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/luxon@3/build/global/luxon.min.js"></script>
+  <link rel="canonical" href="https://toolsified.com/multi-timezone" />
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "How do I compare multiple time zones at once?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Select your reference time zone and add as many comparison time zones as you need. The tool will calculate the time difference and display the local time for each selected region simultaneously."
+    }
+  }, {
+    "@type": "Question",
+    "name": "What is the time zone matrix feature?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "The matrix view generates a comprehensive table showing the exact hour differences between every single time zone you have selected, making it easy to find overlapping business hours."
+    }
+  }, {
+    "@type": "Question",
+    "name": "Does the converter handle Daylight Saving Time (DST)?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes, our tool uses your browser's built-in internationalization API to ensure all daylight saving time rules are accurately applied for any given date."
+    }
+  }]
+}
+</script>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo-container">
+          <a href="/">
+            <img src="/logo.png" alt="Toolsified logo" class="logo" />
+          </a>
+        </div>
+        <nav class="main-nav">
+          <a href="/time-code">Time Code</a>
+          <a href="/multi-timezone">Time Zones</a>
+          <a href="/currency">Currency</a>
+          <a href="/crypto">Crypto</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <!-- Main Content -->
+  <main>
+    <div class="container">
+      <div class="card">
+        <h1>Multi Time Zone Converter</h1>
+
+
+        <label for="inputTime">Time (auto-filled to now):</label>
+        <input type="datetime-local" id="inputTime" style="width:100%;">
+
+        <label for="fromTz">Your time zone (reference):</label>
+        <select id="fromTz" style="width:100%;"></select>
+
+        <h3>Time zones to compare:</h3>
+        <div class="timezone-row" id="firstZoneRow">
+          <select></select>
+        </div>
+        <div id="zonesContainer"></div>
+
+        <button onclick="addTimeZone()" class="primary">Add time zone</button>
+
+        <label for="all" style="display: inline-flex; align-items: center; gap: 0.5em; width: 100%;">
+          Show differences between all time zones
+        </label>
+        <input id="all" type="checkbox" />
+
+
+
+
+
+
+        <button onclick="showAll()" class="primary">Show all times</button>
+
+        <table id="resultsTable" style="display:none;">
+          <thead>
+            <tr>
+              <th>Time Zone (UTC offset)</th>
+              <th>Local Time</th>
+              <th>Difference from reference</th>
+            </tr>
+          </thead>
+          <tbody id="resultsBody"></tbody>
+        </table>
+
+        <div id="matrixTitle" style="display:none;">Difference other time zones</div>
+        <div id="matrixWrapper" style="overflow-x: auto; display:none;"></div>
+      </div>
+
+      <div class="card seo-content" style="margin-top: 40px; text-align: left; padding: 32px;">
+        <h2 style="font-size: 1.5rem; margin-bottom: 16px;">Global Time Zone Comparison</h2>
+        <p style="text-align: left; margin-bottom: 24px;">Comparing schedules across the world has never been easier.
+          The Toolsified Multi Time Zone Converter allows you to select a reference time and instantly see the
+          corresponding local times in cities across the globe. Whether you are scheduling a multinational conference
+          call or tracking global financial markets, our tool provides a clear, accurate dashboard of time differences,
+          fully accounting for Daylight Saving Time (DST).</p>
+
+        <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Common Global Time Offsets</h3>
+        <table style="margin-top: 0; margin-bottom: 32px;">
+          <thead>
+            <tr>
+              <th>Time Zone</th>
+              <th>Standard Offset</th>
+              <th>Major Regions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Pacific Time (PT)</td>
+              <td>UTC-8</td>
+              <td>Los Angeles, Vancouver</td>
+            </tr>
+            <tr>
+              <td>Eastern Time (ET)</td>
+              <td>UTC-5</td>
+              <td>New York, Toronto</td>
+            </tr>
+            <tr>
+              <td>Central European Time (CET)</td>
+              <td>UTC+1</td>
+              <td>Paris, Berlin, Oslo</td>
+            </tr>
+            <tr>
+              <td>Japan Standard Time (JST)</td>
+              <td>UTC+9</td>
+              <td>Tokyo, Osaka</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Top Timezone Comparisons</h3>
+        <div class="internal-links-cluster" style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 32px;">
+          <a href="/time-zone/pst-to-est" style="color: var(--primary-color); text-decoration: underline;">PST to
+            EST</a>
+          <a href="/time-zone/gmt-to-est" style="color: var(--primary-color); text-decoration: underline;">GMT to
+            EST</a>
+          <a href="/time-zone/cet-to-est" style="color: var(--primary-color); text-decoration: underline;">CET to
+            EST</a>
+          <a href="/time-zone/jst-to-pst" style="color: var(--primary-color); text-decoration: underline;">JST to
+            PST</a>
+          <a href="/time-zone/est-to-ist" style="color: var(--primary-color); text-decoration: underline;">EST to
+            IST</a>
+        </div>
+
+        <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Frequently Asked Questions</h3>
+        <div class="faq-item" style="margin-bottom: 16px;">
+          <strong>How do I compare multiple time zones at once?</strong>
+          <p style="text-align: left; margin-bottom: 0;">Select your reference time zone and add as many comparison time
+            zones as you need to see the differences instantly.</p>
+        </div>
+        <div class="faq-item" style="margin-bottom: 16px;">
+          <strong>What is the time zone matrix feature?</strong>
+          <p style="text-align: left; margin-bottom: 0;">The matrix generates a comprehensive table showing the exact
+            hour differences between every single time zone you have selected.</p>
+        </div>
+        <div class="faq-item" style="margin-bottom: 16px;">
+          <strong>Does the converter handle Daylight Saving Time (DST)?</strong>
+          <p style="text-align: left; margin-bottom: 0;">Yes, our tool ensures all daylight saving time rules and
+            historical changes are accurately applied for any given date.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+  <!-- Footer -->
+  <footer style="margin-top: auto; border-top: 1px solid var(--border-color); background: var(--card-bg);">
+    <div class="container" style="text-align: center; padding: 24px 16px; font-size: 0.9rem;">
+      <p style="margin-bottom: 12px;">© 2025 Toolsified. Smart tools for everyday tasks.</p>
+      <div style="display: flex; justify-content: center; gap: 16px; margin-bottom: 12px;">
+        <a href="/privacy" style="color: inherit; text-decoration: underline;">Privacy Policy</a>
+        <a href="/contact" style="color: inherit; text-decoration: underline;">Contact Us</a>
+      </div>
+      <p><a href="mailto:info@toolsified.com"
+          style="color: inherit; text-decoration: underline;">info@toolsified.com</a></p>
+    </div>
+  </footer>
+
+  <script>
+    const { DateTime } = luxon;
+    const allZones = Intl.supportedValuesOf("timeZone");
+
+    const fromTz = document.getElementById("fromTz");
+    const inputTime = document.getElementById("inputTime");
+    const zonesContainer = document.getElementById("zonesContainer");
+    const resultsTable = document.getElementById("resultsTable");
+    const resultsBody = document.getElementById("resultsBody");
+    const matrixWrapper = document.getElementById("matrixWrapper");
+    const matrixTitle = document.getElementById("matrixTitle");
+    const showMatrixCheckbox = document.getElementById("showMatrix");
+    const firstZoneRow = document.getElementById("firstZoneRow");
+
+    // Sett nåtid og referansesone
+    const userTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    fromTz.innerHTML = allZones.map(tz => `<option value="${tz}">${tz}</option>`).join('');
+    fromTz.value = userTz;
+    inputTime.value = DateTime.now().setZone(userTz).toFormat("yyyy-MM-dd'T'HH:mm");
+
+    // Første sammenligningsfelt: alfabetisk første
+    const firstSelect = firstZoneRow.querySelector("select");
+    firstSelect.innerHTML = allZones.map(tz => `<option value="${tz}">${tz}</option>`).join('');
+    firstSelect.value = allZones[0];
+
+    function addTimeZone() {
+      const row = document.createElement("div");
+      row.className = "timezone-row";
+
+      const select = document.createElement("select");
+      select.innerHTML = allZones.map(tz => `<option value="${tz}">${tz}</option>`).join('');
+      row.appendChild(select);
+
+      const removeBtn = document.createElement("button");
+      removeBtn.textContent = "Remove";
+      removeBtn.onclick = () => row.remove();
+      row.appendChild(removeBtn);
+
+      zonesContainer.appendChild(row);
+    }
+
+    function showAll() {
+      resultsBody.innerHTML = "";
+      matrixWrapper.innerHTML = "";
+      matrixTitle.style.display = "none";
+
+      const [datePart, timePart] = inputTime.value.split("T");
+      const [year, month, day] = datePart.split("-").map(Number);
+      const [hour, minute] = timePart.split(":").map(Number);
+
+      const refZone = fromTz.value;
+      const refTime = DateTime.fromObject({ year, month, day, hour, minute }, { zone: refZone });
+
+      const timeZones = [{ label: refZone, time: refTime }];
+      const first = firstSelect.value;
+      if (!timeZones.find(t => t.label === first)) {
+        timeZones.push({ label: first, time: refTime.setZone(first) });
+      }
+
+      const selects = zonesContainer.querySelectorAll("select");
+      selects.forEach(sel => {
+        const zone = sel.value;
+        if (!timeZones.find(t => t.label === zone)) {
+          timeZones.push({ label: zone, time: refTime.setZone(zone) });
+        }
+      });
+
+      // Resultattabell
+      timeZones.forEach(({ label, time }) => {
+        const offsetHours = time.offset / 60;
+        const offsetStr = offsetHours >= 0 ? `UTC+${offsetHours}` : `UTC${offsetHours}`;
+        const diff = (time.offset - refTime.offset) / 60;
+        const diffStr = label === refZone ? "–" :
+          diff === 0 ? "Same time" : (diff > 0 ? `+${diff}h` : `${diff}h`);
+        const row = document.createElement("tr");
+        row.innerHTML = `<td>${label} (${offsetStr})</td>
+                         <td>${time.toFormat("cccc dd LLLL yyyy 'at' HH:mm")}</td>
+                         <td>${diffStr}</td>`;
+        resultsBody.appendChild(row);
+      });
+      resultsTable.style.display = "table";
+
+      // Matrise
+      if (showMatrixCheckbox.checked && timeZones.length > 1) {
+        const zonesForMatrix = timeZones.filter(t => t.label !== refZone);
+        matrixTitle.style.display = "block";
+
+        const table = document.createElement("table");
+        const header = document.createElement("tr");
+        header.innerHTML = `<th>From \\ To</th>` +
+          zonesForMatrix.map(z => `<th>${z.label}</th>`).join('');
+        table.appendChild(header);
+
+        zonesForMatrix.forEach(from => {
+          const row = document.createElement("tr");
+          row.innerHTML = `<th>${from.label}</th>` +
+            zonesForMatrix.map(to => {
+              if (from.label === to.label) return `<td>–</td>`;
+              const diff = (to.time.offset - from.time.offset) / 60;
+              return `<td>${diff > 0 ? `+${diff}h` : `${diff}h`}</td>`;
+            }).join('');
+          table.appendChild(row);
+        });
+
+        matrixWrapper.appendChild(table);
+        matrixWrapper.style.display = "block";
+      } else {
+        matrixWrapper.style.display = "none";
+        matrixTitle.style.display = "none";
+      }
+    }
+  </script>
+  </div>
+</body>
+
+</html>

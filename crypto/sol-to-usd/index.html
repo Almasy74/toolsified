@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Solana to US Dollars Portfolio Tracker – Convert SOL to USD</title>
+    <meta name="description"
+        content="Track your Solana (SOL) investments. Convert SOL to US Dollars (USD) and calculate exact historic profit and loss instantly." />
+    <meta name="google-adsense-account" content="ca-pub-6293439009227714">
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6293439009227714"
+        crossorigin="anonymous"></script>
+    <style>
+        main.container {
+            max-width: 100%;
+            padding: 1rem;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            table-layout: auto;
+        }
+
+        .table th,
+        .table td {
+            border: 1px solid #ddd;
+            padding: 0.5rem;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .row-controls {
+            margin-top: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+    </style>
+    <link rel="canonical" href="https://toolsified.com/crypto/sol-to-usd" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "How do I calculate my Solana profit in US Dollars?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Enter your SOL amount, select your buy and sell dates, and our tool uses real historic exchange rates to calculate your exact profit or loss in USD."
+    }
+  }, {
+    "@type": "Question",
+    "name": "Is my SOL portfolio data secure?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes, Toolsified processes all conversions locally in your browser. No SOL transaction data is ever stored or transmitted to our servers."
+    }
+  }]
+}
+</script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <a href="/">
+                        <img src="/logo.png" alt="Toolsified logo" class="logo" />
+                    </a>
+                </div>
+                <nav class="main-nav">
+                    <a href="/time-code">Time Code</a>
+                    <a href="/multi-timezone">Time Zones</a>
+                    <a href="/currency">Currency</a>
+                    <a href="/crypto">Crypto</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <main class="container">
+        <h1>Solana to US Dollars Tracker</h1>
+        <p class="subtitle" style="text-align: center; margin-bottom: 32px;">Calculate historic profit and loss for
+            SOL to USD.</p>
+
+        <div style="overflow-x: auto" class="card">
+            <table class="table" id="cryptoTable">
+                <thead>
+                    <tr>
+                        <th>Amount</th>
+                        <th>Crypto</th>
+                        <th>Fiat</th>
+                        <th>Buy Date</th>
+                        <th>Sell Date</th>
+                        <th>Buy Rate</th>
+                        <th>Sell Rate</th>
+                        <th>Profit/Loss (USD)</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <div class="row-controls">
+                <button onclick="addRow()" class="primary">Add Transaction</button>
+            </div>
+        </div>
+    </main>
+
+    <div class="card seo-content"
+        style="margin-top: 40px; text-align: left; padding: 32px; max-width: 680px; margin-left: auto; margin-right: auto;">
+        <h2 style="font-size: 1.5rem; margin-bottom: 16px;">Track Your SOL Investments in US Dollars</h2>
+        <p style="text-align: left; margin-bottom: 24px;">The Toolsified <strong>Solana to US Dollars</strong>
+            portfolio tracker is designed for quick, precise calculations. Finding exactly how much you made or lost on
+            a <strong>SOL</strong> trade requires historical exchange rate data. Our tool instantly fetches
+            the precise historic market value of <strong>Solana</strong> in <strong>USD</strong> on the
+            exact dates you bought and sold. It is strictly client-side, meaning your financial data remains completely
+            private and is never logged.</p>
+
+        <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Related Crypto Tools</h3>
+        <div class="internal-links-cluster" style="margin-bottom: 32px;">
+            <p><a href="/crypto" style="color: var(--primary-color); text-decoration: underline;">Back to Smart Crypto
+                    Converter Hub</a></p>
+        </div>
+
+        <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Frequently Asked Questions</h3>
+        <div class="faq-item" style="margin-bottom: 16px;">
+            <strong>How do I calculate my Solana profit in US Dollars?</strong>
+            <p style="text-align: left; margin-bottom: 0;">Enter your SOL amount and transaction dates. The
+                tool uses real historic exchange rates to calculate your profit or loss in USD.</p>
+        </div>
+        <div class="faq-item" style="margin-bottom: 16px;">
+            <strong>Is my SOL portfolio data secure?</strong>
+            <p style="text-align: left; margin-bottom: 0;">Yes. All calculations happen instantly in your browser
+                session and your data is never saved or transmitted to our servers.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="margin-top: auto; border-top: 1px solid var(--border-color); background: var(--card-bg);">
+        <div class="container" style="text-align: center; padding: 24px 16px; font-size: 0.9rem;">
+            <p style="margin-bottom: 12px;">© 2025 Toolsified. Smart tools for everyday tasks.</p>
+            <div style="display: flex; justify-content: center; gap: 16px; margin-bottom: 12px;">
+                <a href="/privacy" style="color: inherit; text-decoration: underline;">Privacy Policy</a>
+                <a href="/contact" style="color: inherit; text-decoration: underline;">Contact Us</a>
+            </div>
+            <p><a href="mailto:info@toolsified.com"
+                    style="color: inherit; text-decoration: underline;">info@toolsified.com</a></p>
+        </div>
+    </footer>
+
+    <script>
+        const supportedCryptos = ['BTC', 'ETH', 'SOL'];
+        const supportedFiats = ['USD', 'EUR', 'NOK'];
+
+        let isFirstRow = true;
+
+        function addRow() {
+            const tbody = document.querySelector("#cryptoTable tbody");
+            const row = document.createElement("tr");
+
+            row.innerHTML = `
+        <td><input type="number" step="any" class="amount" placeholder="e.g. 0.5" /></td>
+        <td>
+          <select class="crypto">
+            ${supportedCryptos.map(c => `<option value="${c}">${c}</option>`).join('')}
+          </select>
+        </td>
+        <td>
+          <select class="fiat">
+            ${supportedFiats.map(f => `<option value="${f}">${f}</option>`).join('')}
+          </select>
+        </td>
+        <td><input type="date" class="buy-date" /></td>
+        <td><input type="date" class="sell-date" /></td>
+        <td class="buy-rate">-</td>
+        <td class="sell-rate">-</td>
+        <td class="diff" style="font-weight: 600;">-</td>
+        <td><button onclick="removeRow(this)" style="background:var(--error-color); color:white; border:none; border-radius:4px; cursor:pointer; padding:4px 8px;">X</button></td>
+      `;
+
+            tbody.appendChild(row);
+
+            // Programmatic SEO Pre-selection for the first row specifically
+            if (isFirstRow) {
+                row.querySelector(".crypto").value = "SOL";
+                row.querySelector(".fiat").value = "USD";
+                isFirstRow = false;
+            }
+
+            row.querySelectorAll("input, select").forEach(el => {
+                el.addEventListener("change", () => updateRow(row));
+            });
+        }
+
+        function removeRow(btn) {
+            btn.closest("tr").remove();
+        }
+
+        async function getRate(crypto, fiat, date) {
+            if (!date) return null;
+            const selectedDate = new Date(date);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            selectedDate.setHours(0, 0, 0, 0);
+            if (selectedDate > today) return null;
+
+            try {
+                const url = `/.netlify/functions/crypto-convert?crypto=${crypto}&fiat=${fiat}&date=${date}`;
+                const response = await fetch(url);
+
+                if (!response.ok) return null;
+                const data = await response.json();
+                if (!data.rate) return null;
+
+                return data.rate;
+            } catch (err) {
+                return null;
+            }
+        }
+
+        async function updateRow(row) {
+            const amount = parseFloat(row.querySelector(".amount").value);
+            const crypto = row.querySelector(".crypto").value;
+            const fiat = row.querySelector(".fiat").value.toUpperCase();
+            const buyDate = row.querySelector(".buy-date").value;
+            const sellDate = row.querySelector(".sell-date").value;
+
+            const buyRateCell = row.querySelector(".buy-rate");
+            const sellRateCell = row.querySelector(".sell-rate");
+            const diffCell = row.querySelector(".diff");
+
+            if (!crypto || !fiat || !amount || (!buyDate && !sellDate)) return;
+
+            buyRateCell.textContent = "Loading...";
+            sellRateCell.textContent = "Loading...";
+
+            const buyRate = await getRate(crypto, fiat, buyDate);
+            const sellRate = await getRate(crypto, fiat, sellDate);
+
+            buyRateCell.textContent = buyRate ? buyRate.toFixed(2) : (buyDate ? 'Error' : '-');
+            sellRateCell.textContent = sellRate ? sellRate.toFixed(2) : (sellDate ? 'Error' : '-');
+
+            if (typeof buyRate === 'number' && typeof sellRate === 'number') {
+                const diff = (sellRate - buyRate) * amount;
+                diffCell.textContent = (diff > 0 ? "+" : "") + diff.toFixed(2);
+                diffCell.style.color = diff >= 0 ? '#10b981' : '#ef4444';
+            } else {
+                diffCell.textContent = '-';
+                diffCell.style.color = 'inherit';
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', addRow);
+    </script>
+</body>
+
+</html>

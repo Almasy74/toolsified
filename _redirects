@@ -1,0 +1,20 @@
+/currency.html       /currency             301!
+/currency            /currency.html        200
+
+/time-code.html      /time-code            301!
+/time-code           /time-code.html       200
+
+/multi-timezone.html /multi-timezone       301!
+/multi-timezone      /multi-timezone.html  200
+
+/crypto.html         /crypto               301!
+/crypto              /crypto.html          200
+
+/privacy.html        /privacy              301!
+/privacy             /privacy.html         200
+
+/contact.html        /contact              301!
+/contact             /contact.html         200
+
+# Redirect www to root domain
+https://www.toolsified.com/* https://toolsified.com/:splat 301!

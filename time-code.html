@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Time-code Converter – Convert EDT, PST, CEST and more</title>
+  <meta name="description"
+    content="Paste a time like '2pm EDT' and get local time instantly. Great for scheduling across time zones." />
+  <meta name="google-adsense-account" content="ca-pub-6293439009227714">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Time‑code Converter</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/luxon@3/build/global/luxon.min.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6293439009227714"
+    crossorigin="anonymous"></script>
+
+  <link rel="canonical" href="https://toolsified.com/time-code" />
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "How does the time-code converter work?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Simply paste a time code like '2pm EDT' or 'next friday 09:00 CET'. Our tool instantly translates that specific time into your local time zone and any other time zones you select."
+    }
+  }, {
+    "@type": "Question",
+    "name": "Can I copy the time conversion results?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes, each converted time includes a quick 'Copy' button that formats the local time, ISO 8601 string, and UTC offset, perfect for pasting into emails or calendar invites."
+    }
+  }, {
+    "@type": "Question",
+    "name": "Is the time zone converter free?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Absolutely. All tools on Toolsified are 100% free to use with no registrations required."
+    }
+  }]
+}
+</script>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo-container">
+          <a href="/">
+            <img src="/logo.png" alt="Toolsified logo" class="logo" />
+          </a>
+        </div>
+        <nav class="main-nav">
+          <a href="/time-code">Time Code</a>
+          <a href="/multi-timezone">Time Zones</a>
+          <a href="/currency">Currency</a>
+          <a href="/crypto">Crypto</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <main>
+    <div class="card">
+      <h1>Time‑code Converter</h1>
+
+      <label for="codeInput">Time code (e.g. <strong>2pm EDT</strong>, <strong>tomorrow 15 CEST</strong>, or
+        <strong>next monday 08:00 CET</strong>):</label>
+      <input id="codeInput" placeholder="e.g. 2pm edt or 'next friday 09:00 cet'" />
+
+      <label for="zoneRows">Where I am:</label>
+      <div id="zoneRows"></div>
+
+      <label for="addZone">Show also in these time zones:</label>
+      <button id="addZone" class="primary" type="button">Add time zone</button>
+
+      <button id="convertBtn" class="primary" type="button">Convert</button>
+
+      <table id="resultTbl" style="display:none">
+        <thead>
+          <tr>
+            <th>Time zone</th>
+            <th>Time formats</th>
+          </tr>
+        </thead>
+        <tbody id="resultBody"></tbody>
+      </table>
+    </div>
+
+    <div class="card seo-content" style="margin-top: 40px; text-align: left; padding: 32px;">
+      <h2 style="font-size: 1.5rem; margin-bottom: 16px;">Smart Time-Code Translation</h2>
+      <p style="text-align: left; margin-bottom: 24px;">Stop struggling with manual time zone math. The Toolsified
+        Time-code Converter lets you paste natural language time formats (like "3pm PST" or "tomorrow 15:00 CEST") and
+        instantly translates them into your local time and any other global zones you need. Perfect for coordinating
+        international meetings, gaming events, or remote work schedules without leaving your browser.</p>
+
+      <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Supported Time Code Examples</h3>
+      <table style="margin-top: 0; margin-bottom: 32px;">
+        <thead>
+          <tr>
+            <th>Input Format</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>2pm EDT</code></td>
+            <td>Standard US time zone abbreviation</td>
+          </tr>
+          <tr>
+            <td><code>tomorrow 15 CEST</code></td>
+            <td>Relative day with European time</td>
+          </tr>
+          <tr>
+            <td><code>next monday 08:00 CET</code></td>
+            <td>Specific upcoming weekday</td>
+          </tr>
+          <tr>
+            <td><code>24 Dec 2026 12:00 GMT</code></td>
+            <td>Exact date and time parsing</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Top Time Format Translations</h3>
+      <div class="internal-links-cluster" style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 32px;">
+        <a href="/time-code/convert-edt-to-local-time"
+          style="color: var(--primary-color); text-decoration: underline;">EDT to Local Time</a>
+        <a href="/time-code/convert-pdt-to-local-time"
+          style="color: var(--primary-color); text-decoration: underline;">PDT to Local Time</a>
+        <a href="/time-code/convert-gmt-to-local-time"
+          style="color: var(--primary-color); text-decoration: underline;">GMT to Local Time</a>
+        <a href="/time-code/convert-cest-to-local-time"
+          style="color: var(--primary-color); text-decoration: underline;">CEST to Local Time</a>
+        <a href="/time-code/convert-bst-to-local-time"
+          style="color: var(--primary-color); text-decoration: underline;">BST to Local Time</a>
+      </div>
+
+      <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Frequently Asked Questions</h3>
+      <div class="faq-item" style="margin-bottom: 16px;">
+        <strong>How does the time-code converter work?</strong>
+        <p style="text-align: left; margin-bottom: 0;">Simply paste a time code. Our tool instantly translates that
+          specific time into your local time zone and any other time zones you select.</p>
+      </div>
+      <div class="faq-item" style="margin-bottom: 16px;">
+        <strong>Can I copy the time conversion results?</strong>
+        <p style="text-align: left; margin-bottom: 0;">Yes, each converted time includes a 'Copy' button that formats
+          the local time, ISO string, and UTC offset.</p>
+      </div>
+      <div class="faq-item" style="margin-bottom: 16px;">
+        <strong>Is the time zone converter free?</strong>
+        <p style="text-align: left; margin-bottom: 0;">Absolutely. All tools on Toolsified are 100% free to use with no
+          registrations required.</p>
+      </div>
+    </div>
+  </main>
+  <!-- Footer -->
+  <footer style="margin-top: auto; border-top: 1px solid var(--border-color); background: var(--card-bg);">
+    <div class="container" style="text-align: center; padding: 24px 16px; font-size: 0.9rem;">
+      <p style="margin-bottom: 12px;">© 2025 Toolsified. Smart tools for everyday tasks.</p>
+      <div style="display: flex; justify-content: center; gap: 16px; margin-bottom: 12px;">
+        <a href="/privacy" style="color: inherit; text-decoration: underline;">Privacy Policy</a>
+        <a href="/contact" style="color: inherit; text-decoration: underline;">Contact Us</a>
+      </div>
+      <p><a href="mailto:info@toolsified.com"
+          style="color: inherit; text-decoration: underline;">info@toolsified.com</a></p>
+    </div>
+  </footer>
+
+  <script>
+    const { DateTime } = luxon;
+    const allZones = Intl.supportedValuesOf('timeZone');
+    const zoneRows = document.getElementById('zoneRows');
+    const localZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+    function createSelect(initialValue = "") {
+      const sel = document.createElement('select');
+      allZones.forEach(z => {
+        const o = document.createElement('option');
+        o.value = o.textContent = z;
+        if (z === initialValue) o.selected = true;
+        sel.appendChild(o);
+      });
+      return sel;
+    }
+
+    function addZoneRow(first = false, initialValue = "") {
+      const row = document.createElement('div');
+      row.className = 'row';
+      const sel = createSelect(initialValue);
+      row.appendChild(sel);
+      if (!first) {
+        const rm = document.createElement('button');
+        rm.textContent = 'Remove';
+        rm.className = 'remove-btn';
+        rm.onclick = () => row.remove();
+        row.appendChild(rm);
+      }
+      zoneRows.appendChild(row);
+    }
+
+    addZoneRow(true, localZone);
+    document.getElementById('addZone').onclick = () => addZoneRow(false);
+
+    const abbrevMap = {
+      PST: 'America/Los_Angeles', PDT: 'America/Los_Angeles',
+      EST: 'America/New_York', EDT: 'America/New_York',
+      CST: 'America/Chicago', CDT: 'America/Chicago',
+      MST: 'America/Denver', MDT: 'America/Denver',
+      CET: 'Europe/Paris', CEST: 'Europe/Paris',
+      GMT: 'Etc/GMT', UTC: 'Etc/UTC'
+    };
+
+    function resolveDate(words, zone) {
+      const now = DateTime.now().setZone(zone);
+      const joined = words.join(' ').toLowerCase();
+
+      if (joined.includes('tomorrow')) return now.plus({ days: 1 });
+      if (joined.includes('yesterday')) return now.minus({ days: 1 });
+      if (joined.includes('today')) return now;
+
+      const weekdays = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+      const match = joined.match(/next\s+(monday|tuesday|wednesday|thursday|friday|saturday|sunday)/i);
+      if (match) {
+        const target = weekdays.indexOf(match[1].toLowerCase());
+        const diff = (target + 7 - now.weekday) % 7 || 7;
+        return now.plus({ days: diff });
+      }
+
+      const formats = ['d LLL yyyy', 'd LLL', 'd LLLL yyyy', 'd LLLL', 'LLL d yyyy', 'LLL d'];
+      for (const fmt of formats) {
+        const tryDate = DateTime.fromFormat(joined, fmt, { zone });
+        if (tryDate.isValid) return tryDate;
+      }
+
+      return now;
+    }
+
+    document.getElementById('convertBtn').onclick = () => {
+      const raw = document.getElementById('codeInput').value.trim();
+      if (!raw) return alert('Please enter a time code.');
+
+      const cleaned = raw.replace(/[.,!?]/g, '');
+      const upper = cleaned.toUpperCase();
+      const abbr = Object.keys(abbrevMap).find(a =>
+        upper.includes(` ${a}`) || upper.startsWith(`${a} `) || upper.endsWith(` ${a}`)
+      );
+      if (!abbr) return alert('Could not detect time zone abbreviation. Try “2pm EDT”.');
+
+      const zone = abbrevMap[abbr];
+      const rawWithoutAbbr = raw.replace(new RegExp(`\\b${abbr}\\b`, 'i'), '').trim();
+
+      const timeMatch = rawWithoutAbbr.match(/(\d{1,2})(?::(\d{2}))?\s*(am|pm)?/i);
+      if (!timeMatch) return alert('Missing time (e.g. 2pm or 14:00)');
+
+      let [full, hh, mm, ap] = timeMatch;
+      let hour = parseInt(hh, 10), minute = parseInt(mm || '0', 10);
+      if (ap) {
+        ap = ap.toLowerCase();
+        if (ap === 'pm' && hour !== 12) hour += 12;
+        if (ap === 'am' && hour === 12) hour = 0;
+      }
+
+      const words = rawWithoutAbbr.replace(full, '').trim().split(/\s+/);
+      const baseDate = resolveDate(words, zone);
+      const dt = baseDate.set({ hour, minute, second: 0, millisecond: 0 });
+      render(dt);
+    };
+
+    function render(base) {
+      const out = document.getElementById('resultBody');
+      out.innerHTML = '';
+      const added = new Set();
+
+      function add(z) {
+        if (added.has(z)) return;
+        added.add(z);
+        const dt = base.setZone(z);
+        const isToday = dt.hasSame(DateTime.now().setZone(z), 'day');
+        const localStr = dt.toFormat('cccc dd LLL yyyy · HH:mm') + (isToday ? ' (today)' : '');
+        const isoStr = dt.toISO();
+        const offset = dt.toFormat("ZZ");
+
+        const content = `Local: ${localStr}\nISO: ${isoStr}\nOffset: UTC${offset}`;
+
+        const tr = document.createElement('tr');
+        const formatsCell = document.createElement('td');
+        formatsCell.innerHTML = `
+      <div><strong>Local:</strong> ${localStr}</div>
+      <div><strong>ISO:</strong> ${isoStr}</div>
+      <div><strong>Offset:</strong> UTC${offset}</div>
+      <button class="copy-btn">Copy</button><span class="copied-msg" style="display:none">Copied!</span>
+    `;
+
+        formatsCell.querySelector('.copy-btn').onclick = () => {
+          navigator.clipboard.writeText(content);
+          const msg = formatsCell.querySelector('.copied-msg');
+          msg.style.display = 'inline';
+          setTimeout(() => msg.style.display = 'none', 1000);
+        };
+
+        tr.innerHTML = `<td>${z}</td>`;
+        tr.appendChild(formatsCell);
+        out.appendChild(tr);
+      }
+
+      add(localZone);
+      zoneRows.querySelectorAll('select').forEach(sel => add(sel.value));
+      document.getElementById('resultTbl').style.display = 'table';
+    }
+  </script>
+</body>
+
+</html>

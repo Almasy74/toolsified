@@ -1,0 +1,9 @@
+{
+  "name": "currency-functions",
+  "version": "1.0.0",
+  "description": "Netlify functions for currency and crypto conversion",
+  "main": "crypto-convert.js",
+  "dependencies": {
+    "axios": "^1.6.0"
+  }
+}

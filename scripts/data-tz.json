@@ -1,0 +1,82 @@
+[
+    {
+        "base": "America/Los_Angeles",
+        "target": "America/New_York",
+        "baseName": "Pacific Time (PT)",
+        "targetName": "Eastern Time (ET)",
+        "baseVar": "pst",
+        "targetVar": "est"
+    },
+    {
+        "base": "Europe/London",
+        "target": "America/New_York",
+        "baseName": "London (GMT/BST)",
+        "targetName": "Eastern Time (ET)",
+        "baseVar": "gmt",
+        "targetVar": "est"
+    },
+    {
+        "base": "Europe/Paris",
+        "target": "America/New_York",
+        "baseName": "Central European Time (CET)",
+        "targetName": "Eastern Time (ET)",
+        "baseVar": "cet",
+        "targetVar": "est"
+    },
+    {
+        "base": "Asia/Tokyo",
+        "target": "America/Los_Angeles",
+        "baseName": "Japan Standard Time (JST)",
+        "targetName": "Pacific Time (PT)",
+        "baseVar": "jst",
+        "targetVar": "pst"
+    },
+    {
+        "base": "America/New_York",
+        "target": "Asia/Kolkata",
+        "baseName": "Eastern Time (ET)",
+        "targetName": "India Standard Time (IST)",
+        "baseVar": "est",
+        "targetVar": "ist"
+    },
+    {
+        "base": "Australia/Sydney",
+        "target": "America/Los_Angeles",
+        "baseName": "Australian Eastern Time (AET)",
+        "targetName": "Pacific Time (PT)",
+        "baseVar": "aet",
+        "targetVar": "pst"
+    },
+    {
+        "base": "Europe/Berlin",
+        "target": "Asia/Tokyo",
+        "baseName": "Central European Time (CET)",
+        "targetName": "Japan Standard Time (JST)",
+        "baseVar": "cet",
+        "targetVar": "jst"
+    },
+    {
+        "base": "America/Chicago",
+        "target": "Europe/London",
+        "baseName": "Central Time (CT)",
+        "targetName": "London (GMT/BST)",
+        "baseVar": "ct",
+        "targetVar": "gmt"
+    },
+    {
+        "base": "Europe/Paris",
+        "target": "Asia/Shanghai",
+        "baseName": "Central European Time (CET)",
+        "targetName": "China Standard Time (CST)",
+        "baseVar": "cet",
+        "targetVar": "cst"
+    },
+    {
+        "base": "America/Denver",
+        "target": "America/New_York",
+        "baseName": "Mountain Time (MT)",
+        "targetName": "Eastern Time (ET)",
+        "baseVar": "mt",
+        "targetVar": "est"
+    }
+]

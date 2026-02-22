@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Eastern Time (ET) to India Standard Time (IST) Converter – Live Time Zone Comparison</title>
+    <meta name="description"
+        content="Convert Eastern Time (ET) to India Standard Time (IST) instantly. Compare schedules between est and ist with exact time differences." />
+    <meta name="google-adsense-account" content="ca-pub-6293439009227714">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6293439009227714"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3/build/global/luxon.min.js"></script>
+    <link rel="canonical" href="https://toolsified.com/time-zone/est-to-ist" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "How do I compare Eastern Time (ET) to India Standard Time (IST)?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Simply enter your local time in the tool above to see the exact corresponding time in India Standard Time (IST)."
+    }
+  }, {
+    "@type": "Question",
+    "name": "Does the converter handle Daylight Saving Time (DST) for India Standard Time (IST)?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes, our tool automatically accounts for DST rules for both Eastern Time (ET) and India Standard Time (IST) based on the specific date you choose."
+    }
+  }]
+}
+</script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <a href="/">
+                        <img src="/logo.png" alt="Toolsified logo" class="logo" />
+                    </a>
+                </div>
+                <nav class="main-nav">
+                    <a href="/time-code">Time Code</a>
+                    <a href="/multi-timezone">Time Zones</a>
+                    <a href="/currency">Currency</a>
+                    <a href="/crypto">Crypto</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <!-- Main Content -->
+    <main class="container">
+        <h1 id="page-title">Eastern Time (ET) to India Standard Time (IST) Converter</h1>
+        <p class="subtitle" style="text-align: center; margin-bottom: 32px;">Instantly compare times between Eastern Time (ET)
+            and India Standard Time (IST).</p>
+
+        <div class="card" id="applet-container">
+            <label for="inputTime">Reference Time in Eastern Time (ET):</label>
+            <input type="datetime-local" id="inputTime" style="width:100%;">
+
+            <div style="display: none;">
+                <select id="fromTz"></select>
+                <div class="timezone-row" id="firstZoneRow">
+                    <select></select>
+                </div>
+                <div id="zonesContainer"></div>
+                <input id="showMatrix" type="checkbox" />
+            </div>
+
+            <button onclick="showAll()" class="primary" style="margin-top: 24px;">Calculate India Standard Time (IST) Time</button>
+
+            <table id="resultsTable" style="display:none; width: 100%; margin-top: 24px;">
+                <thead>
+                    <tr>
+                        <th>Time Zone</th>
+                        <th>Local Time</th>
+                        <th>Difference</th>
+                    </tr>
+                </thead>
+                <tbody id="resultsBody"></tbody>
+            </table>
+        </div>
+
+        <div class="card seo-content" style="margin-top: 40px; text-align: left; padding: 32px;">
+            <h2 style="font-size: 1.5rem; margin-bottom: 16px;">Understanding the Eastern Time (ET) to India Standard Time (IST) Conversion
+            </h2>
+            <p style="text-align: left; margin-bottom: 24px;">Comparing schedules between <strong>Eastern Time (ET)</strong>
+                and <strong>India Standard Time (IST)</strong> is critical for coordinating international meetings, remote work, and
+                travel plans. Our hyper-accurate time zone converter instantly calculates the exact time difference,
+                accounting for complex global Daylight Saving Time (DST) shift rules. Simply select a date and time in
+                the <strong>Eastern Time (ET)</strong> input above, and the tool will immediately output the corresponding
+                local time in <strong>India Standard Time (IST)</strong>.</p>
+
+            <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Frequently Asked Questions</h3>
+            <div class="faq-item" style="margin-bottom: 16px;">
+                <strong>How do I compare Eastern Time (ET) to India Standard Time (IST)?</strong>
+                <p style="text-align: left; margin-bottom: 0;">Enter your local time in the tool above to see the exact
+                    corresponding time in India Standard Time (IST).</p>
+            </div>
+            <div class="faq-item" style="margin-bottom: 16px;">
+                <strong>Does the converter handle Daylight Saving Time (DST) for India Standard Time (IST)?</strong>
+                <p style="text-align: left; margin-bottom: 0;">Yes, our tool automatically accounts for DST rules for
+                    both Eastern Time (ET) and India Standard Time (IST) based on the exact date selected.</p>
+            </div>
+
+            <h3 style="font-size: 1.2rem; margin-bottom: 16px; margin-top: 32px;">Related Time Zones</h3>
+            <div class="internal-links-cluster">
+                <p><a href="/multi-timezone" style="color: var(--primary-color); text-decoration: underline;">Compare
+                        multiple time zones at once</a></p>
+            </div>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer style="margin-top: auto; border-top: 1px solid var(--border-color); background: var(--card-bg);">
+        <div class="container" style="text-align: center; padding: 24px 16px; font-size: 0.9rem;">
+            <p style="margin-bottom: 12px;">© 2025 Toolsified. Smart tools for everyday tasks.</p>
+            <div style="display: flex; justify-content: center; gap: 16px; margin-bottom: 12px;">
+                <a href="/privacy" style="color: inherit; text-decoration: underline;">Privacy Policy</a>
+                <a href="/contact" style="color: inherit; text-decoration: underline;">Contact Us</a>
+            </div>
+            <p><a href="mailto:info@toolsified.com"
+                    style="color: inherit; text-decoration: underline;">info@toolsified.com</a></p>
+        </div>
+    </footer>
+
+    <script>
+        const { DateTime } = luxon;
+
+        const fromTz = document.getElementById("fromTz");
+        const inputTime = document.getElementById("inputTime");
+        const resultsTable = document.getElementById("resultsTable");
+        const resultsBody = document.getElementById("resultsBody");
+        const firstZoneRow = document.getElementById("firstZoneRow");
+
+        // Hidden configurations injected by builder
+        const injectedBaseTz = "America/New_York";
+        const injectedTargetTz = "Asia/Kolkata";
+
+        // Initialize hidden selects
+        fromTz.innerHTML = `<option value="${injectedBaseTz}">${injectedBaseTz}</option>`;
+        fromTz.value = injectedBaseTz;
+
+        const firstSelect = firstZoneRow.querySelector("select");
+        firstSelect.innerHTML = `<option value="${injectedTargetTz}">${injectedTargetTz}</option>`;
+        firstSelect.value = injectedTargetTz;
+
+        // Set initial time to exactly now in base timezone
+        const nowInBase = DateTime.now().setZone(injectedBaseTz);
+        inputTime.value = nowInBase.toFormat("yyyy-MM-dd'T'HH:mm");
+
+        function showAll() {
+            resultsBody.innerHTML = "";
+
+            const [datePart, timePart] = inputTime.value.split("T");
+            if (!datePart || !timePart) return;
+
+            const [year, month, day] = datePart.split("-").map(Number);
+            const [hour, minute] = timePart.split(":").map(Number);
+
+            const refZone = fromTz.value;
+            const refTime = DateTime.fromObject({ year, month, day, hour, minute }, { zone: refZone });
+
+            const timeZones = [
+                { label: "Eastern Time (ET)", time: refTime },
+                { label: "India Standard Time (IST)", time: refTime.setZone(firstSelect.value) }
+            ];
+
+            // Result table
+            timeZones.forEach(({ label, time }, idx) => {
+                const diff = idx === 0 ? 0 : (time.offset - refTime.offset) / 60;
+                const diffStr = idx === 0 ? "–" : (diff === 0 ? "Same time" : (diff > 0 ? `+${diff}h` : `${diff}h`));
+                const row = document.createElement("tr");
+                row.innerHTML = `<td><strong>${label}</strong></td>
+                         <td>${time.toFormat("cccc, dd LLL yyyy  HH:mm")}</td>
+                         <td>${diffStr}</td>`;
+                resultsBody.appendChild(row);
+            });
+            resultsTable.style.display = "table";
+        }
+
+        // Auto calculate on load
+        window.addEventListener('DOMContentLoaded', showAll);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-adsense-account" content="ca-pub-6293439009227714">
+  <title>Currency Converter – Toolsified</title>
+  <meta name="description"
+    content="Convert currencies instantly with live exchange rates. Smart, fast and free currency tool from Toolsified." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6293439009227714"
+    crossorigin="anonymous"></script>
+
+  <style>
+    .swap-btn {
+      padding: 10px 16px;
+      background: #10b981;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .swap-btn:hover {
+      background: #059669;
+    }
+  </style>
+  <link rel="canonical" href="https://toolsified.com/currency" />
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "How do I convert currency on Toolsified?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Simply enter your amount, select the currency you are converting from, and choose the currency you want to convert to. Our tool fetches real-time exchange rates to provide an instant, accurate conversion."
+    }
+  }, {
+    "@type": "Question",
+    "name": "How often are the exchange rates updated?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "The exchange rates are typically updated daily based on robust data from the European Central Bank and other global sources."
+    }
+  }, {
+    "@type": "Question",
+    "name": "Is there a fee for currency conversion?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "No. Toolsified's currency converter is 100% free to use. We do not charge fees, nor do we require sign-ups, to access real-time exchange rates."
+    }
+  }]
+}
+</script>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo-container">
+          <a href="/">
+            <img src="/logo.png" alt="Toolsified logo" class="logo" />
+          </a>
+        </div>
+        <nav class="main-nav">
+          <a href="/time-code">Time Code</a>
+          <a href="/multi-timezone">Time Zones</a>
+          <a href="/currency">Currency</a>
+          <a href="/crypto">Crypto</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <!-- Main Content -->
+  <main>
+    <div class="card">
+      <h1>Currency Converter</h1>
+
+      <label for="amount">Amount:</label>
+      <input type="number" id="amount" placeholder="Enter amount" />
+
+      <label for="fromCurrency">From:</label>
+      <div class="row">
+        <select id="fromCurrency"></select>
+        <button id="swapBtn" class="swap-btn" title="Swap currencies">↔</button>
+      </div>
+
+      <label for="toCurrency">To:</label>
+      <select id="toCurrency"></select>
+
+      <button id="convertBtn" class="primary">Convert</button>
+
+      <div id="result" style="margin-top: 24px; font-size: 1.25rem; font-weight: 600;"></div>
+      <div id="lastUpdated" style="margin-top: 12px; font-size: 0.95rem; color: #555;"></div>
+    </div>
+
+    <div class="card seo-content" style="margin-top: 40px; text-align: left; padding: 32px;">
+      <h2 style="font-size: 1.5rem; margin-bottom: 16px;">Fast, Accurate Currency Conversion</h2>
+      <p style="text-align: left; margin-bottom: 24px;">Convert between US Dollars, Euros, Norwegian Kroner, and dozens
+        of other global currencies instantly. The Toolsified currency converter uses real-time exchange rate data to
+        ensure you get accurate calculations for travel, business, or everyday planning. Simply enter your amount above,
+        select your base and target currencies, and get your result without any hidden fees or complicated menus.</p>
+
+      <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Quick Reference: Popular Conversions</h3>
+      <table style="margin-top: 0; margin-bottom: 32px;">
+        <thead>
+          <tr>
+            <th>USD to EUR</th>
+            <th>EUR to GBP</th>
+            <th>USD to NOK</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>$10 &asymp; €9.20</td>
+            <td>€10 &asymp; £8.50</td>
+            <td>$10 &asymp; 105 NOK</td>
+          </tr>
+          <tr>
+            <td>$50 &asymp; €46.00</td>
+            <td>€50 &asymp; £42.50</td>
+            <td>$50 &asymp; 525 NOK</td>
+          </tr>
+          <tr>
+            <td>$100 &asymp; €92.00</td>
+            <td>€100 &asymp; £85.00</td>
+            <td>$100 &asymp; 1050 NOK</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Top Conversions</h3>
+      <div class="internal-links-cluster" style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 32px;">
+        <a href="/currency/usd-to-eur" style="color: var(--primary-color); text-decoration: underline;">USD to EUR</a>
+        <a href="/currency/gbp-to-usd" style="color: var(--primary-color); text-decoration: underline;">GBP to USD</a>
+        <a href="/currency/eur-to-nok" style="color: var(--primary-color); text-decoration: underline;">EUR to NOK</a>
+        <a href="/currency/usd-to-jpy" style="color: var(--primary-color); text-decoration: underline;">USD to JPY</a>
+        <a href="/currency/cad-to-usd" style="color: var(--primary-color); text-decoration: underline;">CAD to USD</a>
+        <a href="/currency/usd-to-aud" style="color: var(--primary-color); text-decoration: underline;">USD to AUD</a>
+        <a href="/currency/eur-to-gbp" style="color: var(--primary-color); text-decoration: underline;">EUR to GBP</a>
+        <a href="/currency/usd-to-inr" style="color: var(--primary-color); text-decoration: underline;">USD to INR</a>
+      </div>
+
+      <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Frequently Asked Questions</h3>
+      <div class="faq-item" style="margin-bottom: 16px;">
+        <strong>How do I convert currency on Toolsified?</strong>
+        <p style="text-align: left; margin-bottom: 0;">Simply enter your amount, select your currencies, and click
+          convert. We fetch real-time rates instantly.</p>
+      </div>
+      <div class="faq-item" style="margin-bottom: 16px;">
+        <strong>How often are the exchange rates updated?</strong>
+        <p style="text-align: left; margin-bottom: 0;">Rates are updated daily based on robust data from the European
+          Central Bank and other global sources.</p>
+      </div>
+      <div class="faq-item" style="margin-bottom: 16px;">
+        <strong>Is there a fee for currency conversion?</strong>
+        <p style="text-align: left; margin-bottom: 0;">No. Toolsified's converter is 100% free to use with no hidden
+          fees or sign-ups required.</p>
+      </div>
+    </div>
+
+  </main>
+  <!-- Footer -->
+  <footer style="margin-top: auto; border-top: 1px solid var(--border-color); background: var(--card-bg);">
+    <div class="container" style="text-align: center; padding: 24px 16px; font-size: 0.9rem;">
+      <p style="margin-bottom: 12px;">© 2025 Toolsified. Smart tools for everyday tasks.</p>
+      <div style="display: flex; justify-content: center; gap: 16px; margin-bottom: 12px;">
+        <a href="/privacy" style="color: inherit; text-decoration: underline;">Privacy Policy</a>
+        <a href="/contact" style="color: inherit; text-decoration: underline;">Contact Us</a>
+      </div>
+      <p><a href="mailto:info@toolsified.com"
+          style="color: inherit; text-decoration: underline;">info@toolsified.com</a></p>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer></script>
+
+  <script>
+    const currencies = [
+      "USD", "EUR", "GBP", "NOK", "SEK", "DKK", "JPY", "AUD", "CAD", "INR",
+      "CHF", "CNY", "NZD", "HKD", "SGD", "KRW", "TRY", "ZAR", "BRL", "PLN"
+    ];
+    const fromSelect = document.getElementById('fromCurrency');
+    const toSelect = document.getElementById('toCurrency');
+
+    currencies.forEach(cur => {
+      const opt1 = document.createElement('option');
+      opt1.value = opt1.textContent = cur;
+      fromSelect.appendChild(opt1);
+
+      const opt2 = document.createElement('option');
+      opt2.value = opt2.textContent = cur;
+      toSelect.appendChild(opt2);
+    });
+
+    fromSelect.value = "USD";
+    toSelect.value = "EUR";
+
+    document.getElementById('swapBtn').onclick = () => {
+      const temp = fromSelect.value;
+      fromSelect.value = toSelect.value;
+      toSelect.value = temp;
+    };
+
+    document.getElementById('convertBtn').onclick = async () => {
+      const amount = parseFloat(document.getElementById('amount').value);
+      const from = fromSelect.value;
+      const to = toSelect.value;
+
+      if (!amount || amount <= 0) {
+        alert("Please enter a valid amount");
+        return;
+      }
+
+      try {
+        const res = await axios.get(`/.netlify/functions/convert?from=${from}&to=${to}&amount=${amount}`);
+        const converted = res.data.result.toFixed(2);
+        const date = res.data.date || "unknown";
+        document.getElementById('result').textContent = `${amount} ${from} = ${converted} ${to}`;
+        document.getElementById('lastUpdated').textContent = `Exchange rate last updated: ${date}`;
+      } catch (err) {
+        document.getElementById('result').textContent = "Could not retrieve exchange rate. Please try again later.";
+        document.getElementById('lastUpdated').textContent = "";
+      }
+    };
+  </script>
+</body>
+
+</html>

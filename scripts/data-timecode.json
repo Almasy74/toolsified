@@ -1,0 +1,27 @@
+[
+    {
+        "format": "EDT",
+        "name": "Eastern Daylight Time",
+        "var": "edt"
+    },
+    {
+        "format": "PDT",
+        "name": "Pacific Daylight Time",
+        "var": "pdt"
+    },
+    {
+        "format": "GMT",
+        "name": "Greenwich Mean Time",
+        "var": "gmt"
+    },
+    {
+        "format": "CEST",
+        "name": "Central European Summer Time",
+        "var": "cest"
+    },
+    {
+        "format": "BST",
+        "name": "British Summer Time",
+        "var": "bst"
+    }
+]
