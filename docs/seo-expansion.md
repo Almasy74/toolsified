@@ -164,6 +164,20 @@ Expansion creates new impressions → impressions create signals → signals cre
 
 ---
 
+## Stagnation Protocol
+
+If no qualifying signals (score ≥4) appear for 28 consecutive days:
+
+1. Do NOT create new tools or categories.
+2. Improve internal linking between existing pages.
+3. Expand FAQ or explanatory sections on top-impression pages.
+4. Strengthen cluster hubs with clearer navigation and related links.
+5. Wait one full validation window before reassessing.
+
+*Purpose: Authority consolidation before further expansion.*
+
+---
+
 ## Operator Principle
 
 **Optimization beats invention.**
