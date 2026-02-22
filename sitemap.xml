@@ -27,6 +27,36 @@
   <url><loc>https://toolsified.com/currency/usd-to-sek</loc></url>
   <url><loc>https://toolsified.com/currency/eur-to-sek</loc></url>
   <url><loc>https://toolsified.com/currency/usd-to-inr</loc></url>
+  <url><loc>https://toolsified.com/currency/inr-to-usd</loc></url>
+  <url><loc>https://toolsified.com/currency/jpy-to-usd</loc></url>
+  <url><loc>https://toolsified.com/currency/chf-to-usd</loc></url>
+  <url><loc>https://toolsified.com/currency/chf-to-eur</loc></url>
+  <url><loc>https://toolsified.com/currency/gbp-to-aud</loc></url>
+  <url><loc>https://toolsified.com/currency/aud-to-gbp</loc></url>
+  <url><loc>https://toolsified.com/currency/eur-to-cad</loc></url>
+  <url><loc>https://toolsified.com/currency/cad-to-eur</loc></url>
+  <url><loc>https://toolsified.com/currency/eur-to-aud</loc></url>
+  <url><loc>https://toolsified.com/currency/aud-to-eur</loc></url>
+  <url><loc>https://toolsified.com/currency/usd-to-cny</loc></url>
+  <url><loc>https://toolsified.com/currency/cny-to-usd</loc></url>
+  <url><loc>https://toolsified.com/currency/usd-to-nzd</loc></url>
+  <url><loc>https://toolsified.com/currency/nzd-to-usd</loc></url>
+  <url><loc>https://toolsified.com/currency/usd-to-krw</loc></url>
+  <url><loc>https://toolsified.com/currency/krw-to-usd</loc></url>
+  <url><loc>https://toolsified.com/currency/usd-to-sgd</loc></url>
+  <url><loc>https://toolsified.com/currency/sgd-to-usd</loc></url>
+  <url><loc>https://toolsified.com/currency/usd-to-hkd</loc></url>
+  <url><loc>https://toolsified.com/currency/hkd-to-usd</loc></url>
+  <url><loc>https://toolsified.com/currency/gbp-to-cad</loc></url>
+  <url><loc>https://toolsified.com/currency/cad-to-gbp</loc></url>
+  <url><loc>https://toolsified.com/currency/eur-to-dkk</loc></url>
+  <url><loc>https://toolsified.com/currency/dkk-to-eur</loc></url>
+  <url><loc>https://toolsified.com/currency/usd-to-dkk</loc></url>
+  <url><loc>https://toolsified.com/currency/dkk-to-usd</loc></url>
+  <url><loc>https://toolsified.com/currency/sek-to-usd</loc></url>
+  <url><loc>https://toolsified.com/currency/nok-to-usd</loc></url>
+  <url><loc>https://toolsified.com/currency/usd-to-zar</loc></url>
+  <url><loc>https://toolsified.com/currency/zar-to-usd</loc></url>
   <url><loc>https://toolsified.com/time-zone/pst-to-est</loc></url>
   <url><loc>https://toolsified.com/time-zone/gmt-to-est</loc></url>
   <url><loc>https://toolsified.com/time-zone/cet-to-est</loc></url>
@@ -36,7 +66,16 @@
   <url><loc>https://toolsified.com/time-zone/cet-to-jst</loc></url>
   <url><loc>https://toolsified.com/time-zone/ct-to-gmt</loc></url>
   <url><loc>https://toolsified.com/time-zone/cet-to-cst</loc></url>
-  <url><loc>https://toolsified.com/time-zone/mt-to-est</loc></url>
+  <url><loc>https://toolsified.com/time-zone/mt-to-gmt</loc></url>
+  <url><loc>https://toolsified.com/time-zone/pst-to-gmt</loc></url>
+  <url><loc>https://toolsified.com/time-zone/jst-to-est</loc></url>
+  <url><loc>https://toolsified.com/time-zone/aet-to-est</loc></url>
+  <url><loc>https://toolsified.com/time-zone/gst-to-est</loc></url>
+  <url><loc>https://toolsified.com/time-zone/sgt-to-pst</loc></url>
+  <url><loc>https://toolsified.com/time-zone/gmt-to-ist</loc></url>
+  <url><loc>https://toolsified.com/time-zone/pst-to-ist</loc></url>
+  <url><loc>https://toolsified.com/time-zone/cet-to-pst</loc></url>
+  <url><loc>https://toolsified.com/time-zone/cst-to-est</loc></url>
   <url><loc>https://toolsified.com/crypto/btc-to-usd</loc></url>
   <url><loc>https://toolsified.com/crypto/eth-to-usd</loc></url>
   <url><loc>https://toolsified.com/crypto/sol-to-usd</loc></url>
