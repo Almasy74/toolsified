@@ -1,0 +1,21 @@
+[
+  {
+    "id": "button-default",
+    "url": "https://skatteetaten.github.io/designsystemet/?path=/docs/komponenter-button--docs",
+    "selector": ".sbdocs-preview",
+    "nth": 0,
+    "out": "docs/find/screenshots/button-default.png",
+    "width": 900,
+    "height": 300
+  },
+ 
+  {
+    "id": "table-default",
+    "url": "https://skatteetaten.github.io/designsystemet/?path=/docs/komponenter-table--docs",
+    "selector": ".sbdocs-preview",
+    "nth": 0,
+    "out": "docs/find/screenshots/table-default.png",
+    "width": 1200,
+    "height": 700
+  }
+]
