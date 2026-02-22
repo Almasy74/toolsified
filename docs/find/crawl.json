@@ -174,7 +174,7 @@
       "Innhold og utforming",
       "Sidetyper",
       "Innholdselementer og virkemidler",
-      "Skjema og tjenester",
+      "Skjema og tjeneste",
       "Valg av sidetyper og virkemidler",
       "Trenger du hjelp?"
     ]
@@ -238,7 +238,7 @@
     "name": "Komponenter",
     "type": "doc",
     "depth": 1,
-    "summary": "I versjonshistorikken finner du endringene til komponentene. For eldre komponenter må du sannsynligvis lete i gammel dokumentasjon for riktig historikk.",
+    "summary": "I versjonshistorikken finner du endringene til komponentene.",
     "tips": [],
     "anchors": [
       "Versjoner og historikk",
@@ -283,7 +283,8 @@
       "Tittel Hjelpsom og trygg",
       "Tekst Det viktigste først",
       "Mellomtitler og avsnitt God struktur og gode veiskilt",
-      "Lenker Bruk kortlenker",
+      "Lenker Bruk kortlenker, og lenk til åpne nettsider",
+      "Vi lenker til åpne nettsider",
       "Faste avsnitt som er med i de fleste brev",
       "Aktuelt regelverk i dette brevet",
       "Har du spørsmål? (Kontaktinformasjon)",
@@ -393,6 +394,7 @@
       "Alle felt må fylles ut",
       "Merke valgfrie felt",
       "Vise feilmelding",
+      "Enten/eller-situasjoner",
       "Trenger du hjelp?"
     ]
   },
@@ -483,8 +485,6 @@
       "Regler for responsivitet",
       "Relevante containere",
       "Eksempelkode",
-      "CSS / SCSS",
-      "React / JSX",
       "Trenger du hjelp?"
     ]
   },
@@ -505,8 +505,6 @@
       "Regler for responsivitet",
       "Eksempler",
       "Eksempelkode",
-      "CSS / SCSS",
-      "React / JSX",
       "Trenger du hjelp?"
     ]
   },
@@ -1205,38 +1203,44 @@
     "type": "component",
     "depth": 2,
     "summary": "",
-    "tips": [],
+    "tips": [
+      "Modal : Dokumentasjon om at modalRef.current?.close() ikke kaller onClose for modalen.",
+      "Footer : Dokumentasjon om innebygde lenker og oppførsel ved åpning i ny fane.",
+      "Opprettet Ny sidetype: Intern arbeidsliste",
+      "Typografi : Eksempler på utheving (bold, italic)",
+      "Forbedret JSDoc for flere komponenter."
+    ],
     "anchors": [
+      "Versjon 2.6.1 – 30. januar 2026",
+      "Versjon 2.6.0 – 28. januar 2026",
+      "Nye komponenter og funksjoner",
+      "Andre feilrettinger og forbedringer",
+      "Oppdatert dokumentasjon og eksempler",
+      "Versjon 2.5.2 – 9. januar 2026",
+      "Andre feilrettinger og forbedringer",
+      "Versjon 2.5.1 – 8. januar 2026",
+      "Andre feilrettinger og forbedringer",
+      "Versjon 2.5.0 – 17. desember 2025",
+      "Nye funksjoner",
+      "Andre feilrettinger og forbedringer",
+      "Versjon 2.4.1 – 26. november 2025",
+      "Versjon 2.4.0 – 13. november 2025",
+      "Nye komponenter og funksjoner",
+      "Andre feilrettinger og forbedringer",
+      "Feilretting",
+      "Versjon 2.3.1 – 22. oktober 2025",
+      "Forbedringer",
+      "Versjon 2.3.0 – 16. oktober 2025",
+      "Nye komponenter og funksjoner",
+      "Andre feilrettinger og forbedringer",
+      "Versjon 2.2.2 – 30. september 2025",
+      "Feilrettinger",
+      "Versjon 2.2.1 – 30. september 2025",
+      "Feilrettinger",
       "Versjon 2.2.0 – 28. august 2025",
       "Nye komponenter og funksjoner",
       "Andre feilrettinger og forbedringer",
-      "Versjon 2.1.0 – 12. juni 2025",
-      "Nye komponenter og funksjoner",
-      "Andre feilrettinger og forbedringer",
-      "Versjon 2.0.1 – 8. mai 2025",
-      "Feilrettinger",
-      "Versjon 2.0.0 – 10. april 2025",
-      "Breaking changes",
-      "Oppdaterte avhengigheter",
-      "Andre feilrettinger og forbedringer",
-      "Versjon 1.6.1 – 8. mai 2025",
-      "Feilrettinger",
-      "Versjon 1.6.0 – 27.02.2025",
-      "Feilrettinger og forbedringer",
-      "Andre forbedringer",
-      "Versjon 1.5.1 – 11.02.2025",
-      "Versjon 1.5.0 – 30.01.2025",
-      "Nye komponenter",
-      "Feilrettinger og forbedringer",
-      "Andre forbedringer",
-      "Versjon 1.4.0 – 28.11.2024",
-      "Feilrettinger og forbedringer",
-      "Andre forbedringer",
-      "Versjon 1.3.0 – 31.10.2024",
-      "@skatteetaten/ds-collections",
-      "Feilrettinger og forbedringer",
-      "Andre forbedringer",
-      "Versjon 1.2.0 - 26. september 2024"
+      "Versjon 2.1.0 – 12. juni 2025"
     ]
   },
   {
@@ -1351,6 +1355,7 @@
       "Alle felt må fylles ut",
       "Merke valgfrie felt",
       "Vise feilmelding",
+      "Enten/eller-situasjoner",
       "Trenger du hjelp?"
     ]
   },
@@ -1590,6 +1595,24 @@
       "Skill mellom primær- og sekundærhandlinger",
       "Advarselknapp for handlinger det ikke går an å angre på",
       "Unngå inaktive knapper",
+      "Tekst i komponenten",
+      "Universell utforming",
+      "Trenger du hjelp?"
+    ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/fieldset",
+    "title": "Fieldset - Skatteetaten",
+    "name": "Fieldset",
+    "type": "component",
+    "depth": 2,
+    "summary": "",
+    "tips": [],
+    "anchors": [
+      "Eksempel",
+      "Egnet til:",
+      "Uegnet til:",
+      "Teknisk dokumentasjon",
       "Universell utforming",
       "Trenger du hjelp?"
     ]
@@ -1608,10 +1631,11 @@
       "Send brukeren direkte til hjelpen",
       "Spesielt om lenker på nettsider og i digitale tjenester",
       "Ikke vis hele URL-en",
+      "Meningsbærende URL-er på",
       "Plassering av lenker",
       "Spesielt om lenker i brev, brosjyrer og trykksaker",
       "Bruk kort-lenker",
-      "Unntak fra regel om kort-url n år brevet kun skal sendes til bedrifter",
+      "Vi lenker til åpne nettsider",
       "Lenker til skjemaer",
       "Lenker til andre nettsteder",
       "Trenger du hjelp?"
@@ -1647,10 +1671,9 @@
       "Vanlig lenke",
       "Ekstern lenke",
       "Lenke med ikon",
-      "Ekstern lenke med ikon",
       "Hvordan bruke komponenten",
-      "Hoveregler",
-      "Slik skriver du lenker riktig",
+      "Retningslinjer for lenkeatferd – samme vidu eller ny fane",
+      "Tekst i komponenten",
       "Universell utforming",
       "Trenger du hjelp?"
     ]
@@ -1758,6 +1781,7 @@
       "Vertikal",
       "Horisontal",
       "Hvordan bruke komponenten",
+      "Tekst i komponenten",
       "Universell utforming",
       "Trenger du hjelp?"
     ]
@@ -1827,6 +1851,7 @@
       "Ikke bruk placeholder-tekst",
       "Autocomplete",
       "Typer input",
+      "Vis tegnbegrensning med teller",
       "God praksis",
       "Universell utforming",
       "Trenger du hjelp?"
