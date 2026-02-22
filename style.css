@@ -369,6 +369,40 @@ footer {
   font-size: 0.9rem;
 }
 
+/* Toggle Details Button */
+.toggle-details-btn {
+  background: none;
+  border: 1px solid var(--border-color);
+  color: var(--primary-color);
+  padding: 4px 8px;
+  font-size: 0.85rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.toggle-details-btn:hover {
+  background: var(--bg-color);
+  border-color: var(--primary-color);
+}
+
+.details-row {
+  background: var(--bg-color);
+}
+
+.details-content {
+  padding: 12px;
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  font-size: 0.9rem;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.details-content strong {
+  color: var(--text-color);
+}
+
 /* Media Queries */
 @media (max-width: 768px) {
   .container {

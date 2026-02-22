@@ -72,9 +72,8 @@
                         <th>Fiat</th>
                         <th>Buy Date</th>
                         <th>Sell Date</th>
-                        <th>Buy Rate</th>
-                        <th>Sell Rate</th>
                         <th>Profit/Loss (USD)</th>
+                        <th>Details</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -100,10 +99,10 @@
         <div class="section">
             <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Related Crypto Tools</h3>
             <div class="internal-links-cluster" style="margin-bottom: 32px;">
-                <p><a href="/crypto/btc-to-eur" style="color: var(--primary-color); text-decoration: underline;">Bitcoin to Euros</a></p>
+                <p><a href="/crypto/eth-to-usd" style="color: var(--primary-color); text-decoration: underline;">Ethereum to US Dollars</a></p>
+<p><a href="/crypto/btc-to-eur" style="color: var(--primary-color); text-decoration: underline;">Bitcoin to Euros</a></p>
 <p><a href="/crypto/btc-to-usd" style="color: var(--primary-color); text-decoration: underline;">Bitcoin to US Dollars</a></p>
-<p><a href="/crypto/eth-to-eur" style="color: var(--primary-color); text-decoration: underline;">Ethereum to Euros</a></p>
-<p><a href="/currency/usd-to-nzd" style="color: var(--primary-color); text-decoration: underline;">USD to NZD Rate</a></p>
+<p><a href="/currency/inr-to-usd" style="color: var(--primary-color); text-decoration: underline;">INR to USD Rate</a></p>
                 <p><a href="/crypto" style="color: var(--primary-color); text-decoration: underline;">Back to Smart
                         Crypto Converter Hub</a></p>
             </div>
@@ -145,44 +144,74 @@
 
         function addRow() {
             const tbody = document.querySelector("#cryptoTable tbody");
-            const row = document.createElement("tr");
+            const transactionId = "tx-" + Date.now() + Math.random().toString(36).substr(2, 5);
 
-            row.innerHTML = `
-        <td><input type="number" step="any" class="amount" placeholder="e.g. 0.5" /></td>
-        <td>
-          <select class="crypto">
-            ${supportedCryptos.map(c => `<option value="${c}">${c}</option>`).join('')}
-          </select>
-        </td>
-        <td>
-          <select class="fiat">
-            ${supportedFiats.map(f => `<option value="${f}">${f}</option>`).join('')}
-          </select>
-        </td>
-        <td><input type="date" class="buy-date" /></td>
-        <td><input type="date" class="sell-date" /></td>
-        <td class="buy-rate">-</td>
-        <td class="sell-rate">-</td>
-        <td class="diff" style="font-weight: 600;">-</td>
-        <td><button onclick="removeRow(this)" style="background:var(--error-color); color:white; border:none; border-radius:4px; cursor:pointer; padding:4px 8px;">X</button></td>
-      `;
+            const mainRow = document.createElement("tr");
+            mainRow.setAttribute('data-id', transactionId);
+            mainRow.classList.add('main-row');
 
-            tbody.appendChild(row);
+            mainRow.innerHTML = `
+                <td><input type="number" step="any" class="amount" placeholder="e.g. 0.5" /></td>
+                <td>
+                    <select class="crypto">
+                        ${supportedCryptos.map(c => `<option value="${c}">${c}</option>`).join('')}
+                    </select>
+                </td>
+                <td>
+                    <select class="fiat">
+                        ${supportedFiats.map(f => `<option value="${f}">${f}</option>`).join('')}
+                    </select>
+                </td>
+                <td><input type="date" class="buy-date" /></td>
+                <td><input type="date" class="sell-date" /></td>
+                <td class="diff" style="font-weight: 600;">-</td>
+                <td><button class="toggle-details-btn" onclick="toggleDetails('${transactionId}')">Details</button></td>
+                <td><button onclick="removeRow('${transactionId}')" style="background:var(--danger-color); color:white; border:none; border-radius:4px; cursor:pointer; padding:4px 8px;">X</button></td>
+            `;
+
+            const detailsRow = document.createElement("tr");
+            detailsRow.setAttribute('data-details-for', transactionId);
+            detailsRow.classList.add('details-row');
+            detailsRow.style.display = 'none';
+            detailsRow.innerHTML = `
+                <td colspan="8">
+                    <div class="details-content">
+                        <div><strong>Buy Rate:</strong> <span class="buy-rate">-</span></div>
+                        <div><strong>Sell Rate:</strong> <span class="sell-rate">-</span></div>
+                    </div>
+                </td>
+            `;
+
+            tbody.appendChild(mainRow);
+            tbody.appendChild(detailsRow);
 
             // Programmatic SEO Pre-selection for the first row specifically
             if (isFirstRow) {
-                row.querySelector(".crypto").value = "ETH";
-                row.querySelector(".fiat").value = "USD";
+                mainRow.querySelector(".crypto").value = "ETH";
+                mainRow.querySelector(".fiat").value = "USD";
                 isFirstRow = false;
             }
 
-            row.querySelectorAll("input, select").forEach(el => {
-                el.addEventListener("change", () => updateRow(row));
+            mainRow.querySelectorAll("input, select").forEach(el => {
+                el.addEventListener("change", () => updateRow(transactionId));
             });
         }
 
-        function removeRow(btn) {
-            btn.closest("tr").remove();
+        function removeRow(id) {
+            document.querySelector(`tr[data-id="${id}"]`).remove();
+            document.querySelector(`tr[data-details-for="${id}"]`).remove();
+        }
+
+        function toggleDetails(id) {
+            const detailsRow = document.querySelector(`tr[data-details-for="${id}"]`);
+            const btn = document.querySelector(`tr[data-id="${id}"] .toggle-details-btn`);
+            if (detailsRow.style.display === 'none') {
+                detailsRow.style.display = 'table-row';
+                btn.textContent = 'Hide';
+            } else {
+                detailsRow.style.display = 'none';
+                btn.textContent = 'Details';
+            }
         }
 
         async function getRate(crypto, fiat, date) {
@@ -205,16 +234,19 @@
             }
         }
 
-        async function updateRow(row) {
-            const amount = parseFloat(row.querySelector(".amount").value);
-            const crypto = row.querySelector(".crypto").value;
-            const fiat = row.querySelector(".fiat").value.toUpperCase();
-            const buyDate = row.querySelector(".buy-date").value;
-            const sellDate = row.querySelector(".sell-date").value;
+        async function updateRow(id) {
+            const mainRow = document.querySelector(`tr[data-id="${id}"]`);
+            const detailsRow = document.querySelector(`tr[data-details-for="${id}"]`);
 
-            const buyRateCell = row.querySelector(".buy-rate");
-            const sellRateCell = row.querySelector(".sell-rate");
-            const diffCell = row.querySelector(".diff");
+            const amount = parseFloat(mainRow.querySelector(".amount").value);
+            const crypto = mainRow.querySelector(".crypto").value;
+            const fiat = mainRow.querySelector(".fiat").value.toUpperCase();
+            const buyDate = mainRow.querySelector(".buy-date").value;
+            const sellDate = mainRow.querySelector(".sell-date").value;
+
+            const buyRateCell = detailsRow.querySelector(".buy-rate");
+            const sellRateCell = detailsRow.querySelector(".sell-rate");
+            const diffCell = mainRow.querySelector(".diff");
 
             if (!crypto || !fiat || !amount || (!buyDate && !sellDate)) return;
 
