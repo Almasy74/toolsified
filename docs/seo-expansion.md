@@ -8,6 +8,14 @@
 
 ---
 
+## Signal Validation Window
+
+A query signal must meet scoring criteria for **at least 14 consecutive days** before expansion is allowed.
+
+*This prevents scaling temporary Google test impressions.*
+
+---
+
 ## Signal Scoring Model
 
 Each query signal receives a score before expansion.
@@ -39,6 +47,22 @@ Pages generated per signal:
 - **Score 4** → 5 pages
 - **Score 5** → 8 pages
 - **Score 6+** → 12 pages
+
+---
+
+## Expansion Rate Limit
+
+Maximum new pages per deployment cycle: **15**.
+
+Large expansions must be split across multiple weeks to protect crawl budget and index quality.
+
+---
+
+## Cluster Authority Rule
+
+New pages must remain within the functional purpose of the parent tool. Expansion may vary parameters, not intent.
+- ✅ *USD → EUR*
+- ❌ *Crypto tax reporting*
 
 ---
 
