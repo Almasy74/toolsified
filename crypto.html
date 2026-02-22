@@ -214,8 +214,8 @@
             ${supportedFiats.map(f => `<option>${f}</option>`).join('')}
           </select>
         </td>
-        <td><input type="text" class="buy-date" placeholder="YYYY-MM-DD" onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'" /></td>
-        <td><input type="text" class="sell-date" placeholder="YYYY-MM-DD" onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'" /></td>
+        <td><input type="date" class="buy-date" /></td>
+        <td><input type="date" class="sell-date" /></td>
         <td class="buy-rate">-</td>
         <td class="sell-rate">-</td>
         <td class="diff">-</td>
