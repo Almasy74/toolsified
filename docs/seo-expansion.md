@@ -99,15 +99,20 @@ New pages must remain within the functional purpose of the parent tool. Expansio
 
 ---
 
-## Weekly Expansion Workflow (10 minutes)
+## 10-Step Signal Radar Workflow 
 
-1. Open GSC → Queries → Last 28 days
-2. Export top 50 queries
-3. Apply Signal Scoring
-4. Select highest scoring signal
-5. Generate pages using Expansion Formula
-6. Deploy
-7. Log expansion
+*How to properly extract signals from GSC without guessing.*
+
+1. **Open the Right Report:** Go to GSC → Performance → Search results. (Do not use Page view first).
+2. **Set the Time Filter:** Date → Last 28 days. **Compare → Previous period.** (SEO signals are trends, not levels).
+3. **Enable All Columns:** Turn on Clicks, Impressions, CTR, and Position.
+4. **The Critical Filter:** Click + New → Query → Custom (regex). Enter: `(to|convert|timezone|time|crypto|btc|usd|eur)`. This removes noise testing outside our core clusters.
+5. **Sort Correctly:** Sort by **Impressions ↓** (Descending), NOT clicks. Impressions indicate the ranking test phase.
+6. **Identify the SIGNAL:** Look for query patterns (e.g., `usd to nok`, `usd to sek` both showing impressions). This means Google is testing the *USD cluster*, not just one page.
+7. **Visual Cluster Check (Pro Move):** Click a query → Pages tab. If multiple pages get impressions from the same query, Google is mapping cluster authority (Green light).
+8. **Export:** Export → Google Sheets. Add a "Signal Score" column and apply the Signal Scoring Model formula.
+9. **Spot the Winners:** Look for Impressions going ↑ week-over-week and slow Position improvement. 0 clicks is normal; traffic comes last.
+10. **Ignore the Noise:** Do not react to positions 80-100, single-day spikes, rare long sentences, or branded coincidences. Scale only stable testing.
 
 ---
 
