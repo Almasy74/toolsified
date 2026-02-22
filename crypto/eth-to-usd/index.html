@@ -89,7 +89,7 @@
         <p class="subtitle" style="text-align: center; margin-bottom: 32px;">Calculate historic profit and loss for
             ETH to USD.</p>
 
-        <div style="overflow-x: auto" class="card">
+        <div class="table-container card">
             <table class="table" id="cryptoTable">
                 <thead>
                     <tr>
@@ -237,11 +237,16 @@
 
             if (!crypto || !fiat || !amount || (!buyDate && !sellDate)) return;
 
+            buyRateCell.classList.add('skeleton-loader');
+            sellRateCell.classList.add('skeleton-loader');
             buyRateCell.textContent = "Loading...";
             sellRateCell.textContent = "Loading...";
 
             const buyRate = await getRate(crypto, fiat, buyDate);
             const sellRate = await getRate(crypto, fiat, sellDate);
+
+            buyRateCell.classList.remove('skeleton-loader');
+            sellRateCell.classList.remove('skeleton-loader');
 
             buyRateCell.textContent = buyRate ? buyRate.toFixed(2) : (buyDate ? 'Error' : '-');
             sellRateCell.textContent = sellRate ? sellRate.toFixed(2) : (sellDate ? 'Error' : '-');

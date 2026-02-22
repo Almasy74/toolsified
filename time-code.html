@@ -83,15 +83,17 @@
 
       <button id="convertBtn" class="primary" type="button">Convert</button>
 
-      <table id="resultTbl" style="display:none">
-        <thead>
-          <tr>
-            <th>Time zone</th>
-            <th>Time formats</th>
-          </tr>
-        </thead>
-        <tbody id="resultBody"></tbody>
-      </table>
+      <div class="table-container">
+        <table id="resultTbl" style="display:none">
+          <thead>
+            <tr>
+              <th>Time zone</th>
+              <th>Time formats</th>
+            </tr>
+          </thead>
+          <tbody id="resultBody"></tbody>
+        </table>
+      </div>
     </div>
 
     <div class="card seo-content" style="margin-top: 40px; text-align: left; padding: 32px;">
@@ -102,32 +104,34 @@
         international meetings, gaming events, or remote work schedules without leaving your browser.</p>
 
       <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Supported Time Code Examples</h3>
-      <table style="margin-top: 0; margin-bottom: 32px;">
-        <thead>
-          <tr>
-            <th>Input Format</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>2pm EDT</code></td>
-            <td>Standard US time zone abbreviation</td>
-          </tr>
-          <tr>
-            <td><code>tomorrow 15 CEST</code></td>
-            <td>Relative day with European time</td>
-          </tr>
-          <tr>
-            <td><code>next monday 08:00 CET</code></td>
-            <td>Specific upcoming weekday</td>
-          </tr>
-          <tr>
-            <td><code>24 Dec 2026 12:00 GMT</code></td>
-            <td>Exact date and time parsing</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-container">
+        <table style="margin-top: 0; margin-bottom: 32px;">
+          <thead>
+            <tr>
+              <th>Input Format</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>2pm EDT</code></td>
+              <td>Standard US time zone abbreviation</td>
+            </tr>
+            <tr>
+              <td><code>tomorrow 15 CEST</code></td>
+              <td>Relative day with European time</td>
+            </tr>
+            <tr>
+              <td><code>next monday 08:00 CET</code></td>
+              <td>Specific upcoming weekday</td>
+            </tr>
+            <tr>
+              <td><code>24 Dec 2026 12:00 GMT</code></td>
+              <td>Exact date and time parsing</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
       <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Top Time Format Translations</h3>
       <div class="internal-links-cluster" style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 32px;">

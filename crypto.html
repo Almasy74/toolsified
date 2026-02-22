@@ -91,7 +91,7 @@
   </header>
   <main class="container">
     <h1>Smart Crypto Converter</h1>
-    <div style="overflow-x: auto">
+    <div class="table-container">
       <table class="table" id="cryptoTable">
         <thead>
           <tr>
@@ -124,32 +124,34 @@
       no account.</p>
 
     <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Supported Cryptocurrencies</h3>
-    <table style="margin-top: 0; margin-bottom: 32px; width: 100%;">
-      <thead>
-        <tr>
-          <th>Asset</th>
-          <th>Symbol</th>
-          <th>Type</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Bitcoin</td>
-          <td>BTC</td>
-          <td>Layer 1 Store of Value</td>
-        </tr>
-        <tr>
-          <td>Ethereum</td>
-          <td>ETH</td>
-          <td>Smart Contract Platform</td>
-        </tr>
-        <tr>
-          <td>Solana</td>
-          <td>SOL</td>
-          <td>High-Speed Blockchain</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-container">
+      <table style="margin-top: 0; margin-bottom: 32px; width: 100%;">
+        <thead>
+          <tr>
+            <th>Asset</th>
+            <th>Symbol</th>
+            <th>Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Bitcoin</td>
+            <td>BTC</td>
+            <td>Layer 1 Store of Value</td>
+          </tr>
+          <tr>
+            <td>Ethereum</td>
+            <td>ETH</td>
+            <td>Smart Contract Platform</td>
+          </tr>
+          <tr>
+            <td>Solana</td>
+            <td>SOL</td>
+            <td>High-Speed Blockchain</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Live Historic Conversion Paths</h3>
     <div class="internal-links-cluster" style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 32px;">
@@ -278,8 +280,20 @@
 
       if (!crypto || !fiat || !amount) return;
 
+      if (buyDate) {
+        buyRateCell.classList.add('skeleton-loader');
+        buyRateCell.textContent = 'Loading...';
+      }
+      if (sellDate) {
+        sellRateCell.classList.add('skeleton-loader');
+        sellRateCell.textContent = 'Loading...';
+      }
+
       const buyRate = await getRate(crypto, fiat, buyDate);
       const sellRate = await getRate(crypto, fiat, sellDate);
+
+      buyRateCell.classList.remove('skeleton-loader');
+      sellRateCell.classList.remove('skeleton-loader');
 
       buyRateCell.textContent = buyRate === 'VALUTAFEIL' ? 'Valutakurs mangler' : (buyRate ? buyRate.toFixed(2) : (buyDate ? 'Feil' : '-'));
       sellRateCell.textContent = sellRate === 'VALUTAFEIL' ? 'Valutakurs mangler' : (sellRate ? sellRate.toFixed(2) : (sellDate ? 'Feil' : '-'));
