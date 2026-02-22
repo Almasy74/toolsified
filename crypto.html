@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Smart Crypto Converter</title>
-  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="/style.css?v=2.0" />
   <style>
     main.container {
       max-width: 100%;
@@ -95,14 +95,14 @@
       <table class="table" id="cryptoTable">
         <thead>
           <tr>
-            <th>Beløp</th>
-            <th>Krypto</th>
+            <th>Amount</th>
+            <th>Crypto</th>
             <th>Fiat</th>
-            <th>Kjøpsdato</th>
-            <th>Salgsdato</th>
-            <th>Kjøpskurs</th>
-            <th>Salgskurs</th>
-            <th>Gevinst/tap</th>
+            <th>Buy Date</th>
+            <th>Sell Date</th>
+            <th>Buy Rate</th>
+            <th>Sell Rate</th>
+            <th>Profit/Loss</th>
             <th></th>
           </tr>
         </thead>
@@ -110,7 +110,7 @@
       </table>
     </div>
     <div class="row-controls">
-      <button onclick="addRow()">Legg til rad</button>
+      <button onclick="addRow()">Add Transaction</button>
     </div>
   </main>
 
@@ -242,27 +242,27 @@
       if (selectedDate > today) return null;
 
       try {
-        // Bruk Netlify-funksjon for konvertering
+        // Use Netlify function for conversion
         const url = `/.netlify/functions/crypto-convert?crypto=${crypto}&fiat=${fiat}&date=${date}`;
-        console.log("Henter kurs fra:", url);
+        console.log("Fetching rate from:", url);
         const response = await fetch(url);
 
         if (!response.ok) {
-          console.error("Feil ved henting av kurs:", await response.text());
+          console.error("Error fetching rate:", await response.text());
           return null;
         }
 
         const data = await response.json();
-        console.log("Kurs data:", data);
+        console.log("Rate data:", data);
 
         if (!data.rate) {
-          console.error("Ingen kurs funnet for", crypto, "til", fiat, "på dato", date);
+          console.error("No rate found for", crypto, "to", fiat, "on date", date);
           return null;
         }
 
         return data.rate;
       } catch (err) {
-        console.error("Feil ved henting av kurs:", err);
+        console.error("Error fetching rate:", err);
         return null;
       }
     }
@@ -295,8 +295,8 @@
       buyRateCell.classList.remove('skeleton-loader');
       sellRateCell.classList.remove('skeleton-loader');
 
-      buyRateCell.textContent = buyRate === 'VALUTAFEIL' ? 'Valutakurs mangler' : (buyRate ? buyRate.toFixed(2) : (buyDate ? 'Feil' : '-'));
-      sellRateCell.textContent = sellRate === 'VALUTAFEIL' ? 'Valutakurs mangler' : (sellRate ? sellRate.toFixed(2) : (sellDate ? 'Feil' : '-'));
+      buyRateCell.textContent = buyRate === 'VALUTAFEIL' ? 'Rate missing' : (buyRate ? buyRate.toFixed(2) : (buyDate ? 'Error' : '-'));
+      sellRateCell.textContent = sellRate === 'VALUTAFEIL' ? 'Rate missing' : (sellRate ? sellRate.toFixed(2) : (sellDate ? 'Error' : '-'));
 
       if (typeof buyRate === 'number' && typeof sellRate === 'number') {
         const diff = (sellRate - buyRate) * amount;
