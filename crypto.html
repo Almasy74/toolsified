@@ -4,41 +4,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Smart Crypto Converter</title>
+  <title>Smart Crypto Converter | Toolsified</title>
   <link rel="stylesheet" href="/style.css?v=2.0" />
-  <style>
-    main.container {
-      max-width: 100%;
-      padding: 1rem;
-    }
-
-    .table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 1rem;
-      table-layout: auto;
-    }
-
-    .table th,
-    .table td {
-      border: 1px solid #ddd;
-      padding: 0.5rem;
-      text-align: center;
-      white-space: nowrap;
-    }
-
-    .row-controls {
-      margin-top: 1rem;
-      display: flex;
-      gap: 1rem;
-    }
-
-    .input-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-    }
-  </style>
   <link rel="canonical" href="https://toolsified.com/crypto" />
   <script type="application/ld+json">
 {
@@ -89,9 +56,14 @@
       </div>
     </div>
   </header>
-  <main class="container">
+
+  <main class="page-container" style="padding-top: 48px; padding-bottom: 48px;">
     <h1>Smart Crypto Converter</h1>
-    <div class="table-container">
+    <p class="subtitle" style="text-align: center; margin-bottom: 32px;">Calculate Bitcoin & Ethereum gains instantly
+      using historical prices. No account required.</p>
+
+    <!-- Tool Section -->
+    <div class="table-container card" style="margin-top: 0;">
       <table class="table" id="cryptoTable">
         <thead>
           <tr>
@@ -108,81 +80,91 @@
         </thead>
         <tbody></tbody>
       </table>
+      <div class="row-controls" style="margin-top: 1rem; display: flex; gap: 1rem; padding: 0 1rem 1rem 1rem;">
+        <button onclick="addRow()" class="primary" style="margin-top: 0; width: auto;">+ Add Transaction</button>
+      </div>
     </div>
-    <div class="row-controls">
-      <button onclick="addRow()">Add Transaction</button>
+
+    <!-- Content Sections -->
+    <div class="section">
+      <h2 style="font-size: 1.5rem; margin-bottom: 16px;">Track Your Crypto Gains and Losses</h2>
+      <p style="text-align: left; margin-bottom: 24px;">The Toolsified Smart Crypto Converter is designed for quick,
+        precise portfolio tracking. Whether you bought Bitcoin, Ethereum, or Solana, simply enter the amount and the
+        dates
+        of your purchase and sale. The tool instantly fetches the historical exchange rates between your chosen crypto
+        and
+        fiat currencies (like USD, EUR, or NOK) to calculate your exact profit or loss. It is private, fast, and
+        requires
+        no account.</p>
+    </div>
+
+    <div class="section">
+      <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Supported Cryptocurrencies</h3>
+      <div class="table-container card" style="padding: 0; margin-top: 0;">
+        <table style="margin: 0; width: 100%;">
+          <thead>
+            <tr>
+              <th>Asset</th>
+              <th>Symbol</th>
+              <th>Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Bitcoin</td>
+              <td>BTC</td>
+              <td>Layer 1 Store of Value</td>
+            </tr>
+            <tr>
+              <td>Ethereum</td>
+              <td>ETH</td>
+              <td>Smart Contract Platform</td>
+            </tr>
+            <tr>
+              <td>Solana</td>
+              <td>SOL</td>
+              <td>High-Speed Blockchain</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Live Historic Conversion Paths</h3>
+      <div class="internal-links-cluster" style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 32px;">
+        <a href="/crypto/btc-to-usd" style="color: var(--primary-color); text-decoration: underline;">BTC to USD</a>
+        <a href="/crypto/eth-to-usd" style="color: var(--primary-color); text-decoration: underline;">ETH to USD</a>
+        <a href="/crypto/sol-to-usd" style="color: var(--primary-color); text-decoration: underline;">SOL to USD</a>
+        <a href="/crypto/btc-to-eur" style="color: var(--primary-color); text-decoration: underline;">BTC to EUR</a>
+        <a href="/crypto/eth-to-eur" style="color: var(--primary-color); text-decoration: underline;">ETH to EUR</a>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Frequently Asked Questions</h3>
+      <div class="faq-item" style="margin-bottom: 16px;">
+        <strong>How does the crypto converter work?</strong>
+        <p style="text-align: left; margin-bottom: 0;">Log your crypto buys and sells on specific dates. It calculates
+          the
+          profit or loss using exact historical exchange rates.</p>
+      </div>
+      <div class="faq-item" style="margin-bottom: 16px;">
+        <strong>Which cryptocurrencies are supported?</strong>
+        <p style="text-align: left; margin-bottom: 0;">We currently support Bitcoin (BTC), Ethereum (ETH), and Solana
+          (SOL) against major fiat currencies.</p>
+      </div>
+      <div class="faq-item" style="margin-bottom: 16px;">
+        <strong>Is my portfolio data stored?</strong>
+        <p style="text-align: left; margin-bottom: 0;">No. All calculations happen instantly in your browser session and
+          your data is never saved or transmitted to our servers.</p>
+      </div>
     </div>
   </main>
 
-  <div class="card seo-content"
-    style="margin-top: 40px; text-align: left; padding: 32px; max-width: 680px; margin-left: auto; margin-right: auto;">
-    <h2 style="font-size: 1.5rem; margin-bottom: 16px;">Track Your Crypto Gains and Losses</h2>
-    <p style="text-align: left; margin-bottom: 24px;">The Toolsified Smart Crypto Converter is designed for quick,
-      precise portfolio tracking. Whether you bought Bitcoin, Ethereum, or Solana, simply enter the amount and the dates
-      of your purchase and sale. The tool instantly fetches the historical exchange rates between your chosen crypto and
-      fiat currencies (like USD, EUR, or NOK) to calculate your exact profit or loss. It is private, fast, and requires
-      no account.</p>
-
-    <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Supported Cryptocurrencies</h3>
-    <div class="table-container">
-      <table style="margin-top: 0; margin-bottom: 32px; width: 100%;">
-        <thead>
-          <tr>
-            <th>Asset</th>
-            <th>Symbol</th>
-            <th>Type</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Bitcoin</td>
-            <td>BTC</td>
-            <td>Layer 1 Store of Value</td>
-          </tr>
-          <tr>
-            <td>Ethereum</td>
-            <td>ETH</td>
-            <td>Smart Contract Platform</td>
-          </tr>
-          <tr>
-            <td>Solana</td>
-            <td>SOL</td>
-            <td>High-Speed Blockchain</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Live Historic Conversion Paths</h3>
-    <div class="internal-links-cluster" style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 32px;">
-      <a href="/crypto/btc-to-usd" style="color: var(--primary-color); text-decoration: underline;">BTC to USD</a>
-      <a href="/crypto/eth-to-usd" style="color: var(--primary-color); text-decoration: underline;">ETH to USD</a>
-      <a href="/crypto/sol-to-usd" style="color: var(--primary-color); text-decoration: underline;">SOL to USD</a>
-      <a href="/crypto/btc-to-eur" style="color: var(--primary-color); text-decoration: underline;">BTC to EUR</a>
-      <a href="/crypto/eth-to-eur" style="color: var(--primary-color); text-decoration: underline;">ETH to EUR</a>
-    </div>
-
-    <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Frequently Asked Questions</h3>
-    <div class="faq-item" style="margin-bottom: 16px;">
-      <strong>How does the crypto converter work?</strong>
-      <p style="text-align: left; margin-bottom: 0;">Log your crypto buys and sells on specific dates. It calculates the
-        profit or loss using exact historical exchange rates.</p>
-    </div>
-    <div class="faq-item" style="margin-bottom: 16px;">
-      <strong>Which cryptocurrencies are supported?</strong>
-      <p style="text-align: left; margin-bottom: 0;">We currently support Bitcoin (BTC), Ethereum (ETH), and Solana
-        (SOL) against major fiat currencies.</p>
-    </div>
-    <div class="faq-item" style="margin-bottom: 16px;">
-      <strong>Is my portfolio data stored?</strong>
-      <p style="text-align: left; margin-bottom: 0;">No. All calculations happen instantly in your browser session and
-        your data is never saved or transmitted to our servers.</p>
-    </div>
-  </div>
-
   <!-- Footer -->
   <footer style="margin-top: auto; border-top: 1px solid var(--border-color); background: var(--card-bg);">
-    <div class="container" style="text-align: center; padding: 24px 16px; font-size: 0.9rem;">
+    <div class="page-container" style="text-align: center; padding: 24px 16px; font-size: 0.9rem;">
       <p style="margin-bottom: 12px;">© 2025 Toolsified. Smart tools for everyday tasks.</p>
       <div style="display: flex; justify-content: center; gap: 16px; margin-bottom: 12px;">
         <a href="/privacy" style="color: inherit; text-decoration: underline;">Privacy Policy</a>
@@ -196,14 +178,13 @@
   <script>
     const supportedCryptos = ['BTC', 'ETH', 'SOL'];
     const supportedFiats = ['NOK', 'USD', 'EUR'];
-    const apiKey = '61afd9bedcb6a6417369f2bb518b7352f01bb62d0051d9a4803b8aa83acf4227';
 
     function addRow() {
       const tbody = document.querySelector("#cryptoTable tbody");
       const row = document.createElement("tr");
 
       row.innerHTML = `
-        <td><input type="number" step="any" class="amount" /></td>
+        <td><input type="number" step="any" class="amount" placeholder="0.00" /></td>
         <td>
           <select class="crypto">
             ${supportedCryptos.map(c => `<option>${c}</option>`).join('')}
@@ -218,8 +199,8 @@
         <td><input type="date" class="sell-date" /></td>
         <td class="buy-rate">-</td>
         <td class="sell-rate">-</td>
-        <td class="diff">-</td>
-        <td><button onclick="removeRow(this)">X</button></td>
+        <td class="diff" style="font-weight: 600;">-</td>
+        <td><button onclick="removeRow(this)" style="background:var(--danger-color); color:white; border:none; border-radius:4px; cursor:pointer; padding:4px 8px;">X</button></td>
       `;
 
       tbody.appendChild(row);
@@ -242,27 +223,13 @@
       if (selectedDate > today) return null;
 
       try {
-        // Use Netlify function for conversion
         const url = `/.netlify/functions/crypto-convert?crypto=${crypto}&fiat=${fiat}&date=${date}`;
-        console.log("Fetching rate from:", url);
         const response = await fetch(url);
 
-        if (!response.ok) {
-          console.error("Error fetching rate:", await response.text());
-          return null;
-        }
-
+        if (!response.ok) return null;
         const data = await response.json();
-        console.log("Rate data:", data);
-
-        if (!data.rate) {
-          console.error("No rate found for", crypto, "to", fiat, "on date", date);
-          return null;
-        }
-
-        return data.rate;
+        return data.rate || null;
       } catch (err) {
-        console.error("Error fetching rate:", err);
         return null;
       }
     }
@@ -295,13 +262,13 @@
       buyRateCell.classList.remove('skeleton-loader');
       sellRateCell.classList.remove('skeleton-loader');
 
-      buyRateCell.textContent = buyRate === 'VALUTAFEIL' ? 'Rate missing' : (buyRate ? buyRate.toFixed(2) : (buyDate ? 'Error' : '-'));
-      sellRateCell.textContent = sellRate === 'VALUTAFEIL' ? 'Rate missing' : (sellRate ? sellRate.toFixed(2) : (sellDate ? 'Error' : '-'));
+      buyRateCell.textContent = buyRate ? buyRate.toFixed(2) : (buyDate ? 'Error' : '-');
+      sellRateCell.textContent = sellRate ? sellRate.toFixed(2) : (sellDate ? 'Error' : '-');
 
       if (typeof buyRate === 'number' && typeof sellRate === 'number') {
         const diff = (sellRate - buyRate) * amount;
-        diffCell.textContent = diff.toFixed(2);
-        diffCell.style.color = diff >= 0 ? 'green' : 'red';
+        diffCell.textContent = (diff >= 0 ? "+" : "") + diff.toFixed(2);
+        diffCell.style.color = diff >= 0 ? '#10b981' : '#ef4444';
       } else {
         diffCell.textContent = '-';
         diffCell.style.color = 'inherit';

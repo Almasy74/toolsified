@@ -105,6 +105,21 @@ a:focus-visible {
   width: 100%;
 }
 
+.page-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  width: 100%;
+}
+
+.page-container .card {
+  max-width: 100%;
+}
+
+.section {
+  margin-top: 2.5rem;
+}
+
 .card {
   max-width: 680px;
   margin: 40px auto;

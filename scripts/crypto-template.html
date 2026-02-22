@@ -14,33 +14,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6293439009227714"
         crossorigin="anonymous"></script>
-    <style>
-        main.container {
-            max-width: 100%;
-            padding: 1rem;
-        }
-
-        .table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
-            table-layout: auto;
-        }
-
-        .table th,
-        .table td {
-            border: 1px solid #ddd;
-            padding: 0.5rem;
-            text-align: center;
-            white-space: nowrap;
-        }
-
-        .row-controls {
-            margin-top: 1rem;
-            display: flex;
-            gap: 1rem;
-        }
-    </style>
     <link rel="canonical" href="https://toolsified.com/crypto/[FROM_VAR]-to-[TO_VAR]" />
     <script type="application/ld+json">
 {
@@ -84,12 +57,13 @@
             </div>
         </div>
     </header>
-    <main class="container">
+
+    <main class="page-container" style="padding-top: 48px; padding-bottom: 48px;">
         <h1>[FROM_NAME] to [TO_NAME] Historical Profit & Loss Calculator</h1>
         <p class="subtitle" style="text-align: center; margin-bottom: 32px;">Calculate historic profit and loss for
             [FROM_TICKER] to [TO_TICKER].</p>
 
-        <div class="table-container card">
+        <div class="table-container card" style="margin-top: 0;">
             <table class="table" id="cryptoTable">
                 <thead>
                     <tr>
@@ -106,46 +80,50 @@
                 </thead>
                 <tbody></tbody>
             </table>
-            <div class="row-controls">
-                <button onclick="addRow()" class="primary">Add Transaction</button>
+            <div class="row-controls" style="margin-top: 1rem; display: flex; gap: 1rem; padding: 0 1rem 1rem 1rem;">
+                <button onclick="addRow()" class="primary" style="margin-top: 0; width: auto;">+ Add
+                    Transaction</button>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 style="font-size: 1.5rem; margin-bottom: 16px;">Analyze [FROM_NAME] ROI in [TO_NAME]</h2>
+            <p style="text-align: left; margin-bottom: 24px;">Use the Toolsified <strong>[FROM_NAME] to
+                    [TO_NAME]</strong> historical profit and loss calculator to analyze your investment performance.
+                Whether you're tracking long-term gains or calculating specific ROI, our tool provides precise market
+                values for <strong>[FROM_NAME]</strong> in <strong>[TO_TICKER]</strong> based on audited historical
+                data. Simply enter your transaction dates and amounts above to see your net results instantly. Our tool
+                functions entirely within your browser, ensuring your <strong>[FROM_TICKER]</strong> financial data
+                remains private and secure.</p>
+        </div>
+
+        <div class="section">
+            <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Related Crypto Tools</h3>
+            <div class="internal-links-cluster" style="margin-bottom: 32px;">
+                [RELATED_CLUSTER]
+                <p><a href="/crypto" style="color: var(--primary-color); text-decoration: underline;">Back to Smart
+                        Crypto Converter Hub</a></p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Frequently Asked Questions</h3>
+            <div class="faq-item" style="margin-bottom: 16px;">
+                <strong>How do I calculate my [FROM_NAME] profit in [TO_NAME]?</strong>
+                <p style="text-align: left; margin-bottom: 0;">Enter your [FROM_TICKER] amount and transaction dates.
+                    The tool uses real historic exchange rates to calculate your profit or loss in [TO_TICKER].</p>
+            </div>
+            <div class="faq-item" style="margin-bottom: 16px;">
+                <strong>Is my [FROM_TICKER] portfolio data secure?</strong>
+                <p style="text-align: left; margin-bottom: 0;">Yes. All calculations happen instantly in your browser
+                    session and your data is never saved or transmitted to our servers.</p>
             </div>
         </div>
     </main>
 
-    <div class="card seo-content"
-        style="margin-top: 40px; text-align: left; padding: 32px; max-width: 680px; margin-left: auto; margin-right: auto;">
-        <h2 style="font-size: 1.5rem; margin-bottom: 16px;">Analyze [FROM_NAME] ROI in [TO_NAME]</h2>
-        <p style="text-align: left; margin-bottom: 24px;">Use the Toolsified <strong>[FROM_NAME] to [TO_NAME]</strong>
-            historical profit and loss calculator to analyze your investment performance. Whether you're tracking
-            long-term gains or calculating specific ROI, our tool provides precise market values for
-            <strong>[FROM_NAME]</strong> in <strong>[TO_TICKER]</strong> based on audited historical data. Simply enter
-            your transaction dates and amounts above to see your net results instantly. Our tool functions entirely
-            within your browser, ensuring your <strong>[FROM_TICKER]</strong> financial data remains private and secure.
-        </p>
-
-        <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Related Crypto Tools</h3>
-        <div class="internal-links-cluster" style="margin-bottom: 32px;">
-            [RELATED_CLUSTER]
-            <p><a href="/crypto" style="color: var(--primary-color); text-decoration: underline;">Back to Smart Crypto
-                    Converter Hub</a></p>
-        </div>
-
-        <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Frequently Asked Questions</h3>
-        <div class="faq-item" style="margin-bottom: 16px;">
-            <strong>How do I calculate my [FROM_NAME] profit in [TO_NAME]?</strong>
-            <p style="text-align: left; margin-bottom: 0;">Enter your [FROM_TICKER] amount and transaction dates. The
-                tool uses real historic exchange rates to calculate your profit or loss in [TO_TICKER].</p>
-        </div>
-        <div class="faq-item" style="margin-bottom: 16px;">
-            <strong>Is my [FROM_TICKER] portfolio data secure?</strong>
-            <p style="text-align: left; margin-bottom: 0;">Yes. All calculations happen instantly in your browser
-                session and your data is never saved or transmitted to our servers.</p>
-        </div>
-    </div>
-
     <!-- Footer -->
     <footer style="margin-top: auto; border-top: 1px solid var(--border-color); background: var(--card-bg);">
-        <div class="container" style="text-align: center; padding: 24px 16px; font-size: 0.9rem;">
+        <div class="page-container" style="text-align: center; padding: 24px 16px; font-size: 0.9rem;">
             <p style="margin-bottom: 12px;">© 2025 Toolsified. Smart tools for everyday tasks.</p>
             <div style="display: flex; justify-content: center; gap: 16px; margin-bottom: 12px;">
                 <a href="/privacy" style="color: inherit; text-decoration: underline;">Privacy Policy</a>
@@ -218,9 +196,7 @@
 
                 if (!response.ok) return null;
                 const data = await response.json();
-                if (!data.rate) return null;
-
-                return data.rate;
+                return data.rate || null;
             } catch (err) {
                 return null;
             }
@@ -255,7 +231,7 @@
 
             if (typeof buyRate === 'number' && typeof sellRate === 'number') {
                 const diff = (sellRate - buyRate) * amount;
-                diffCell.textContent = (diff > 0 ? "+" : "") + diff.toFixed(2);
+                diffCell.textContent = (diff >= 0 ? "+" : "") + diff.toFixed(2);
                 diffCell.style.color = diff >= 0 ? '#10b981' : '#ef4444';
             } else {
                 diffCell.textContent = '-';
