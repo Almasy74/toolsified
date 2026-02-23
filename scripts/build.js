@@ -24,7 +24,9 @@ const baseUrls = [
     'https://toolsified.com/currency',
     'https://toolsified.com/crypto',
     'https://toolsified.com/privacy',
-    'https://toolsified.com/contact'
+    'https://toolsified.com/contact',
+    'https://toolsified.com/terms',
+    'https://toolsified.com/about'
 ];
 const generatedUrls = [];
 
