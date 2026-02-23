@@ -58,34 +58,37 @@
         </div>
     </header>
 
-    <main class="page-container" style="padding-top: 48px; padding-bottom: 48px;">
-        <h1>[FROM_NAME] to [TO_NAME] Historical Profit & Loss Calculator</h1>
+    <main class="container">
+        <h1 style="text-align: center; margin-bottom: 8px;">[FROM_NAME] to [TO_NAME] Historical Profit & Loss Calculator
+        </h1>
         <p class="subtitle" style="text-align: center; margin-bottom: 32px;">Calculate historic profit and loss for
             [FROM_TICKER] to [TO_TICKER].</p>
 
-        <div class="table-container card" style="margin-top: 0;">
-            <table class="table" id="cryptoTable">
-                <thead>
-                    <tr>
-                        <th>Amount</th>
-                        <th>Crypto</th>
-                        <th>Fiat</th>
-                        <th>Buy Date</th>
-                        <th>Sell Date</th>
-                        <th>Profit/Loss ([TO_TICKER])</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-            <div class="row-controls" style="margin-top: 1rem; display: flex; gap: 1rem; padding: 0 1rem 1rem 1rem;">
+        <div class="card" style="margin-top: 0; padding: 24px;">
+            <div class="table-container" style="margin-top: 0; box-shadow: none; padding: 0;">
+                <table class="table" id="cryptoTable">
+                    <thead>
+                        <tr>
+                            <th>Amount</th>
+                            <th>Crypto</th>
+                            <th>Fiat</th>
+                            <th>Buy Date</th>
+                            <th>Sell Date</th>
+                            <th>Profit/Loss ([TO_TICKER])</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div class="row-controls" style="margin-top: 1rem; display: flex; gap: 1rem;">
                 <button onclick="addRow()" class="primary" style="margin-top: 0; width: auto;">+ Add
                     Transaction</button>
             </div>
         </div>
 
-        <div class="section">
+        <div class="section card seo-content" style="padding: 32px; margin-top: 40px;">
             <h2 style="font-size: 1.5rem; margin-bottom: 16px;">Analyze [FROM_NAME] ROI in [TO_NAME]</h2>
             <p style="text-align: left; margin-bottom: 24px;">Use the Toolsified <strong>[FROM_NAME] to
                     [TO_NAME]</strong> historical profit and loss calculator to analyze your investment performance.
@@ -94,34 +97,33 @@
                 data. Simply enter your transaction dates and amounts above to see your net results instantly. Our tool
                 functions entirely within your browser, ensuring your <strong>[FROM_TICKER]</strong> financial data
                 remains private and secure.</p>
-        </div>
 
-        <div class="section">
-            <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Related Crypto Tools</h3>
-            <div class="internal-links-cluster" style="margin-bottom: 32px;">
-                [RELATED_CLUSTER]
-                <p><a href="/crypto" style="color: var(--primary-color); text-decoration: underline;">Back to Smart
-                        Crypto Converter Hub</a></p>
+            <div class="section">
+                <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Related Crypto Tools</h3>
+                <div class="internal-links-cluster" style="margin-bottom: 32px;">
+                    [RELATED_CLUSTER]
+                    <p><a href="/crypto" style="color: var(--primary-color); text-decoration: underline;">Back to Smart
+                            Crypto Converter Hub</a></p>
+                </div>
             </div>
-        </div>
 
-        <div class="section">
-            <!-- AD SLOT: before-faq-banner -->
+            <div class="section">
+                <!-- AD SLOT: before-faq-banner -->
 
-            <!-- AD SLOT: before-faq-banner -->
-
-            <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Frequently Asked Questions</h3>
-            <div class="faq-item" style="margin-bottom: 16px;">
-                <strong>How do I calculate my [FROM_NAME] profit in [TO_NAME]?</strong>
-                <p style="text-align: left; margin-bottom: 0;">Enter your [FROM_TICKER] amount and transaction dates.
-                    The tool uses real historic exchange rates to calculate your profit or loss in [TO_TICKER].</p>
+                <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Frequently Asked Questions</h3>
+                <div class="faq-item" style="margin-bottom: 16px;">
+                    <strong>How do I calculate my [FROM_NAME] profit in [TO_NAME]?</strong>
+                    <p style="text-align: left; margin-bottom: 0;">Enter your [FROM_TICKER] amount and transaction
+                        dates.
+                        The tool uses real historic exchange rates to calculate your profit or loss in [TO_TICKER].</p>
+                </div>
+                <div class="faq-item" style="margin-bottom: 16px;">
+                    <strong>Is my [FROM_TICKER] portfolio data secure?</strong>
+                    <p style="text-align: left; margin-bottom: 0;">Yes. All calculations happen instantly in your
+                        browser
+                        session and your data is never saved or transmitted to our servers.</p>
+                </div>
             </div>
-            <div class="faq-item" style="margin-bottom: 16px;">
-                <strong>Is my [FROM_TICKER] portfolio data secure?</strong>
-                <p style="text-align: left; margin-bottom: 0;">Yes. All calculations happen instantly in your browser
-                    session and your data is never saved or transmitted to our servers.</p>
-            </div>
-        </div>
     </main>
 
     <!-- Footer -->
