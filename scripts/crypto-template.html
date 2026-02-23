@@ -270,7 +270,7 @@
             if (typeof buyRate === 'number' && typeof sellRate === 'number') {
                 const diff = (sellRate - buyRate) * amount;
                 diffCell.textContent = (diff >= 0 ? "+" : "") + diff.toFixed(2);
-                diffCell.style.color = diff >= 0 ? '#15803d' : '#ef4444';
+                diffCell.style.color = diff >= 0 ? '#15803d' : '#b91c1c';
             } else {
                 diffCell.textContent = '-';
                 diffCell.style.color = 'inherit';

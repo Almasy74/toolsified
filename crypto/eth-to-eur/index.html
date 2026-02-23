@@ -101,10 +101,10 @@
             <div class="section">
                 <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Related Crypto Tools</h3>
                 <div class="internal-links-cluster" style="margin-bottom: 32px;">
-                    <p><a href="/crypto/btc-to-usd" style="color: var(--primary-color); text-decoration: underline;">Bitcoin to US Dollars</a></p>
+                    <p><a href="/crypto/sol-to-usd" style="color: var(--primary-color); text-decoration: underline;">Solana to US Dollars</a></p>
+<p><a href="/crypto/btc-to-eur" style="color: var(--primary-color); text-decoration: underline;">Bitcoin to Euros</a></p>
 <p><a href="/crypto/eth-to-usd" style="color: var(--primary-color); text-decoration: underline;">Ethereum to US Dollars</a></p>
-<p><a href="/crypto/sol-to-usd" style="color: var(--primary-color); text-decoration: underline;">Solana to US Dollars</a></p>
-<p><a href="/currency/usd-to-chf" style="color: var(--primary-color); text-decoration: underline;">USD to CHF Rate</a></p>
+<p><a href="/currency/usd-to-cny" style="color: var(--primary-color); text-decoration: underline;">USD to CNY Rate</a></p>
                     <p><a href="/crypto" style="color: var(--primary-color); text-decoration: underline;">Back to Smart
                             Crypto Converter Hub</a></p>
                 </div>
@@ -273,7 +273,7 @@
             if (typeof buyRate === 'number' && typeof sellRate === 'number') {
                 const diff = (sellRate - buyRate) * amount;
                 diffCell.textContent = (diff >= 0 ? "+" : "") + diff.toFixed(2);
-                diffCell.style.color = diff >= 0 ? '#10b981' : '#ef4444';
+                diffCell.style.color = diff >= 0 ? '#15803d' : '#b91c1c';
             } else {
                 diffCell.textContent = '-';
                 diffCell.style.color = 'inherit';
