@@ -18,26 +18,55 @@
 
     <link rel="canonical" href="https://toolsified.com/time-code/convert-bst-to-local-time" />
     <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [{
-    "@type": "Question",
-    "name": "How do I convert BST to my local time?",
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": "Simply paste a time code like '2pm BST' or 'tomorrow 15:00 BST'. Our tool instantly translates British Summer Time into your local time zone."
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "name": "British Summer Time Converter",
+          "description": "Convert British Summer Time (BST) to your local time instantly using natural language parsing.",
+          "applicationCategory": "UtilitiesApplication",
+          "operatingSystem": "Web",
+          "featureList": [
+            "Converts BST to local time",
+            "Understands natural language time codes",
+            "Processes calculations locally in the browser",
+            "Maintains user privacy with no server execution"
+          ],
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [{
+            "@type": "Question",
+            "name": "How do I convert BST to my local time?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Simply paste a time code like '2pm BST' or 'tomorrow 15:00 BST'. Our tool instantly translates British Summer Time into your local time zone."
+            }
+          }, {
+            "@type": "Question",
+            "name": "Can I convert BST to other time zones?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, once you input a BST time, you can add as many target time zones as you need and the converter will translate it across all of them simultaneously."
+            }
+          }, {
+            "@type": "Question",
+            "name": "Is my scheduling data uploaded?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The BST time conversion happens 100% locally in your web browser, ensuring your scheduling remains strictly private."
+            }
+          }]
+        }
+      ]
     }
-  }, {
-    "@type": "Question",
-    "name": "Can I convert BST to other time zones?",
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": "Yes, once you input a BST time, you can add as many target time zones as you need and the converter will translate it across all of them simultaneously."
-    }
-  }]
-}
-</script>
+    </script>
 </head>
 
 <body>
@@ -60,6 +89,18 @@
         </div>
     </header>
     <main>
+        <div class="card"
+            style="margin-top: 24px; margin-bottom: 24px; padding: 16px; background-color: var(--secondary-color); border: 1px solid var(--border-color); border-radius: 8px;">
+            <p style="margin-bottom: 8px; font-weight: 600; font-size: 0.95rem;">🛠️ Tool Capabilities Map</p>
+            <ul style="margin: 0; padding-left: 20px; font-size: 0.9rem;">
+                <li><strong>Purpose:</strong> Translates British Summer Time (BST) strings to local time using natural language.
+                </li>
+                <li><strong>Input Format:</strong> Natural language expression (e.g. "tomorrow 15:00 BST").</li>
+                <li><strong>Output Format:</strong> Relative local date matrix and ISO strings.</li>
+                <li><strong>Processing Method:</strong> Resolves exclusively locally inside your browser.</li>
+            </ul>
+        </div>
+
         <div class="card">
             <h1 id="page-title">Latest BST to Local Time Converter (2026)</h1>
             <p class="subtitle" style="text-align: center; margin-bottom: 32px;">Smart British Summer Time (BST) natural
@@ -101,12 +142,20 @@
                 Perfect for coordinating
                 international meetings, gaming events, or remote work schedules without leaving your browser.</p>
 
+            <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Technical Capabilities</h3>
+            <ul style="text-align: left; margin-bottom: 24px; padding-left: 20px;">
+                <li style="margin-bottom: 8px;">Parses unstructured, natural language dates (e.g., "next Friday")</li>
+                <li style="margin-bottom: 8px;">Instantly maps BST across multiple local targets</li>
+                <li style="margin-bottom: 8px;">Processes data 100% locally in your browser logic—no server pings</li>
+                <li style="margin-bottom: 8px;">Generates copyable data outputs including specific ISO timestamps</li>
+            </ul>
+
             <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Related Time Tools</h3>
             <div class="internal-links-cluster" style="margin-bottom: 32px;">
                 <p><a href="/time-code/convert-edt-to-local-time" style="color: var(--primary-color); text-decoration: underline;">Eastern Daylight Time to Local</a></p>
-<p><a href="/time-code/convert-gmt-to-local-time" style="color: var(--primary-color); text-decoration: underline;">Greenwich Mean Time to Local</a></p>
 <p><a href="/time-code/convert-bst-to-local-time" style="color: var(--primary-color); text-decoration: underline;">British Summer Time to Local</a></p>
-<p><a href="/time-zone/pst-to-est" style="color: var(--primary-color); text-decoration: underline;">Pacific Time (PT) to Eastern Time (ET)</a></p>
+<p><a href="/time-code/convert-pdt-to-local-time" style="color: var(--primary-color); text-decoration: underline;">Pacific Daylight Time to Local</a></p>
+<p><a href="/time-zone/sgt-to-pst" style="color: var(--primary-color); text-decoration: underline;">Singapore Time (SGT) to Pacific Time (PT)</a></p>
                 <p><a href="/time-code" style="color: var(--primary-color); text-decoration: underline;">Back to
                         Time-code Translator Hub</a></p>
             </div>
@@ -124,25 +173,31 @@
                 <p style="text-align: left; margin-bottom: 0;">Yes, once you input a BST time, you can add as many
                     target time zones as you need and the converter will translate it across all of them.</p>
             </div>
+            <div class="faq-item" style="margin-bottom: 16px;">
+                <strong>Is my scheduling data uploaded?</strong>
+                <p style="text-align: left; margin-bottom: 0;">No. The BST time conversion happens 100% locally in
+                    your web browser, ensuring your scheduling remains strictly private.</p>
+            </div>
         </div>
     </main>
     <!-- Footer -->
     <footer style="margin-top: auto; border-top: 1px solid var(--border-color); background: var(--card-bg);">
-    <div class="container" style="text-align: center; padding: 24px 16px; font-size: 0.9rem;">
-      <p style="margin-bottom: 12px;">© 2026 Toolsified &mdash; Independent web tools platform.</p>
-      <div style="display: flex; justify-content: center; gap: 16px; margin-bottom: 12px; flex-wrap: wrap;">
-        <a href="/privacy" style="color: inherit; text-decoration: underline;">Privacy Policy</a>
-        <span>|</span>
-        <a href="/terms" style="color: inherit; text-decoration: underline;">Terms</a>
-        <span>|</span>
-        <a href="/about" style="color: inherit; text-decoration: underline;">About</a>
-        <span>|</span>
-        <a href="/contact" style="color: inherit; text-decoration: underline;">Contact</a>
-      </div>
-      <p style="margin: 4px 0;">Contact: <a href="mailto:info@toolsified.com" style="color: inherit; text-decoration: underline;">info@toolsified.com</a></p>
-      <p style="margin: 0;">Location: Norway</p>
-    </div>
-  </footer>
+        <div class="container" style="text-align: center; padding: 24px 16px; font-size: 0.9rem;">
+            <p style="margin-bottom: 12px;">© 2026 Toolsified &mdash; Independent web tools platform.</p>
+            <div style="display: flex; justify-content: center; gap: 16px; margin-bottom: 12px; flex-wrap: wrap;">
+                <a href="/privacy" style="color: inherit; text-decoration: underline;">Privacy Policy</a>
+                <span>|</span>
+                <a href="/terms" style="color: inherit; text-decoration: underline;">Terms</a>
+                <span>|</span>
+                <a href="/about" style="color: inherit; text-decoration: underline;">About</a>
+                <span>|</span>
+                <a href="/contact" style="color: inherit; text-decoration: underline;">Contact</a>
+            </div>
+            <p style="margin: 4px 0;">Contact: <a href="mailto:info@toolsified.com"
+                    style="color: inherit; text-decoration: underline;">info@toolsified.com</a></p>
+            <p style="margin: 0;">Location: Norway</p>
+        </div>
+    </footer>
 
     <script>
         const { DateTime } = luxon;
