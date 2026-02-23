@@ -79,7 +79,9 @@ a:focus-visible {
 
 .main-nav {
   display: flex;
+  align-items: center;
   gap: 24px;
+  margin-top: 6px;
 }
 
 .main-nav a {
