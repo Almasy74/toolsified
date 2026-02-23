@@ -270,12 +270,14 @@ td {
   /* Slightly smaller font to fit 3 chars + arrow */
 }
 
-/* Ensure Crypto/Fiat columns have enough space */
-.table th:nth-child(2),
-.table td:nth-child(2),
-.table th:nth-child(3),
-.table td:nth-child(3) {
-  min-width: 80px;
+/* Ensure columns have enough space to prevent input text cutoff */
+.table .amount {
+  min-width: 140px;
+}
+
+.table .crypto,
+.table .fiat {
+  min-width: 100px;
 }
 
 th {
