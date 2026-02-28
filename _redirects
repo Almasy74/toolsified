@@ -10,6 +10,18 @@
 /crypto.html         /crypto               301!
 /crypto              /crypto.html          200
 
+/business-days.html      /business-days            301!
+/business-days           /business-days.html       200
+
+/meeting-overlap.html    /meeting-overlap          301!
+/meeting-overlap         /meeting-overlap.html     200
+
+/inflation-calculator.html /inflation-calculator      301!
+/inflation-calculator      /inflation-calculator.html 200
+
+/crypto-tax-estimator.html /crypto-tax-estimator      301!
+/crypto-tax-estimator      /crypto-tax-estimator.html 200
+
 /privacy.html        /privacy              301!
 /privacy             /privacy.html         200
 

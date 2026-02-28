@@ -83,6 +83,16 @@ a:focus-visible {
   gap: 24px;
 }
 
+.nav-toggle {
+  display: none;
+  padding: 10px 14px;
+  border: 1px solid var(--border-color);
+  background: var(--card-bg);
+  color: var(--primary-color);
+  font-weight: 600;
+  cursor: pointer;
+}
+
 .main-nav a {
   font-weight: 600;
   color: var(--primary-color);
@@ -101,6 +111,48 @@ a:focus-visible {
 .main-nav a:focus-visible {
   outline: 2px solid var(--primary-color);
   outline-offset: 2px;
+}
+
+.nav-more {
+  position: relative;
+}
+
+.nav-more-toggle {
+  padding: 12px 16px;
+  border: 0;
+  background: transparent;
+  color: var(--primary-color);
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.nav-more-toggle:hover {
+  background: var(--bg-color);
+}
+
+.nav-more-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 230px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  box-shadow: 0 10px 24px var(--shadow-color);
+  padding: 8px;
+  display: none;
+  z-index: 30;
+}
+
+.nav-more-menu a {
+  display: block;
+  padding: 10px 12px;
+}
+
+.nav-more:hover .nav-more-menu,
+.nav-more.is-open .nav-more-menu {
+  display: block;
 }
 
 /* Layout container */
@@ -506,19 +558,47 @@ th {
   }
 
   .header-content {
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
     gap: 16px;
+  }
+
+  .nav-toggle {
+    display: inline-block;
   }
 
   .main-nav {
     width: 100%;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 12px;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    padding-top: 8px;
+  }
+
+  .main-nav.is-open {
+    display: flex;
   }
 
   .main-nav a {
     font-size: 0.9rem;
+    width: 100%;
+    padding: 12px;
+  }
+
+  .nav-more-toggle {
+    width: 100%;
+    text-align: left;
+    padding: 12px;
+  }
+
+  .nav-more-menu {
+    position: static;
+    min-width: 0;
+    box-shadow: none;
+    margin-top: 6px;
   }
 
   .footer-content {

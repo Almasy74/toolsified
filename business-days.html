@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-adsense-account" content="ca-pub-6293439009227714" />
+  <title>Business Days Calculator - Toolsified</title>
+  <meta name="description"
+    content="Calculate business days between dates. Exclude weekends and optionally apply national holidays." />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="stylesheet" href="/style.css?v=2.2" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="canonical" href="https://toolsified.com/business-days" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6293439009227714"
+    crossorigin="anonymous"></script>
+    <script defer src="/scripts/nav.js"></script>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo-container">
+          <a href="/"><img src="/logo.png" alt="Toolsified logo" class="logo" /></a>
+        </div>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Toggle navigation">Menu</button>
+                <nav class="main-nav" id="mainNav">
+                    <a href="/time-code">Time Code</a>
+                    <a href="/multi-timezone">Time Zones</a>
+                    <a href="/currency">Currency</a>
+                    <a href="/crypto">Crypto</a>
+                    <div class="nav-more">
+                        <button class="nav-more-toggle" type="button" aria-expanded="false" aria-haspopup="true">More</button>
+                        <div class="nav-more-menu">
+                            <a href="/business-days">Business Days</a>
+                            <a href="/meeting-overlap">Meeting Overlap</a>
+                            <a href="/inflation-calculator">Inflation Calculator</a>
+                            <a href="/crypto-tax-estimator">Crypto Tax Estimator</a>
+                        </div>
+                    </div>
+                </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="card">
+      <h1>Business Days Calculator</h1>
+
+      <label for="startDate">Start date</label>
+      <input id="startDate" type="date" />
+
+      <label for="endDate">End date</label>
+      <input id="endDate" type="date" />
+
+      <label style="display:flex; align-items:center; gap:8px; margin-top:16px;">
+        <input id="excludeWeekends" type="checkbox" checked style="width:auto; margin-top:0;" />
+        Exclude weekends (Saturday and Sunday)
+      </label>
+
+      <label for="country">Holiday calendar (optional)</label>
+      <select id="country">
+        <option value="">No holiday filter</option>
+        <option value="US">United States</option>
+        <option value="UK">United Kingdom</option>
+        <option value="AU">Australia</option>
+        <option value="NO">Norway</option>
+      </select>
+
+      <button id="calcBtn" class="primary" type="button">Calculate</button>
+
+      <div id="summary" class="card" style="margin:24px 0 0; padding:20px; box-shadow:none; border:1px solid var(--border-color); display:none;"></div>
+      <div id="holidayList" style="margin-top:16px;"></div>
+    </div>
+
+    <div class="card seo-content" style="margin-top: 40px; text-align: left; padding: 32px;">
+      <h2 style="font-size:1.5rem; margin-bottom:16px;">Working Day Counting Made Simple</h2>
+      <p style="text-align:left; margin-bottom:16px;">Use this tool to count days between two dates for planning, contracts,
+        payroll, and delivery windows. You can choose whether weekends are included and optionally apply a country holiday
+        calendar.</p>
+      <h3 style="font-size:1.2rem; margin-bottom:12px;">Related Tools</h3>
+      <div class="internal-links-cluster" style="display:flex; flex-wrap:wrap; gap:12px;">
+        <a href="/meeting-overlap" style="color: var(--primary-color); text-decoration: underline;">Meeting Overlap Finder</a>
+        <a href="/multi-timezone" style="color: var(--primary-color); text-decoration: underline;">Multi Time Zone Converter</a>
+        <a href="/time-code" style="color: var(--primary-color); text-decoration: underline;">Time Code Converter</a>
+      </div>
+    </div>
+  </main>
+
+  <footer style="margin-top: auto; border-top: 1px solid var(--border-color); background: var(--card-bg);">
+    <div class="container" style="text-align: center; padding: 24px 16px; font-size: 0.9rem;">
+      <p style="margin-bottom: 12px;">&copy; 2026 Toolsified &mdash; Independent web tools platform.</p>
+      <div style="display: flex; justify-content: center; gap: 16px; margin-bottom: 12px; flex-wrap: wrap;">
+        <a href="/privacy" style="color: inherit; text-decoration: underline;">Privacy Policy</a>
+        <span>|</span>
+        <a href="/terms" style="color: inherit; text-decoration: underline;">Terms</a>
+        <span>|</span>
+        <a href="/about" style="color: inherit; text-decoration: underline;">About</a>
+        <span>|</span>
+        <a href="/contact" style="color: inherit; text-decoration: underline;">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function fmtDate(d) {
+      return d.toISOString().slice(0, 10);
+    }
+
+    function parseDate(iso) {
+      const [y, m, d] = iso.split("-").map(Number);
+      return new Date(Date.UTC(y, m - 1, d));
+    }
+
+    function addDays(date, days) {
+      const d = new Date(date);
+      d.setUTCDate(d.getUTCDate() + days);
+      return d;
+    }
+
+    function nthWeekday(year, month, weekday, n) {
+      const d = new Date(Date.UTC(year, month, 1));
+      let count = 0;
+      while (d.getUTCMonth() === month) {
+        if (d.getUTCDay() === weekday) {
+          count += 1;
+          if (count === n) return new Date(d);
+        }
+        d.setUTCDate(d.getUTCDate() + 1);
+      }
+      return null;
+    }
+
+    function lastWeekday(year, month, weekday) {
+      const d = new Date(Date.UTC(year, month + 1, 0));
+      while (d.getUTCDay() !== weekday) d.setUTCDate(d.getUTCDate() - 1);
+      return d;
+    }
+
+    function observed(date) {
+      const d = new Date(date);
+      const day = d.getUTCDay();
+      if (day === 6) return addDays(d, -1);
+      if (day === 0) return addDays(d, 1);
+      return d;
+    }
+
+    function easterSunday(year) {
+      const a = year % 19;
+      const b = Math.floor(year / 100);
+      const c = year % 100;
+      const d = Math.floor(b / 4);
+      const e = b % 4;
+      const f = Math.floor((b + 8) / 25);
+      const g = Math.floor((b - f + 1) / 3);
+      const h = (19 * a + b - d - g + 15) % 30;
+      const i = Math.floor(c / 4);
+      const k = c % 4;
+      const l = (32 + 2 * e + 2 * i - h - k) % 7;
+      const m = Math.floor((a + 11 * h + 22 * l) / 451);
+      const month = Math.floor((h + l - 7 * m + 114) / 31);
+      const day = ((h + l - 7 * m + 114) % 31) + 1;
+      return new Date(Date.UTC(year, month - 1, day));
+    }
+
+    function collectHolidays(country, year) {
+      const out = [];
+      const easter = easterSunday(year);
+      if (country === "US") {
+        out.push(observed(new Date(Date.UTC(year, 0, 1))));
+        out.push(nthWeekday(year, 0, 1, 3)); // MLK
+        out.push(nthWeekday(year, 1, 1, 3)); // Presidents
+        out.push(lastWeekday(year, 4, 1)); // Memorial
+        out.push(observed(new Date(Date.UTC(year, 5, 19))));
+        out.push(observed(new Date(Date.UTC(year, 6, 4))));
+        out.push(nthWeekday(year, 8, 1, 1)); // Labor
+        out.push(nthWeekday(year, 9, 1, 2)); // Columbus
+        out.push(observed(new Date(Date.UTC(year, 10, 11))));
+        out.push(nthWeekday(year, 10, 4, 4)); // Thanksgiving
+        out.push(observed(new Date(Date.UTC(year, 11, 25))));
+      } else if (country === "UK") {
+        out.push(observed(new Date(Date.UTC(year, 0, 1))));
+        out.push(addDays(easter, -2)); // Good Friday
+        out.push(addDays(easter, 1)); // Easter Monday
+        out.push(nthWeekday(year, 4, 1, 1)); // Early May
+        out.push(lastWeekday(year, 4, 1)); // Spring Bank
+        out.push(lastWeekday(year, 7, 1)); // Summer Bank
+        out.push(observed(new Date(Date.UTC(year, 11, 25))));
+        out.push(observed(new Date(Date.UTC(year, 11, 26))));
+      } else if (country === "AU") {
+        out.push(observed(new Date(Date.UTC(year, 0, 1))));
+        out.push(observed(new Date(Date.UTC(year, 0, 26))));
+        out.push(addDays(easter, -2)); // Good Friday
+        out.push(addDays(easter, 1)); // Easter Monday
+        out.push(observed(new Date(Date.UTC(year, 3, 25)))); // ANZAC
+        out.push(nthWeekday(year, 5, 1, 2)); // King's Birthday (many states)
+        out.push(observed(new Date(Date.UTC(year, 11, 25))));
+        out.push(observed(new Date(Date.UTC(year, 11, 26))));
+      } else if (country === "NO") {
+        out.push(new Date(Date.UTC(year, 0, 1)));
+        out.push(addDays(easter, -3)); // Maundy Thursday
+        out.push(addDays(easter, -2)); // Good Friday
+        out.push(addDays(easter, 1)); // Easter Monday
+        out.push(new Date(Date.UTC(year, 4, 1))); // Labour Day
+        out.push(new Date(Date.UTC(year, 4, 17))); // Constitution Day
+        out.push(addDays(easter, 39)); // Ascension Day
+        out.push(addDays(easter, 50)); // Whit Monday
+        out.push(new Date(Date.UTC(year, 11, 25)));
+        out.push(new Date(Date.UTC(year, 11, 26)));
+      }
+      return out.filter(Boolean);
+    }
+
+    function buildHolidaySet(country, startYear, endYear) {
+      const set = new Set();
+      for (let y = startYear; y <= endYear; y += 1) {
+        collectHolidays(country, y).forEach((d) => set.add(fmtDate(d)));
+      }
+      return set;
+    }
+
+    function calculateBusinessDays() {
+      const startIso = document.getElementById("startDate").value;
+      const endIso = document.getElementById("endDate").value;
+      const excludeWeekends = document.getElementById("excludeWeekends").checked;
+      const country = document.getElementById("country").value;
+
+      if (!startIso || !endIso) {
+        alert("Please choose both start date and end date.");
+        return;
+      }
+
+      let start = parseDate(startIso);
+      let end = parseDate(endIso);
+      if (start > end) {
+        const tmp = start;
+        start = end;
+        end = tmp;
+      }
+
+      const holidaySet = country ? buildHolidaySet(country, start.getUTCFullYear(), end.getUTCFullYear()) : new Set();
+      let totalDays = 0;
+      let weekendDays = 0;
+      let holidayDays = 0;
+      let businessDays = 0;
+      const excludedHolidayDates = [];
+
+      for (let d = new Date(start); d <= end; d = addDays(d, 1)) {
+        totalDays += 1;
+        const iso = fmtDate(d);
+        const day = d.getUTCDay();
+        const isWeekend = day === 0 || day === 6;
+        const isHoliday = holidaySet.has(iso);
+
+        if (isWeekend) weekendDays += 1;
+        if (isHoliday) holidayDays += 1;
+
+        if (excludeWeekends && isWeekend) continue;
+        if (isHoliday) {
+          excludedHolidayDates.push(iso);
+          continue;
+        }
+        businessDays += 1;
+      }
+
+      const summary = document.getElementById("summary");
+      summary.style.display = "block";
+      summary.innerHTML = `
+        <h3 style="margin-bottom:12px;">Result</h3>
+        <p><strong>${businessDays}</strong> business day(s)</p>
+        <p style="margin-top:8px;">Total calendar days (inclusive): ${totalDays}</p>
+        <p>Weekend days in range: ${weekendDays}</p>
+        <p>Holiday dates in range: ${holidayDays}</p>
+      `;
+
+      const holidayList = document.getElementById("holidayList");
+      if (excludedHolidayDates.length) {
+        const preview = excludedHolidayDates.slice(0, 25).join(", ");
+        holidayList.innerHTML = `
+          <div class="card" style="margin:12px 0 0; padding:16px; box-shadow:none; border:1px solid var(--border-color);">
+            <strong>Excluded holiday dates (${country}):</strong>
+            <p style="margin-top:8px; text-align:left;">${preview}${excludedHolidayDates.length > 25 ? ", ..." : ""}</p>
+          </div>
+        `;
+      } else {
+        holidayList.innerHTML = "";
+      }
+    }
+
+    function todayIsoLocal() {
+      const d = new Date();
+      d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
+      return d.toISOString().slice(0, 10);
+    }
+
+    const todayIso = todayIsoLocal();
+    const in30 = addDays(parseDate(todayIso), 30);
+    document.getElementById("startDate").value = todayIso;
+    document.getElementById("endDate").value = fmtDate(in30);
+    document.getElementById("calcBtn").addEventListener("click", calculateBusinessDays);
+  </script>
+</body>
+
+</html>

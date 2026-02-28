@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-adsense-account" content="ca-pub-6293439009227714" />
+  <title>Crypto Tax Estimator - Toolsified</title>
+  <meta name="description"
+    content="Estimate crypto tax on realized gains by country with a simple calculator and clear assumptions." />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="stylesheet" href="/style.css?v=2.2" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="canonical" href="https://toolsified.com/crypto-tax-estimator" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6293439009227714"
+    crossorigin="anonymous"></script>
+    <script defer src="/scripts/nav.js"></script>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo-container">
+          <a href="/"><img src="/logo.png" alt="Toolsified logo" class="logo" /></a>
+        </div>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Toggle navigation">Menu</button>
+                <nav class="main-nav" id="mainNav">
+                    <a href="/time-code">Time Code</a>
+                    <a href="/multi-timezone">Time Zones</a>
+                    <a href="/currency">Currency</a>
+                    <a href="/crypto">Crypto</a>
+                    <div class="nav-more">
+                        <button class="nav-more-toggle" type="button" aria-expanded="false" aria-haspopup="true">More</button>
+                        <div class="nav-more-menu">
+                            <a href="/business-days">Business Days</a>
+                            <a href="/meeting-overlap">Meeting Overlap</a>
+                            <a href="/inflation-calculator">Inflation Calculator</a>
+                            <a href="/crypto-tax-estimator">Crypto Tax Estimator</a>
+                        </div>
+                    </div>
+                </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="card">
+      <h1>Crypto Tax Estimator</h1>
+
+      <label for="country">Country</label>
+      <select id="country">
+        <option value="US">United States</option>
+        <option value="UK">United Kingdom</option>
+        <option value="NO">Norway</option>
+        <option value="AU">Australia</option>
+        <option value="CA">Canada (Ontario model)</option>
+      </select>
+
+      <label for="gain">Realized crypto gain</label>
+      <input id="gain" type="number" min="0" step="0.01" value="10000" />
+
+      <label for="income">Estimated annual taxable income (optional but recommended)</label>
+      <input id="income" type="number" min="0" step="0.01" value="70000" />
+
+      <label for="holdingDays">Holding period (days)</label>
+      <input id="holdingDays" type="number" min="1" step="1" value="400" />
+
+      <button id="calcBtn" class="primary" type="button">Estimate tax</button>
+      <div id="result" style="margin-top:20px;"></div>
+    </div>
+
+    <div class="card seo-content" style="margin-top: 40px; text-align: left; padding: 32px;">
+      <h2 style="font-size:1.5rem; margin-bottom:16px;">Quick Tax Direction, Not Legal Advice</h2>
+      <p style="text-align:left; margin-bottom:16px;">This estimator gives a high-level tax estimate from simplified country
+        assumptions. Use it for planning only.</p>
+      <p style="text-align:left; margin-bottom:16px;"><strong>Important:</strong> tax laws change. Always verify with a local
+        tax advisor or your tax authority before filing.</p>
+      <h3 style="font-size:1.2rem; margin-bottom:12px;">Related Tools</h3>
+      <div class="internal-links-cluster" style="display:flex; flex-wrap:wrap; gap:12px;">
+        <a href="/crypto" style="color: var(--primary-color); text-decoration: underline;">Smart Crypto Converter</a>
+        <a href="/inflation-calculator" style="color: var(--primary-color); text-decoration: underline;">Inflation Calculator</a>
+        <a href="/currency" style="color: var(--primary-color); text-decoration: underline;">Currency Converter</a>
+      </div>
+    </div>
+  </main>
+
+  <footer style="margin-top: auto; border-top: 1px solid var(--border-color); background: var(--card-bg);">
+    <div class="container" style="text-align: center; padding: 24px 16px; font-size: 0.9rem;">
+      <p style="margin-bottom: 12px;">&copy; 2026 Toolsified &mdash; Independent web tools platform.</p>
+      <div style="display: flex; justify-content: center; gap: 16px; margin-bottom: 12px; flex-wrap: wrap;">
+        <a href="/privacy" style="color: inherit; text-decoration: underline;">Privacy Policy</a>
+        <span>|</span>
+        <a href="/terms" style="color: inherit; text-decoration: underline;">Terms</a>
+        <span>|</span>
+        <a href="/about" style="color: inherit; text-decoration: underline;">About</a>
+        <span>|</span>
+        <a href="/contact" style="color: inherit; text-decoration: underline;">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function pct(n) {
+      return `${(n * 100).toFixed(1)}%`;
+    }
+
+    function money(n) {
+      return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 2 }).format(n);
+    }
+
+    function usShortRate(income) {
+      if (income <= 11600) return 0.10;
+      if (income <= 47150) return 0.12;
+      if (income <= 100525) return 0.22;
+      if (income <= 191950) return 0.24;
+      if (income <= 243725) return 0.32;
+      if (income <= 609350) return 0.35;
+      return 0.37;
+    }
+
+    function usLongRate(incomePlusGain) {
+      if (incomePlusGain <= 47025) return 0.00;
+      if (incomePlusGain <= 518900) return 0.15;
+      return 0.20;
+    }
+
+    function auRate(income) {
+      if (income <= 18200) return 0.00;
+      if (income <= 45000) return 0.16;
+      if (income <= 135000) return 0.30;
+      if (income <= 190000) return 0.37;
+      return 0.45;
+    }
+
+    function caOnRate(income) {
+      if (income <= 55867) return 0.205;
+      if (income <= 111733) return 0.2415;
+      if (income <= 173205) return 0.2965;
+      if (income <= 246752) return 0.3148;
+      return 0.338;
+    }
+
+    function estimateTax({ country, gain, income, holdingDays }) {
+      const longTerm = holdingDays >= 365;
+      if (gain <= 0) return { tax: 0, rate: 0, note: "No tax estimated on zero or negative gain." };
+
+      if (country === "US") {
+        const rate = longTerm ? usLongRate(income + gain) : usShortRate(income);
+        return {
+          tax: gain * rate,
+          rate,
+          note: longTerm
+            ? "US long-term capital gains estimate (single filer thresholds)."
+            : "US short-term gains treated as ordinary income estimate."
+        };
+      }
+
+      if (country === "UK") {
+        const allowance = 3000;
+        const taxable = Math.max(0, gain - allowance);
+        const rate = income <= 50270 ? 0.18 : 0.24;
+        return {
+          tax: taxable * rate,
+          rate: gain ? (taxable * rate) / gain : 0,
+          note: `UK estimate with GBP ${allowance} annual exempt amount and CGT rate ${pct(rate)}.`
+        };
+      }
+
+      if (country === "NO") {
+        const rate = 0.22;
+        return { tax: gain * rate, rate, note: "Norway estimate using flat ordinary income tax treatment." };
+      }
+
+      if (country === "AU") {
+        const rate = auRate(income);
+        const taxable = longTerm ? gain * 0.5 : gain;
+        return {
+          tax: taxable * rate,
+          rate: gain ? (taxable * rate) / gain : 0,
+          note: longTerm
+            ? "Australia estimate with 50% CGT discount for holdings over 12 months."
+            : "Australia estimate without CGT discount."
+        };
+      }
+
+      const baseRate = caOnRate(income);
+      const taxable = gain * 0.5;
+      return {
+        tax: taxable * baseRate,
+        rate: gain ? (taxable * baseRate) / gain : 0,
+        note: "Canada estimate with 50% inclusion rate and Ontario-style marginal approximation."
+      };
+    }
+
+    function runCalc() {
+      const country = document.getElementById("country").value;
+      const gain = Number(document.getElementById("gain").value);
+      const income = Number(document.getElementById("income").value || 0);
+      const holdingDays = Number(document.getElementById("holdingDays").value);
+      if (!(gain >= 0) || !(income >= 0) || !(holdingDays > 0)) {
+        return alert("Please enter valid non-negative values.");
+      }
+
+      const out = estimateTax({ country, gain, income, holdingDays });
+      document.getElementById("result").innerHTML = `
+        <div class="card" style="margin:0; box-shadow:none; border:1px solid var(--border-color);">
+          <h3 style="margin-bottom:8px;">Estimate</h3>
+          <p>Estimated tax: <strong>${money(out.tax)}</strong></p>
+          <p>Effective tax rate on gain: <strong>${pct(out.rate)}</strong></p>
+          <p style="margin-top:8px;">${out.note}</p>
+          <p style="margin-top:12px; font-size:0.95rem; color:#555;">This is an educational estimate only and not tax advice.</p>
+        </div>
+      `;
+    }
+
+    document.getElementById("calcBtn").addEventListener("click", runCalc);
+  </script>
+</body>
+
+</html>

@@ -68,6 +68,7 @@
       ]
     }
     </script>
+    <script defer src="/scripts/nav.js"></script>
 </head>
 
 <body>
@@ -80,11 +81,21 @@
                         <img src="/logo.png" alt="Toolsified logo" class="logo" />
                     </a>
                 </div>
-                <nav class="main-nav">
+                <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Toggle navigation">Menu</button>
+                <nav class="main-nav" id="mainNav">
                     <a href="/time-code">Time Code</a>
                     <a href="/multi-timezone">Time Zones</a>
                     <a href="/currency">Currency</a>
                     <a href="/crypto">Crypto</a>
+                    <div class="nav-more">
+                        <button class="nav-more-toggle" type="button" aria-expanded="false" aria-haspopup="true">More</button>
+                        <div class="nav-more-menu">
+                            <a href="/business-days">Business Days</a>
+                            <a href="/meeting-overlap">Meeting Overlap</a>
+                            <a href="/inflation-calculator">Inflation Calculator</a>
+                            <a href="/crypto-tax-estimator">Crypto Tax Estimator</a>
+                        </div>
+                    </div>
                 </nav>
             </div>
         </div>
@@ -177,10 +188,10 @@
 
             <h3 style="font-size: 1.2rem; margin-bottom: 16px; margin-top: 32px;">Related Time Zones</h3>
             <div class="internal-links-cluster">
-                <p><a href="/time-zone/aet-to-est" style="color: var(--primary-color); text-decoration: underline;">Australian Eastern Time (AET) to Eastern Time (ET)</a></p>
-<p><a href="/time-zone/ct-to-gmt" style="color: var(--primary-color); text-decoration: underline;">Central Time (CT) to London (GMT/BST)</a></p>
+                <p><a href="/time-zone/sgt-to-pst" style="color: var(--primary-color); text-decoration: underline;">Singapore Time (SGT) to Pacific Time (PT)</a></p>
+<p><a href="/time-zone/est-to-ist" style="color: var(--primary-color); text-decoration: underline;">Eastern Time (ET) to India Standard Time (IST)</a></p>
 <p><a href="/time-zone/cst-to-est" style="color: var(--primary-color); text-decoration: underline;">China Standard Time (CST) to Eastern Time (ET)</a></p>
-<p><a href="/time-code/convert-edt-to-local-time" style="color: var(--primary-color); text-decoration: underline;">Eastern Daylight Time to Local</a></p>
+<p><a href="/time-code/convert-pdt-to-local-time" style="color: var(--primary-color); text-decoration: underline;">Pacific Daylight Time to Local</a></p>
                 <p><a href="/multi-timezone" style="color: var(--primary-color); text-decoration: underline;">Compare
                         multiple time zones at once</a></p>
             </div>

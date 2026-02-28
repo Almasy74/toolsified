@@ -76,6 +76,7 @@
       ]
     }
     </script>
+    <script defer src="/scripts/nav.js"></script>
 </head>
 
 <body>
@@ -88,11 +89,21 @@
                         <img src="/logo.png" alt="Toolsified logo" class="logo" />
                     </a>
                 </div>
-                <nav class="main-nav">
+                <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Toggle navigation">Menu</button>
+                <nav class="main-nav" id="mainNav">
                     <a href="/time-code">Time Code</a>
                     <a href="/multi-timezone">Time Zones</a>
                     <a href="/currency">Currency</a>
                     <a href="/crypto">Crypto</a>
+                    <div class="nav-more">
+                        <button class="nav-more-toggle" type="button" aria-expanded="false" aria-haspopup="true">More</button>
+                        <div class="nav-more-menu">
+                            <a href="/business-days">Business Days</a>
+                            <a href="/meeting-overlap">Meeting Overlap</a>
+                            <a href="/inflation-calculator">Inflation Calculator</a>
+                            <a href="/crypto-tax-estimator">Crypto Tax Estimator</a>
+                        </div>
+                    </div>
                 </nav>
             </div>
         </div>
@@ -193,10 +204,10 @@
 
             <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Related Currency Tools</h3>
             <div class="internal-links-cluster" style="margin-bottom: 32px;">
-                <p><a href="/currency/usd-to-chf" style="color: var(--primary-color); text-decoration: underline;">USD to CHF Rate</a></p>
-<p><a href="/currency/krw-to-usd" style="color: var(--primary-color); text-decoration: underline;">KRW to USD Rate</a></p>
-<p><a href="/currency/nok-to-usd" style="color: var(--primary-color); text-decoration: underline;">NOK to USD Rate</a></p>
-<p><a href="/crypto/eth-to-usd" style="color: var(--primary-color); text-decoration: underline;">Ethereum to US Dollars</a></p>
+                <p><a href="/currency/chf-to-usd" style="color: var(--primary-color); text-decoration: underline;">CHF to USD Rate</a></p>
+<p><a href="/currency/chf-to-eur" style="color: var(--primary-color); text-decoration: underline;">CHF to EUR Rate</a></p>
+<p><a href="/currency/cny-to-usd" style="color: var(--primary-color); text-decoration: underline;">CNY to USD Rate</a></p>
+<p><a href="/crypto/btc-to-usd" style="color: var(--primary-color); text-decoration: underline;">Bitcoin to US Dollars</a></p>
                 <p><a href="/currency" style="color: var(--primary-color); text-decoration: underline;">Back to Currency
                         Converter Hub</a></p>
             </div>

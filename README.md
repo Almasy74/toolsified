@@ -9,7 +9,10 @@
 - [Time‑code Converter](time-code.html) – Paste something like `2pm EDT` or `5 July 14:00 CEST` and get local time everywhere.
 - [Multi Time Zone Converter](multi-timezone.html) – See the current time in multiple zones, add/remove locations, and more.
 
-More tools coming soon: currency converters, calculators, file utilities, health tools, and more.
+- [Business Days Calculator](business-days.html) - Count working days between two dates with optional holiday filters.
+- [Meeting Overlap Finder](meeting-overlap.html) - Find overlapping working windows across 2 to 5 time zones.
+- [Inflation Calculator](inflation-calculator.html) - Estimate purchasing power changes by country and year.
+- [Crypto Tax Estimator](crypto-tax-estimator.html) - Get a simple estimated tax for realized crypto gains by country.
 
 ## 🚀 Tech Stack
 

@@ -47,6 +47,7 @@
   }]
 }
 </script>
+    <script defer src="/scripts/nav.js"></script>
 </head>
 
 <body>
@@ -59,12 +60,22 @@
             <img src="/logo.png" alt="Toolsified logo" class="logo" />
           </a>
         </div>
-        <nav class="main-nav">
-          <a href="/time-code">Time Code</a>
-          <a href="/multi-timezone">Time Zones</a>
-          <a href="/currency">Currency</a>
-          <a href="/crypto">Crypto</a>
-        </nav>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Toggle navigation">Menu</button>
+                <nav class="main-nav" id="mainNav">
+                    <a href="/time-code">Time Code</a>
+                    <a href="/multi-timezone">Time Zones</a>
+                    <a href="/currency">Currency</a>
+                    <a href="/crypto">Crypto</a>
+                    <div class="nav-more">
+                        <button class="nav-more-toggle" type="button" aria-expanded="false" aria-haspopup="true">More</button>
+                        <div class="nav-more-menu">
+                            <a href="/business-days">Business Days</a>
+                            <a href="/meeting-overlap">Meeting Overlap</a>
+                            <a href="/inflation-calculator">Inflation Calculator</a>
+                            <a href="/crypto-tax-estimator">Crypto Tax Estimator</a>
+                        </div>
+                    </div>
+                </nav>
       </div>
     </div>
   </header>

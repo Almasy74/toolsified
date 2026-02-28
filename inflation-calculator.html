@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-adsense-account" content="ca-pub-6293439009227714" />
+  <title>Inflation Calculator - Toolsified</title>
+  <meta name="description"
+    content="Estimate what an amount from a past year is worth today using country-based inflation data." />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="stylesheet" href="/style.css?v=2.2" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="canonical" href="https://toolsified.com/inflation-calculator" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6293439009227714"
+    crossorigin="anonymous"></script>
+    <script defer src="/scripts/nav.js"></script>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo-container">
+          <a href="/"><img src="/logo.png" alt="Toolsified logo" class="logo" /></a>
+        </div>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Toggle navigation">Menu</button>
+                <nav class="main-nav" id="mainNav">
+                    <a href="/time-code">Time Code</a>
+                    <a href="/multi-timezone">Time Zones</a>
+                    <a href="/currency">Currency</a>
+                    <a href="/crypto">Crypto</a>
+                    <div class="nav-more">
+                        <button class="nav-more-toggle" type="button" aria-expanded="false" aria-haspopup="true">More</button>
+                        <div class="nav-more-menu">
+                            <a href="/business-days">Business Days</a>
+                            <a href="/meeting-overlap">Meeting Overlap</a>
+                            <a href="/inflation-calculator">Inflation Calculator</a>
+                            <a href="/crypto-tax-estimator">Crypto Tax Estimator</a>
+                        </div>
+                    </div>
+                </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="card">
+      <h1>Inflation Calculator</h1>
+
+      <label for="amount">Amount</label>
+      <input id="amount" type="number" min="0" step="0.01" value="100" />
+
+      <label for="country">Country/Region</label>
+      <select id="country">
+        <option value="US">United States (USD)</option>
+        <option value="UK">United Kingdom (GBP)</option>
+        <option value="NO">Norway (NOK)</option>
+        <option value="EA">Euro Area (EUR)</option>
+      </select>
+
+      <div class="row">
+        <div style="flex:1;">
+          <label for="startYear" style="margin-top:0;">From year</label>
+          <select id="startYear"></select>
+        </div>
+        <div style="flex:1;">
+          <label for="endYear" style="margin-top:0;">To year</label>
+          <select id="endYear"></select>
+        </div>
+      </div>
+
+      <button id="calcBtn" class="primary" type="button">Calculate inflation</button>
+      <div id="result" style="margin-top:20px;"></div>
+    </div>
+
+    <div class="card seo-content" style="margin-top: 40px; text-align: left; padding: 32px;">
+      <h2 style="font-size:1.5rem; margin-bottom:16px;">Purchasing Power Over Time</h2>
+      <p style="text-align:left; margin-bottom:16px;">Use this calculator to estimate how inflation changes value from one
+        year to another. Useful for salary comparisons, savings targets, and long-term planning.</p>
+      <p style="text-align:left; margin-bottom:16px;"><strong>Note:</strong> values are simplified annual CPI-based rates
+        for estimation and should not replace official financial advice.</p>
+      <h3 style="font-size:1.2rem; margin-bottom:12px;">Related Tools</h3>
+      <div class="internal-links-cluster" style="display:flex; flex-wrap:wrap; gap:12px;">
+        <a href="/currency" style="color: var(--primary-color); text-decoration: underline;">Currency Converter</a>
+        <a href="/crypto-tax-estimator" style="color: var(--primary-color); text-decoration: underline;">Crypto Tax Estimator</a>
+        <a href="/business-days" style="color: var(--primary-color); text-decoration: underline;">Business Days Calculator</a>
+      </div>
+    </div>
+  </main>
+
+  <footer style="margin-top: auto; border-top: 1px solid var(--border-color); background: var(--card-bg);">
+    <div class="container" style="text-align: center; padding: 24px 16px; font-size: 0.9rem;">
+      <p style="margin-bottom: 12px;">&copy; 2026 Toolsified &mdash; Independent web tools platform.</p>
+      <div style="display: flex; justify-content: center; gap: 16px; margin-bottom: 12px; flex-wrap: wrap;">
+        <a href="/privacy" style="color: inherit; text-decoration: underline;">Privacy Policy</a>
+        <span>|</span>
+        <a href="/terms" style="color: inherit; text-decoration: underline;">Terms</a>
+        <span>|</span>
+        <a href="/about" style="color: inherit; text-decoration: underline;">About</a>
+        <span>|</span>
+        <a href="/contact" style="color: inherit; text-decoration: underline;">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const rates = {
+      US: { 2000: 3.4, 2001: 2.8, 2002: 1.6, 2003: 2.3, 2004: 2.7, 2005: 3.4, 2006: 3.2, 2007: 2.9, 2008: 3.8, 2009: -0.4, 2010: 1.6, 2011: 3.2, 2012: 2.1, 2013: 1.5, 2014: 1.6, 2015: 0.1, 2016: 1.3, 2017: 2.1, 2018: 2.4, 2019: 1.8, 2020: 1.2, 2021: 4.7, 2022: 8.0, 2023: 4.1, 2024: 3.3, 2025: 2.9, 2026: 2.5 },
+      UK: { 2000: 0.8, 2001: 1.2, 2002: 1.3, 2003: 1.4, 2004: 1.3, 2005: 2.1, 2006: 2.3, 2007: 2.3, 2008: 3.6, 2009: 2.2, 2010: 3.3, 2011: 4.5, 2012: 2.8, 2013: 2.6, 2014: 1.5, 2015: 0.0, 2016: 0.7, 2017: 2.7, 2018: 2.5, 2019: 1.8, 2020: 0.9, 2021: 2.6, 2022: 9.1, 2023: 7.3, 2024: 3.5, 2025: 2.8, 2026: 2.2 },
+      NO: { 2000: 3.1, 2001: 3.0, 2002: 1.3, 2003: 2.5, 2004: 0.5, 2005: 1.5, 2006: 2.3, 2007: 0.8, 2008: 3.8, 2009: 2.2, 2010: 2.5, 2011: 1.2, 2012: 0.8, 2013: 2.1, 2014: 2.0, 2015: 2.2, 2016: 3.6, 2017: 1.9, 2018: 2.7, 2019: 2.2, 2020: 1.3, 2021: 3.5, 2022: 5.8, 2023: 5.5, 2024: 4.1, 2025: 3.0, 2026: 2.5 },
+      EA: { 2000: 2.1, 2001: 2.3, 2002: 2.2, 2003: 2.1, 2004: 2.1, 2005: 2.2, 2006: 2.2, 2007: 2.1, 2008: 3.3, 2009: 0.3, 2010: 1.6, 2011: 2.7, 2012: 2.5, 2013: 1.3, 2014: 0.4, 2015: 0.0, 2016: 0.2, 2017: 1.5, 2018: 1.8, 2019: 1.2, 2020: 0.3, 2021: 2.6, 2022: 8.4, 2023: 5.4, 2024: 2.7, 2025: 2.3, 2026: 2.0 }
+    };
+
+    const currencyByCountry = { US: "USD", UK: "GBP", NO: "NOK", EA: "EUR" };
+    const yearMin = 2000;
+    const yearMax = 2026;
+    const startYear = document.getElementById("startYear");
+    const endYear = document.getElementById("endYear");
+    for (let y = yearMin; y <= yearMax; y += 1) {
+      startYear.innerHTML += `<option value="${y}">${y}</option>`;
+      endYear.innerHTML += `<option value="${y}">${y}</option>`;
+    }
+    startYear.value = "2000";
+    endYear.value = "2026";
+
+    function formatMoney(value, currency) {
+      return new Intl.NumberFormat("en-US", { style: "currency", currency, maximumFractionDigits: 2 }).format(value);
+    }
+
+    function runCalc() {
+      const amount = Number(document.getElementById("amount").value);
+      const country = document.getElementById("country").value;
+      const from = Number(startYear.value);
+      const to = Number(endYear.value);
+
+      if (!(amount >= 0)) return alert("Please enter a valid amount.");
+      if (from >= to) return alert("From year must be earlier than to year.");
+
+      let factor = 1;
+      const rows = [];
+      for (let y = from + 1; y <= to; y += 1) {
+        const rate = rates[country][y] ?? 0;
+        factor *= (1 + rate / 100);
+        rows.push(`<tr><td>${y}</td><td>${rate.toFixed(1)}%</td></tr>`);
+      }
+
+      const adjusted = amount * factor;
+      const change = ((factor - 1) * 100);
+      const ccy = currencyByCountry[country];
+      document.getElementById("result").innerHTML = `
+        <div class="card" style="margin:0; box-shadow:none; border:1px solid var(--border-color);">
+          <h3 style="margin-bottom:8px;">Result</h3>
+          <p>${formatMoney(amount, ccy)} in ${from} has estimated purchasing power of</p>
+          <p style="font-size:1.4rem; font-weight:700; margin:8px 0;">${formatMoney(adjusted, ccy)} in ${to}</p>
+          <p>Cumulative inflation: <strong>${change.toFixed(1)}%</strong></p>
+          <div class="table-container" style="margin-top:16px;">
+            <table>
+              <thead><tr><th>Year</th><th>Inflation</th></tr></thead>
+              <tbody>${rows.join("")}</tbody>
+            </table>
+          </div>
+        </div>
+      `;
+    }
+
+    document.getElementById("calcBtn").addEventListener("click", runCalc);
+  </script>
+</body>
+
+</html>

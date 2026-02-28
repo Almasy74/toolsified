@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-adsense-account" content="ca-pub-6293439009227714" />
+  <title>Meeting Overlap Finder - Toolsified</title>
+  <meta name="description"
+    content="Find overlapping working hours across global time zones and identify the best meeting window." />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="stylesheet" href="/style.css?v=2.2" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/luxon@3/build/global/luxon.min.js"></script>
+  <link rel="canonical" href="https://toolsified.com/meeting-overlap" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6293439009227714"
+    crossorigin="anonymous"></script>
+    <script defer src="/scripts/nav.js"></script>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo-container">
+          <a href="/"><img src="/logo.png" alt="Toolsified logo" class="logo" /></a>
+        </div>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Toggle navigation">Menu</button>
+                <nav class="main-nav" id="mainNav">
+                    <a href="/time-code">Time Code</a>
+                    <a href="/multi-timezone">Time Zones</a>
+                    <a href="/currency">Currency</a>
+                    <a href="/crypto">Crypto</a>
+                    <div class="nav-more">
+                        <button class="nav-more-toggle" type="button" aria-expanded="false" aria-haspopup="true">More</button>
+                        <div class="nav-more-menu">
+                            <a href="/business-days">Business Days</a>
+                            <a href="/meeting-overlap">Meeting Overlap</a>
+                            <a href="/inflation-calculator">Inflation Calculator</a>
+                            <a href="/crypto-tax-estimator">Crypto Tax Estimator</a>
+                        </div>
+                    </div>
+                </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="card">
+      <h1>Meeting Overlap Finder</h1>
+
+      <label for="meetingDate">Meeting date</label>
+      <input id="meetingDate" type="date" />
+
+      <div class="row" style="margin-top:16px;">
+        <div style="flex:1;">
+          <label for="workStart" style="margin-top:0;">Workday start</label>
+          <input id="workStart" type="number" min="0" max="23" value="9" />
+        </div>
+        <div style="flex:1;">
+          <label for="workEnd" style="margin-top:0;">Workday end</label>
+          <input id="workEnd" type="number" min="1" max="24" value="17" />
+        </div>
+      </div>
+
+      <h3 style="margin-top:20px;">Time zones (2 to 5)</h3>
+      <div id="zoneRows"></div>
+      <button id="addZoneBtn" class="primary" type="button" style="margin-top:12px;">Add time zone</button>
+      <button id="findBtn" class="primary" type="button">Find overlap</button>
+
+      <div id="result" style="margin-top:20px;"></div>
+    </div>
+
+    <div class="card seo-content" style="margin-top: 40px; text-align: left; padding: 32px;">
+      <h2 style="font-size:1.5rem; margin-bottom:16px;">Plan Global Meetings Faster</h2>
+      <p style="text-align:left; margin-bottom:16px;">Pick your team locations and working-hour range to instantly find shared
+        time windows. The tool highlights the best overlap so you can schedule without timezone guesswork.</p>
+      <h3 style="font-size:1.2rem; margin-bottom:12px;">Related Tools</h3>
+      <div class="internal-links-cluster" style="display:flex; flex-wrap:wrap; gap:12px;">
+        <a href="/multi-timezone" style="color: var(--primary-color); text-decoration: underline;">Multi Time Zone Converter</a>
+        <a href="/time-code" style="color: var(--primary-color); text-decoration: underline;">Time Code Converter</a>
+        <a href="/business-days" style="color: var(--primary-color); text-decoration: underline;">Business Days Calculator</a>
+      </div>
+    </div>
+  </main>
+
+  <footer style="margin-top: auto; border-top: 1px solid var(--border-color); background: var(--card-bg);">
+    <div class="container" style="text-align: center; padding: 24px 16px; font-size: 0.9rem;">
+      <p style="margin-bottom: 12px;">&copy; 2026 Toolsified &mdash; Independent web tools platform.</p>
+      <div style="display: flex; justify-content: center; gap: 16px; margin-bottom: 12px; flex-wrap: wrap;">
+        <a href="/privacy" style="color: inherit; text-decoration: underline;">Privacy Policy</a>
+        <span>|</span>
+        <a href="/terms" style="color: inherit; text-decoration: underline;">Terms</a>
+        <span>|</span>
+        <a href="/about" style="color: inherit; text-decoration: underline;">About</a>
+        <span>|</span>
+        <a href="/contact" style="color: inherit; text-decoration: underline;">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const { DateTime } = luxon;
+    const allZones = Intl.supportedValuesOf("timeZone");
+    const zoneRows = document.getElementById("zoneRows");
+
+    function zoneLabel(zone) {
+      return zone.replaceAll("_", " ");
+    }
+
+    function zoneSelect(defaultZone = "") {
+      const select = document.createElement("select");
+      select.innerHTML = allZones.map((z) => `<option value="${z}">${zoneLabel(z)}</option>`).join("");
+      if (defaultZone && allZones.includes(defaultZone)) select.value = defaultZone;
+      return select;
+    }
+
+    function addZone(defaultZone = "") {
+      const currentRows = zoneRows.querySelectorAll(".row").length;
+      if (currentRows >= 5) return;
+
+      const row = document.createElement("div");
+      row.className = "row";
+      const select = zoneSelect(defaultZone);
+      row.appendChild(select);
+
+      if (currentRows >= 2) {
+        const remove = document.createElement("button");
+        remove.type = "button";
+        remove.className = "remove-btn";
+        remove.textContent = "Remove";
+        remove.onclick = () => row.remove();
+        row.appendChild(remove);
+      }
+      zoneRows.appendChild(row);
+    }
+
+    function mergeContiguous(slots) {
+      const merged = [];
+      for (const slot of slots) {
+        if (!merged.length) {
+          merged.push({ start: slot.start, end: slot.end });
+          continue;
+        }
+        const prev = merged[merged.length - 1];
+        if (+prev.end === +slot.start) {
+          prev.end = slot.end;
+        } else {
+          merged.push({ start: slot.start, end: slot.end });
+        }
+      }
+      return merged;
+    }
+
+    function findOverlap() {
+      const dateIso = document.getElementById("meetingDate").value;
+      const workStart = Number(document.getElementById("workStart").value);
+      const workEnd = Number(document.getElementById("workEnd").value);
+      const rows = Array.from(zoneRows.querySelectorAll("select"));
+      const zones = [...new Set(rows.map((r) => r.value).filter(Boolean))];
+
+      if (!dateIso) return alert("Please choose a date.");
+      if (zones.length < 2 || zones.length > 5) return alert("Choose between 2 and 5 unique time zones.");
+      if (!(workStart >= 0 && workStart <= 23 && workEnd >= 1 && workEnd <= 24 && workStart < workEnd)) {
+        return alert("Workday must be a valid range (e.g. 9 to 17).");
+      }
+
+      const dayStartUtc = DateTime.fromISO(dateIso, { zone: "utc" }).startOf("day");
+      const fullSlots = [];
+      const scores = [];
+      for (let m = 0; m < 24 * 60; m += 30) {
+        const start = dayStartUtc.plus({ minutes: m });
+        const end = start.plus({ minutes: 30 });
+
+        let count = 0;
+        for (const zone of zones) {
+          const local = start.setZone(zone);
+          const hour = local.hour + local.minute / 60;
+          if (hour >= workStart && hour < workEnd) count += 1;
+        }
+        scores.push({ start, end, count });
+        if (count === zones.length) fullSlots.push({ start, end });
+      }
+
+      const fullIntervals = mergeContiguous(fullSlots);
+      const result = document.getElementById("result");
+
+      if (!fullIntervals.length) {
+        const maxCount = Math.max(...scores.map((s) => s.count));
+        const partial = mergeContiguous(scores.filter((s) => s.count === maxCount));
+        const partialHtml = partial.map((iv) => `<li>${iv.start.toFormat("HH:mm")} - ${iv.end.toFormat("HH:mm")} UTC (${maxCount}/${zones.length} zones)</li>`).join("");
+        result.innerHTML = `
+          <div class="card" style="margin:0; box-shadow:none; border:1px solid var(--border-color);">
+            <h3 style="margin-bottom:8px;">No full overlap found</h3>
+            <p>Best partial overlap on ${dateIso}:</p>
+            <ul style="margin:8px 0 0 20px;">${partialHtml || "<li>None</li>"}</ul>
+          </div>
+        `;
+        return;
+      }
+
+      const sorted = fullIntervals.sort((a, b) => (b.end - b.start) - (a.end - a.start));
+      const best = sorted[0];
+      const rowsHtml = sorted.map((iv) => {
+        const utcRange = `${iv.start.toFormat("HH:mm")} - ${iv.end.toFormat("HH:mm")} UTC`;
+        const byZone = zones.map((z) => `${zoneLabel(z)}: ${iv.start.setZone(z).toFormat("HH:mm")} - ${iv.end.setZone(z).toFormat("HH:mm")}`).join("<br>");
+        return `<tr><td>${utcRange}</td><td style="text-align:left;">${byZone}</td></tr>`;
+      }).join("");
+
+      result.innerHTML = `
+        <div class="card" style="margin:0; box-shadow:none; border:1px solid var(--border-color);">
+          <h3 style="margin-bottom:8px;">Best meeting window</h3>
+          <p><strong>${best.start.toFormat("HH:mm")} - ${best.end.toFormat("HH:mm")} UTC</strong> on ${dateIso}</p>
+          <div class="table-container" style="margin-top:16px;">
+            <table>
+              <thead><tr><th>UTC Window</th><th>Local Times</th></tr></thead>
+              <tbody>${rowsHtml}</tbody>
+            </table>
+          </div>
+        </div>
+      `;
+    }
+
+    const localZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    document.getElementById("meetingDate").value = DateTime.now().toISODate();
+    addZone(localZone);
+    addZone("America/New_York");
+    document.getElementById("addZoneBtn").addEventListener("click", () => addZone(""));
+    document.getElementById("findBtn").addEventListener("click", findOverlap);
+  </script>
+</body>
+
+</html>
