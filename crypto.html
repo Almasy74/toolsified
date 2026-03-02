@@ -4,78 +4,55 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Smart Crypto Converter | Toolsified</title>
+  <meta name="google-adsense-account" content="ca-pub-6293439009227714">
+  <title>Crypto Profit and Loss Calculator | Historical Buy/Sell Analysis - Toolsified</title>
+  <meta name="description"
+    content="Track historical crypto profit/loss with date-based rates, transparent assumptions, practical scenarios, and clear limitations for planning." />
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="stylesheet" href="/style.css?v=2.2" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="canonical" href="https://toolsified.com/crypto" />
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [{
-    "@type": "Question",
-    "name": "How does the crypto converter work?",
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": "Our smart crypto converter lets you log your crypto buys and sells (e.g., Bitcoin or Ethereum to USD/EUR/NOK) on specific dates, and it calculates the exact profit or loss using historical exchange rates."
-    }
-  }, {
-    "@type": "Question",
-    "name": "Which cryptocurrencies are supported?",
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": "Currently, we support major cryptocurrencies like Bitcoin (BTC), Ethereum (ETH), and Solana (SOL) converting against standard fiat currencies."
-    }
-  }, {
-    "@type": "Question",
-    "name": "Is my portfolio data stored?",
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": "No. Toolsified is fully privacy-focused. All calculations happen instantly in your browser session and your data is never saved or transmitted to our servers."
-    }
-  }]
-}
-</script>
-    <script defer src="/scripts/nav.js"></script>
+  <script defer src="/scripts/nav.js"></script>
 </head>
 
 <body>
-  <!-- Header -->
   <header class="site-header">
     <div class="container">
       <div class="header-content">
         <div class="logo-container">
-          <a href="/">
-            <img src="/logo.png" alt="Toolsified logo" class="logo" />
-          </a>
+          <a href="/"><img src="/logo.png" alt="Toolsified logo" class="logo" /></a>
         </div>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Toggle navigation">Menu</button>
-                <nav class="main-nav" id="mainNav">
-                    <a href="/time-code">Time Code</a>
-                    <a href="/multi-timezone">Time Zones</a>
-                    <a href="/currency">Currency</a>
-                    <a href="/crypto">Crypto</a>
-                    <div class="nav-more">
-                        <button class="nav-more-toggle" type="button" aria-expanded="false" aria-haspopup="true">More</button>
-                        <div class="nav-more-menu">
-                            <a href="/business-days">Business Days</a>
-                            <a href="/meeting-overlap">Meeting Overlap</a>
-                            <a href="/inflation-calculator">Inflation Calculator</a>
-                            <a href="/crypto-tax-estimator">Crypto Tax Estimator</a>
-                        </div>
-                    </div>
-                </nav>
+        <nav class="main-nav" id="mainNav">
+          <a href="/time-code">Time Code</a>
+          <a href="/multi-timezone">Time Zones</a>
+          <a href="/currency">Currency</a>
+          <a href="/crypto">Crypto</a>
+          <div class="nav-more">
+            <button class="nav-more-toggle" type="button" aria-expanded="false" aria-haspopup="true">More</button>
+            <div class="nav-more-menu">
+              <a href="/business-days">Business Days</a>
+              <a href="/meeting-overlap">Meeting Overlap</a>
+              <a href="/inflation-calculator">Inflation Calculator</a>
+              <a href="/crypto-tax-estimator">Crypto Tax Estimator</a>
+            </div>
+          </div>
+        </nav>
       </div>
     </div>
   </header>
 
   <main class="container">
     <h1 style="text-align: center; margin-bottom: 8px;">Smart Crypto Converter</h1>
-    <p class="subtitle" style="text-align: center; margin-bottom: 32px;">Calculate Bitcoin & Ethereum gains instantly
-      using historical prices. No account required.</p>
+
+    <section class="card seo-content" style="margin-top:24px; text-align:left; padding:32px;">
+      <h2>Intro: who this calculator is for</h2>
+      <p>This calculator is built for people who need a quick estimate of historical crypto performance without opening a full portfolio platform. You can add multiple buy/sell transactions for supported assets and see estimated profit or loss in fiat terms. It is useful for private investors reviewing strategy, freelancers paid in crypto, and operators preparing rough internal reporting before formal reconciliation.</p>
+      <p>A typical use case is checking how a BTC position bought months ago would look if sold on a specific later date. Another is comparing two alternative exit dates to understand timing impact. The table format supports multiple rows, so you can test separate entries and compare outcomes side by side. You can also inspect buy and sell rate details for each row using the "More" view.</p>
+      <p>This page is intentionally practical and transparent. It focuses on date-based gain/loss approximation and avoids hidden assumptions. It is not a tax filing engine and does not replace exchange statements, accountant guidance, or jurisdiction rules.</p>
+    </section>
 
     <div class="card" style="margin-top: 0; padding: 24px;">
       <div class="table-container" style="margin-top: 0; box-shadow: none; padding: 0;">
@@ -100,108 +77,67 @@
       </div>
     </div>
 
-    <!-- AD SLOT: before-faq-banner -->
+    <section class="card seo-content" style="padding: 32px; margin-top: 40px; text-align:left;">
+      <h2>How it works</h2>
+      <p>Each table row collects amount, asset, fiat currency, buy date, and sell date. The tool requests historical rates through <code>/.netlify/functions/crypto-convert</code> for both dates and applies the formula <code>(sellRate - buyRate) x amount</code> to estimate result in fiat.</p>
+      <p><strong>Data handling:</strong> the tool uses date-based rate responses and computes the final difference in your browser. It does not model intraday execution times, order book depth, slippage, funding, or exchange fee schedules.</p>
+      <p><strong>Limitations:</strong> this calculator does not implement tax lot methods (FIFO/LIFO/HIFO), staking income treatment, derivatives accounting, wash sale interpretation, or legal reporting fields. Use it as a planning layer, then verify with complete records.</p>
 
-    <div class="section card seo-content" style="padding: 32px; margin-top: 40px;">
-      <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Fast, Accurate Crypto Tracking</h3>
-      <p style="text-align: left; margin-bottom: 24px;">Convert between Bitcoin, Ethereum, Solana and Fiat instantly.
-        The Toolsified crypto converter uses real-time exchange rate data to ensure you get accurate calculations for
-        your portfolio tracking. Simply enter your amount above, select your base and target currencies, and your
-        buy/sell dates to get your exact profit or loss without any hidden fees or complicated menus.</p>
-    </div>
+      <h2>Practical use scenarios</h2>
+      <ul>
+        <li>Estimate if a previous buy/sell window generated positive nominal return in USD, EUR, or NOK.</li>
+        <li>Compare potential outcomes of two different sell dates before making a disposition decision.</li>
+        <li>Prepare a quick month-end summary draft before reconciliation with exchange exports.</li>
+        <li>Test sensitivity of P/L to small date shifts during high-volatility periods.</li>
+        <li>Create an initial review before handing data to tax software or a professional advisor.</li>
+      </ul>
 
-    <!-- Content Sections -->
-    <div class="section">
-      <h2 style="font-size: 1.5rem; margin-bottom: 16px;">Track Your Crypto Gains and Losses</h2>
-      <p style="text-align: left; margin-bottom: 24px;">The Toolsified Smart Crypto Converter is designed for quick,
-        precise portfolio tracking. Whether you bought Bitcoin, Ethereum, or Solana, simply enter the amount and the
-        dates
-        of your purchase and sale. The tool instantly fetches the historical exchange rates between your chosen crypto
-        and
-        fiat currencies (like USD, EUR, or NOK) to calculate your exact profit or loss. It is private, fast, and
-        requires
-        no account.</p>
-    </div>
+      <h2>Interpreting results responsibly</h2>
+      <p>Profit and loss output should be read as a structured estimate, not a full accounting statement. The strongest use of this tool is comparative analysis: testing scenarios consistently with the same assumptions. For example, if two rows differ only by sell date, the resulting change highlights timing sensitivity. If two rows differ by fiat currency, you can inspect how currency context changes reported outcomes. These are valid analytical uses that help decision-making.</p>
+      <p>Where users get into trouble is assuming estimator output equals realized post-fee proceeds or taxable gain. Realized exchange results depend on execution venue, spread, maker/taker fees, withdrawal costs, and timestamp granularity. Tax calculations add another layer: lot identification methods, offsets from losses, jurisdiction exemptions, and filing status can materially change the final liability. Use this page to prepare questions and preliminary ranges, then validate with complete records.</p>
+      <p>A practical workflow is: import or list your transactions, estimate ranges here, compare with exchange exports, then reconcile discrepancies. This reduces surprises before formal reporting. If you are managing larger positions, maintain a separate ledger that captures transaction IDs, exact timestamps, fee currency, and transfer costs. The tool remains useful in that setup as a fast diagnostic surface for scenario testing and communication.</p>
+      <p>When presenting estimates to stakeholders, include your assumptions directly in the note: selected date, asset, fiat denomination, and whether fees are excluded. This makes the output reproducible and prevents misinterpretation. A reproducible estimate is far more valuable than a single number with unclear origin, especially when crypto volatility is high and decisions are time-sensitive.</p>
 
-    <div class="section">
-      <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Supported Cryptocurrencies</h3>
-      <div class="table-container card" style="padding: 0; margin-top: 0;">
-        <table style="margin: 0; width: 100%;">
-          <thead>
-            <tr>
-              <th>Asset</th>
-              <th>Symbol</th>
-              <th>Type</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Bitcoin</td>
-              <td>BTC</td>
-              <td>Layer 1 Store of Value</td>
-            </tr>
-            <tr>
-              <td>Ethereum</td>
-              <td>ETH</td>
-              <td>Smart Contract Platform</td>
-            </tr>
-            <tr>
-              <td>Solana</td>
-              <td>SOL</td>
-              <td>High-Speed Blockchain</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+      <h2>Common mistakes to avoid</h2>
+      <p>A frequent error is mixing realized and unrealized performance in one discussion. This page calculates realized-style difference between a buy and sell date for a chosen amount; it does not continuously mark open positions. Another error is ignoring fee currency. If fees are paid in asset units, your net amount sold can differ from nominal amount. Also avoid assuming all transactions were executed exactly at daily midpoint prices. If your process depends on precision, pair this tool with exchange exports and reconcile by timestamp. Used this way, the estimator remains valuable as a fast analytical layer while final numbers come from authoritative records.</p>
 
-    <div class="section">
-      <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Live Historic Conversion Paths</h3>
-      <div class="internal-links-cluster" style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 32px;">
+      <h2>Related tools</h2>
+      <div class="internal-links-cluster" style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 24px;">
         <a href="/crypto/btc-to-usd" style="color: var(--primary-color); text-decoration: underline;">BTC to USD</a>
         <a href="/crypto/eth-to-usd" style="color: var(--primary-color); text-decoration: underline;">ETH to USD</a>
         <a href="/crypto/sol-to-usd" style="color: var(--primary-color); text-decoration: underline;">SOL to USD</a>
-        <a href="/crypto/btc-to-eur" style="color: var(--primary-color); text-decoration: underline;">BTC to EUR</a>
-        <a href="/crypto/eth-to-eur" style="color: var(--primary-color); text-decoration: underline;">ETH to EUR</a>
+        <a href="/crypto-tax-estimator" style="color: var(--primary-color); text-decoration: underline;">Crypto Tax Estimator</a>
+        <a href="/currency" style="color: var(--primary-color); text-decoration: underline;">Currency Converter</a>
       </div>
-    </div>
 
-    <div class="section">
-      <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Frequently Asked Questions</h3>
+      <h2>FAQ</h2>
       <div class="faq-item" style="margin-bottom: 16px;">
-        <strong>How does the crypto converter work?</strong>
-        <p style="text-align: left; margin-bottom: 0;">Log your crypto buys and sells on specific dates. It calculates
-          the
-          profit or loss using exact historical exchange rates.</p>
+        <strong>Is this crypto calculator suitable for tax filing?</strong>
+        <p>No. It is a high-level estimator. Filing requires complete transaction history, lot tracking, and local regulations.</p>
       </div>
       <div class="faq-item" style="margin-bottom: 16px;">
-        <strong>Which cryptocurrencies are supported?</strong>
-        <p style="text-align: left; margin-bottom: 0;">We currently support Bitcoin (BTC), Ethereum (ETH), and Solana
-          (SOL) against major fiat currencies.</p>
+        <strong>Why does my exchange P/L not match exactly?</strong>
+        <p>Exchange statements include exact execution price, fees, and timestamp precision. This tool uses historical reference rates by selected date.</p>
       </div>
       <div class="faq-item" style="margin-bottom: 16px;">
-        <strong>Is my portfolio data stored?</strong>
-        <p style="text-align: left; margin-bottom: 0;">No. All calculations happen instantly in your browser session and
-          your data is never saved or transmitted to our servers.</p>
+        <strong>Can I track more than one transaction?</strong>
+        <p>Yes. Add as many rows as needed and inspect each result independently.</p>
       </div>
-    </div>
+      <div class="faq-item">
+        <strong>Does this tool store my portfolio?</strong>
+        <p>No account is required. Entered values are used to calculate on-screen output in your current session.</p>
+      </div>
+    </section>
   </main>
 
-  <!-- Footer -->
-  <footer style="margin-top: auto; border-top: 1px solid var(--border-color); background: var(--card-bg);">
-    <div class="container" style="text-align: center; padding: 24px 16px; font-size: 0.9rem;">
-      <p style="margin-bottom: 12px;">© 2026 Toolsified &mdash; Independent web tools platform.</p>
-      <div style="display: flex; justify-content: center; gap: 16px; margin-bottom: 12px; flex-wrap: wrap;">
-        <a href="/privacy" style="color: inherit; text-decoration: underline;">Privacy Policy</a>
-        <span>|</span>
-        <a href="/terms" style="color: inherit; text-decoration: underline;">Terms</a>
-        <span>|</span>
-        <a href="/about" style="color: inherit; text-decoration: underline;">About</a>
-        <span>|</span>
-        <a href="/contact" style="color: inherit; text-decoration: underline;">Contact</a>
+  <footer class="site-footer">
+    <div class="footer-container">
+      <p class="footer-tagline">&copy; 2026 Toolsified - Independent web tools platform.</p>
+      <div class="footer-links">
+        <a href="/privacy">Privacy Policy</a><span>|</span><a href="/terms">Terms</a><span>|</span><a href="/about">About</a><span>|</span><a href="/contact">Contact</a>
       </div>
-      <p style="margin: 4px 0;">Contact: <a href="mailto:info@toolsified.com" style="color: inherit; text-decoration: underline;">info@toolsified.com</a></p>
-      <p style="margin: 0;">Location: Norway</p>
+      <p class="footer-contact">Contact: <a href="mailto:info@toolsified.com">info@toolsified.com</a></p>
+      <p class="footer-location">Location: Norway</p>
     </div>
   </footer>
 

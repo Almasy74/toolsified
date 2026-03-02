@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bitcoin to US Dollars Profit/Loss Tracker & ROI Calculator (2026) | Toolsified</title>
+    <title>Bitcoin to US Dollars Historical Profit Calculator | 2026</title>
     <meta name="description"
-        content="Track your Bitcoin (BTC) investments. Convert BTC to US Dollars (USD) and calculate exact historic profit and loss instantly." />
+        content="Analyze historical Bitcoin (BTC) performance in US Dollars (USD) with transaction-level profit/loss estimates and clear assumptions." />
     <meta name="google-adsense-account" content="ca-pub-6293439009227714">
-  <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="stylesheet" href="/style.css?v=2.2" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,68 +16,15 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6293439009227714"
         crossorigin="anonymous"></script>
     <link rel="canonical" href="https://toolsified.com/crypto/btc-to-usd" />
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "WebApplication",
-          "name": "Bitcoin to US Dollars Profit/Loss Tracker",
-          "description": "Calculate exact historic profit and loss for BTC to USD. All calculations run locally in your browser.",
-          "applicationCategory": "UtilitiesApplication",
-          "operatingSystem": "Web",
-          "featureList": [
-            "Converts BTC to USD",
-            "Calculates historical profit and loss",
-            "Processes calculations locally in the browser",
-            "Maintains user privacy with no data uploads"
-          ],
-          "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-          }
-        },
-        {
-          "@type": "FAQPage",
-          "mainEntity": [{
-            "@type": "Question",
-            "name": "How do I calculate my Bitcoin profit in US Dollars?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Enter your BTC amount, select your buy and sell dates, and our tool uses real historic exchange rates to calculate your exact profit or loss in USD."
-            }
-          }, {
-            "@type": "Question",
-            "name": "Does this tool upload my financial data?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "No. Toolsified processes all BTC calculations locally in your browser. No transaction data is ever stored or transmitted to our servers."
-            }
-          }, {
-            "@type": "Question",
-            "name": "What processing method does this calculator use?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "This tool uses local browser processing to execute the profit/loss logic instantly."
-            }
-          }]
-        }
-      ]
-    }
-    </script>
     <script defer src="/scripts/nav.js"></script>
 </head>
 
 <body>
-    <!-- Header -->
     <header class="site-header">
         <div class="container">
             <div class="header-content">
                 <div class="logo-container">
-                    <a href="/">
-                        <img src="/logo.png" alt="Toolsified logo" class="logo" />
-                    </a>
+                    <a href="/"><img src="/logo.png" alt="Toolsified logo" class="logo" /></a>
                 </div>
                 <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Toggle navigation">Menu</button>
                 <nav class="main-nav" id="mainNav">
@@ -100,22 +47,13 @@
     </header>
 
     <main class="container">
-        <div class="card"
-            style="margin-top: 24px; margin-bottom: 24px; padding: 16px; background-color: var(--secondary-color); border: 1px solid var(--border-color); border-radius: 8px;">
-            <p style="margin-bottom: 8px; font-weight: 600; font-size: 0.95rem;">🛠️ Tool Capabilities Map</p>
-            <ul style="margin: 0; padding-left: 20px; font-size: 0.9rem;">
-                <li><strong>Purpose:</strong> Calculates historical profit and loss for BTC to USD.
-                </li>
-                <li><strong>Input Format:</strong> Amount of crypto, buy date, and sell date.</li>
-                <li><strong>Output Format:</strong> Exact return on investment in USD fiat.</li>
-                <li><strong>Processing Method:</strong> Executed entirely locally in your web browser.</li>
-            </ul>
-        </div>
+        <h1 style="text-align: center; margin-bottom: 8px;">Bitcoin to US Dollars Historical Profit and Loss Calculator</h1>
 
-        <h1 style="text-align: center; margin-bottom: 8px;">Bitcoin to US Dollars Historical Profit & Loss Calculator
-        </h1>
-        <p class="subtitle" style="text-align: center; margin-bottom: 32px;">Calculate historic profit and loss for
-            BTC to USD.</p>
+        <section class="card seo-content" style="margin-top:24px; text-align:left; padding:32px;">
+            <h2>What this tool is for</h2>
+            <p>This page helps you estimate historical profit or loss for <strong>Bitcoin (BTC)</strong> positions priced in <strong>US Dollars (USD)</strong>. It is built for investors, traders, finance students, and analysts who need quick transaction-level hindsight checks without setting up a spreadsheet model from scratch. You can add multiple rows, each with its own amount, buy date, and sell date, then review the net result per row.</p>
+            <p>A common use case is validating whether a strategy generated gain after a volatile market period. Another is comparing what the same BTC position would have produced if sold in different months. The calculator is educational and planning-oriented: it gives fast directional analysis, not a full tax lot accounting system. Because the table supports several transactions, it can also serve as a lightweight pre-review before exporting records to accounting or tax software. If you are preparing reports for compliance or filing obligations, treat this as an estimate and reconcile with official exchange records and your jurisdiction rules.</p>
+        </section>
 
         <div class="card" style="margin-top: 0; padding: 24px;">
             <div class="table-container" style="margin-top: 0; box-shadow: none; padding: 0;">
@@ -136,76 +74,52 @@
                 </table>
             </div>
             <div class="row-controls" style="margin-top: 1rem; display: flex; gap: 1rem;">
-                <button onclick="addRow()" class="primary" style="margin-top: 0; width: auto;">+ Add
-                    Transaction</button>
+                <button onclick="addRow()" class="primary" style="margin-top: 0; width: auto;">+ Add Transaction</button>
             </div>
         </div>
 
-        <div class="section card seo-content" style="padding: 32px; margin-top: 40px;">
-            <h2 style="font-size: 1.5rem; margin-bottom: 16px;">Analyze Bitcoin ROI in US Dollars</h2>
-            <p style="text-align: left; margin-bottom: 24px;">Use the Toolsified <strong>Bitcoin to
-                    US Dollars</strong> historical profit and loss calculator to analyze your investment performance.
-                Whether you're tracking long-term gains or calculating specific ROI, our tool provides precise market
-                values for <strong>Bitcoin</strong> in <strong>USD</strong> based on audited historical
-                data. Simply enter your transaction dates and amounts above to see your net results instantly. Our tool
-                functions entirely within your browser, ensuring your <strong>BTC</strong> financial data
-                remains private and secure.</p>
+        <section class="card seo-content" style="padding: 32px; margin-top: 40px; text-align:left;">
+            <h2>How it works</h2>
+            <p>For each row, the calculator requests historical rates for the selected buy and sell dates using <code>/.netlify/functions/crypto-convert</code>. It then computes <code>(sellRate - buyRate) x amount</code> in your selected fiat currency. The data call returns a rate snapshot for each date, and the final arithmetic runs in your browser.</p>
+            <p><strong>Data and limits:</strong> returned rates depend on source availability and date coverage. Intraday timing, exchange-specific spreads, fees, and slippage are not included. The result is a historical estimate, not a broker-confirmed execution ledger.</p>
+            <p><strong>Scope:</strong> this page is designed for gain/loss approximation per position. It does not implement FIFO/LIFO/HIFO lot methods, tax event classification, staking rewards treatment, or jurisdiction-specific reporting forms.</p>
 
-            <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Technical Capabilities</h3>
-            <ul style="text-align: left; margin-bottom: 24px; padding-left: 20px;">
-                <li style="margin-bottom: 8px;">Supports tracking for multiple BTC transactions</li>
-                <li style="margin-bottom: 8px;">Retrieves accurate historic exchange rates for USD</li>
-                <li style="margin-bottom: 8px;">100% local browser processing—no server transmission</li>
-                <li style="margin-bottom: 8px;">Calculates exact profit and loss differentials automatically</li>
+            <h2>Practical use scenarios</h2>
+            <ul><li>Test how a BTC position performs in USD terms across two different exit dates.</li>
+<li>Prepare a directional investor update using transparent date-based assumptions.</li>
+<li>Use row-by-row output to isolate which transaction contributed most to total movement.</li>
+<li>Compare multiple transaction rows to see timing impact under one fiat baseline.</li>
+<li>Perform a pre-tax estimate review before handing records to professional tools.</li></ul>
+
+            <h2>Pair-specific planning notes</h2>
+            <ul>
+                <li>Before tax season, compare multiple sell dates to test sensitivity for this pair.</li>
+<li>Use this route for quick hindsight checks before full ledger reconciliation.</li>
+<li>If fees were charged in asset units, reconcile exchange statements after using this estimate.</li>
             </ul>
 
-            <div class="section">
-                <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Related Crypto Tools</h3>
-                <div class="internal-links-cluster" style="margin-bottom: 32px;">
-                    <p><a href="/crypto/eth-to-usd" style="color: var(--primary-color); text-decoration: underline;">Ethereum to US Dollars</a></p>
-<p><a href="/crypto/sol-to-usd" style="color: var(--primary-color); text-decoration: underline;">Solana to US Dollars</a></p>
-<p><a href="/crypto/eth-to-eur" style="color: var(--primary-color); text-decoration: underline;">Ethereum to Euros</a></p>
-<p><a href="/currency/cad-to-usd" style="color: var(--primary-color); text-decoration: underline;">CAD to USD Rate</a></p>
-                    <p><a href="/crypto" style="color: var(--primary-color); text-decoration: underline;">Back to Smart
-                            Crypto Converter Hub</a></p>
-                </div>
+            <h2>Related tools</h2>
+            <div class="internal-links-cluster" style="margin-bottom: 24px;">
+                <p><a href="/crypto/btc-to-usd" style="color: var(--primary-color); text-decoration: underline;">Bitcoin to US Dollars</a></p>
+<p><a href="/crypto/eth-to-usd" style="color: var(--primary-color); text-decoration: underline;">Ethereum to US Dollars</a></p>
+<p><a href="/crypto/btc-to-eur" style="color: var(--primary-color); text-decoration: underline;">Bitcoin to Euros</a></p>
+<p><a href="/currency/gbp-to-cad" style="color: var(--primary-color); text-decoration: underline;">GBP to CAD Rate</a></p>
+                <p><a href="/crypto" style="color: var(--primary-color); text-decoration: underline;">Back to Crypto Tools Hub</a></p>
             </div>
 
-            <div class="section">
-                <!-- AD SLOT: before-faq-banner -->
-
-                <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Frequently Asked Questions</h3>
-                <div class="faq-item" style="margin-bottom: 16px;">
-                    <strong>How do I calculate my Bitcoin profit in US Dollars?</strong>
-                    <p style="text-align: left; margin-bottom: 0;">Enter your BTC amount and transaction
-                        dates.
-                        The tool uses real historic exchange rates to calculate your profit or loss in USD.</p>
-                </div>
-                <div class="faq-item" style="margin-bottom: 16px;">
-                    <strong>Does this tool upload my financial data?</strong>
-                    <p style="text-align: left; margin-bottom: 0;">No. All calculations happen instantly in your browser
-                        session and your transaction data is never saved or transmitted to our servers.</p>
-                </div>
-                <div class="faq-item" style="margin-bottom: 16px;">
-                    <strong>What processing method does this calculator use?</strong>
-                    <p style="text-align: left; margin-bottom: 0;">This tool uses local browser processing (client-side
-                        JavaScript) to execute the BTC profit/loss logic instantly.</p>
-                </div>
-            </div>
+            <h2>FAQ</h2>
+            <div class="faq-item" style="margin-bottom: 16px;"><strong>Is there account creation required for this crypto tool?</strong><p>No account is required for basic calculations.</p></div>
+<div class="faq-item" style="margin-bottom: 16px;"><strong>Why do results differ across platforms for the same dates?</strong><p>Different providers can use different historical datasets, sampling windows, or pricing conventions.</p></div>
+<div class="faq-item" style="margin-bottom: 16px;"><strong>Does this page include trading fees in USD output?</strong><p>No, the estimate is rate-based and does not automatically include venue fee schedules.</p></div>
+<div class="faq-item" style="margin-bottom: 16px;"><strong>Can I model multiple transactions in one view?</strong><p>Yes, add rows and compute each position independently.</p></div>
+        </section>
     </main>
 
-    <!-- Footer -->
     <footer class="site-footer">
         <div class="footer-container">
-            <p class="footer-tagline">© 2026 Toolsified &mdash; Independent web tools platform.</p>
+            <p class="footer-tagline">&copy; 2026 Toolsified - Independent web tools platform.</p>
             <div class="footer-links">
-                <a href="/privacy">Privacy Policy</a>
-                <span>|</span>
-                <a href="/terms">Terms</a>
-                <span>|</span>
-                <a href="/about">About</a>
-                <span>|</span>
-                <a href="/contact">Contact</a>
+                <a href="/privacy">Privacy Policy</a><span>|</span><a href="/terms">Terms</a><span>|</span><a href="/about">About</a><span>|</span><a href="/contact">Contact</a>
             </div>
             <p class="footer-contact">Contact: <a href="mailto:info@toolsified.com">info@toolsified.com</a></p>
             <p class="footer-location">Location: Norway</p>
@@ -261,7 +175,6 @@
             tbody.appendChild(mainRow);
             tbody.appendChild(detailsRow);
 
-            // Programmatic SEO Pre-selection for the first row specifically
             if (isFirstRow) {
                 mainRow.querySelector(".crypto").value = "BTC";
                 mainRow.querySelector(".fiat").value = "USD";

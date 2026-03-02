@@ -5,9 +5,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="google-adsense-account" content="ca-pub-6293439009227714" />
-  <title>Business Days Calculator - Toolsified</title>
+  <title>Business Days Calculator | Count Working Days with Holiday Filters - Toolsified</title>
   <meta name="description"
-    content="Calculate business days between dates. Exclude weekends and optionally apply national holidays." />
+    content="Calculate business days between dates with optional weekend and holiday exclusion. Includes methodology, use cases, and limitations." />
   <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="stylesheet" href="/style.css?v=2.2" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -16,40 +16,32 @@
   <link rel="canonical" href="https://toolsified.com/business-days" />
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6293439009227714"
     crossorigin="anonymous"></script>
-    <script defer src="/scripts/nav.js"></script>
+  <script defer src="/scripts/nav.js"></script>
 </head>
 
 <body>
   <header class="site-header">
     <div class="container">
       <div class="header-content">
-        <div class="logo-container">
-          <a href="/"><img src="/logo.png" alt="Toolsified logo" class="logo" /></a>
-        </div>
+        <div class="logo-container"><a href="/"><img src="/logo.png" alt="Toolsified logo" class="logo" /></a></div>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Toggle navigation">Menu</button>
-                <nav class="main-nav" id="mainNav">
-                    <a href="/time-code">Time Code</a>
-                    <a href="/multi-timezone">Time Zones</a>
-                    <a href="/currency">Currency</a>
-                    <a href="/crypto">Crypto</a>
-                    <div class="nav-more">
-                        <button class="nav-more-toggle" type="button" aria-expanded="false" aria-haspopup="true">More</button>
-                        <div class="nav-more-menu">
-                            <a href="/business-days">Business Days</a>
-                            <a href="/meeting-overlap">Meeting Overlap</a>
-                            <a href="/inflation-calculator">Inflation Calculator</a>
-                            <a href="/crypto-tax-estimator">Crypto Tax Estimator</a>
-                        </div>
-                    </div>
-                </nav>
+        <nav class="main-nav" id="mainNav">
+          <a href="/time-code">Time Code</a><a href="/multi-timezone">Time Zones</a><a href="/currency">Currency</a><a href="/crypto">Crypto</a>
+          <div class="nav-more"><button class="nav-more-toggle" type="button" aria-expanded="false" aria-haspopup="true">More</button><div class="nav-more-menu"><a href="/business-days">Business Days</a><a href="/meeting-overlap">Meeting Overlap</a><a href="/inflation-calculator">Inflation Calculator</a><a href="/crypto-tax-estimator">Crypto Tax Estimator</a></div></div>
+        </nav>
       </div>
     </div>
   </header>
 
-  <main>
-    <div class="card">
-      <h1>Business Days Calculator</h1>
+  <main class="container">
+    <h1>Business Days Calculator</h1>
 
+    <section class="card seo-content" style="margin-top:24px; text-align:left; padding:32px;">
+      <h2>Intro</h2>
+      <p>This calculator counts business days between two dates and can exclude weekends and selected national holiday calendars. It is useful for contract deadlines, payroll cycles, service-level commitments, procurement lead times, and internal project planning.</p>
+    </section>
+
+    <div class="card" style="margin-top:24px;">
       <label for="startDate">Start date</label>
       <input id="startDate" type="date" />
 
@@ -76,34 +68,35 @@
       <div id="holidayList" style="margin-top:16px;"></div>
     </div>
 
-    <div class="card seo-content" style="margin-top: 40px; text-align: left; padding: 32px;">
-      <h2 style="font-size:1.5rem; margin-bottom:16px;">Working Day Counting Made Simple</h2>
-      <p style="text-align:left; margin-bottom:16px;">Use this tool to count days between two dates for planning, contracts,
-        payroll, and delivery windows. You can choose whether weekends are included and optionally apply a country holiday
-        calendar.</p>
-      <h3 style="font-size:1.2rem; margin-bottom:12px;">Related Tools</h3>
-      <div class="internal-links-cluster" style="display:flex; flex-wrap:wrap; gap:12px;">
+    <section class="card seo-content" style="margin-top: 40px; text-align: left; padding: 32px;">
+      <h2>How it works</h2>
+      <p>The logic iterates date by date from start to end (inclusive), tracks total days, flags weekend dates, and checks holiday matches from built-in country rules. Business-day output is the remaining set after exclusions.</p>
+      <p><strong>Limitations:</strong> public holiday rules are simplified and may not include all regional observances, one-off decrees, or company-specific non-working days.</p>
+
+      <h2>Practical use scenarios</h2>
+      <ul>
+        <li>Estimate payment due dates for net terms.</li>
+        <li>Calculate SLA windows excluding weekends and holidays.</li>
+        <li>Plan onboarding timelines across countries.</li>
+        <li>Forecast staffing workload around holiday periods.</li>
+      </ul>
+
+      <h2>Related tools</h2>
+      <div class="internal-links-cluster" style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:24px;">
         <a href="/meeting-overlap" style="color: var(--primary-color); text-decoration: underline;">Meeting Overlap Finder</a>
         <a href="/multi-timezone" style="color: var(--primary-color); text-decoration: underline;">Multi Time Zone Converter</a>
         <a href="/time-code" style="color: var(--primary-color); text-decoration: underline;">Time Code Converter</a>
       </div>
-    </div>
+
+      <h2>FAQ</h2>
+      <div class="faq-item" style="margin-bottom:16px;"><strong>Are start and end dates included?</strong><p>Yes, the range is inclusive.</p></div>
+      <div class="faq-item" style="margin-bottom:16px;"><strong>Can I exclude weekends?</strong><p>Yes, enable the weekend exclusion checkbox.</p></div>
+      <div class="faq-item" style="margin-bottom:16px;"><strong>Are holiday calendars complete?</strong><p>They are practical defaults and should be validated for legal or payroll-critical processes.</p></div>
+      <div class="faq-item"><strong>Does the tool support custom company holidays?</strong><p>Not currently; use output as a baseline and apply internal calendar adjustments.</p></div>
+    </section>
   </main>
 
-  <footer style="margin-top: auto; border-top: 1px solid var(--border-color); background: var(--card-bg);">
-    <div class="container" style="text-align: center; padding: 24px 16px; font-size: 0.9rem;">
-      <p style="margin-bottom: 12px;">&copy; 2026 Toolsified &mdash; Independent web tools platform.</p>
-      <div style="display: flex; justify-content: center; gap: 16px; margin-bottom: 12px; flex-wrap: wrap;">
-        <a href="/privacy" style="color: inherit; text-decoration: underline;">Privacy Policy</a>
-        <span>|</span>
-        <a href="/terms" style="color: inherit; text-decoration: underline;">Terms</a>
-        <span>|</span>
-        <a href="/about" style="color: inherit; text-decoration: underline;">About</a>
-        <span>|</span>
-        <a href="/contact" style="color: inherit; text-decoration: underline;">Contact</a>
-      </div>
-    </div>
-  </footer>
+  <footer class="site-footer"><div class="footer-container"><p class="footer-tagline">&copy; 2026 Toolsified - Independent web tools platform.</p><div class="footer-links"><a href="/privacy">Privacy Policy</a><span>|</span><a href="/terms">Terms</a><span>|</span><a href="/about">About</a><span>|</span><a href="/contact">Contact</a></div></div></footer>
 
   <script>
     function fmtDate(d) {
@@ -171,43 +164,43 @@
       const easter = easterSunday(year);
       if (country === "US") {
         out.push(observed(new Date(Date.UTC(year, 0, 1))));
-        out.push(nthWeekday(year, 0, 1, 3)); // MLK
-        out.push(nthWeekday(year, 1, 1, 3)); // Presidents
-        out.push(lastWeekday(year, 4, 1)); // Memorial
+        out.push(nthWeekday(year, 0, 1, 3));
+        out.push(nthWeekday(year, 1, 1, 3));
+        out.push(lastWeekday(year, 4, 1));
         out.push(observed(new Date(Date.UTC(year, 5, 19))));
         out.push(observed(new Date(Date.UTC(year, 6, 4))));
-        out.push(nthWeekday(year, 8, 1, 1)); // Labor
-        out.push(nthWeekday(year, 9, 1, 2)); // Columbus
+        out.push(nthWeekday(year, 8, 1, 1));
+        out.push(nthWeekday(year, 9, 1, 2));
         out.push(observed(new Date(Date.UTC(year, 10, 11))));
-        out.push(nthWeekday(year, 10, 4, 4)); // Thanksgiving
+        out.push(nthWeekday(year, 10, 4, 4));
         out.push(observed(new Date(Date.UTC(year, 11, 25))));
       } else if (country === "UK") {
         out.push(observed(new Date(Date.UTC(year, 0, 1))));
-        out.push(addDays(easter, -2)); // Good Friday
-        out.push(addDays(easter, 1)); // Easter Monday
-        out.push(nthWeekday(year, 4, 1, 1)); // Early May
-        out.push(lastWeekday(year, 4, 1)); // Spring Bank
-        out.push(lastWeekday(year, 7, 1)); // Summer Bank
+        out.push(addDays(easter, -2));
+        out.push(addDays(easter, 1));
+        out.push(nthWeekday(year, 4, 1, 1));
+        out.push(lastWeekday(year, 4, 1));
+        out.push(lastWeekday(year, 7, 1));
         out.push(observed(new Date(Date.UTC(year, 11, 25))));
         out.push(observed(new Date(Date.UTC(year, 11, 26))));
       } else if (country === "AU") {
         out.push(observed(new Date(Date.UTC(year, 0, 1))));
         out.push(observed(new Date(Date.UTC(year, 0, 26))));
-        out.push(addDays(easter, -2)); // Good Friday
-        out.push(addDays(easter, 1)); // Easter Monday
-        out.push(observed(new Date(Date.UTC(year, 3, 25)))); // ANZAC
-        out.push(nthWeekday(year, 5, 1, 2)); // King's Birthday (many states)
+        out.push(addDays(easter, -2));
+        out.push(addDays(easter, 1));
+        out.push(observed(new Date(Date.UTC(year, 3, 25))));
+        out.push(nthWeekday(year, 5, 1, 2));
         out.push(observed(new Date(Date.UTC(year, 11, 25))));
         out.push(observed(new Date(Date.UTC(year, 11, 26))));
       } else if (country === "NO") {
         out.push(new Date(Date.UTC(year, 0, 1)));
-        out.push(addDays(easter, -3)); // Maundy Thursday
-        out.push(addDays(easter, -2)); // Good Friday
-        out.push(addDays(easter, 1)); // Easter Monday
-        out.push(new Date(Date.UTC(year, 4, 1))); // Labour Day
-        out.push(new Date(Date.UTC(year, 4, 17))); // Constitution Day
-        out.push(addDays(easter, 39)); // Ascension Day
-        out.push(addDays(easter, 50)); // Whit Monday
+        out.push(addDays(easter, -3));
+        out.push(addDays(easter, -2));
+        out.push(addDays(easter, 1));
+        out.push(new Date(Date.UTC(year, 4, 1)));
+        out.push(new Date(Date.UTC(year, 4, 17)));
+        out.push(addDays(easter, 39));
+        out.push(addDays(easter, 50));
         out.push(new Date(Date.UTC(year, 11, 25)));
         out.push(new Date(Date.UTC(year, 11, 26)));
       }

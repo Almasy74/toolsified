@@ -1,105 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="google-adsense-account" content="ca-pub-6293439009227714" />
-  <title>Meeting Overlap Finder - Toolsified</title>
-  <meta name="description"
-    content="Find overlapping working hours across global time zones and identify the best meeting window." />
+  <title>Meeting Overlap Finder | Best Shared Windows Across Time Zones - Toolsified</title>
+  <meta name="description" content="Find overlapping working hours across 2-5 time zones with transparent logic, practical examples, and scheduling guidance." />
   <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="stylesheet" href="/style.css?v=2.2" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/luxon@3/build/global/luxon.min.js"></script>
   <link rel="canonical" href="https://toolsified.com/meeting-overlap" />
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6293439009227714"
-    crossorigin="anonymous"></script>
-    <script defer src="/scripts/nav.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6293439009227714" crossorigin="anonymous"></script>
+  <script defer src="/scripts/nav.js"></script>
 </head>
-
 <body>
-  <header class="site-header">
-    <div class="container">
-      <div class="header-content">
-        <div class="logo-container">
-          <a href="/"><img src="/logo.png" alt="Toolsified logo" class="logo" /></a>
-        </div>
-        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Toggle navigation">Menu</button>
-                <nav class="main-nav" id="mainNav">
-                    <a href="/time-code">Time Code</a>
-                    <a href="/multi-timezone">Time Zones</a>
-                    <a href="/currency">Currency</a>
-                    <a href="/crypto">Crypto</a>
-                    <div class="nav-more">
-                        <button class="nav-more-toggle" type="button" aria-expanded="false" aria-haspopup="true">More</button>
-                        <div class="nav-more-menu">
-                            <a href="/business-days">Business Days</a>
-                            <a href="/meeting-overlap">Meeting Overlap</a>
-                            <a href="/inflation-calculator">Inflation Calculator</a>
-                            <a href="/crypto-tax-estimator">Crypto Tax Estimator</a>
-                        </div>
-                    </div>
-                </nav>
-      </div>
-    </div>
-  </header>
+  <header class="site-header"><div class="container"><div class="header-content"><div class="logo-container"><a href="/"><img src="/logo.png" alt="Toolsified logo" class="logo" /></a></div><button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Toggle navigation">Menu</button><nav class="main-nav" id="mainNav"><a href="/time-code">Time Code</a><a href="/multi-timezone">Time Zones</a><a href="/currency">Currency</a><a href="/crypto">Crypto</a><div class="nav-more"><button class="nav-more-toggle" type="button" aria-expanded="false" aria-haspopup="true">More</button><div class="nav-more-menu"><a href="/business-days">Business Days</a><a href="/meeting-overlap">Meeting Overlap</a><a href="/inflation-calculator">Inflation Calculator</a><a href="/crypto-tax-estimator">Crypto Tax Estimator</a></div></div></nav></div></div></header>
 
-  <main>
-    <div class="card">
-      <h1>Meeting Overlap Finder</h1>
+  <main class="container">
+    <h1>Meeting Overlap Finder</h1>
+    <section class="card seo-content" style="margin-top:24px; text-align:left; padding:32px;"><h2>Intro</h2><p>This tool identifies shared working windows across teams in different time zones. It is designed for distributed teams, consulting projects, customer success calls, and global operations where schedule fairness matters.</p></section>
 
-      <label for="meetingDate">Meeting date</label>
-      <input id="meetingDate" type="date" />
-
-      <div class="row" style="margin-top:16px;">
-        <div style="flex:1;">
-          <label for="workStart" style="margin-top:0;">Workday start</label>
-          <input id="workStart" type="number" min="0" max="23" value="9" />
-        </div>
-        <div style="flex:1;">
-          <label for="workEnd" style="margin-top:0;">Workday end</label>
-          <input id="workEnd" type="number" min="1" max="24" value="17" />
-        </div>
-      </div>
-
-      <h3 style="margin-top:20px;">Time zones (2 to 5)</h3>
-      <div id="zoneRows"></div>
-      <button id="addZoneBtn" class="primary" type="button" style="margin-top:12px;">Add time zone</button>
-      <button id="findBtn" class="primary" type="button">Find overlap</button>
-
-      <div id="result" style="margin-top:20px;"></div>
+    <div class="card" style="margin-top:24px;">
+      <label for="meetingDate">Meeting date</label><input id="meetingDate" type="date" />
+      <div class="row" style="margin-top:16px;"><div style="flex:1;"><label for="workStart" style="margin-top:0;">Workday start</label><input id="workStart" type="number" min="0" max="23" value="9" /></div><div style="flex:1;"><label for="workEnd" style="margin-top:0;">Workday end</label><input id="workEnd" type="number" min="1" max="24" value="17" /></div></div>
+      <h2 style="font-size:1.2rem; margin-top:20px;">Time zones (2 to 5)</h2><div id="zoneRows"></div><button id="addZoneBtn" class="primary" type="button" style="margin-top:12px;">Add time zone</button><button id="findBtn" class="primary" type="button">Find overlap</button><div id="result" style="margin-top:20px;"></div>
     </div>
 
-    <div class="card seo-content" style="margin-top: 40px; text-align: left; padding: 32px;">
-      <h2 style="font-size:1.5rem; margin-bottom:16px;">Plan Global Meetings Faster</h2>
-      <p style="text-align:left; margin-bottom:16px;">Pick your team locations and working-hour range to instantly find shared
-        time windows. The tool highlights the best overlap so you can schedule without timezone guesswork.</p>
-      <h3 style="font-size:1.2rem; margin-bottom:12px;">Related Tools</h3>
-      <div class="internal-links-cluster" style="display:flex; flex-wrap:wrap; gap:12px;">
-        <a href="/multi-timezone" style="color: var(--primary-color); text-decoration: underline;">Multi Time Zone Converter</a>
-        <a href="/time-code" style="color: var(--primary-color); text-decoration: underline;">Time Code Converter</a>
-        <a href="/business-days" style="color: var(--primary-color); text-decoration: underline;">Business Days Calculator</a>
-      </div>
-    </div>
+    <section class="card seo-content" style="margin-top:40px; text-align:left; padding:32px;">
+      <h2>How it works</h2>
+      <p>The algorithm scans 30-minute slots across a day in UTC, maps each slot into selected local zones, and counts how many zones are within the defined workday range. It then returns full overlap windows or the best partial windows when full overlap is impossible.</p>
+      <p><strong>Limitations:</strong> the result does not account for personal availability, calendar conflicts, local holidays, or organization-specific meeting policies.</p>
+      <h2>Practical use scenarios</h2>
+      <ul><li>Weekly planning for US-Europe-APAC teams.</li><li>Incident command calls that need at least partial overlap.</li><li>Customer workshops with distributed stakeholders.</li><li>Recruiting panels across multiple offices.</li></ul>
+      <h2>Related tools</h2>
+      <div class="internal-links-cluster" style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:24px;"><a href="/multi-timezone" style="color: var(--primary-color); text-decoration: underline;">Multi Time Zone Converter</a><a href="/time-code" style="color: var(--primary-color); text-decoration: underline;">Time Code Converter</a><a href="/business-days" style="color: var(--primary-color); text-decoration: underline;">Business Days Calculator</a></div>
+      <h2>FAQ</h2>
+      <div class="faq-item" style="margin-bottom:16px;"><strong>What if no full overlap exists?</strong><p>The tool returns best partial windows and indicates how many zones are covered.</p></div>
+      <div class="faq-item" style="margin-bottom:16px;"><strong>How many zones can I compare?</strong><p>Between 2 and 5 unique zones.</p></div>
+      <div class="faq-item" style="margin-bottom:16px;"><strong>Does this include daylight saving?</strong><p>Yes, timezone conversion uses date-aware offsets.</p></div>
+      <div class="faq-item"><strong>Is this a calendar booking tool?</strong><p>No. Use this for overlap discovery, then schedule in your calendar platform.</p></div>
+    </section>
   </main>
 
-  <footer style="margin-top: auto; border-top: 1px solid var(--border-color); background: var(--card-bg);">
-    <div class="container" style="text-align: center; padding: 24px 16px; font-size: 0.9rem;">
-      <p style="margin-bottom: 12px;">&copy; 2026 Toolsified &mdash; Independent web tools platform.</p>
-      <div style="display: flex; justify-content: center; gap: 16px; margin-bottom: 12px; flex-wrap: wrap;">
-        <a href="/privacy" style="color: inherit; text-decoration: underline;">Privacy Policy</a>
-        <span>|</span>
-        <a href="/terms" style="color: inherit; text-decoration: underline;">Terms</a>
-        <span>|</span>
-        <a href="/about" style="color: inherit; text-decoration: underline;">About</a>
-        <span>|</span>
-        <a href="/contact" style="color: inherit; text-decoration: underline;">Contact</a>
-      </div>
-    </div>
-  </footer>
+  <footer class="site-footer"><div class="footer-container"><p class="footer-tagline">&copy; 2026 Toolsified - Independent web tools platform.</p><div class="footer-links"><a href="/privacy">Privacy Policy</a><span>|</span><a href="/terms">Terms</a><span>|</span><a href="/about">About</a><span>|</span><a href="/contact">Contact</a></div></div></footer>
 
   <script>
     const { DateTime } = luxon;
@@ -191,13 +136,7 @@
         const maxCount = Math.max(...scores.map((s) => s.count));
         const partial = mergeContiguous(scores.filter((s) => s.count === maxCount));
         const partialHtml = partial.map((iv) => `<li>${iv.start.toFormat("HH:mm")} - ${iv.end.toFormat("HH:mm")} UTC (${maxCount}/${zones.length} zones)</li>`).join("");
-        result.innerHTML = `
-          <div class="card" style="margin:0; box-shadow:none; border:1px solid var(--border-color);">
-            <h3 style="margin-bottom:8px;">No full overlap found</h3>
-            <p>Best partial overlap on ${dateIso}:</p>
-            <ul style="margin:8px 0 0 20px;">${partialHtml || "<li>None</li>"}</ul>
-          </div>
-        `;
+        result.innerHTML = `<div class="card" style="margin:0; box-shadow:none; border:1px solid var(--border-color);"><h3 style="margin-bottom:8px;">No full overlap found</h3><p>Best partial overlap on ${dateIso}:</p><ul style="margin:8px 0 0 20px;">${partialHtml || "<li>None</li>"}</ul></div>`;
         return;
       }
 
@@ -209,18 +148,7 @@
         return `<tr><td>${utcRange}</td><td style="text-align:left;">${byZone}</td></tr>`;
       }).join("");
 
-      result.innerHTML = `
-        <div class="card" style="margin:0; box-shadow:none; border:1px solid var(--border-color);">
-          <h3 style="margin-bottom:8px;">Best meeting window</h3>
-          <p><strong>${best.start.toFormat("HH:mm")} - ${best.end.toFormat("HH:mm")} UTC</strong> on ${dateIso}</p>
-          <div class="table-container" style="margin-top:16px;">
-            <table>
-              <thead><tr><th>UTC Window</th><th>Local Times</th></tr></thead>
-              <tbody>${rowsHtml}</tbody>
-            </table>
-          </div>
-        </div>
-      `;
+      result.innerHTML = `<div class="card" style="margin:0; box-shadow:none; border:1px solid var(--border-color);"><h3 style="margin-bottom:8px;">Best meeting window</h3><p><strong>${best.start.toFormat("HH:mm")} - ${best.end.toFormat("HH:mm")} UTC</strong> on ${dateIso}</p><div class="table-container" style="margin-top:16px;"><table><thead><tr><th>UTC Window</th><th>Local Times</th></tr></thead><tbody>${rowsHtml}</tbody></table></div></div>`;
     }
 
     const localZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -231,5 +159,4 @@
     document.getElementById("findBtn").addEventListener("click", findOverlap);
   </script>
 </body>
-
 </html>

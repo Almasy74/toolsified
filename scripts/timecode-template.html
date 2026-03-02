@@ -2,13 +2,13 @@
 <html lang="en">
 
 <head>
-    <title>Translate [FORMAT] to Local Time ([YEAR]) | [NAME] Converter</title>
-    content="Paste a time abbreviation like '2pm [FORMAT]' and convert [NAME] ([FORMAT]) to your local time instantly."
-    />
-    <meta name="google-adsense-account" content="ca-pub-6293439009227714">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/png" href="/favicon.png">
+    <title>Convert [FORMAT] to Local Time | [NAME] Time Code Translator ([YEAR])</title>
+    <meta name="description"
+        content="Translate [NAME] ([FORMAT]) expressions to local time with natural-language parsing, timezone-aware logic, and practical scheduling examples." />
+    <meta name="google-adsense-account" content="ca-pub-6293439009227714">
+    <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="stylesheet" href="/style.css?v=2.2" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,70 +16,16 @@
     <script src="https://cdn.jsdelivr.net/npm/luxon@3/build/global/luxon.min.js"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6293439009227714"
         crossorigin="anonymous"></script>
-
     <link rel="canonical" href="https://toolsified.com/time-code/convert-[VAR]-to-local-time" />
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "WebApplication",
-          "name": "[NAME] Converter",
-          "description": "Convert [NAME] ([FORMAT]) to your local time instantly using natural language parsing.",
-          "applicationCategory": "UtilitiesApplication",
-          "operatingSystem": "Web",
-          "featureList": [
-            "Converts [FORMAT] to local time",
-            "Understands natural language time codes",
-            "Processes calculations locally in the browser",
-            "Maintains user privacy with no server execution"
-          ],
-          "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-          }
-        },
-        {
-          "@type": "FAQPage",
-          "mainEntity": [{
-            "@type": "Question",
-            "name": "How do I convert [FORMAT] to my local time?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Simply paste a time code like '2pm [FORMAT]' or 'tomorrow 15:00 [FORMAT]'. Our tool instantly translates [NAME] into your local time zone."
-            }
-          }, {
-            "@type": "Question",
-            "name": "Can I convert [FORMAT] to other time zones?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes, once you input a [FORMAT] time, you can add as many target time zones as you need and the converter will translate it across all of them simultaneously."
-            }
-          }, {
-            "@type": "Question",
-            "name": "Is my scheduling data uploaded?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "No. The [FORMAT] time conversion happens 100% locally in your web browser, ensuring your scheduling remains strictly private."
-            }
-          }]
-        }
-      ]
-    }
-    </script>
     <script defer src="/scripts/nav.js"></script>
 </head>
 
 <body>
-    <!-- Header -->
     <header class="site-header">
         <div class="container">
             <div class="header-content">
                 <div class="logo-container">
-                    <a href="/">
-                        <img src="/logo.png" alt="Toolsified logo" class="logo" />
-                    </a>
+                    <a href="/"><img src="/logo.png" alt="Toolsified logo" class="logo" /></a>
                 </div>
                 <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Toggle navigation">Menu</button>
                 <nav class="main-nav" id="mainNav">
@@ -100,26 +46,18 @@
             </div>
         </div>
     </header>
-    <main>
-        <div class="card"
-            style="margin-top: 24px; margin-bottom: 24px; padding: 16px; background-color: var(--secondary-color); border: 1px solid var(--border-color); border-radius: 8px;">
-            <p style="margin-bottom: 8px; font-weight: 600; font-size: 0.95rem;">🛠️ Tool Capabilities Map</p>
-            <ul style="margin: 0; padding-left: 20px; font-size: 0.9rem;">
-                <li><strong>Purpose:</strong> Translates [NAME] ([FORMAT]) strings to local time using natural language.
-                </li>
-                <li><strong>Input Format:</strong> Natural language expression (e.g. "tomorrow 15:00 [FORMAT]").</li>
-                <li><strong>Output Format:</strong> Relative local date matrix and ISO strings.</li>
-                <li><strong>Processing Method:</strong> Resolves exclusively locally inside your browser.</li>
-            </ul>
-        </div>
 
-        <div class="card">
-            <h1 id="page-title">Latest [FORMAT] to Local Time Converter ([YEAR])</h1>
-            <p class="subtitle" style="text-align: center; margin-bottom: 32px;">Smart [NAME] ([FORMAT]) natural
-                language translator.</p>
+    <main class="container">
+        <h1 id="page-title">[NAME] ([FORMAT]) to Local Time Converter</h1>
 
-            <label for="codeInput">Time code input (e.g. <strong>2pm [FORMAT]</strong>, <strong>tomorrow 15
-                    [FORMAT]</strong>):</label>
+        <section class="card seo-content" style="margin-top:24px; text-align:left; padding:32px;">
+            <h2>What this translator does</h2>
+            <p>This page translates time expressions that include <strong>[FORMAT]</strong> into your local timezone and any additional zones you select. It is designed for people who receive meeting invites in abbreviations, remote teams working across continents, customer support operations, and event hosts publishing start times to international audiences. Instead of manually calculating offsets, you can paste a phrase like "2pm [FORMAT]" and instantly see equivalent local output.</p>
+            <p>The parser supports practical language patterns such as clock time, optional minutes, am/pm notation, and relative words like "tomorrow" or "next Monday". That makes it useful when invite text is informal and not already calendar-formatted. You can also add multiple target zones and copy formatted output strings for chat, email, or runbooks. The goal is to reduce scheduling mistakes caused by ambiguous abbreviations and daylight saving shifts. This is especially useful during DST change periods, when a static offset assumption can be wrong for part of the year.</p>
+        </section>
+
+        <div class="card" style="margin-top:24px;">
+            <label for="codeInput">Time code input (for example <strong>2pm [FORMAT]</strong> or <strong>tomorrow 15 [FORMAT]</strong>):</label>
             <input id="codeInput" placeholder="e.g. 2pm [FORMAT]" />
 
             <label for="zoneRows">Target Local Time Zone:</label>
@@ -128,8 +66,7 @@
             <label for="addZone">Show also in these time zones:</label>
             <button id="addZone" class="primary" type="button" style="margin-bottom: 16px;">Add time zone</button>
 
-            <button id="convertBtn" class="primary" type="button" style="width: 100%;">Convert [FORMAT] to Local
-                Time</button>
+            <button id="convertBtn" class="primary" type="button" style="width: 100%;">Convert [FORMAT] to Local Time</button>
 
             <div class="table-container">
                 <table id="resultTbl" style="display:none; width: 100%; margin-top: 24px;">
@@ -144,63 +81,36 @@
             </div>
         </div>
 
-        <!-- AD SLOT: tool-content-banner -->
+        <section class="card seo-content" style="margin-top: 40px; text-align: left; padding: 32px;">
+            <h2>How it works</h2>
+            <p>The converter detects the timezone abbreviation in your text, parses the time component, resolves optional relative date words, then creates a timezone-aware datetime using Luxon. It maps common abbreviations (such as [FORMAT], GMT, UTC, or EDT/PDT variants where supported) to IANA zones and renders output in each selected target zone.</p>
+            <p><strong>Logic:</strong> parse expression -> map abbreviation to source zone -> resolve date/time context -> transform into selected zones -> render local, ISO, and UTC offset output.</p>
+            <p><strong>Limitations:</strong> ambiguous abbreviations can map to multiple regions globally. This page uses a fixed mapping table for consistent behavior, so always verify critical schedules in your calendar platform.</p>
 
-        <div class="card seo-content" style="margin-top: 40px; text-align: left; padding: 32px;">
-            <h2 style="font-size: 1.5rem; margin-bottom: 16px;">Smart [NAME] Translator</h2>
-            <p style="text-align: left; margin-bottom: 24px;">Stop struggling with manual time zone math. The Toolsified
-                Time-code Converter lets you paste natural language time formats specifically for <strong>[NAME]
-                    ([FORMAT])</strong>. Instantly translate an invitation like "3pm [FORMAT]" into your local time.
-                Perfect for coordinating
-                international meetings, gaming events, or remote work schedules without leaving your browser.</p>
+            <h2>Practical use scenarios</h2>
+            <ul>[PAIR_SCENARIOS]</ul>
 
-            <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Technical Capabilities</h3>
-            <ul style="text-align: left; margin-bottom: 24px; padding-left: 20px;">
-                <li style="margin-bottom: 8px;">Parses unstructured, natural language dates (e.g., "next Friday")</li>
-                <li style="margin-bottom: 8px;">Instantly maps [FORMAT] across multiple local targets</li>
-                <li style="margin-bottom: 8px;">Processes data 100% locally in your browser logic—no server pings</li>
-                <li style="margin-bottom: 8px;">Generates copyable data outputs including specific ISO timestamps</li>
+            <h2>Format-specific planning notes</h2>
+            <ul>
+                [PAIR_NOTES]
             </ul>
 
-            <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Related Time Tools</h3>
-            <div class="internal-links-cluster" style="margin-bottom: 32px;">
+            <h2>Related tools</h2>
+            <div class="internal-links-cluster" style="margin-bottom: 24px;">
                 [RELATED_CLUSTER]
-                <p><a href="/time-code" style="color: var(--primary-color); text-decoration: underline;">Back to
-                        Time-code Translator Hub</a></p>
+                <p><a href="/time-code" style="color: var(--primary-color); text-decoration: underline;">Back to Time-code Hub</a></p>
             </div>
 
-            <!-- AD SLOT: before-faq-banner -->
-
-            <h3 style="font-size: 1.2rem; margin-bottom: 16px;">Frequently Asked Questions</h3>
-            <div class="faq-item" style="margin-bottom: 16px;">
-                <strong>How do I convert [FORMAT] to my local time?</strong>
-                <p style="text-align: left; margin-bottom: 0;">Simply paste a time code like '2pm [FORMAT]'. Our tool
-                    instantly translates [NAME] into your local time zone.</p>
-            </div>
-            <div class="faq-item" style="margin-bottom: 16px;">
-                <strong>Can I convert [FORMAT] to other time zones?</strong>
-                <p style="text-align: left; margin-bottom: 0;">Yes, once you input a [FORMAT] time, you can add as many
-                    target time zones as you need and the converter will translate it across all of them.</p>
-            </div>
-            <div class="faq-item" style="margin-bottom: 16px;">
-                <strong>Is my scheduling data uploaded?</strong>
-                <p style="text-align: left; margin-bottom: 0;">No. The [FORMAT] time conversion happens 100% locally in
-                    your web browser, ensuring your scheduling remains strictly private.</p>
-            </div>
-        </div>
+            <h2>FAQ</h2>
+            [PAIR_FAQ]
+        </section>
     </main>
-    <!-- Footer -->
+
     <footer class="site-footer">
         <div class="footer-container">
-            <p class="footer-tagline">© [YEAR] Toolsified &mdash; Independent web tools platform.</p>
+            <p class="footer-tagline">&copy; [YEAR] Toolsified - Independent web tools platform.</p>
             <div class="footer-links">
-                <a href="/privacy">Privacy Policy</a>
-                <span>|</span>
-                <a href="/terms">Terms</a>
-                <span>|</span>
-                <a href="/about">About</a>
-                <span>|</span>
-                <a href="/contact">Contact</a>
+                <a href="/privacy">Privacy Policy</a><span>|</span><a href="/terms">Terms</a><span>|</span><a href="/about">About</a><span>|</span><a href="/contact">Contact</a>
             </div>
             <p class="footer-contact">Contact: <a href="mailto:info@toolsified.com">info@toolsified.com</a></p>
             <p class="footer-location">Location: Norway</p>
@@ -322,7 +232,7 @@
                 added.add(z);
                 const dt = base.setZone(z);
                 const isToday = dt.hasSame(DateTime.now().setZone(z), 'day');
-                const localStr = dt.toFormat('cccc dd LLL yyyy · HH:mm') + (isToday ? ' (today)' : '');
+                const localStr = dt.toFormat('cccc dd LLL yyyy HH:mm') + (isToday ? ' (today)' : '');
                 const isoStr = dt.toISO();
                 const offset = dt.toFormat("ZZ");
 
