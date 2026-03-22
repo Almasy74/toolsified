@@ -566,7 +566,7 @@
       "Digital formidling",
       "Elektronisk Electronic, online",
       "Fritak og unntak",
-      "Hilsen fra Skatteetaten Yours sincerely, The Tax Administration",
+      "Hilsen fra Skatteetaten Yours sincerely, the Tax Administration",
       "Innen By, within"
     ]
   },
@@ -895,6 +895,12 @@
     ]
   },
   {
+    "url": "https://www.skatteetaten.no/stilogtone/god-praksis/~/link/92625d4b3139464a9dacc75d3f2e8ca5.aspx",
+    "error": "404 Client Error: Not Found for url: https://www.skatteetaten.no/stilogtone/god-praksis/~/link/92625d4b3139464a9dacc75d3f2e8ca5.aspx",
+    "type": "error",
+    "depth": 2
+  },
+  {
     "url": "https://www.skatteetaten.no/stilogtone/god-praksis/brukertesting/brukerinnvolvering-av-egne-ansatte",
     "title": "Brukerinnvolvering av egne ansatte - Skatteetaten",
     "name": "Brukerinnvolvering av egne ansatte",
@@ -1000,6 +1006,12 @@
       "Oppdatering av retningslinjene",
       "Trenger du hjelp?"
     ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/skrive/~/link/92625d4b3139464a9dacc75d3f2e8ca5.aspx",
+    "error": "404 Client Error: Not Found for url: https://www.skatteetaten.no/stilogtone/skrive/~/link/92625d4b3139464a9dacc75d3f2e8ca5.aspx",
+    "type": "error",
+    "depth": 2
   },
   {
     "url": "https://www.skatteetaten.no/stilogtone/monster/skatteetatenno/fremgangsmate/skatteetatenno",
@@ -1113,6 +1125,12 @@
     ]
   },
   {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/~/link/92625d4b3139464a9dacc75d3f2e8ca5.aspx",
+    "error": "404 Client Error: Not Found for url: https://www.skatteetaten.no/stilogtone/monster/~/link/92625d4b3139464a9dacc75d3f2e8ca5.aspx",
+    "type": "error",
+    "depth": 2
+  },
+  {
     "url": "https://www.skatteetaten.no/stilogtone/designsystemet/kom-i-gang/introduksjon",
     "title": "Introduksjon til designsystemet - Skatteetaten",
     "name": "Introduksjon til designsystemet",
@@ -1197,6 +1215,12 @@
     ]
   },
   {
+    "url": "https://www.skatteetaten.no/stilogtone/designsystemet/~/link/92625d4b3139464a9dacc75d3f2e8ca5.aspx",
+    "error": "404 Client Error: Not Found for url: https://www.skatteetaten.no/stilogtone/designsystemet/~/link/92625d4b3139464a9dacc75d3f2e8ca5.aspx",
+    "type": "error",
+    "depth": 2
+  },
+  {
     "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/versjonshistorikk",
     "title": "Versjonshistorikk - Skatteetaten",
     "name": "Versjonshistorikk",
@@ -1204,6 +1228,9 @@
     "depth": 2,
     "summary": "",
     "tips": [
+      "Alert: Opprettet navngitte eksempler.",
+      "Accordion: Opprettet navngitte eksempler.",
+      "Datepicker: Opprettet navngitte eksempler.",
       "Modal : Dokumentasjon om at modalRef.current?.close() ikke kaller onClose for modalen.",
       "Footer : Dokumentasjon om innebygde lenker og oppførsel ved åpning i ny fane.",
       "Opprettet Ny sidetype: Intern arbeidsliste",
@@ -1211,6 +1238,11 @@
       "Forbedret JSDoc for flere komponenter."
     ],
     "anchors": [
+      "Versjon 2.7.1 – 12. mars 2026",
+      "Versjon 2.7.0 – 4. mars 2026",
+      "Nye komponenter og funksjoner",
+      "Andre feilrettinger og forbedringer",
+      "Oppdatert dokumentasjon og eksempler",
       "Versjon 2.6.1 – 30. januar 2026",
       "Versjon 2.6.0 – 28. januar 2026",
       "Nye komponenter og funksjoner",
@@ -1235,12 +1267,7 @@
       "Andre feilrettinger og forbedringer",
       "Versjon 2.2.2 – 30. september 2025",
       "Feilrettinger",
-      "Versjon 2.2.1 – 30. september 2025",
-      "Feilrettinger",
-      "Versjon 2.2.0 – 28. august 2025",
-      "Nye komponenter og funksjoner",
-      "Andre feilrettinger og forbedringer",
-      "Versjon 2.1.0 – 12. juni 2025"
+      "Versjon 2.2.1 – 30. september 2025"
     ]
   },
   {
@@ -1508,6 +1535,12 @@
       "Universell utforming",
       "Trenger du hjelp?"
     ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/interaksjon/~/link/92625d4b3139464a9dacc75d3f2e8ca5.aspx",
+    "error": "404 Client Error: Not Found for url: https://www.skatteetaten.no/stilogtone/monster/interaksjon/~/link/92625d4b3139464a9dacc75d3f2e8ca5.aspx",
+    "type": "error",
+    "depth": 2
   },
   {
     "url": "https://www.skatteetaten.no/stilogtone/designsystemet/komponenter/openclose",
@@ -1858,6 +1891,12 @@
     ]
   },
   {
+    "url": "https://www.skatteetaten.no/stilogtone/monster/sideoppsett/~/link/92625d4b3139464a9dacc75d3f2e8ca5.aspx",
+    "error": "404 Client Error: Not Found for url: https://www.skatteetaten.no/stilogtone/monster/sideoppsett/~/link/92625d4b3139464a9dacc75d3f2e8ca5.aspx",
+    "type": "error",
+    "depth": 2
+  },
+  {
     "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler/adresse",
     "title": "Adresse - Skatteetaten",
     "name": "Adresse",
@@ -1951,6 +1990,18 @@
       "Relaterte temaer",
       "Trenger du hjelp?"
     ]
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/visuelt/~/link/92625d4b3139464a9dacc75d3f2e8ca5.aspx",
+    "error": "404 Client Error: Not Found for url: https://www.skatteetaten.no/stilogtone/visuelt/~/link/92625d4b3139464a9dacc75d3f2e8ca5.aspx",
+    "type": "error",
+    "depth": 2
+  },
+  {
+    "url": "https://www.skatteetaten.no/stilogtone/skrive/skriveregler/~/link/92625d4b3139464a9dacc75d3f2e8ca5.aspx",
+    "error": "404 Client Error: Not Found for url: https://www.skatteetaten.no/stilogtone/skrive/skriveregler/~/link/92625d4b3139464a9dacc75d3f2e8ca5.aspx",
+    "type": "error",
+    "depth": 2
   },
   {
     "url": "https://www.skatteetaten.no/stilogtone/god-praksis/maling/toppoppgaver",
