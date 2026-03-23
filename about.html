@@ -1,17 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About Toolsified | Editorial Purpose and Data Handling</title>
-  <meta name="description" content="Learn who operates Toolsified, what the site is built for, and how tool data is handled across the platform." />
-  <link rel="icon" type="image/png" href="/favicon.png"><link rel="stylesheet" href="/style.css?v=2.3" />
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"><link rel="canonical" href="https://toolsified.com/about" />
+  <meta name="description"
+    content="Learn who operates Toolsified, what the site is built for, and how tool data is handled across the platform." />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="stylesheet" href="/style.css?v=2.3" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="canonical" href="https://toolsified.com/about" />
   <script defer src="/scripts/nav.js"></script>
 </head>
+
 <body>
-<header class="site-header"><div class="container"><div class="header-content"><div class="logo-container"><a href="/"><img src="/logo.png" alt="Toolsified logo" class="logo" /></a></div><button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Toggle navigation">Menu</button><nav class="main-nav" id="mainNav"><a href="/time-code">Time Code</a><a href="/multi-timezone">Time Zones</a><a href="/currency">Currency</a><a href="/crypto">Crypto</a><div class="nav-more"><button class="nav-more-toggle" type="button" aria-expanded="false" aria-haspopup="true">More</button><div class="nav-more-menu"><a href="/business-days">Business Days</a><a href="/meeting-overlap">Meeting Overlap</a><a href="/inflation-calculator">Inflation Calculator</a><a href="/crypto-tax-estimator">Crypto Tax Estimator</a></div></div></nav></div></div></header>
-<main class="container"><div class="card"><h1>About Toolsified</h1><p style="text-align:left;">Toolsified is an independent web tools publisher based in Norway. The site focuses on practical browser-based tools for currency conversion, time-zone handling, crypto analysis, business-day planning, and related utility workflows.</p><h2>What Toolsified is built for</h2><p style="text-align:left;">The purpose of Toolsified is straightforward: make common calculations faster, clearer, and easier to verify. Many utility sites return a number but provide very little context. Toolsified aims to do both: provide the calculator and explain what the output means, how it is produced, and where its limits are.</p><h2>Who runs the site</h2><p style="text-align:left;">Toolsified is operated independently with a small editorial and maintenance workflow. It is not a bank, broker, tax authority, law firm, government agency, or financial institution. The site publishes web-based tools, explanatory content, methodology notes, and related pages intended to help users make faster preliminary decisions and better sense-checks.</p><h2>How the tools work</h2><p style="text-align:left;">Most calculations run locally in the browser after the page loads. Some tools depend on external reference data delivered through serverless endpoints, such as live exchange-rate lookups or historical crypto pricing. Where that applies, the relevant tool page should explain the calculation method, data dependency, and practical limitations.</p><h2>Editorial and quality approach</h2><ul style="text-align:left;"><li>Each important tool page is expected to explain what the tool does and does not do.</li><li>Methodology notes are included where external data or estimation logic matters.</li><li>Related links are maintained to help users move between adjacent tools and compare alternatives.</li><li>Policy pages such as About, Privacy, Terms, and Contact are published to make site purpose and responsibility clearer.</li><li>Content and technical behavior are revised over time as the site grows.</li></ul><h2>What users should rely on Toolsified for</h2><p style="text-align:left;">Toolsified is best suited for quick calculations, early comparisons, and preliminary checks. It can help users estimate values, compare scenarios, convert between formats, and understand common constraints before moving to a formal source or transaction environment.</p><h2>What users should not rely on Toolsified for</h2><p style="text-align:left;">Toolsified should not be treated as a substitute for regulated advice, binding quotes, brokerage execution systems, tax filings, legal interpretation, or official government guidance. Exchange rates, crypto prices, settlement outcomes, deadlines, and rules can differ from reference calculations shown on the site.</p><h2>Why some results may differ from real-world outcomes</h2><p style="text-align:left;">A calculated output can differ from what a user sees in a bank, exchange, payroll platform, booking flow, or tax report. That can happen because of spreads, fees, liquidity, execution timing, settlement rules, time-zone transitions, daylight-saving changes, rounding policies, source-data timing, or jurisdiction-specific rules. Where possible, Toolsified explains these differences directly on the relevant tool pages.</p><h2>Methodology and transparency</h2><p style="text-align:left;">Toolsified aims to make important assumptions visible. When a result depends on external reference data, date logic, or estimation rules, the site should explain enough for a user to understand the basis of the output and decide whether a more formal source is required. For methodology details across categories, see the <a href="/methodology">Methodology</a> page.</p><h2>Privacy and site policies</h2><p style="text-align:left;">Toolsified also publishes supporting policy pages so users can understand how the site is run and what responsibilities apply. For more information, see the <a href="/privacy">Privacy Policy</a>, <a href="/terms">Terms and Conditions</a>, and <a href="/contact">Contact</a> page.</p><h2>Contact</h2><p style="text-align:left;">If you want to report an issue, suggest an improvement, or ask a question about how a tool behaves, use the <a href="/contact">contact page</a>. Feedback is useful both for technical fixes and for improving clarity where a calculator result may be misunderstood.</p></div></main>
-<footer class="site-footer"><div class="footer-container"><p class="footer-tagline">&copy; 2026 Toolsified - Independent web tools platform.</p><div class="footer-links"><a href="/privacy">Privacy Policy</a><span>|</span><a href="/terms">Terms</a><span>|</span><a href="/about">About</a><span>|</span><a href="/contact">Contact</a></div><p class="footer-contact">Contact: <a href="mailto:info@toolsified.com">info@toolsified.com</a></p><p class="footer-location">Location: Norway</p></div></footer>
-</body></html>
+  <header class="site-header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo-container"><a href="/"><img src="/logo.png" alt="Toolsified logo" class="logo" /></a></div>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mainNav"
+          aria-label="Toggle navigation">Menu</button>
+        <nav class="main-nav" id="mainNav">
+          <a href="/time-code">Time Code</a>
+          <a href="/multi-timezone">Time Zones</a>
+          <a href="/currency">Currency</a>
+          <a href="/crypto">Crypto</a>
+          <div class="nav-more">
+            <button class="nav-more-toggle" type="button" aria-expanded="false" aria-haspopup="true">More</button>
+            <div class="nav-more-menu">
+              <a href="/business-days">Business Days</a>
+              <a href="/meeting-overlap">Meeting Overlap</a>
+              <a href="/inflation-calculator">Inflation Calculator</a>
+              <a href="/crypto-tax-estimator">Crypto Tax Estimator</a>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <h1>About Toolsified</h1>
+      <p style="text-align:left;">Toolsified is an independent web tools publisher based in Norway. The site focuses on
+        practical browser-based tools for pricing math, date and time planning, currency conversion, unit conversion,
+        crypto analysis, and related utility workflows.</p>
+
+      <h2>What Toolsified is built for</h2>
+      <p style="text-align:left;">The purpose of Toolsified is straightforward: make common calculations faster, clearer,
+        and easier to verify. Many utility sites return a number but provide very little context. Toolsified aims to do
+        both: provide the calculator and explain what the output means, how it is produced, and where its limits are.</p>
+
+      <h2>Who runs the site</h2>
+      <p style="text-align:left;">Toolsified is operated independently with a small editorial and maintenance workflow.
+        It is not a bank, broker, tax authority, law firm, government agency, or financial institution. The site
+        publishes web-based tools, explanatory content, methodology notes, and related pages intended to help users
+        make faster preliminary decisions and better sense-checks.</p>
+
+      <h2>How the tools work</h2>
+      <p style="text-align:left;">Most calculations run locally in the browser after the page loads. Some tools depend
+        on external reference data delivered through serverless endpoints, such as live exchange-rate lookups or
+        historical crypto pricing. Others are deterministic calculators that use browser-side formulas for percentages,
+        taxes, loans, date spans, ages, and unit conversions. Where external data or estimation assumptions matter, the
+        relevant tool page should explain the calculation method, data dependency, and practical limitations.</p>
+
+      <h2>Editorial and quality approach</h2>
+      <ul style="text-align:left;">
+        <li>Each important tool page is expected to explain what the tool does and does not do.</li>
+        <li>Methodology notes are included where external data or estimation logic matters.</li>
+        <li>Related links are maintained to help users move between adjacent tools and compare alternatives.</li>
+        <li>Policy pages such as About, Privacy, Terms, and Contact are published to make site purpose and
+          responsibility clearer.</li>
+        <li>Content and technical behavior are revised over time as the site grows.</li>
+      </ul>
+
+      <h2>What users should rely on Toolsified for</h2>
+      <p style="text-align:left;">Toolsified is best suited for quick calculations, early comparisons, and preliminary
+        checks. It can help users estimate values, compare scenarios, convert between formats, understand common time
+        and date constraints, and size practical pricing questions before moving to a formal source or transaction
+        environment.</p>
+
+      <h2>What users should not rely on Toolsified for</h2>
+      <p style="text-align:left;">Toolsified should not be treated as a substitute for regulated advice, binding quotes,
+        brokerage execution systems, tax filings, legal interpretation, or official government guidance. Exchange
+        rates, crypto prices, settlement outcomes, deadlines, and rules can differ from reference calculations shown on
+        the site.</p>
+
+      <h2>Why some results may differ from real-world outcomes</h2>
+      <p style="text-align:left;">A calculated output can differ from what a user sees in a bank, exchange, payroll
+        platform, booking flow, lender quote, or tax report. That can happen because of spreads, fees, liquidity,
+        execution timing, settlement rules, lender terms, time-zone transitions, daylight-saving changes, rounding
+        policies, source-data timing, or jurisdiction-specific rules. Where possible, Toolsified explains these
+        differences directly on the relevant tool pages.</p>
+
+      <h2>Methodology and transparency</h2>
+      <p style="text-align:left;">Toolsified aims to make important assumptions visible. When a result depends on
+        external reference data, date logic, or estimation rules, the site should explain enough for a user to
+        understand the basis of the output and decide whether a more formal source is required. For methodology details
+        across categories, see the <a href="/methodology">Methodology</a> page.</p>
+
+      <h2>Privacy and site policies</h2>
+      <p style="text-align:left;">Toolsified also publishes supporting policy pages so users can understand how the site
+        is run and what responsibilities apply. For more information, see the <a href="/privacy">Privacy Policy</a>, <a
+          href="/terms">Terms and Conditions</a>, and <a href="/contact">Contact</a> page.</p>
+
+      <h2>Contact</h2>
+      <p style="text-align:left;">If you want to report an issue, suggest an improvement, or ask a question about how a
+        tool behaves, use the <a href="/contact">contact page</a>. Feedback is useful both for technical fixes and for
+        improving clarity where a calculator result may be misunderstood.</p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <p class="footer-tagline">&copy; 2026 Toolsified - Independent web tools platform.</p>
+      <div class="footer-links">
+        <a href="/privacy">Privacy Policy</a><span>|</span><a href="/terms">Terms</a><span>|</span><a href="/about">About</a><span>|</span><a href="/contact">Contact</a>
+      </div>
+      <p class="footer-contact">Contact: <a href="mailto:info@toolsified.com">info@toolsified.com</a></p>
+      <p class="footer-location">Location: Norway</p>
+    </div>
+  </footer>
+</body>
+
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-adsense-account" content="ca-pub-6293439009227714" />
+  <title>Loan Payment Calculator | Monthly Payment, Interest and Extra Payments - Toolsified</title>
+  <meta name="description"
+    content="Estimate loan payments, total interest, payoff timeline, and the impact of extra monthly payments with a simple browser-based amortization calculator." />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="stylesheet" href="/style.css?v=2.3" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="canonical" href="https://toolsified.com/loan-payment-calculator" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6293439009227714"
+    crossorigin="anonymous"></script>
+  <script defer src="/scripts/nav.js"></script>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo-container"><a href="/"><img src="/logo.png" alt="Toolsified logo" class="logo" /></a></div>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mainNav"
+          aria-label="Toggle navigation">Menu</button>
+        <nav class="main-nav" id="mainNav">
+          <a href="/time-code">Time Code</a><a href="/multi-timezone">Time Zones</a><a href="/currency">Currency</a><a
+            href="/crypto">Crypto</a>
+          <div class="nav-more"><button class="nav-more-toggle" type="button" aria-expanded="false"
+              aria-haspopup="true">More</button>
+            <div class="nav-more-menu"><a href="/business-days">Business Days</a><a href="/meeting-overlap">Meeting
+                Overlap</a><a href="/inflation-calculator">Inflation Calculator</a><a
+                href="/crypto-tax-estimator">Crypto Tax Estimator</a></div>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Loan Payment Calculator</h1>
+
+    <section class="card seo-content" style="margin-top:24px; text-align:left; padding:32px;">
+      <h2>Intro</h2>
+      <p>This calculator estimates monthly loan payments, total interest, and payoff speed using a standard amortization
+        formula. It also lets you test the effect of an extra monthly payment. It is useful for mortgages, auto loans,
+        personal loans, and quick budgeting before you compare formal lender offers.</p>
+    </section>
+
+    <div class="card" style="margin-top:24px;">
+      <div class="row">
+        <div style="flex:1;">
+          <label for="principal" style="margin-top:0;">Loan amount</label>
+          <input id="principal" type="number" min="0" step="0.01" value="250000" />
+        </div>
+        <div style="flex:1;">
+          <label for="rate" style="margin-top:0;">Annual interest rate (%)</label>
+          <input id="rate" type="number" min="0" step="0.01" value="6.5" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div style="flex:1;">
+          <label for="years" style="margin-top:0;">Loan term (years)</label>
+          <input id="years" type="number" min="1" step="1" value="30" />
+        </div>
+        <div style="flex:1;">
+          <label for="extra" style="margin-top:0;">Extra monthly payment (optional)</label>
+          <input id="extra" type="number" min="0" step="0.01" value="0" />
+        </div>
+      </div>
+
+      <button id="calcBtn" class="primary" type="button">Calculate loan</button>
+      <div id="result" style="margin-top:20px;"></div>
+    </div>
+
+    <section class="card seo-content" style="margin-top:40px; text-align:left; padding:32px;">
+      <h2>How it works</h2>
+      <p>The standard monthly payment uses the amortization formula <code>P x r / (1 - (1 + r)^-n)</code>, where
+        <code>P</code> is principal, <code>r</code> is monthly interest rate, and <code>n</code> is the number of
+        monthly payments. When an extra payment is added, the calculator simulates the loan month by month until the
+        balance reaches zero.</p>
+      <p><strong>Limitations:</strong> this is an estimate only. It does not include origination fees, insurance,
+        property tax, closing costs, variable-rate resets, or lender-specific rounding and disclosure rules.</p>
+
+      <h2>Practical use scenarios</h2>
+      <ul>
+        <li>Estimate monthly affordability before you apply.</li>
+        <li>Compare shorter versus longer loan terms.</li>
+        <li>See how extra monthly payments reduce interest and payoff time.</li>
+        <li>Build a rough repayment plan before using lender documents.</li>
+      </ul>
+
+      <h2>Related tools</h2>
+      <div class="internal-links-cluster" style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:24px;">
+        <a href="/percentage-calculator" style="color: var(--primary-color); text-decoration: underline;">Percentage Calculator</a>
+        <a href="/vat-calculator" style="color: var(--primary-color); text-decoration: underline;">VAT Calculator</a>
+        <a href="/inflation-calculator" style="color: var(--primary-color); text-decoration: underline;">Inflation Calculator</a>
+        <a href="/currency" style="color: var(--primary-color); text-decoration: underline;">Currency Converter</a>
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq-item" style="margin-bottom:16px;">
+        <strong>Does this replace a lender quote?</strong>
+        <p>No. Use it for planning only. Actual offers depend on fees, credit profile, taxes, insurance, and lender
+          policy.</p>
+      </div>
+      <div class="faq-item" style="margin-bottom:16px;">
+        <strong>What does the extra payment field do?</strong>
+        <p>It adds the same extra amount every month and re-simulates the balance until payoff.</p>
+      </div>
+      <div class="faq-item" style="margin-bottom:16px;">
+        <strong>Can I use a zero interest rate?</strong>
+        <p>Yes. In that case the payment is simply the loan amount divided by the number of months.</p>
+      </div>
+      <div class="faq-item">
+        <strong>Does this include taxes and insurance?</strong>
+        <p>No. Those costs vary and need separate treatment.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <p class="footer-tagline">&copy; 2026 Toolsified - Independent web tools platform.</p>
+      <div class="footer-links"><a href="/privacy">Privacy Policy</a><span>|</span><a href="/terms">Terms</a><span>|</span><a href="/about">About</a><span>|</span><a href="/contact">Contact</a></div>
+      <p class="footer-contact">Contact: <a href="mailto:info@toolsified.com">info@toolsified.com</a></p>
+      <p class="footer-location">Location: Norway</p>
+    </div>
+  </footer>
+
+  <script>
+    function money(value) {
+      return new Intl.NumberFormat("en-US", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }).format(value);
+    }
+
+    function paymentFor(principal, monthlyRate, months) {
+      if (monthlyRate === 0) return principal / months;
+      return principal * monthlyRate / (1 - Math.pow(1 + monthlyRate, -months));
+    }
+
+    function monthsToText(months) {
+      const years = Math.floor(months / 12);
+      const restMonths = months % 12;
+      const parts = [];
+      if (years) parts.push(`${years} year${years === 1 ? "" : "s"}`);
+      if (restMonths) parts.push(`${restMonths} month${restMonths === 1 ? "" : "s"}`);
+      return parts.length ? parts.join(", ") : "0 months";
+    }
+
+    function simulateLoan(principal, annualRate, years, extra) {
+      const months = years * 12;
+      const monthlyRate = annualRate / 100 / 12;
+      const scheduledPayment = paymentFor(principal, monthlyRate, months);
+      const actualPayment = scheduledPayment + extra;
+
+      let balance = principal;
+      let totalInterest = 0;
+      let paidMonths = 0;
+      const previewRows = [];
+
+      while (balance > 0.000001 && paidMonths < 1200) {
+        const interest = balance * monthlyRate;
+        let principalPaid = actualPayment - interest;
+        if (monthlyRate === 0) principalPaid = actualPayment;
+        if (principalPaid <= 0) {
+          throw new Error("Payment is too low to cover interest.");
+        }
+        if (principalPaid > balance) principalPaid = balance;
+
+        const totalPaymentThisMonth = principalPaid + interest;
+        balance -= principalPaid;
+        totalInterest += interest;
+        paidMonths += 1;
+
+        if (previewRows.length < 12) {
+          previewRows.push({
+            month: paidMonths,
+            payment: totalPaymentThisMonth,
+            interest,
+            principalPaid,
+            balance: Math.max(balance, 0)
+          });
+        }
+      }
+
+      return {
+        scheduledPayment,
+        actualPayment,
+        totalInterest,
+        totalPaid: principal + totalInterest,
+        paidMonths,
+        previewRows
+      };
+    }
+
+    function calculate() {
+      const principal = Number(document.getElementById("principal").value);
+      const annualRate = Number(document.getElementById("rate").value);
+      const years = Number(document.getElementById("years").value);
+      const extra = Number(document.getElementById("extra").value);
+
+      if (!(principal > 0) || !(annualRate >= 0) || !(years > 0) || !(extra >= 0)) {
+        alert("Please enter valid non-negative values.");
+        return;
+      }
+
+      const baseline = simulateLoan(principal, annualRate, years, 0);
+      const accelerated = simulateLoan(principal, annualRate, years, extra);
+      const monthsSaved = baseline.paidMonths - accelerated.paidMonths;
+      const interestSaved = baseline.totalInterest - accelerated.totalInterest;
+      const rows = accelerated.previewRows.map((row) => `
+        <tr>
+          <td>${row.month}</td>
+          <td>${money(row.payment)}</td>
+          <td>${money(row.interest)}</td>
+          <td>${money(row.principalPaid)}</td>
+          <td>${money(row.balance)}</td>
+        </tr>
+      `).join("");
+
+      document.getElementById("result").innerHTML = `
+        <div class="card" style="margin:0; box-shadow:none; border:1px solid var(--border-color);">
+          <h3 style="margin-bottom:12px;">Result</h3>
+          <p>Scheduled monthly payment: <strong>${money(baseline.scheduledPayment)}</strong></p>
+          <p style="margin-top:8px;">Monthly payment with extra: <strong>${money(accelerated.actualPayment)}</strong></p>
+          <p style="margin-top:8px;">Estimated payoff time: <strong>${monthsToText(accelerated.paidMonths)}</strong></p>
+          <p style="margin-top:8px;">Total interest: <strong>${money(accelerated.totalInterest)}</strong></p>
+          <p style="margin-top:8px;">Total paid: <strong>${money(accelerated.totalPaid)}</strong></p>
+          <p style="margin-top:8px;">Time saved versus baseline: <strong>${monthsToText(monthsSaved)}</strong></p>
+          <p style="margin-top:8px;">Interest saved versus baseline: <strong>${money(interestSaved)}</strong></p>
+          <div class="table-container" style="margin-top:16px;">
+            <table>
+              <thead>
+                <tr><th>Month</th><th>Payment</th><th>Interest</th><th>Principal</th><th>Balance</th></tr>
+              </thead>
+              <tbody>${rows}</tbody>
+            </table>
+          </div>
+          <p style="margin-top:12px; font-size:0.95rem; color:#555;">Preview table shows the first 12 months of the accelerated scenario.</p>
+        </div>
+      `;
+    }
+
+    document.getElementById("calcBtn").addEventListener("click", calculate);
+    calculate();
+  </script>
+</body>
+
+</html>

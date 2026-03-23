@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-adsense-account" content="ca-pub-6293439009227714" />
+  <title>Unit Converter | Length, Weight, Temperature, Area and Volume - Toolsified</title>
+  <meta name="description"
+    content="Convert common units for length, weight, temperature, area, and volume in one fast browser-based unit converter." />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="stylesheet" href="/style.css?v=2.3" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="canonical" href="https://toolsified.com/unit-converter" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6293439009227714"
+    crossorigin="anonymous"></script>
+  <script defer src="/scripts/nav.js"></script>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo-container"><a href="/"><img src="/logo.png" alt="Toolsified logo" class="logo" /></a></div>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mainNav"
+          aria-label="Toggle navigation">Menu</button>
+        <nav class="main-nav" id="mainNav">
+          <a href="/time-code">Time Code</a><a href="/multi-timezone">Time Zones</a><a href="/currency">Currency</a><a
+            href="/crypto">Crypto</a>
+          <div class="nav-more"><button class="nav-more-toggle" type="button" aria-expanded="false"
+              aria-haspopup="true">More</button>
+            <div class="nav-more-menu"><a href="/business-days">Business Days</a><a href="/meeting-overlap">Meeting
+                Overlap</a><a href="/inflation-calculator">Inflation Calculator</a><a
+                href="/crypto-tax-estimator">Crypto Tax Estimator</a></div>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Unit Converter</h1>
+
+    <section class="card seo-content" style="margin-top:24px; text-align:left; padding:32px;">
+      <h2>Intro</h2>
+      <p>This unit converter handles common measurement categories in one place: length, weight, temperature, area, and
+        volume. It is useful for shopping, travel, cooking, schoolwork, engineering pre-checks, and quick reference
+        tasks where you want a fast answer without switching between different calculators.</p>
+    </section>
+
+    <div class="card" style="margin-top:24px;">
+      <label for="category">Category</label>
+      <select id="category"></select>
+
+      <div class="row">
+        <div style="flex:1;">
+          <label for="amount" style="margin-top:0;">Amount</label>
+          <input id="amount" type="number" step="0.01" value="1" />
+        </div>
+        <div style="flex:1;">
+          <label for="fromUnit" style="margin-top:0;">From</label>
+          <select id="fromUnit"></select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div style="flex:1;">
+          <label for="toUnit" style="margin-top:0;">To</label>
+          <select id="toUnit"></select>
+        </div>
+        <div style="flex:1; display:flex; align-items:flex-end;">
+          <button id="swapBtn" class="primary" type="button" style="margin-top:0;">Swap units</button>
+        </div>
+      </div>
+
+      <button id="calcBtn" class="primary" type="button">Convert units</button>
+      <div id="result" style="margin-top:20px;"></div>
+    </div>
+
+    <section class="card seo-content" style="margin-top:40px; text-align:left; padding:32px;">
+      <h2>How it works</h2>
+      <p>The converter maps each unit to a standard base unit inside its category, then converts from the source unit to
+        the target unit. Temperature uses direct formulas rather than a single multiplier because Celsius, Fahrenheit,
+        and Kelvin have different zero points.</p>
+      <p><strong>Limitations:</strong> this tool is built for everyday reference use. Specialized scientific,
+        engineering, medical, or trade workflows may require stricter precision, additional units, or standardized
+        rounding rules.</p>
+
+      <h2>Practical use scenarios</h2>
+      <ul>
+        <li>Convert feet to meters or miles to kilometers when traveling.</li>
+        <li>Switch between kilograms and pounds for shipping or health tracking.</li>
+        <li>Translate cooking volumes or temperatures across recipes.</li>
+        <li>Convert area or volume values for property and project planning.</li>
+      </ul>
+
+      <h2>Related tools</h2>
+      <div class="internal-links-cluster" style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:24px;">
+        <a href="/currency" style="color: var(--primary-color); text-decoration: underline;">Currency Converter</a>
+        <a href="/percentage-calculator" style="color: var(--primary-color); text-decoration: underline;">Percentage Calculator</a>
+        <a href="/vat-calculator" style="color: var(--primary-color); text-decoration: underline;">VAT Calculator</a>
+        <a href="/time-code" style="color: var(--primary-color); text-decoration: underline;">Time Code Converter</a>
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq-item" style="margin-bottom:16px;">
+        <strong>Which unit categories are included?</strong>
+        <p>Length, weight, temperature, area, and volume.</p>
+      </div>
+      <div class="faq-item" style="margin-bottom:16px;">
+        <strong>Why is temperature handled differently?</strong>
+        <p>Because temperature scales do not share the same zero point, so conversion needs formulas, not just a simple
+          multiplier.</p>
+      </div>
+      <div class="faq-item" style="margin-bottom:16px;">
+        <strong>Can I use this for engineering specs?</strong>
+        <p>Use it as a quick reference. Validate final numbers against the precision and standards your workflow
+          requires.</p>
+      </div>
+      <div class="faq-item">
+        <strong>Does the page need an account?</strong>
+        <p>No. The conversion happens directly in your browser.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <p class="footer-tagline">&copy; 2026 Toolsified - Independent web tools platform.</p>
+      <div class="footer-links"><a href="/privacy">Privacy Policy</a><span>|</span><a href="/terms">Terms</a><span>|</span><a href="/about">About</a><span>|</span><a href="/contact">Contact</a></div>
+      <p class="footer-contact">Contact: <a href="mailto:info@toolsified.com">info@toolsified.com</a></p>
+      <p class="footer-location">Location: Norway</p>
+    </div>
+  </footer>
+
+  <script>
+    const categories = {
+      length: {
+        label: "Length",
+        units: {
+          mm: { label: "Millimeters", factor: 0.001 },
+          cm: { label: "Centimeters", factor: 0.01 },
+          m: { label: "Meters", factor: 1 },
+          km: { label: "Kilometers", factor: 1000 },
+          in: { label: "Inches", factor: 0.0254 },
+          ft: { label: "Feet", factor: 0.3048 },
+          yd: { label: "Yards", factor: 0.9144 },
+          mi: { label: "Miles", factor: 1609.344 }
+        }
+      },
+      weight: {
+        label: "Weight",
+        units: {
+          mg: { label: "Milligrams", factor: 0.000001 },
+          g: { label: "Grams", factor: 0.001 },
+          kg: { label: "Kilograms", factor: 1 },
+          oz: { label: "Ounces", factor: 0.028349523125 },
+          lb: { label: "Pounds", factor: 0.45359237 }
+        }
+      },
+      temperature: {
+        label: "Temperature",
+        units: {
+          C: { label: "Celsius" },
+          F: { label: "Fahrenheit" },
+          K: { label: "Kelvin" }
+        }
+      },
+      area: {
+        label: "Area",
+        units: {
+          sqm: { label: "Square meters", factor: 1 },
+          sqkm: { label: "Square kilometers", factor: 1000000 },
+          sqft: { label: "Square feet", factor: 0.09290304 },
+          acre: { label: "Acres", factor: 4046.8564224 },
+          hectare: { label: "Hectares", factor: 10000 },
+          sqmi: { label: "Square miles", factor: 2589988.110336 }
+        }
+      },
+      volume: {
+        label: "Volume",
+        units: {
+          ml: { label: "Milliliters", factor: 0.001 },
+          l: { label: "Liters", factor: 1 },
+          m3: { label: "Cubic meters", factor: 1000 },
+          cup: { label: "US cups", factor: 0.2365882365 },
+          pint: { label: "US pints", factor: 0.473176473 },
+          quart: { label: "US quarts", factor: 0.946352946 },
+          gallon: { label: "US gallons", factor: 3.785411784 }
+        }
+      }
+    };
+
+    const categorySelect = document.getElementById("category");
+    const fromUnit = document.getElementById("fromUnit");
+    const toUnit = document.getElementById("toUnit");
+
+    function populateCategories() {
+      categorySelect.innerHTML = Object.entries(categories).map(([key, category]) => (
+        `<option value="${key}">${category.label}</option>`
+      )).join("");
+    }
+
+    function populateUnits() {
+      const category = categories[categorySelect.value];
+      const options = Object.entries(category.units).map(([key, unit]) => (
+        `<option value="${key}">${unit.label}</option>`
+      )).join("");
+      fromUnit.innerHTML = options;
+      toUnit.innerHTML = options;
+
+      const keys = Object.keys(category.units);
+      fromUnit.value = keys[0];
+      toUnit.value = keys[1] || keys[0];
+    }
+
+    function convertTemperature(value, from, to) {
+      let celsius = value;
+      if (from === "F") celsius = (value - 32) * 5 / 9;
+      if (from === "K") celsius = value - 273.15;
+
+      if (to === "C") return celsius;
+      if (to === "F") return celsius * 9 / 5 + 32;
+      return celsius + 273.15;
+    }
+
+    function convertValue(amount, categoryKey, from, to) {
+      if (categoryKey === "temperature") {
+        return convertTemperature(amount, from, to);
+      }
+
+      const category = categories[categoryKey];
+      const baseValue = amount * category.units[from].factor;
+      return baseValue / category.units[to].factor;
+    }
+
+    function formatNumber(value) {
+      return new Intl.NumberFormat("en-US", {
+        maximumFractionDigits: 6
+      }).format(value);
+    }
+
+    function calculate() {
+      const amount = Number(document.getElementById("amount").value);
+      const categoryKey = categorySelect.value;
+      const from = fromUnit.value;
+      const to = toUnit.value;
+
+      if (!Number.isFinite(amount)) {
+        alert("Please enter a valid amount.");
+        return;
+      }
+
+      const result = convertValue(amount, categoryKey, from, to);
+      const oneWay = convertValue(1, categoryKey, from, to);
+      const reverse = convertValue(1, categoryKey, to, from);
+      const category = categories[categoryKey];
+
+      document.getElementById("result").innerHTML = `
+        <div class="card" style="margin:0; box-shadow:none; border:1px solid var(--border-color);">
+          <h3 style="margin-bottom:12px;">Result</h3>
+          <p><strong>${formatNumber(amount)}</strong> ${category.units[from].label} = <strong>${formatNumber(result)}</strong> ${category.units[to].label}</p>
+          <p style="margin-top:8px;">1 ${category.units[from].label} = <strong>${formatNumber(oneWay)}</strong> ${category.units[to].label}</p>
+          <p style="margin-top:8px;">1 ${category.units[to].label} = <strong>${formatNumber(reverse)}</strong> ${category.units[from].label}</p>
+          <p style="margin-top:12px; font-size:0.95rem; color:#555;">Category: ${category.label}</p>
+        </div>
+      `;
+    }
+
+    populateCategories();
+    categorySelect.value = "length";
+    populateUnits();
+    document.getElementById("amount").value = "1";
+    fromUnit.value = "m";
+    toUnit.value = "ft";
+
+    categorySelect.addEventListener("change", () => {
+      populateUnits();
+      calculate();
+    });
+    document.getElementById("swapBtn").addEventListener("click", () => {
+      const current = fromUnit.value;
+      fromUnit.value = toUnit.value;
+      toUnit.value = current;
+      calculate();
+    });
+    document.getElementById("calcBtn").addEventListener("click", calculate);
+    calculate();
+  </script>
+</body>
+
+</html>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Methodology and Data Sources | How Toolsified Calculates Results</title>
-  <meta name="description" content="Understand how Toolsified sources exchange rates, converts time zones, and estimates crypto profit. Data handling, limitations, and assumptions explained." />
+  <meta name="description" content="Understand how Toolsified handles pricing math, date logic, exchange rates, time zones, and crypto estimation. Data handling, limitations, and assumptions explained." />
   <meta name="google-adsense-account" content="ca-pub-6293439009227714">
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="stylesheet" href="/style.css?v=2.3" />
@@ -115,6 +115,26 @@
       </ul>
       <p>This tool is designed for planning and scenario comparison. Treat output as a directional estimate and reconcile with exchange records and professional tax guidance for official purposes.</p>
 
+      <h2>Browser-based math, pricing, and date calculators</h2>
+      <h3>How they work</h3>
+      <p>Percentage, VAT, loan payment, date difference, age, and unit conversion tools use deterministic formulas that run directly in the browser. In these cases, the page uses your entered values together with transparent arithmetic or calendar logic rather than calling an external pricing feed.</p>
+
+      <h3>What that means in practice</h3>
+      <ul>
+        <li>Percentage and VAT outputs are formula-based reference calculations.</li>
+        <li>Loan payment estimates use standard amortization math and optional extra-payment simulation.</li>
+        <li>Date and age tools use browser-side calendar arithmetic with date-only comparisons.</li>
+        <li>Unit conversion uses fixed conversion factors and formula transforms for the selected measurement family.</li>
+      </ul>
+
+      <h3>Limitations</h3>
+      <ul>
+        <li>Tax-related pages are practical estimators, not legal or filing guidance.</li>
+        <li>Loan outputs do not include lender fees, insurance, taxes, or jurisdiction-specific disclosure rules unless explicitly stated.</li>
+        <li>Date-based tools are strong for planning, but contractual deadlines may depend on local legal interpretation, cutoff times, or custom calendars.</li>
+        <li>Unit conversion factors are standardized references and should be validated against domain-specific requirements where rounding tolerance matters.</li>
+      </ul>
+
       <h2>General principles</h2>
       <ul>
         <li><strong>Privacy:</strong> most calculations run client-side in the browser. Serverless functions fetch reference data but do not store user inputs or results.</li>
@@ -125,6 +145,12 @@
 
       <h2>Related pages</h2>
       <div class="internal-links-cluster" style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 24px;">
+        <a href="/percentage-calculator" style="color: var(--primary-color); text-decoration: underline;">Percentage Calculator</a>
+        <a href="/vat-calculator" style="color: var(--primary-color); text-decoration: underline;">VAT Calculator</a>
+        <a href="/loan-payment-calculator" style="color: var(--primary-color); text-decoration: underline;">Loan Payment Calculator</a>
+        <a href="/date-difference-calculator" style="color: var(--primary-color); text-decoration: underline;">Date Difference Calculator</a>
+        <a href="/age-calculator" style="color: var(--primary-color); text-decoration: underline;">Age Calculator</a>
+        <a href="/unit-converter" style="color: var(--primary-color); text-decoration: underline;">Unit Converter</a>
         <a href="/currency" style="color: var(--primary-color); text-decoration: underline;">Currency Converter</a>
         <a href="/crypto" style="color: var(--primary-color); text-decoration: underline;">Crypto Profit Calculator</a>
         <a href="/time-code" style="color: var(--primary-color); text-decoration: underline;">Time Code Converter</a>

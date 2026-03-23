@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-adsense-account" content="ca-pub-6293439009227714" />
+  <title>Percentage Calculator | Percent Of, Percent Change, Increase and Decrease - Toolsified</title>
+  <meta name="description"
+    content="Calculate percent of a number, percentage increase or decrease, percent difference, and add or subtract percentages in one quick browser-based tool." />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="stylesheet" href="/style.css?v=2.3" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="canonical" href="https://toolsified.com/percentage-calculator" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6293439009227714"
+    crossorigin="anonymous"></script>
+  <script defer src="/scripts/nav.js"></script>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo-container"><a href="/"><img src="/logo.png" alt="Toolsified logo" class="logo" /></a></div>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mainNav"
+          aria-label="Toggle navigation">Menu</button>
+        <nav class="main-nav" id="mainNav">
+          <a href="/time-code">Time Code</a><a href="/multi-timezone">Time Zones</a><a href="/currency">Currency</a><a
+            href="/crypto">Crypto</a>
+          <div class="nav-more"><button class="nav-more-toggle" type="button" aria-expanded="false"
+              aria-haspopup="true">More</button>
+            <div class="nav-more-menu"><a href="/business-days">Business Days</a><a href="/meeting-overlap">Meeting
+                Overlap</a><a href="/inflation-calculator">Inflation Calculator</a><a
+                href="/crypto-tax-estimator">Crypto Tax Estimator</a></div>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Percentage Calculator</h1>
+
+    <section class="card seo-content" style="margin-top:24px; text-align:left; padding:32px;">
+      <h2>Intro</h2>
+      <p>This calculator covers the most common percentage questions in one place: percent of a number, what percent one
+        number is of another, percentage increase or decrease, and adding or subtracting a percentage from a starting
+        value. It is useful for discounts, margins, markups, budgeting, classroom math, and quick business checks.</p>
+    </section>
+
+    <div class="card" style="margin-top:24px;">
+      <h2 style="font-size:1.2rem;">1. What is X% of Y?</h2>
+      <div class="row">
+        <div style="flex:1;">
+          <label for="percentRate" style="margin-top:0;">Percent</label>
+          <input id="percentRate" type="number" step="0.01" value="25" />
+        </div>
+        <div style="flex:1;">
+          <label for="percentBase" style="margin-top:0;">Number</label>
+          <input id="percentBase" type="number" step="0.01" value="240" />
+        </div>
+      </div>
+
+      <h2 style="font-size:1.2rem; margin-top:20px;">2. X is what percent of Y?</h2>
+      <div class="row">
+        <div style="flex:1;">
+          <label for="partValue" style="margin-top:0;">Part</label>
+          <input id="partValue" type="number" step="0.01" value="18" />
+        </div>
+        <div style="flex:1;">
+          <label for="wholeValue" style="margin-top:0;">Whole</label>
+          <input id="wholeValue" type="number" step="0.01" value="72" />
+        </div>
+      </div>
+
+      <h2 style="font-size:1.2rem; margin-top:20px;">3. Percentage change</h2>
+      <div class="row">
+        <div style="flex:1;">
+          <label for="fromValue" style="margin-top:0;">From</label>
+          <input id="fromValue" type="number" step="0.01" value="80" />
+        </div>
+        <div style="flex:1;">
+          <label for="toValue" style="margin-top:0;">To</label>
+          <input id="toValue" type="number" step="0.01" value="100" />
+        </div>
+      </div>
+
+      <h2 style="font-size:1.2rem; margin-top:20px;">4. Add or subtract a percentage</h2>
+      <div class="row">
+        <div style="flex:1;">
+          <label for="adjustBase" style="margin-top:0;">Starting value</label>
+          <input id="adjustBase" type="number" step="0.01" value="150" />
+        </div>
+        <div style="flex:1;">
+          <label for="adjustRate" style="margin-top:0;">Percent</label>
+          <input id="adjustRate" type="number" step="0.01" value="12" />
+        </div>
+      </div>
+
+      <button id="calcBtn" class="primary" type="button">Calculate percentages</button>
+      <div id="result" style="margin-top:20px;"></div>
+    </div>
+
+    <section class="card seo-content" style="margin-top:40px; text-align:left; padding:32px;">
+      <h2>How it works</h2>
+      <p>The page uses standard percentage formulas directly in the browser.</p>
+      <ul>
+        <li><code>percent of number = rate / 100 x base</code></li>
+        <li><code>what percent = part / whole x 100</code></li>
+        <li><code>percentage change = (new - old) / old x 100</code></li>
+        <li><code>adjusted value = base x (1 +/- rate / 100)</code></li>
+      </ul>
+      <p><strong>Limitations:</strong> this tool does not decide whether your business context should use margin,
+        markup, percentage-point change, or absolute change. It gives the math; you still need the right commercial or
+        reporting interpretation.</p>
+
+      <h2>Practical use scenarios</h2>
+      <ul>
+        <li>Check discounts and markups during shopping or procurement.</li>
+        <li>Measure salary changes, price increases, or KPI movement.</li>
+        <li>Convert ratios into percentages for reporting or schoolwork.</li>
+        <li>Quickly test what happens when a number goes up or down by a chosen percentage.</li>
+      </ul>
+
+      <h2>Related tools</h2>
+      <div class="internal-links-cluster" style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:24px;">
+        <a href="/vat-calculator" style="color: var(--primary-color); text-decoration: underline;">VAT Calculator</a>
+        <a href="/loan-payment-calculator" style="color: var(--primary-color); text-decoration: underline;">Loan Payment Calculator</a>
+        <a href="/inflation-calculator" style="color: var(--primary-color); text-decoration: underline;">Inflation Calculator</a>
+        <a href="/unit-converter" style="color: var(--primary-color); text-decoration: underline;">Unit Converter</a>
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq-item" style="margin-bottom:16px;">
+        <strong>What is the difference between percentage change and percentage points?</strong>
+        <p>Percentage change compares relative growth or decline, while percentage points describe the direct difference
+          between two percentage values.</p>
+      </div>
+      <div class="faq-item" style="margin-bottom:16px;">
+        <strong>Can I use this for discounts and markups?</strong>
+        <p>Yes. The add/subtract section is useful for rough discount and markup checks.</p>
+      </div>
+      <div class="faq-item" style="margin-bottom:16px;">
+        <strong>Why does percent change fail when the starting value is zero?</strong>
+        <p>Because the formula divides by the starting value, and division by zero is undefined.</p>
+      </div>
+      <div class="faq-item">
+        <strong>Does the tool store my numbers?</strong>
+        <p>No. The calculation runs in your browser.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <p class="footer-tagline">&copy; 2026 Toolsified - Independent web tools platform.</p>
+      <div class="footer-links"><a href="/privacy">Privacy Policy</a><span>|</span><a href="/terms">Terms</a><span>|</span><a href="/about">About</a><span>|</span><a href="/contact">Contact</a></div>
+      <p class="footer-contact">Contact: <a href="mailto:info@toolsified.com">info@toolsified.com</a></p>
+      <p class="footer-location">Location: Norway</p>
+    </div>
+  </footer>
+
+  <script>
+    function formatNumber(value) {
+      return new Intl.NumberFormat("en-US", {
+        maximumFractionDigits: 4
+      }).format(value);
+    }
+
+    function formatPercent(value) {
+      return `${formatNumber(value)}%`;
+    }
+
+    function safeNumber(id) {
+      return Number(document.getElementById(id).value);
+    }
+
+    function calculate() {
+      const percentRate = safeNumber("percentRate");
+      const percentBase = safeNumber("percentBase");
+      const partValue = safeNumber("partValue");
+      const wholeValue = safeNumber("wholeValue");
+      const fromValue = safeNumber("fromValue");
+      const toValue = safeNumber("toValue");
+      const adjustBase = safeNumber("adjustBase");
+      const adjustRate = safeNumber("adjustRate");
+
+      const percentOf = (percentRate / 100) * percentBase;
+      const whatPercent = wholeValue === 0 ? null : (partValue / wholeValue) * 100;
+      const percentChange = fromValue === 0 ? null : ((toValue - fromValue) / fromValue) * 100;
+      const increaseValue = adjustBase * (1 + adjustRate / 100);
+      const decreaseValue = adjustBase * (1 - adjustRate / 100);
+
+      document.getElementById("result").innerHTML = `
+        <div class="card" style="margin:0; box-shadow:none; border:1px solid var(--border-color);">
+          <h3 style="margin-bottom:12px;">Results</h3>
+          <p><strong>${formatPercent(percentRate)}</strong> of <strong>${formatNumber(percentBase)}</strong> is <strong>${formatNumber(percentOf)}</strong>.</p>
+          <p style="margin-top:8px;"><strong>${formatNumber(partValue)}</strong> is ${whatPercent === null ? "<strong>undefined</strong> because the whole value is zero." : `<strong>${formatPercent(whatPercent)}</strong> of ${formatNumber(wholeValue)}.`}</p>
+          <p style="margin-top:8px;">Change from <strong>${formatNumber(fromValue)}</strong> to <strong>${formatNumber(toValue)}</strong> is ${percentChange === null ? "<strong>undefined</strong> because the starting value is zero." : `<strong>${formatPercent(percentChange)}</strong>.`}</p>
+          <p style="margin-top:8px;">Add <strong>${formatPercent(adjustRate)}</strong> to <strong>${formatNumber(adjustBase)}</strong>: <strong>${formatNumber(increaseValue)}</strong>.</p>
+          <p style="margin-top:8px;">Subtract <strong>${formatPercent(adjustRate)}</strong> from <strong>${formatNumber(adjustBase)}</strong>: <strong>${formatNumber(decreaseValue)}</strong>.</p>
+        </div>
+      `;
+    }
+
+    document.getElementById("calcBtn").addEventListener("click", calculate);
+    calculate();
+  </script>
+</body>
+
+</html>

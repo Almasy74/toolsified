@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-adsense-account" content="ca-pub-6293439009227714" />
+  <title>Date Difference Calculator | Days Between Dates, Weeks and Calendar Difference - Toolsified</title>
+  <meta name="description"
+    content="Calculate the number of days between dates, inclusive span, weekdays, weekends, and exact calendar difference in years, months, and days." />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="stylesheet" href="/style.css?v=2.3" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="canonical" href="https://toolsified.com/date-difference-calculator" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6293439009227714"
+    crossorigin="anonymous"></script>
+  <script defer src="/scripts/nav.js"></script>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo-container"><a href="/"><img src="/logo.png" alt="Toolsified logo" class="logo" /></a></div>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mainNav"
+          aria-label="Toggle navigation">Menu</button>
+        <nav class="main-nav" id="mainNav">
+          <a href="/time-code">Time Code</a><a href="/multi-timezone">Time Zones</a><a href="/currency">Currency</a><a
+            href="/crypto">Crypto</a>
+          <div class="nav-more"><button class="nav-more-toggle" type="button" aria-expanded="false"
+              aria-haspopup="true">More</button>
+            <div class="nav-more-menu"><a href="/business-days">Business Days</a><a href="/meeting-overlap">Meeting
+                Overlap</a><a href="/inflation-calculator">Inflation Calculator</a><a
+                href="/crypto-tax-estimator">Crypto Tax Estimator</a></div>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Date Difference Calculator</h1>
+
+    <section class="card seo-content" style="margin-top:24px; text-align:left; padding:32px;">
+      <h2>Intro</h2>
+      <p>This calculator shows the total days between two dates, the inclusive date span, weekday and weekend counts,
+        and an exact calendar difference in years, months, and days. It is useful for planning deadlines, tracking
+        project durations, checking age-like intervals, and comparing date ranges without business-day filters.</p>
+    </section>
+
+    <div class="card" style="margin-top:24px;">
+      <div class="row">
+        <div style="flex:1;">
+          <label for="startDate" style="margin-top:0;">Start date</label>
+          <input id="startDate" type="date" />
+        </div>
+        <div style="flex:1;">
+          <label for="endDate" style="margin-top:0;">End date</label>
+          <input id="endDate" type="date" />
+        </div>
+      </div>
+
+      <button id="calcBtn" class="primary" type="button">Calculate date difference</button>
+      <div id="result" style="margin-top:20px;"></div>
+    </div>
+
+    <section class="card seo-content" style="margin-top:40px; text-align:left; padding:32px;">
+      <h2>How it works</h2>
+      <p>The page converts both dates into UTC date-only values, then measures the calendar span in two ways:</p>
+      <ul>
+        <li>absolute day difference using date arithmetic</li>
+        <li>exact calendar difference using stepwise year and month matching</li>
+      </ul>
+      <p><strong>Limitations:</strong> this page measures calendar dates only. It does not include time-of-day, business
+        calendars, public holidays, or legal deadline rules that may depend on local cutoff times.</p>
+
+      <h2>Practical use scenarios</h2>
+      <ul>
+        <li>Count days between project milestones or travel dates.</li>
+        <li>Check how long a contract, course, or event period lasts.</li>
+        <li>Compare total days with exact calendar components.</li>
+        <li>Use it as a general "days between dates" tool before switching to business-day logic.</li>
+      </ul>
+
+      <h2>Related tools</h2>
+      <div class="internal-links-cluster" style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:24px;">
+        <a href="/business-days" style="color: var(--primary-color); text-decoration: underline;">Business Days Calculator</a>
+        <a href="/age-calculator" style="color: var(--primary-color); text-decoration: underline;">Age Calculator</a>
+        <a href="/meeting-overlap" style="color: var(--primary-color); text-decoration: underline;">Meeting Overlap Finder</a>
+        <a href="/multi-timezone" style="color: var(--primary-color); text-decoration: underline;">Multi Time Zone</a>
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq-item" style="margin-bottom:16px;">
+        <strong>What is the difference between total days and inclusive days?</strong>
+        <p>Total days measures the gap between the two dates. Inclusive days counts both the start date and the end
+          date as part of the span.</p>
+      </div>
+      <div class="faq-item" style="margin-bottom:16px;">
+        <strong>How is this different from the business days calculator?</strong>
+        <p>This page measures all calendar days. The business days calculator excludes weekends and optional holiday
+          calendars.</p>
+      </div>
+      <div class="faq-item" style="margin-bottom:16px;">
+        <strong>Does it include leap years?</strong>
+        <p>Yes. Leap years are handled naturally by date arithmetic.</p>
+      </div>
+      <div class="faq-item">
+        <strong>Can I use it for legal deadlines?</strong>
+        <p>Use it for planning only. Formal deadlines may follow jurisdiction-specific rules.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <p class="footer-tagline">&copy; 2026 Toolsified - Independent web tools platform.</p>
+      <div class="footer-links"><a href="/privacy">Privacy Policy</a><span>|</span><a href="/terms">Terms</a><span>|</span><a href="/about">About</a><span>|</span><a href="/contact">Contact</a></div>
+      <p class="footer-contact">Contact: <a href="mailto:info@toolsified.com">info@toolsified.com</a></p>
+      <p class="footer-location">Location: Norway</p>
+    </div>
+  </footer>
+
+  <script>
+    const DAY_MS = 24 * 60 * 60 * 1000;
+
+    function parseDate(iso) {
+      const [year, month, day] = iso.split("-").map(Number);
+      return new Date(Date.UTC(year, month - 1, day));
+    }
+
+    function formatDate(date) {
+      return date.toISOString().slice(0, 10);
+    }
+
+    function addDays(date, days) {
+      const next = new Date(date);
+      next.setUTCDate(next.getUTCDate() + days);
+      return next;
+    }
+
+    function addMonthsClamped(date, months) {
+      const year = date.getUTCFullYear();
+      const month = date.getUTCMonth();
+      const day = date.getUTCDate();
+      const target = new Date(Date.UTC(year, month + months, 1));
+      const lastDay = new Date(Date.UTC(target.getUTCFullYear(), target.getUTCMonth() + 1, 0)).getUTCDate();
+      target.setUTCDate(Math.min(day, lastDay));
+      return target;
+    }
+
+    function addYearsClamped(date, years) {
+      return addMonthsClamped(date, years * 12);
+    }
+
+    function exactCalendarDifference(start, end) {
+      let current = new Date(start);
+      let years = 0;
+      let months = 0;
+
+      while (addYearsClamped(current, 1) <= end) {
+        current = addYearsClamped(current, 1);
+        years += 1;
+      }
+
+      while (addMonthsClamped(current, 1) <= end) {
+        current = addMonthsClamped(current, 1);
+        months += 1;
+      }
+
+      const days = Math.round((end - current) / DAY_MS);
+      return { years, months, days };
+    }
+
+    function todayIsoLocal() {
+      const current = new Date();
+      current.setMinutes(current.getMinutes() - current.getTimezoneOffset());
+      return current.toISOString().slice(0, 10);
+    }
+
+    function calculate() {
+      const startIso = document.getElementById("startDate").value;
+      const endIso = document.getElementById("endDate").value;
+
+      if (!startIso || !endIso) {
+        alert("Please choose both dates.");
+        return;
+      }
+
+      let start = parseDate(startIso);
+      let end = parseDate(endIso);
+      let swapped = false;
+
+      if (start > end) {
+        const temp = start;
+        start = end;
+        end = temp;
+        swapped = true;
+      }
+
+      const totalDays = Math.round((end - start) / DAY_MS);
+      const inclusiveDays = totalDays + 1;
+      let weekdays = 0;
+      let weekends = 0;
+
+      for (let cursor = new Date(start); cursor <= end; cursor = addDays(cursor, 1)) {
+        const day = cursor.getUTCDay();
+        if (day === 0 || day === 6) {
+          weekends += 1;
+        } else {
+          weekdays += 1;
+        }
+      }
+
+      const exact = exactCalendarDifference(start, end);
+      const weekRemainder = totalDays % 7;
+
+      document.getElementById("result").innerHTML = `
+        <div class="card" style="margin:0; box-shadow:none; border:1px solid var(--border-color);">
+          <h3 style="margin-bottom:12px;">Result</h3>
+          <p>Date range: <strong>${formatDate(start)}</strong> to <strong>${formatDate(end)}</strong>${swapped ? " (reordered automatically)" : ""}</p>
+          <p style="margin-top:8px;">Total days between dates: <strong>${totalDays}</strong></p>
+          <p style="margin-top:8px;">Inclusive calendar days: <strong>${inclusiveDays}</strong></p>
+          <p style="margin-top:8px;">Equivalent weeks and days: <strong>${Math.floor(totalDays / 7)} week(s) and ${weekRemainder} day(s)</strong></p>
+          <p style="margin-top:8px;">Exact calendar difference: <strong>${exact.years} year(s), ${exact.months} month(s), ${exact.days} day(s)</strong></p>
+          <p style="margin-top:8px;">Weekdays in inclusive span: <strong>${weekdays}</strong></p>
+          <p style="margin-top:8px;">Weekend days in inclusive span: <strong>${weekends}</strong></p>
+        </div>
+      `;
+    }
+
+    const today = parseDate(todayIsoLocal());
+    document.getElementById("startDate").value = formatDate(today);
+    document.getElementById("endDate").value = formatDate(addDays(today, 30));
+    document.getElementById("calcBtn").addEventListener("click", calculate);
+    calculate();
+  </script>
+</body>
+
+</html>

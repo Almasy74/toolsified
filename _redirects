@@ -5,6 +5,12 @@
 /multi-timezone.html /multi-timezone       301!
 /crypto.html         /crypto               301!
 /business-days.html      /business-days            301!
+/percentage-calculator.html /percentage-calculator 301!
+/vat-calculator.html     /vat-calculator           301!
+/loan-payment-calculator.html /loan-payment-calculator 301!
+/date-difference-calculator.html /date-difference-calculator 301!
+/age-calculator.html     /age-calculator           301!
+/unit-converter.html     /unit-converter           301!
 /meeting-overlap.html    /meeting-overlap          301!
 /inflation-calculator.html /inflation-calculator    301!
 /crypto-tax-estimator.html /crypto-tax-estimator    301!
@@ -21,6 +27,12 @@
 /multi-timezone      /multi-timezone.html  200
 /crypto              /crypto.html          200
 /business-days       /business-days.html       200
+/percentage-calculator /percentage-calculator.html 200
+/vat-calculator      /vat-calculator.html      200
+/loan-payment-calculator /loan-payment-calculator.html 200
+/date-difference-calculator /date-difference-calculator.html 200
+/age-calculator      /age-calculator.html      200
+/unit-converter      /unit-converter.html      200
 /meeting-overlap     /meeting-overlap.html     200
 /inflation-calculator  /inflation-calculator.html 200
 /crypto-tax-estimator  /crypto-tax-estimator.html 200

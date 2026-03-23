@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-adsense-account" content="ca-pub-6293439009227714" />
+  <title>Age Calculator | Exact Age by Date of Birth - Toolsified</title>
+  <meta name="description"
+    content="Calculate exact age by date of birth, including years, months, days, total weeks, total days, and time until next birthday." />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="stylesheet" href="/style.css?v=2.3" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="canonical" href="https://toolsified.com/age-calculator" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6293439009227714"
+    crossorigin="anonymous"></script>
+  <script defer src="/scripts/nav.js"></script>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo-container"><a href="/"><img src="/logo.png" alt="Toolsified logo" class="logo" /></a></div>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mainNav"
+          aria-label="Toggle navigation">Menu</button>
+        <nav class="main-nav" id="mainNav">
+          <a href="/time-code">Time Code</a><a href="/multi-timezone">Time Zones</a><a href="/currency">Currency</a><a
+            href="/crypto">Crypto</a>
+          <div class="nav-more"><button class="nav-more-toggle" type="button" aria-expanded="false"
+              aria-haspopup="true">More</button>
+            <div class="nav-more-menu"><a href="/business-days">Business Days</a><a href="/meeting-overlap">Meeting
+                Overlap</a><a href="/inflation-calculator">Inflation Calculator</a><a
+                href="/crypto-tax-estimator">Crypto Tax Estimator</a></div>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Age Calculator</h1>
+
+    <section class="card seo-content" style="margin-top:24px; text-align:left; padding:32px;">
+      <h2>Intro</h2>
+      <p>This calculator shows exact age from a birth date to a chosen "as of" date. It returns years, months, days,
+        total months, total weeks, total days, and the timing of the next birthday. It is useful for forms, planning,
+        eligibility checks, and quick personal reference.</p>
+    </section>
+
+    <div class="card" style="margin-top:24px;">
+      <div class="row">
+        <div style="flex:1;">
+          <label for="birthDate" style="margin-top:0;">Date of birth</label>
+          <input id="birthDate" type="date" />
+        </div>
+        <div style="flex:1;">
+          <label for="asOfDate" style="margin-top:0;">As of date</label>
+          <input id="asOfDate" type="date" />
+        </div>
+      </div>
+
+      <button id="calcBtn" class="primary" type="button">Calculate age</button>
+      <div id="result" style="margin-top:20px;"></div>
+    </div>
+
+    <section class="card seo-content" style="margin-top:40px; text-align:left; padding:32px;">
+      <h2>How it works</h2>
+      <p>The calculator compares the birth date and reference date using calendar-aware year and month steps, then adds
+        remaining days. This produces a precise date-based age rather than a rounded year estimate.</p>
+      <p><strong>Limitations:</strong> this is a date-only tool. It does not use time of birth, time zones, or legal
+        definitions that may vary in formal eligibility settings.</p>
+
+      <h2>Practical use scenarios</h2>
+      <ul>
+        <li>Check exact age for forms, school, or sports registration.</li>
+        <li>See how many days or weeks have passed since birth.</li>
+        <li>Find the next birthday and how long remains.</li>
+        <li>Measure age on a historical or future date.</li>
+      </ul>
+
+      <h2>Related tools</h2>
+      <div class="internal-links-cluster" style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:24px;">
+        <a href="/date-difference-calculator" style="color: var(--primary-color); text-decoration: underline;">Date Difference Calculator</a>
+        <a href="/business-days" style="color: var(--primary-color); text-decoration: underline;">Business Days Calculator</a>
+        <a href="/multi-timezone" style="color: var(--primary-color); text-decoration: underline;">Multi Time Zone</a>
+        <a href="/time-code" style="color: var(--primary-color); text-decoration: underline;">Time Code Converter</a>
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq-item" style="margin-bottom:16px;">
+        <strong>Does this account for leap years?</strong>
+        <p>Yes. Leap years are handled naturally through date arithmetic.</p>
+      </div>
+      <div class="faq-item" style="margin-bottom:16px;">
+        <strong>Can I calculate age on a future date?</strong>
+        <p>Yes. The reference date can be today, a past date, or a future date.</p>
+      </div>
+      <div class="faq-item" style="margin-bottom:16px;">
+        <strong>What if the birthday is February 29?</strong>
+        <p>The calculator keeps the birth date intact and handles non-leap years through clamped calendar logic.</p>
+      </div>
+      <div class="faq-item">
+        <strong>Is this suitable for legal age checks?</strong>
+        <p>Use it as a reference. Formal eligibility rules may depend on local law and specific cutoff wording.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <p class="footer-tagline">&copy; 2026 Toolsified - Independent web tools platform.</p>
+      <div class="footer-links"><a href="/privacy">Privacy Policy</a><span>|</span><a href="/terms">Terms</a><span>|</span><a href="/about">About</a><span>|</span><a href="/contact">Contact</a></div>
+      <p class="footer-contact">Contact: <a href="mailto:info@toolsified.com">info@toolsified.com</a></p>
+      <p class="footer-location">Location: Norway</p>
+    </div>
+  </footer>
+
+  <script>
+    const DAY_MS = 24 * 60 * 60 * 1000;
+
+    function parseDate(iso) {
+      const [year, month, day] = iso.split("-").map(Number);
+      return new Date(Date.UTC(year, month - 1, day));
+    }
+
+    function formatDate(date) {
+      return date.toISOString().slice(0, 10);
+    }
+
+    function addMonthsClamped(date, months) {
+      const year = date.getUTCFullYear();
+      const month = date.getUTCMonth();
+      const day = date.getUTCDate();
+      const target = new Date(Date.UTC(year, month + months, 1));
+      const lastDay = new Date(Date.UTC(target.getUTCFullYear(), target.getUTCMonth() + 1, 0)).getUTCDate();
+      target.setUTCDate(Math.min(day, lastDay));
+      return target;
+    }
+
+    function addYearsClamped(date, years) {
+      return addMonthsClamped(date, years * 12);
+    }
+
+    function exactCalendarDifference(start, end) {
+      let current = new Date(start);
+      let years = 0;
+      let months = 0;
+
+      while (addYearsClamped(current, 1) <= end) {
+        current = addYearsClamped(current, 1);
+        years += 1;
+      }
+
+      while (addMonthsClamped(current, 1) <= end) {
+        current = addMonthsClamped(current, 1);
+        months += 1;
+      }
+
+      const days = Math.round((end - current) / DAY_MS);
+      return { years, months, days };
+    }
+
+    function nextBirthdayDate(birthDate, asOfDate) {
+      const currentYearBirthday = addYearsClamped(birthDate, asOfDate.getUTCFullYear() - birthDate.getUTCFullYear());
+      if (currentYearBirthday >= asOfDate) {
+        return currentYearBirthday;
+      }
+      return addYearsClamped(currentYearBirthday, 1);
+    }
+
+    function todayIsoLocal() {
+      const current = new Date();
+      current.setMinutes(current.getMinutes() - current.getTimezoneOffset());
+      return current.toISOString().slice(0, 10);
+    }
+
+    function calculate() {
+      const birthIso = document.getElementById("birthDate").value;
+      const asOfIso = document.getElementById("asOfDate").value;
+
+      if (!birthIso || !asOfIso) {
+        alert("Please choose both dates.");
+        return;
+      }
+
+      const birthDate = parseDate(birthIso);
+      const asOfDate = parseDate(asOfIso);
+
+      if (birthDate > asOfDate) {
+        alert("Date of birth must be on or before the reference date.");
+        return;
+      }
+
+      const exact = exactCalendarDifference(birthDate, asOfDate);
+      const totalDays = Math.round((asOfDate - birthDate) / DAY_MS);
+      const totalWeeks = (totalDays / 7).toFixed(2);
+      const completedMonths = exact.years * 12 + exact.months;
+      const birthday = nextBirthdayDate(birthDate, asOfDate);
+      const daysUntilBirthday = Math.round((birthday - asOfDate) / DAY_MS);
+      const birthWeekday = birthDate.toLocaleDateString("en-US", { weekday: "long", timeZone: "UTC" });
+
+      document.getElementById("result").innerHTML = `
+        <div class="card" style="margin:0; box-shadow:none; border:1px solid var(--border-color);">
+          <h3 style="margin-bottom:12px;">Result</h3>
+          <p>Exact age: <strong>${exact.years} year(s), ${exact.months} month(s), ${exact.days} day(s)</strong></p>
+          <p style="margin-top:8px;">Completed calendar months: <strong>${completedMonths}</strong></p>
+          <p style="margin-top:8px;">Total weeks: <strong>${totalWeeks}</strong></p>
+          <p style="margin-top:8px;">Total days: <strong>${totalDays}</strong></p>
+          <p style="margin-top:8px;">Born on: <strong>${birthWeekday}</strong></p>
+          <p style="margin-top:8px;">Next birthday: <strong>${formatDate(birthday)}</strong></p>
+          <p style="margin-top:8px;">Days until next birthday: <strong>${daysUntilBirthday}</strong></p>
+        </div>
+      `;
+    }
+
+    const today = todayIsoLocal();
+    document.getElementById("birthDate").value = "1990-01-01";
+    document.getElementById("asOfDate").value = today;
+    document.getElementById("calcBtn").addEventListener("click", calculate);
+    calculate();
+  </script>
+</body>
+
+</html>
