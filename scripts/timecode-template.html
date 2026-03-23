@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Convert [FORMAT] to Local Time | [NAME] Time Code Translator ([YEAR])</title>
+    <title>Convert [FORMAT] to Local Time – [NAME] Time Code Translator | Toolsified</title>
     <meta name="description"
-        content="Translate [NAME] ([FORMAT]) expressions to local time with natural-language parsing, timezone-aware logic, and practical scheduling examples." />
+        content="Translate [NAME] ([FORMAT]) time expressions to your local time with natural-language parsing and DST-aware conversion. Free, no login required." />
     <meta name="google-adsense-account" content="ca-pub-6293439009227714">
     <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="stylesheet" href="/style.css?v=2.3" />
@@ -17,6 +17,24 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6293439009227714"
         crossorigin="anonymous"></script>
     <link rel="canonical" href="https://toolsified.com/time-code/convert-[VAR]-to-local-time" />
+    <meta property="og:title" content="Convert [FORMAT] to Local Time – [NAME] Translator" />
+    <meta property="og:description" content="Translate [NAME] ([FORMAT]) time expressions to your local time with DST-aware parsing." />
+    <meta property="og:url" content="https://toolsified.com/time-code/convert-[VAR]-to-local-time" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Toolsified" />
+    <meta name="twitter:card" content="summary" />
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolsified.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Time Code", "item": "https://toolsified.com/time-code" },
+            { "@type": "ListItem", "position": 3, "name": "[FORMAT] to Local Time", "item": "https://toolsified.com/time-code/convert-[VAR]-to-local-time" }
+        ]
+    }
+    </script>
+    <script type="application/ld+json">[FAQ_SCHEMA]</script>
     <script defer src="/scripts/nav.js"></script>
 </head>
 
@@ -48,12 +66,16 @@
     </header>
 
     <main class="container">
+        <nav aria-label="Breadcrumb" style="font-size: 0.85rem; margin-bottom: 8px; color: #666;">
+            <a href="/" style="color: var(--primary-color);">Home</a> &rsaquo;
+            <a href="/time-code" style="color: var(--primary-color);">Time Code</a> &rsaquo;
+            <span>[FORMAT] to Local</span>
+        </nav>
         <h1 id="page-title">[NAME] ([FORMAT]) to Local Time Converter</h1>
 
         <section class="card seo-content" style="margin-top:24px; text-align:left; padding:32px;">
             <h2>What this translator does</h2>
-            <p>This page translates time expressions that include <strong>[FORMAT]</strong> into your local timezone and any additional zones you select. It is designed for people who receive meeting invites in abbreviations, remote teams working across continents, customer support operations, and event hosts publishing start times to international audiences. Instead of manually calculating offsets, you can paste a phrase like "2pm [FORMAT]" and instantly see equivalent local output.</p>
-            <p>The parser supports practical language patterns such as clock time, optional minutes, am/pm notation, and relative words like "tomorrow" or "next Monday". That makes it useful when invite text is informal and not already calendar-formatted. You can also add multiple target zones and copy formatted output strings for chat, email, or runbooks. The goal is to reduce scheduling mistakes caused by ambiguous abbreviations and daylight saving shifts. This is especially useful during DST change periods, when a static offset assumption can be wrong for part of the year.</p>
+            [FORMAT_INTRO_HTML]
         </section>
 
         <div class="card" style="margin-top:24px;">
@@ -83,26 +105,32 @@
 
         <section class="card seo-content" style="margin-top: 40px; text-align: left; padding: 32px;">
             <h2>How it works</h2>
-            <p>The converter detects the timezone abbreviation in your text, parses the time component, resolves optional relative date words, then creates a timezone-aware datetime using Luxon. It maps common abbreviations (such as [FORMAT], GMT, UTC, or EDT/PDT variants where supported) to IANA zones and renders output in each selected target zone.</p>
+            <p>The converter detects the timezone abbreviation in your text, parses the time component, resolves optional relative date words, then creates a timezone-aware datetime using Luxon. It maps common abbreviations [FORMAT_MAPPING_COPY] to IANA zones and renders output in each selected target zone.</p>
             <p><strong>Logic:</strong> parse expression -> map abbreviation to source zone -> resolve date/time context -> transform into selected zones -> render local, ISO, and UTC offset output.</p>
             <p><strong>Limitations:</strong> ambiguous abbreviations can map to multiple regions globally. This page uses a fixed mapping table for consistent behavior, so always verify critical schedules in your calendar platform.</p>
+            <p><strong>[FORMAT] note:</strong> [FORMAT_AMBIGUITY_NOTE]</p>
+
+            <h2>Best input examples</h2>
+            <ul>[FORMAT_EXAMPLES]</ul>
 
             <h2>Practical use scenarios</h2>
             <ul>[PAIR_SCENARIOS]</ul>
 
-            <h2>Format-specific planning notes</h2>
+            <h2>[FORMAT_NOTES_HEADING]</h2>
             <ul>
                 [PAIR_NOTES]
             </ul>
 
             <h2>Related tools</h2>
             <div class="internal-links-cluster" style="margin-bottom: 24px;">
-                [RELATED_CLUSTER]
+                [TIMECODE_RELATED_LINKS]
+                <p><a href="/methodology" style="color: var(--primary-color); text-decoration: underline;">Methodology and data sources</a></p>
                 <p><a href="/time-code" style="color: var(--primary-color); text-decoration: underline;">Back to Time-code Hub</a></p>
             </div>
 
             <h2>FAQ</h2>
             [PAIR_FAQ]
+            <p style="font-size: 0.8rem; color: #888; margin-top: 24px;">Page last built: [BUILD_DATE].</p>
         </section>
     </main>
 

@@ -5,9 +5,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="google-adsense-account" content="ca-pub-6293439009227714">
-    <title>[FROM_NAME] to [TO_NAME] Exchange Rate Converter | [FROM_TICKER]/[TO_TICKER] Live Rate ([YEAR])</title>
+    <title>[PAGE_TITLE]</title>
     <meta name="description"
-        content="Convert [FROM_NAME] ([FROM_TICKER]) to [TO_NAME] ([TO_TICKER]) with live exchange rates, practical examples, and clear conversion methodology." />
+        content="[PAGE_META_DESCRIPTION]" />
     <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="stylesheet" href="/style.css?v=2.3" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -16,6 +16,26 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6293439009227714"
         crossorigin="anonymous"></script>
     <link rel="canonical" href="https://toolsified.com/currency/[FROM_VAR]-to-[TO_VAR]" />
+    <meta property="og:title" content="[PAGE_OG_TITLE]" />
+    <meta property="og:description" content="[PAGE_OG_DESCRIPTION]" />
+    <meta property="og:url" content="https://toolsified.com/currency/[FROM_VAR]-to-[TO_VAR]" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Toolsified" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="[PAGE_TWITTER_TITLE]" />
+    <meta name="twitter:description" content="[PAGE_TWITTER_DESCRIPTION]" />
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolsified.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Currency Converter", "item": "https://toolsified.com/currency" },
+            { "@type": "ListItem", "position": 3, "name": "[FROM_TICKER] to [TO_TICKER]", "item": "https://toolsified.com/currency/[FROM_VAR]-to-[TO_VAR]" }
+        ]
+    }
+    </script>
+    <script type="application/ld+json">[FAQ_SCHEMA]</script>
     <script defer src="/scripts/nav.js"></script>
 </head>
 
@@ -47,14 +67,17 @@
     </header>
 
     <main class="container">
-        <h1 id="page-title">[FROM_NAME] to [TO_NAME] Converter ([FROM_TICKER] to [TO_TICKER])</h1>
+        <nav aria-label="Breadcrumb" style="font-size: 0.85rem; margin-bottom: 8px; color: #666;">
+            <a href="/" style="color: var(--primary-color);">Home</a> &rsaquo;
+            <a href="/currency" style="color: var(--primary-color);">Currency</a> &rsaquo;
+            <span>[FROM_TICKER] to [TO_TICKER]</span>
+        </nav>
+
+        <h1 id="page-title">[FROM_NAME] to [TO_NAME] Converter ([FROM_TICKER]/[TO_TICKER])</h1>
 
         <section class="card seo-content" style="margin-top:24px; text-align:left; padding:32px;">
             <h2>What this converter does</h2>
-            <p>This page converts <strong>[FROM_NAME] ([FROM_TICKER])</strong> to <strong>[TO_NAME] ([TO_TICKER])</strong> using a live exchange-rate lookup and instant client-side math. It is built for travelers planning trip budgets, freelancers invoicing clients in a different currency, ecommerce buyers checking checkout totals, and finance teams that need quick directional pricing before settlement. A typical example is comparing whether 2,500 [FROM_TICKER] salary value, invoice value, or card spend is reasonable in [TO_TICKER] terms before you send a payment or accept a quote.</p>
-            <p>The calculator is intentionally simple: enter an amount, choose source and target currencies, and get a result immediately. You can also swap directions with one click. For quick planning, this page includes reference values for common amounts so you can estimate without manual repetition. For exact decisions, always run the exact amount through the calculator because card networks, banks, and remittance platforms can apply spread or fees on top of the market rate. If you need to compare alternatives, use the Related tools section below to jump to nearby currency pairs without going back to the hub.</p>
-            <p>[PAIR_CONTEXT_A]</p>
-            <p>[PAIR_CONTEXT_B]</p>
+            [WHAT_THIS_TOOL_DOES_HTML]
         </section>
 
         <div class="card" id="applet-container" style="margin-top:24px;">
@@ -77,27 +100,34 @@
         </div>
 
         <section class="card seo-content" style="margin-top:40px; text-align:left; padding:32px;">
-            <h2>How it works</h2>
-            <p>The conversion logic is straightforward: <code>converted amount = input amount x exchange rate</code>. When you press Convert, the page requests a current market rate through <code>/.netlify/functions/convert</code>, then multiplies the returned rate by your amount in the browser. No account is required, and the arithmetic runs client-side after the rate is returned.</p>
-            <p><strong>Data source and timing:</strong> this tool depends on an external exchange-rate feed accessed via the serverless endpoint. The displayed "last updated" timestamp reflects the provider response for the queried pair.</p>
-            <p><strong>Limitations:</strong> this is a reference converter, not a settlement engine. Real transaction totals can differ because of provider markups, card network rates, local taxes, transfer fees, weekends, and delayed booking windows. For accounting, treasury, and compliance use, confirm with your payment provider or bank statement.</p>
+            [COMMON_AMOUNTS]
 
-            <h2>Practical use scenarios</h2>
+            <h2>How it works</h2>
+            <p>The conversion formula is <code>converted amount = input amount &times; exchange rate</code>. When you press Convert, the page requests a current market rate through a serverless endpoint, then multiplies the returned rate by your amount in the browser. No account is required.</p>
+            <p><strong>Data source:</strong> exchange rates are sourced from an external feed via <code>/.netlify/functions/convert</code>. The displayed timestamp reflects the provider response for the queried pair.</p>
+            <p><strong>Reference rate vs. bank rate:</strong> the rate shown here is a mid-market reference. When you actually exchange money, your bank, card network, or transfer provider applies their own rate, which includes spread and possibly fees. The difference can be 0.5% to 3% or more depending on channel, amount, and timing. Always compare execution options for large transfers.</p>
+            <p><strong>Limitations:</strong> this is a reference converter, not a settlement engine. Real transaction totals differ due to provider markups, card network rates, local taxes, transfer fees, and delayed booking windows. For accounting or compliance use, confirm with your payment provider or bank statement.</p>
+
+            <h2>[PAIR_SCENARIOS_HEADING]</h2>
             <ul>[PAIR_SCENARIOS]</ul>
 
-            <h2>Pair-specific planning notes</h2>
+            <h2>[PAIR_NOTES_HEADING]</h2>
             <ul>
                 [PAIR_NOTES]
             </ul>
 
             <h2>Related tools</h2>
             <div class="internal-links-cluster" style="margin-bottom: 24px;">
+                [REVERSE_PAIR_LINK]
                 [RELATED_CLUSTER]
                 <p><a href="/currency" style="color: var(--primary-color); text-decoration: underline;">Back to Currency Converter Hub</a></p>
+                <p><a href="/methodology" style="color: var(--primary-color); text-decoration: underline;">Methodology and data sources</a></p>
             </div>
 
             <h2>FAQ</h2>
             [PAIR_FAQ]
+
+            <p style="font-size: 0.8rem; color: #888; margin-top: 24px;">Page last built: [BUILD_DATE]. Exchange rates update on each conversion request.</p>
         </section>
     </main>
 
@@ -125,7 +155,6 @@
             const opt1 = document.createElement('option');
             opt1.value = opt1.textContent = cur;
             fromSelect.appendChild(opt1);
-
             const opt2 = document.createElement('option');
             opt2.value = opt2.textContent = cur;
             toSelect.appendChild(opt2);
@@ -144,14 +173,10 @@
             const amount = parseFloat(document.getElementById('amount').value);
             const from = fromSelect.value;
             const to = toSelect.value;
-
             const resultEl = document.getElementById('result');
             const lastUpdatedEl = document.getElementById('lastUpdated');
 
-            if (!amount || amount <= 0) {
-                alert("Please enter a valid amount");
-                return;
-            }
+            if (!amount || amount <= 0) { alert("Please enter a valid amount"); return; }
 
             resultEl.classList.add('skeleton-loader');
             resultEl.textContent = "Loading calculation...";
@@ -164,12 +189,29 @@
                 resultEl.classList.remove('skeleton-loader');
                 resultEl.textContent = `${amount} ${from} = ${converted} ${to}`;
                 lastUpdatedEl.textContent = `Exchange rate last updated: ${date}`;
+                populateCommonAmounts(res.data.result / amount);
             } catch (err) {
                 resultEl.classList.remove('skeleton-loader');
                 resultEl.textContent = "Could not retrieve exchange rate. Please try again later.";
                 lastUpdatedEl.textContent = "";
             }
         };
+
+        function populateCommonAmounts(rate) {
+            document.querySelectorAll('.ca-val').forEach(el => {
+                const amt = parseFloat(el.dataset.amt);
+                if (rate && amt) {
+                    el.textContent = (amt * rate).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' ' + el.dataset.to;
+                }
+            });
+        }
+
+        (async function autoLoadRate() {
+            try {
+                const res = await axios.get(`/.netlify/functions/convert?from=[FROM_TICKER]&to=[TO_TICKER]&amount=1`);
+                if (res.data.result) populateCommonAmounts(res.data.result);
+            } catch (e) {}
+        })();
     </script>
 </body>
 

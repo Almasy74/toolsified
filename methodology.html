@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Methodology and Data Sources | How Toolsified Calculates Results</title>
+  <meta name="description" content="Understand how Toolsified sources exchange rates, converts time zones, and estimates crypto profit. Data handling, limitations, and assumptions explained." />
+  <meta name="google-adsense-account" content="ca-pub-6293439009227714">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="stylesheet" href="/style.css?v=2.3" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="canonical" href="https://toolsified.com/methodology" />
+  <meta property="og:title" content="Methodology and Data Sources – Toolsified" />
+  <meta property="og:description" content="How Toolsified sources data, calculates results, and what limitations apply across currency, time, and crypto tools." />
+  <meta property="og:url" content="https://toolsified.com/methodology" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Toolsified" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolsified.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Methodology", "item": "https://toolsified.com/methodology" }
+    ]
+  }
+  </script>
+  <script defer src="/scripts/nav.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo-container">
+          <a href="/"><img src="/logo.png" alt="Toolsified logo" class="logo" /></a>
+        </div>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Toggle navigation">Menu</button>
+        <nav class="main-nav" id="mainNav">
+          <a href="/time-code">Time Code</a>
+          <a href="/multi-timezone">Time Zones</a>
+          <a href="/currency">Currency</a>
+          <a href="/crypto">Crypto</a>
+          <div class="nav-more">
+            <button class="nav-more-toggle" type="button" aria-expanded="false" aria-haspopup="true">More</button>
+            <div class="nav-more-menu">
+              <a href="/business-days">Business Days</a>
+              <a href="/meeting-overlap">Meeting Overlap</a>
+              <a href="/inflation-calculator">Inflation Calculator</a>
+              <a href="/crypto-tax-estimator">Crypto Tax Estimator</a>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <nav aria-label="Breadcrumb" style="font-size: 0.85rem; margin-bottom: 8px; color: #666;">
+      <a href="/" style="color: var(--primary-color);">Home</a> &rsaquo;
+      <span>Methodology</span>
+    </nav>
+
+    <h1>Methodology and Data Sources</h1>
+
+    <section class="card seo-content" style="margin-top: 24px; text-align: left; padding: 32px;">
+      <h2>Currency conversion</h2>
+      <h3>What data is used</h3>
+      <p>Currency exchange rates are fetched in real time from an external API provider via a serverless function (<code>/.netlify/functions/convert</code>). The rate returned is a mid-market reference rate for the queried currency pair at the time of the request.</p>
+
+      <h3>How the calculation works</h3>
+      <p>The formula is straightforward: <code>converted amount = input amount &times; exchange rate</code>. The rate is fetched server-side and returned to the browser, where multiplication happens client-side.</p>
+
+      <h3>What the rate represents</h3>
+      <p>The displayed rate is a market reference, not a bank or card network rate. When you actually exchange money, your provider adds spread, fees, or both. The difference between reference rate and execution rate can range from under 0.5% (competitive transfer services) to 3% or more (airport exchanges, some card networks with dynamic conversion). This calculator does not include those costs.</p>
+
+      <h3>Limitations</h3>
+      <ul>
+        <li>Rates are indicative and update per request; they are not streamed in real time.</li>
+        <li>Weekend and holiday rates may reflect the last available market quote.</li>
+        <li>The tool does not model card network fees, remittance charges, intermediary bank costs, or tax implications.</li>
+        <li>For accounting close, treasury operations, or compliance, use your organization's approved rate source and policy.</li>
+      </ul>
+
+      <h2>Time zone conversion</h2>
+      <h3>How it works</h3>
+      <p>Time zone conversions use the <a href="https://moment.github.io/luxon/" rel="noopener" target="_blank">Luxon</a> library with IANA timezone identifiers (e.g. <code>America/New_York</code>, <code>Europe/Paris</code>). The user's input is treated as a local datetime in the source zone, then transformed to the target zone. This is date-aware, meaning DST transitions are handled automatically.</p>
+
+      <h3>Time code parsing</h3>
+      <p>The time-code converter parses natural-language expressions (e.g. "2pm EDT", "tomorrow 15:00 CET") by extracting the timezone abbreviation, mapping it to an IANA zone via a fixed table, resolving relative date words, then constructing a timezone-aware datetime.</p>
+
+      <h3>Limitations</h3>
+      <ul>
+        <li>Timezone abbreviations are globally ambiguous in some cases (CST can mean US Central or China Standard Time). This tool uses a fixed mapping table for consistency.</li>
+        <li>Very informal phrases may not parse reliably. Including a date improves accuracy.</li>
+        <li>The tool does not check public holidays, working-hour policies, or calendar conflicts.</li>
+        <li>For legal or contractual deadlines, verify with official jurisdiction rules.</li>
+      </ul>
+
+      <h2>Crypto profit and loss estimation</h2>
+      <h3>What data is used</h3>
+      <p>Historical crypto prices are fetched from the CoinGecko API via <code>/.netlify/functions/crypto-convert</code>. The rate returned is a daily reference price for the queried asset and fiat pair on the specified date.</p>
+
+      <h3>How the calculation works</h3>
+      <p>For each transaction row: <code>estimated P/L = (sell date rate &minus; buy date rate) &times; amount</code>. Both rates are fetched individually and the arithmetic runs client-side.</p>
+
+      <h3>What is not included</h3>
+      <ul>
+        <li>Trading fees, slippage, and exchange-specific spreads</li>
+        <li>Intraday price variation (only daily reference rates are used)</li>
+        <li>Gas fees, staking rewards, or DeFi yields</li>
+        <li>Tax lot identification methods (FIFO, LIFO, HIFO)</li>
+        <li>Jurisdiction-specific tax rules, exemptions, or filing requirements</li>
+      </ul>
+      <p>This tool is designed for planning and scenario comparison. Treat output as a directional estimate and reconcile with exchange records and professional tax guidance for official purposes.</p>
+
+      <h2>General principles</h2>
+      <ul>
+        <li><strong>Privacy:</strong> most calculations run client-side in the browser. Serverless functions fetch reference data but do not store user inputs or results.</li>
+        <li><strong>No accounts required:</strong> all tools are free to use without registration.</li>
+        <li><strong>Transparency:</strong> each tool page includes visible methodology, limitations, and data source notes.</li>
+        <li><strong>No financial advice:</strong> Toolsified is a utility platform, not a financial advisor, broker, or tax authority.</li>
+      </ul>
+
+      <h2>Related pages</h2>
+      <div class="internal-links-cluster" style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 24px;">
+        <a href="/currency" style="color: var(--primary-color); text-decoration: underline;">Currency Converter</a>
+        <a href="/crypto" style="color: var(--primary-color); text-decoration: underline;">Crypto Profit Calculator</a>
+        <a href="/time-code" style="color: var(--primary-color); text-decoration: underline;">Time Code Converter</a>
+        <a href="/multi-timezone" style="color: var(--primary-color); text-decoration: underline;">Multi Time Zone</a>
+        <a href="/about" style="color: var(--primary-color); text-decoration: underline;">About Toolsified</a>
+        <a href="/privacy" style="color: var(--primary-color); text-decoration: underline;">Privacy Policy</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <p class="footer-tagline">&copy; 2026 Toolsified &mdash; Independent web tools platform.</p>
+      <div class="footer-links">
+        <a href="/privacy">Privacy Policy</a><span>|</span><a href="/terms">Terms</a><span>|</span><a href="/about">About</a><span>|</span><a href="/contact">Contact</a>
+      </div>
+      <p class="footer-contact">Contact: <a href="mailto:info@toolsified.com">info@toolsified.com</a></p>
+      <p class="footer-location">Location: Norway</p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -51,26 +51,12 @@
     <h1>Time-code Converter</h1>
 
     <section class="card seo-content" style="margin-top:24px; text-align:left; padding:32px;">
-      <h2>Intro: From shorthand invites to precise local times</h2>
-      <p>This tool converts informal time phrases such as "2pm EDT", "tomorrow 15:00 CET", or "next Monday 08:00 PST" into your exact local time and optional additional time zones.</p>
-      <p>Many meeting invites, job interviews, social posts, and webinar announcements only include a timezone abbreviation. Instead of manually calculating UTC offsets or checking daylight saving rules, you can paste the phrase and instantly get a date-aware, timezone-correct result.</p>
-      <p>This is especially useful for:</p>
-      <ul>
-        <li>Remote teams coordinating across regions</li>
-        <li>Recruiters scheduling international interviews</li>
-        <li>Support teams working follow-the-sun models</li>
-        <li>Event hosts publishing global start times</li>
-        <li>Anyone converting EDT, PST, CET, CEST, or similar abbreviations</li>
-      </ul>
-      <p>Timezone abbreviations are frequently misunderstood. A one-hour error during daylight saving transitions is common. This page reduces that risk by applying structured timezone mapping and date-aware conversion logic.</p>
-      <p>The output includes:</p>
-      <ul>
-        <li>Your local time</li>
-        <li>ISO 8601 timestamp</li>
-        <li>UTC offset</li>
-        <li>Optional additional time zones</li>
-      </ul>
-      <p>This makes the result safe to reuse in documentation, chat, email, or incident runbooks.</p>
+      <h2>Intro</h2>
+      <p>This page converts shorthand time expressions such as "2pm EDT", "tomorrow 15:00 CET", or "next Monday 08:00 PST" into your local time and any additional time zones you choose. It is built for quick checks when a message includes a timezone code but not a ready-made calendar event.</p>
+
+      <h2>What this tool category is for</h2>
+      <p>Time-code tools are useful when invites, launch notes, support handoffs, or community announcements rely on abbreviations like EDT, PDT, GMT, CEST, or BST. Instead of manually counting offsets or guessing whether daylight saving applies, you can parse the phrase and see an explicit local result with ISO output and UTC offset.</p>
+      <p>This category works best for operational clarity: checking what a shorthand time means, comparing the same moment across zones, and turning informal scheduling text into something easier to verify and share.</p>
     </section>
 
     <div class="card" style="margin-top:24px;">
@@ -99,93 +85,61 @@
     </div>
 
     <section class="card seo-content" style="margin-top:40px; text-align:left; padding:32px;">
-      <h2>How It Works</h2>
-      <p>The conversion process follows a structured pipeline:</p>
-      <h3>Abbreviation Extraction</h3>
-      <p>The parser identifies a timezone abbreviation in the input string.</p>
-      <h3>Mapping to IANA Timezone</h3>
-      <p>The abbreviation is mapped to a canonical IANA timezone identifier (for example, EDT to America/New_York).</p>
-      <h3>Date Resolution</h3>
-      <p>If relative terms such as "tomorrow" or "next Monday" are present, they are resolved in the source timezone context before conversion.</p>
-      <h3>Datetime Construction</h3>
-      <p>The tool builds a normalized datetime object including offset awareness.</p>
-      <h3>Multi-Zone Rendering</h3>
-      <p>Using Luxon, equivalent timestamps are rendered in selected local zones.</p>
-      <p>Each result row includes:</p>
-      <ul>
-        <li>Human-readable local time</li>
-        <li>ISO 8601 output</li>
-        <li>Explicit UTC offset</li>
-      </ul>
-      <p>This avoids static offset assumptions and reduces DST-related errors.</p>
+      <h2>How time-code conversion works</h2>
+      <p>The converter follows a simple pipeline: detect the timezone abbreviation, map it to a canonical IANA timezone, resolve any date words such as "tomorrow" or "next Monday", then render the same moment in your selected output zones. Results include local time, ISO 8601 output, and explicit UTC offset.</p>
+      <p>This matters because static UTC offset math often fails when daylight saving changes, regions switch on different dates, or the source abbreviation is season-specific such as EST versus EDT.</p>
 
-      <h2>Why Static UTC Offset Calculators Fail</h2>
-      <p>Many tools simply subtract hours from UTC. That approach breaks when:</p>
-      <ul>
-        <li>Daylight saving time changes occur</li>
-        <li>A region observes DST differently</li>
-        <li>An abbreviation is season-specific (EST vs EDT)</li>
-        <li>The event crosses a clock change boundary</li>
-      </ul>
-      <p>This tool applies date-aware rules instead of fixed offsets.</p>
+      <h2>When time codes become ambiguous</h2>
+      <p>Time-code conversion becomes harder when the source text is incomplete or when the abbreviation is reused globally. For example, CST can mean US Central Standard Time or China Standard Time, and IST can refer to India or Israel depending on context.</p>
+      <p>Best practice is to include three things whenever possible: the time, the abbreviation, and the date context. "2pm" alone is weak input. "2pm EDT tomorrow" is much easier to interpret consistently. Near DST transitions or midnight boundaries, it is safest to confirm with the sender and include an ISO timestamp in the final message.</p>
 
-      <h2>Practical Use Scenarios</h2>
-      <ul>
-        <li>Convert webinar announcements before forwarding internally</li>
-        <li>Translate recruiter interview times into your local region</li>
-        <li>Validate release windows for global launches</li>
-        <li>Prepare handoff times for distributed incident response teams</li>
-        <li>Prevent DST-related scheduling errors during spring and autumn transitions</li>
-      </ul>
-      <p>For operational teams, a reliable process is:</p>
-      <ol>
-        <li>Parse the original phrase</li>
-        <li>Confirm source abbreviation</li>
-        <li>Convert to required zones</li>
-        <li>Share both human-readable time and ISO timestamp</li>
-      </ol>
-      <p>Using both formats dramatically reduces misunderstandings.</p>
+      <h2>All supported time codes</h2>
+      <p>These are the dedicated time-code detail pages currently available on Toolsified:</p>
+      <div class="internal-links-cluster" style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:24px;">
+        <a href="/time-code/convert-edt-to-local-time" style="color: var(--primary-color); text-decoration: underline;">Convert EDT to Local Time</a>
+        <a href="/time-code/convert-pdt-to-local-time" style="color: var(--primary-color); text-decoration: underline;">Convert PDT to Local Time</a>
+        <a href="/time-code/convert-gmt-to-local-time" style="color: var(--primary-color); text-decoration: underline;">Convert GMT to Local Time</a>
+        <a href="/time-code/convert-cest-to-local-time" style="color: var(--primary-color); text-decoration: underline;">Convert CEST to Local Time</a>
+        <a href="/time-code/convert-bst-to-local-time" style="color: var(--primary-color); text-decoration: underline;">Convert BST to Local Time</a>
+      </div>
+      <p>Use these detail pages when you regularly work with one specific code and want examples, FAQ, and adjacent links for that abbreviation.</p>
 
-      <h2>Input Quality and Ambiguity Handling</h2>
-      <p>Conversion accuracy depends on input clarity.</p>
-      <p>Best practice:</p>
-      <p>Include:</p>
-      <ul>
-        <li>Time</li>
-        <li>Abbreviation</li>
-        <li>Date context</li>
-      </ul>
-      <p>"2pm" alone is insufficient. "2pm EDT tomorrow" is significantly safer.</p>
+      <h2>Popular time conversion tools</h2>
+      <div class="internal-links-cluster" style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:24px;">
+        <a href="/time-zone/pst-to-est" style="color: var(--primary-color); text-decoration: underline;">PST to EST Converter</a>
+        <a href="/time-zone/gmt-to-est" style="color: var(--primary-color); text-decoration: underline;">GMT to EST Converter</a>
+        <a href="/time-zone/pst-to-gmt" style="color: var(--primary-color); text-decoration: underline;">PST to GMT Converter</a>
+        <a href="/time-zone/gmt-to-ist" style="color: var(--primary-color); text-decoration: underline;">GMT to IST Converter</a>
+        <a href="/multi-timezone" style="color: var(--primary-color); text-decoration: underline;">Multi Time Zone Converter</a>
+      </div>
+      <p>These tools are a better fit when you already know both source and target zones and want a direct corridor converter rather than text parsing.</p>
 
-      <h3>Ambiguous Abbreviations</h3>
-      <p>Some abbreviations are reused globally:</p>
+      <h2>Common use cases</h2>
       <ul>
-        <li>CST -> US Central Standard Time (UTC-6)</li>
-        <li>CST -> China Standard Time (UTC+8)</li>
-        <li>IST -> India Standard Time (UTC+5:30) or Israel Standard Time (UTC+2)</li>
+        <li>Converting meeting invites that only include an abbreviation</li>
+        <li>Checking launch or webinar times before forwarding them internally</li>
+        <li>Translating recruiter interview messages into your local time</li>
+        <li>Preparing handoff notes for distributed support or incident teams</li>
+        <li>Turning chat shorthand into ISO timestamps for docs, email, or runbooks</li>
       </ul>
-      <p>This tool uses a fixed mapping table for consistency. If context is unclear, verify with the sender.</p>
-
-      <h3>Relative Language Near Midnight</h3>
-      <p>Words like "tomorrow" and "next Monday" are interpreted in the source timezone. This is usually correct for invitations, but edge cases near midnight should be confirmed.</p>
-      <p>For high-risk communication, always include an ISO timestamp in the final message.</p>
-
-      <h2>Common Mistakes to Avoid</h2>
-      <ul>
-        <li>Mixing EST and EDT during summer months</li>
-        <li>Omitting date context near DST changes</li>
-        <li>Posting only one converted local time when the audience is global</li>
-        <li>Writing inconsistent phrases like "2pm local EDT"</li>
-      </ul>
-      <p>Clear source phrasing leads to consistent output.</p>
 
       <h2>Limitations</h2>
       <ul>
-        <li>Timezone abbreviations are globally ambiguous in some contexts</li>
-        <li>Extremely informal phrases may not parse reliably</li>
-        <li>Legal or mission-critical scheduling should always be verified in official calendar systems</li>
+        <li>Timezone abbreviations can be globally ambiguous without context</li>
+        <li>Very informal phrases may not parse reliably</li>
+        <li>The tool does not validate legal deadlines, calendars, holidays, or meeting availability</li>
+        <li>Mission-critical schedules should still be confirmed in an official calendar system</li>
       </ul>
-      <p>This tool is designed for operational clarity, not contractual validation.</p>
+      <p>This category is designed for operational clarity and faster verification, not contractual validation.</p>
+
+      <h2>Related tools</h2>
+      <div class="internal-links-cluster" style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:24px;">
+        <a href="/meeting-overlap" style="color: var(--primary-color); text-decoration: underline;">Meeting Overlap Finder</a>
+        <a href="/multi-timezone" style="color: var(--primary-color); text-decoration: underline;">Multi Time Zone Converter</a>
+        <a href="/time-zone/pst-to-est" style="color: var(--primary-color); text-decoration: underline;">PST to EST Converter</a>
+        <a href="/time-zone/gmt-to-ist" style="color: var(--primary-color); text-decoration: underline;">GMT to IST Converter</a>
+        <a href="/methodology" style="color: var(--primary-color); text-decoration: underline;">Methodology and data sources</a>
+      </div>
 
       <h2>FAQ</h2>
       <div class="faq-item" style="margin-bottom: 16px;">
@@ -203,15 +157,6 @@
       <div class="faq-item" style="margin-bottom: 16px;">
         <strong>Does Toolsified store the text I paste?</strong>
         <p>No account is required. Input is processed in-browser for immediate conversion output.</p>
-      </div>
-
-      <h2>Related Tools</h2>
-      <div class="internal-links-cluster" style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:24px;">
-        <a href="/time-code/convert-edt-to-local-time" style="color: var(--primary-color); text-decoration: underline;">EDT to Local Time</a>
-        <a href="/time-code/convert-pdt-to-local-time" style="color: var(--primary-color); text-decoration: underline;">PDT to Local Time</a>
-        <a href="/multi-timezone" style="color: var(--primary-color); text-decoration: underline;">Multi Time Zone Converter</a>
-        <a href="/meeting-overlap" style="color: var(--primary-color); text-decoration: underline;">Meeting Overlap Finder</a>
-        <a href="/time-zone/pst-to-est" style="color: var(--primary-color); text-decoration: underline;">PST to EST Converter</a>
       </div>
     </section>
   </main>
