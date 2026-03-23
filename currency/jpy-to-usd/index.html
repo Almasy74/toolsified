@@ -107,10 +107,7 @@
 <div class="table-container"><table class="table common-amounts-table">
 <thead><tr><th>JPY</th><th>USD (estimate)</th></tr></thead>
 <tbody>
-<tr><td>100 JPY</td><td><span class="ca-val" data-from="JPY" data-to="USD" data-amt="100">—</span></td></tr>
-<tr><td>500 JPY</td><td><span class="ca-val" data-from="JPY" data-to="USD" data-amt="500">—</span></td></tr>
 <tr><td>1,000 JPY</td><td><span class="ca-val" data-from="JPY" data-to="USD" data-amt="1000">—</span></td></tr>
-<tr><td>2,500 JPY</td><td><span class="ca-val" data-from="JPY" data-to="USD" data-amt="2500">—</span></td></tr>
 <tr><td>5,000 JPY</td><td><span class="ca-val" data-from="JPY" data-to="USD" data-amt="5000">—</span></td></tr>
 <tr><td>10,000 JPY</td><td><span class="ca-val" data-from="JPY" data-to="USD" data-amt="10000">—</span></td></tr>
 <tr><td>25,000 JPY</td><td><span class="ca-val" data-from="JPY" data-to="USD" data-amt="25000">—</span></td></tr>
@@ -121,9 +118,9 @@
 
             <h2>How it works</h2>
             <p>The conversion formula is <code>converted amount = input amount &times; exchange rate</code>. When you press Convert, the page requests a current market rate through a serverless endpoint, then multiplies the returned rate by your amount in the browser. No account is required.</p>
-            <p><strong>Data source:</strong> exchange rates are sourced from an external feed via <code>/.netlify/functions/convert</code>. The displayed timestamp reflects the provider response for the queried pair.</p>
-            <p><strong>Reference rate vs. bank rate:</strong> the rate shown here is a mid-market reference. When you actually exchange money, your bank, card network, or transfer provider applies their own rate, which includes spread and possibly fees. The difference can be 0.5% to 3% or more depending on channel, amount, and timing. Always compare execution options for large transfers.</p>
-            <p><strong>Limitations:</strong> this is a reference converter, not a settlement engine. Real transaction totals differ due to provider markups, card network rates, local taxes, transfer fees, and delayed booking windows. For accounting or compliance use, confirm with your payment provider or bank statement.</p>
+<p><strong>Data source:</strong> exchange rates are sourced from an external feed via <code>/.netlify/functions/convert</code>. The displayed timestamp reflects the provider response for the queried pair.</p>
+<p><strong>Reference rate vs. bank rate:</strong> the rate shown here is a mid-market reference. When you actually exchange money, your bank, card network, or transfer provider applies their own rate, which includes spread and possibly fees. The difference can be 0.5% to 3% or more depending on channel, amount, and timing. Always compare execution options for large transfers.</p>
+<p><strong>Limitations:</strong> this is a reference converter, not a settlement engine. Real transaction totals differ due to provider markups, card network rates, local taxes, transfer fees, and delayed booking windows. For accounting or compliance use, confirm with your payment provider or bank statement.</p>
 
             <h2>Practical use scenarios</h2>
             <ul><li>Evaluate marketplace pricing differences by converting listings from JPY into USD.</li>

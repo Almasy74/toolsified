@@ -103,10 +103,7 @@
             [COMMON_AMOUNTS]
 
             <h2>How it works</h2>
-            <p>The conversion formula is <code>converted amount = input amount &times; exchange rate</code>. When you press Convert, the page requests a current market rate through a serverless endpoint, then multiplies the returned rate by your amount in the browser. No account is required.</p>
-            <p><strong>Data source:</strong> exchange rates are sourced from an external feed via <code>/.netlify/functions/convert</code>. The displayed timestamp reflects the provider response for the queried pair.</p>
-            <p><strong>Reference rate vs. bank rate:</strong> the rate shown here is a mid-market reference. When you actually exchange money, your bank, card network, or transfer provider applies their own rate, which includes spread and possibly fees. The difference can be 0.5% to 3% or more depending on channel, amount, and timing. Always compare execution options for large transfers.</p>
-            <p><strong>Limitations:</strong> this is a reference converter, not a settlement engine. Real transaction totals differ due to provider markups, card network rates, local taxes, transfer fees, and delayed booking windows. For accounting or compliance use, confirm with your payment provider or bank statement.</p>
+            [HOW_IT_WORKS_HTML]
 
             <h2>[PAIR_SCENARIOS_HEADING]</h2>
             <ul>[PAIR_SCENARIOS]</ul>
@@ -119,7 +116,7 @@
             <h2>Related tools</h2>
             <div class="internal-links-cluster" style="margin-bottom: 24px;">
                 [REVERSE_PAIR_LINK]
-                [RELATED_CLUSTER]
+                [PAIR_RELATED_LINKS]
                 <p><a href="/currency" style="color: var(--primary-color); text-decoration: underline;">Back to Currency Converter Hub</a></p>
                 <p><a href="/methodology" style="color: var(--primary-color); text-decoration: underline;">Methodology and data sources</a></p>
             </div>

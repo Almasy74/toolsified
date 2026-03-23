@@ -125,6 +125,7 @@
 
     <section class="card seo-content" style="margin-top: 40px; text-align: left; padding: 32px;">
       <h2>Popular currency pairs</h2>
+      <p>Start with one of the most-used pair pages below if you already know the exact direction you need. Detail pages add common amount references, pair-specific notes, and a clearer planning context than the generic converter alone.</p>
       <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px; margin-bottom: 24px;">
         <a href="/currency/usd-to-eur" style="color: var(--primary-color); text-decoration: underline;">USD to EUR</a>
         <a href="/currency/eur-to-usd" style="color: var(--primary-color); text-decoration: underline;">EUR to USD</a>
@@ -141,6 +142,7 @@
       </div>
 
       <h2>All supported pairs</h2>
+      <p>Use the full list when you need a less common pair or want to jump straight into the correct detail page for the exact source and target currencies.</p>
       <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 6px; margin-bottom: 24px; font-size: 0.9rem;">
         <a href="/currency/usd-to-eur">USD → EUR</a> <a href="/currency/eur-to-usd">EUR → USD</a>
         <a href="/currency/gbp-to-usd">GBP → USD</a> <a href="/currency/usd-to-gbp">USD → GBP</a>
@@ -174,6 +176,9 @@
       <p>The formula: <code>converted amount = entered amount &times; latest rate</code>. Rates are fetched from an external API feed via a serverless endpoint. Multiplication runs client-side. No account or login required.</p>
       <p><strong>Limitations:</strong> this is a reference converter. Real settlements differ due to provider spread, card network rates, transfer fees, and timing. For formal accounting, use approved treasury rates. <a href="/methodology" style="color: var(--primary-color);">Read full methodology</a>.</p>
 
+      <h2>How to choose the right pair page</h2>
+      <p>Pick the page that matches the direction your amount starts in. If the quoted amount is in KRW and you need a USD view, use <a href="/currency/krw-to-usd" style="color: var(--primary-color); text-decoration: underline;">KRW to USD</a>, not the reverse. The pair pages are most useful when you want realistic common amounts, a clearer use-case fit, and notes that match how that pair is typically used.</p>
+
       <h2>Common use cases</h2>
       <ul>
         <li><strong>Travel budgeting:</strong> estimate hotel, transport, and meal costs in your home currency before departure.</li>
@@ -200,13 +205,9 @@
         <strong>Why does my bank show a different amount?</strong>
         <p>Banks apply their own spread, service fees, and settlement timing. This tool shows a market reference, not institution-specific pricing.</p>
       </div>
-      <div class="faq-item" style="margin-bottom:16px;">
-        <strong>Can I use these rates for accounting?</strong>
-        <p>For planning only. Accounting close requires approved policy rates with documented timestamps from your organization.</p>
-      </div>
       <div class="faq-item">
-        <strong>Is login required?</strong>
-        <p>No. All conversions run without an account.</p>
+        <strong>Should I use the hub or a detail page?</strong>
+        <p>Use the hub for quick ad hoc checks across many currencies. Use a detail page when you want the exact pair, a common-amount table, and more pair-specific planning notes.</p>
       </div>
     </section>
   </main>
