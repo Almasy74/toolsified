@@ -232,152 +232,158 @@ const currencyFaqLibrary = [
 
 const currencyPageOverrides = {
     'krw-to-usd': {
-        title: 'KRW to USD Converter – Live Rate, Common Amounts and Planning Guide',
-        metaDescription: 'Convert South Korean Won to US Dollars with a live KRW to USD rate, quick reference amounts, and practical notes on fees, timing, and settlement differences.',
+        title: 'KRW to USD Converter – Live Rate, Common Amounts and Price Checks',
+        metaDescription: 'Convert South Korean Won to US Dollars with a live KRW to USD rate, larger common amounts, and practical guidance for price checks, card spend, quotes, and settlement differences.',
         introParagraphs: [
-            'Use this page when the number you have is in South Korean won but the decision you need to make is in US dollars. It gives you a live KRW to USD reference conversion without sending you through a trading platform or banking flow.',
-            'That is useful for Korean supplier quotes, tuition or registration fees, travel budgets in Seoul, and payroll or contractor amounts that need to be reviewed in USD. On this pair, the main challenge is usually scale: a six-figure KRW amount may still represent a fairly ordinary USD expense.',
-            'The reference table helps you judge order of magnitude quickly, while the calculator is better for an exact amount. For anything that will actually be paid, compare the result with your bank or transfer provider because execution spreads and fees can move the booked USD total.'
+            'KRW to USD is mostly a scale-check page. Amounts in won often look large at first glance, so the real question is usually not the arithmetic but whether a Korean price is trivial, meaningful, or over budget once you view it in US dollars.',
+            'That comes up in Korea-based ecommerce carts, supplier quotes, hotel totals, card-spend estimates, and day-to-day price checks where the original amount is in KRW but the mental budget is in USD. A six-figure KRW total can still be a fairly ordinary purchase, which is why tiny example amounts are not very helpful on this pair.',
+            'The reference amounts below start higher on purpose so you can judge order of magnitude faster. Use the table for a quick sense-check, then run the exact KRW total through the converter if the payment or booking is real.'
         ],
         scenarios: [
-            'Check whether a Korean supplier quote still fits a USD purchasing limit before approval.',
-            'Estimate the USD cost of a hotel stay, event fee, or university payment priced in KRW.',
-            'Translate KRW payroll or contractor amounts into USD for internal reporting.',
-            'Compare two vendor offers when one is priced in won and the other is priced in dollars.',
-            'Review whether a large KRW transfer is worth executing now or re-checking closer to settlement.'
+            'Sense-check whether a KRW checkout total on a Korean marketplace is small or material in USD terms.',
+            'Convert a hotel, clinic, conference, or campus payment in Korea before approving the card spend.',
+            'Check whether a supplier quote in won still fits a USD purchasing cap before asking for final terms.',
+            'Compare a KRW-priced offer against a USD-priced alternative without moving into a spreadsheet.',
+            'Estimate whether a larger won-denominated transfer should be refreshed again closer to settlement.'
         ],
         notesHeading: 'KRW to USD planning notes',
         notes: [
-            'KRW is a high-unit currency, so round-looking KRW amounts can convert into much smaller USD totals than users expect at first glance.',
-            'If you are approving a payment now but executing it later, re-check the rate close to settlement time.',
-            'For larger transfers, compare the reference rate here with your provider\'s quoted execution rate and fee policy.'
+            'KRW is a high-unit currency, so larger common amounts are more useful here than tiny sample values like 1 or 5 won.',
+            'Card totals in Korea can post later than the time you checked the reference rate, which is one reason the final USD amount can drift.',
+            'For supplier payments or larger transfers, compare the reference result with the actual rate and fee policy your provider offers at execution time.'
         ],
         howItWorksParagraphs: [
-            'The calculator requests a live KRW/USD reference rate through the currency endpoint, then multiplies that rate by the exact KRW amount you enter. The result is produced in the browser immediately after the rate is returned.',
-            '<strong>Why this pair feels different in practice:</strong> KRW amounts are often large in nominal terms, so a small-looking quote move can still matter on larger supplier, payroll, or travel amounts. This is why the common-amounts table on this page starts at more realistic KRW levels instead of tiny unit amounts.',
-            '<strong>Settlement reality:</strong> the number shown here is a planning reference. Banks, card issuers, and transfer providers can apply a different execution timestamp, their own spread, and fixed fees before the final USD amount is booked.'
+            'The calculator pulls a live KRW/USD reference rate and applies it to the won amount you enter. The result is immediate and is meant to help with fast price interpretation rather than formal settlement.',
+            '<strong>Why the surrounding table matters on this pair:</strong> KRW is quoted in larger nominal numbers than USD, so the common-amounts section is there to make Korean price tags easier to read at a glance without repeated manual conversion.',
+            '<strong>What can change the final number:</strong> once a bank, card issuer, or transfer provider actually processes the payment, its own spread, fee rules, and execution timing can move the booked USD total away from the reference result.'
         ],
         relatedLinks: [
             { url: '/currency/usd-to-krw', name: 'Convert USD to KRW (reverse)' },
             { url: '/currency/cny-to-usd', name: 'CNY to USD Converter' },
             { url: '/currency/jpy-to-usd', name: 'JPY to USD Converter' },
-            { url: '/currency/eur-to-cad', name: 'EUR to CAD Converter' }
+            { url: '/currency/usd-to-hkd', name: 'USD to HKD Converter' }
         ],
         faq: [
-            { q: 'Why do KRW amounts look so large compared with USD?', a: 'The won is quoted in larger nominal numbers than the US dollar, so everyday amounts often appear much bigger before conversion. That is normal for this currency pair.' },
-            { q: 'Can I use this for budgeting in USD?', a: 'Yes, it is useful for planning, approvals, and rough reporting. For accounting close or treasury workflows, use your approved internal rate policy or settlement documentation.' },
-            { q: 'Will my bank give me the exact same KRW to USD result?', a: 'Not necessarily. This tool provides a live reference conversion. Your bank, card issuer, or transfer provider may apply a spread, execution delay, or separate fees.' },
+            { q: 'Why does the KRW table start at higher amounts?', a: 'Because won is a high-unit currency. On this pair, 1 KRW or 5 KRW examples are not very informative, while 1,000 KRW to 500,000 KRW is much closer to how real prices are usually encountered.' },
+            { q: 'Why can a Korean card payment differ from this KRW to USD result?', a: 'Your card network or issuer may use a different timestamp, apply its own FX spread, or add fees before the final USD amount appears on the statement.' },
+            { q: 'Is this page useful for KRW price checks and travel budgeting?', a: 'Yes. It works well for quick price interpretation, booking checks, supplier quotes, and card-spend estimates. For formal accounting or treasury work, use your approved source of record.' },
             { q: 'Can I reverse the direction and convert USD to KRW?', a: 'Yes. Use the swap control or the reverse-pair link to move from USD to KRW.' }
         ]
     },
     'eur-to-cad': {
         title: 'EUR to CAD Converter – Live Rate, Examples and Budget Planning',
-        metaDescription: 'Convert Euros to Canadian Dollars with a live EUR to CAD rate, common amounts, and practical guidance for travel, invoices, and settlement differences.',
+        metaDescription: 'Convert Euros to Canadian Dollars with a live EUR to CAD rate, common amounts, and practical guidance for quote comparison, invoicing, travel planning, and settlement differences.',
         introParagraphs: [
-            'This EUR to CAD converter is for moments when a euro-denominated price needs to be understood in Canadian dollars right away. It is a practical reference page for budgeting, approvals, and side-by-side price comparisons rather than a trading tool.',
-            'Typical uses include European travel planning from Canada, software or agency invoices billed in euros, relocation estimates, and recurring subscriptions that hit a CAD budget each month. The real question on this pair is usually not the spot chart, but whether the final CAD cost still fits the plan.',
-            'Use the table for quick directional checks and the calculator for the exact amount you are reviewing. If the payment will be executed later by card or bank transfer, leave room for spread, timing differences, and provider fees.'
+            'EUR to CAD often shows up when someone is comparing a euro-origin price against a Canadian budget or against a competing local quote. It is less about watching a market and more about deciding what a European amount really means in CAD before you approve it.',
+            'That makes this pair useful for contractor retainers, vendor proposals, software renewals, relocation costs, and travel spending that starts in euros but has to be assessed on the Canadian side. The decision is usually practical: is the converted cost still acceptable once payment friction is taken into account?',
+            'Use the table for a quick planning view and the calculator for the exact number in front of you. If the payment happens later, leave room for spread, provider fees, and timing drift between quote and settlement.'
         ],
         scenarios: [
-            'Check whether a euro-denominated retainer or invoice still fits a CAD operating budget.',
-            'Estimate the Canadian-dollar cost of flights, hotels, rail passes, or event tickets quoted in EUR.',
-            'Compare a European vendor quote with a domestic Canadian quote on the same budget basis.',
-            'Translate recurring EUR software spend into CAD for monthly finance planning.',
-            'Add a reasonable FX buffer before approving a later payment in Canadian dollars.'
+            'Compare a European contractor or agency quote with a Canadian quote on the same CAD basis.',
+            'Check whether a euro-denominated invoice still fits the amount approved in Canadian dollars.',
+            'Estimate the CAD cost of flights, hotels, rail passes, or event fees priced in EUR.',
+            'Translate recurring EUR software or service renewals into CAD for budget review.',
+            'Add a small FX buffer before settling a later payment that was originally quoted in euros.'
         ],
         notesHeading: 'EUR to CAD planning notes',
         notes: [
-            'This pair is often used for budgeting rather than trading, so the main risk is underestimating the final CAD total after fees.',
-            'If your invoice is approved in one week and paid in another, the booked CAD outcome may differ from the earlier estimate.',
-            'For card-based purchases, compare this reference result with your card issuer\'s foreign exchange policy.'
+            'This pair is usually about comparison and approval, so the main risk is underestimating the final CAD cost after spread and fees.',
+            'If a quote is reviewed now but paid later, the booked CAD amount may differ enough to matter on larger invoices or retainers.',
+            'Card payments, invoicing platforms, and bank transfers can all land at slightly different CAD totals even when the reference rate looked the same earlier.'
         ],
         howItWorksParagraphs: [
-            'The tool fetches a live EUR/CAD reference rate through the exchange-rate endpoint and applies it to the euro amount you enter. The arithmetic is done in the browser so you can test different invoice or travel amounts quickly.',
-            '<strong>What matters on this pair:</strong> EUR to CAD is often a budgeting pair rather than a trading pair. Users are usually comparing travel spend, retainers, subscriptions, or invoices, so the practical question is less about market micro-moves and more about the final CAD impact after provider fees.',
-            '<strong>Before approving payment:</strong> if a card, bank transfer, or invoicing platform will be used later, treat this as the baseline reference number and compare it with the booked rate your provider actually offers.'
+            'The tool fetches a live EUR/CAD reference rate and applies it to the euro amount you enter. That gives you a fast CAD estimate for quotes, invoices, or travel costs without switching into a spreadsheet.',
+            '<strong>Where this helps most:</strong> EUR to CAD is commonly used to compare proposals, normalize recurring costs, and judge whether a European amount is still acceptable in a Canadian budget context.',
+            '<strong>Before treating it as final:</strong> if settlement will happen through a card, transfer service, or invoicing platform, compare the reference result here with the booked rate and fees you will actually pay.'
         ],
         relatedLinks: [
             { url: '/currency/cad-to-eur', name: 'Convert CAD to EUR (reverse)' },
-            { url: '/currency/eur-to-aud', name: 'EUR to AUD Converter' },
-            { url: '/currency/aud-to-eur', name: 'AUD to EUR Converter' },
-            { url: '/currency/eur-to-usd', name: 'EUR to USD Converter' }
+            { url: '/currency/eur-to-usd', name: 'EUR to USD Converter' },
+            { url: '/currency/usd-to-cad', name: 'USD to CAD Converter' },
+            { url: '/currency/eur-to-aud', name: 'EUR to AUD Converter' }
         ],
         faq: [
-            { q: 'Is this EUR to CAD result suitable for travel budgeting?', a: 'Yes. It is useful for rough trip planning and price comparison. Final card or cash-exchange totals may differ depending on provider spreads and fees.' },
-            { q: 'Why can the final CAD amount differ from this converter?', a: 'This page shows a live reference rate. Your bank, card network, or transfer service may use a different timestamp, spread, or fee structure.' },
-            { q: 'Should I add a buffer when converting EUR into CAD?', a: 'For larger invoices or travel budgets, that is sensible. A small buffer helps reduce the risk of underestimating the final CAD cost.' },
+            { q: 'Is this EUR to CAD page useful for quote comparison?', a: 'Yes. It is well suited to comparing a euro-denominated quote with a Canadian budget or with another proposal priced in CAD.' },
+            { q: 'Why can the final CAD amount differ from the estimate here?', a: 'Banks, card networks, and payment platforms can use different timestamps, spreads, and fee structures. The result on this page is a reference, not a booked settlement amount.' },
+            { q: 'Should I add a buffer when converting EUR into CAD?', a: 'For larger invoices, retainers, or later travel payments, that is sensible. A small buffer reduces the chance of underestimating the final CAD cost.' },
             { q: 'Can I switch to CAD to EUR on the same tool?', a: 'Yes. Use the swap function or the reverse-pair link.' }
         ]
     },
     'cny-to-usd': {
-        title: 'CNY to USD Converter – Live Rate, Common Amounts and Invoice Checks',
-        metaDescription: 'Convert Chinese Yuan to US Dollars with a live CNY to USD rate, practical examples, and guidance for invoices, card spend, and settlement differences.',
+        title: 'CNY to USD Converter – Live Rate, Common Amounts and Supplier Checks',
+        metaDescription: 'Convert Chinese Yuan to US Dollars with a live CNY to USD rate, practical examples, and guidance for sourcing, supplier quotes, product pricing, and settlement differences.',
         introParagraphs: [
-            'This page is built for CNY amounts that need to be evaluated in USD before you commit to a purchase, order, or payment. It gives you a live reference conversion so you can size a China-priced cost quickly in dollar terms.',
-            'That makes it especially useful for sourcing, manufacturing quotes, ecommerce orders, and supplier invoices where the original number is in yuan but budgeting, margin review, or approval happens in US dollars. On this pair, speed matters because users are often checking a real quote before the next step.',
-            'Use the common amounts as a quick sense-check, then run the exact number you are reviewing through the calculator. Final settlement can still differ if a platform, card network, or transfer provider applies its own spread or fee structure.'
+            'CNY to USD is usually a pricing page, not a travel page. The amount in front of you is often a supplier quote, factory total, marketplace listing, or RMB-denominated unit price that needs to be translated into US-dollar expectations quickly.',
+            'That makes this pair especially useful for sourcing, trade planning, import/export estimates, and product margin review. The goal is not just to convert a number, but to understand whether a yuan-based price still works once you evaluate it on a USD budget or procurement threshold.',
+            'The common amounts below are there for fast commercial sense-checks, while the calculator handles the exact figure you are reviewing. For a real payment, remember that remittance timing, provider spread, and platform charges can all move the final USD result.'
         ],
         scenarios: [
-            'Estimate a supplier invoice from China in USD before approving the purchase order.',
-            'Check whether a marketplace or factory quote still leaves enough room in a USD margin model.',
-            'Translate CNY product or manufacturing costs into USD for sourcing reviews.',
-            'Compare several China-based quotes on the same dollar-denominated budget basis.',
-            'Prepare a fast USD reference before checkout, remittance, or trade-platform payment.'
+            'Translate a factory or supplier quote into USD before approving a purchase order.',
+            'Check whether an RMB-denominated unit price still fits a USD margin target.',
+            'Compare multiple China-based quotes on the same dollar basis before shortlisting vendors.',
+            'Estimate the USD effect of MOQ totals, sample orders, or revised production pricing.',
+            'Prepare a quick USD reference before remittance, platform checkout, or supplier negotiation.'
         ],
         notesHeading: 'CNY to USD planning notes',
         notes: [
-            'This pair is often used in sourcing, procurement, and ecommerce reviews where the reference conversion matters before final checkout.',
-            'If the supplier quote is fixed now but your payment happens later, re-check close to execution time.',
-            'For business use, treat this output as a planning reference rather than a treasury or accounting source of record.'
+            'This pair is often checked before procurement decisions, so quote comparison matters more than generic travel-style budgeting.',
+            'If a supplier holds a CNY quote only for a short window, refresh the conversion close to approval or remittance time.',
+            'For commercial use, treat the result as a planning reference and confirm the final settlement number through the payment rail you will actually use.'
         ],
         howItWorksParagraphs: [
-            'The converter requests a current CNY/USD reference rate from the exchange endpoint, then applies that rate to the CNY amount you enter. The returned figure is meant to help you size a supplier quote, sourcing cost, or checkout total quickly.',
-            '<strong>What makes this pair practical:</strong> many users land here before a real payment step such as supplier approval, card checkout, or marketplace order. In those workflows the key question is whether the USD-equivalent still fits a budget cap or margin assumption before final execution.',
-            '<strong>Important limitation:</strong> a quoted CNY amount can still turn into a different final USD charge once provider spreads, platform fees, or booking delays are applied. For operational decisions, confirm the settlement number as close to payment time as possible.'
+            'The converter pulls a live CNY/USD reference rate and applies it to the yuan amount you enter. It is designed to make supplier totals, marketplace prices, and sourcing numbers easier to interpret in USD without breaking the workflow.',
+            '<strong>Why this pair gets checked:</strong> many users arrive here before a pricing decision, not after it. They are testing whether a yuan-based quote still works against a dollar budget, margin model, or approval threshold.',
+            '<strong>What the calculator does not include:</strong> if the payment later goes through a bank, trade platform, or remittance provider, spreads, fees, and booking delays can change the final USD amount from the reference estimate shown here.'
         ],
         relatedLinks: [
             { url: '/currency/usd-to-cny', name: 'Convert USD to CNY (reverse)' },
-            { url: '/currency/krw-to-usd', name: 'KRW to USD Converter' },
             { url: '/currency/usd-to-hkd', name: 'USD to HKD Converter' },
-            { url: '/currency/usd-to-inr', name: 'USD to INR Converter' }
+            { url: '/currency/usd-to-sgd', name: 'USD to SGD Converter' },
+            { url: '/currency/krw-to-usd', name: 'KRW to USD Converter' }
+        ],
+        faq: [
+            { q: 'Is this page useful for supplier quotes and product pricing?', a: 'Yes. It is designed for quick USD interpretation of CNY-denominated quotes, unit prices, order totals, and sourcing costs before you commit to the next step.' },
+            { q: 'Why can the final USD payment differ from this CNY estimate?', a: 'Banks, remittance services, and trade platforms may apply their own spread, fees, and timing rules. The reference conversion is useful for planning, but it is not the final settlement amount.' },
+            { q: 'Should I compare quotes in CNY or convert everything to USD first?', a: 'If your budget, approval threshold, or margin model is in USD, converting first usually makes comparisons clearer and more consistent.' },
+            { q: 'Can I compare reverse direction, USD to CNY, on the same page?', a: 'Yes. Use the swap button or choose opposite currencies in the selectors.' }
         ]
     },
     'aud-to-eur': {
         title: 'AUD to EUR Converter – Live Rate, Common Amounts and Travel Checks',
         metaDescription: 'Convert Australian Dollars to Euros with a live AUD to EUR rate, planning examples, and practical notes for travel, invoices, and cross-border spending.',
         introParagraphs: [
-            'AUD to EUR is mostly a spending-and-planning pair: you know your budget in Australian dollars and need to see what that means in euros before you book, buy, or approve something.',
-            'This comes up in European travel, conference and event planning, subscription review, and vendor payments where the outgoing amount begins in AUD but the destination cost is measured in EUR. Users usually want a quick answer to a practical question: does my Australian-dollar budget still cover this euro-priced item?',
-            'The common amounts table helps with rough planning, and the calculator is there for the exact amount. Because card issuers and transfer providers often use their own spread and timestamp, treat the result as a current reference rather than a guaranteed checkout number.'
+            'AUD to EUR is the kind of page people open before they book, not after the statement arrives. You know what you can spend in Australian dollars and need to see whether a euro-priced trip cost, booking, or transfer still fits that limit.',
+            'That is why this pair is more about travel, card use, study-abroad planning, and relocation logistics than about procurement. The usual question is practical and time-sensitive: what does this posted EUR amount mean for my Australian budget right now?',
+            'The common amounts are there for quick trip-style comparisons, while the calculator handles the exact price in front of you. Once a card issuer or transfer provider processes the payment, the booked result can still shift because of spread, fees, or timing.'
         ],
         scenarios: [
-            'Check whether an AUD trip budget is enough for euro-priced hotels, transport, and bookings.',
-            'Estimate the EUR value of an Australian budget before approving a conference or event expense.',
-            'Compare a euro subscription or software renewal against an AUD department budget.',
-            'Convert an Australian transfer amount into euros before sending money to a eurozone recipient.',
-            'Review whether it is worth re-checking the rate before a large European card or bank payment.'
+            'Check whether an AUD trip budget covers euro-priced hotels, rail tickets, museum passes, and day-to-day spend.',
+            'Compare two posted booking prices in Europe before you commit to the card charge.',
+            'Estimate the EUR value of an Australian budget before study-abroad deposits or relocation setup costs are paid.',
+            'Convert an Australian transfer amount into euros before sending funds to a eurozone landlord, school, or recipient.',
+            'Re-check a larger euro payment before travel if the booking and the actual charge will happen on different days.'
         ],
         notesHeading: 'AUD to EUR planning notes',
         notes: [
-            'This pair is often used for spending and invoice review rather than investment analysis, so fee awareness matters more than tiny spot moves.',
-            'If your budget is fixed in AUD, re-check the rate before large EUR payments or bookings.',
-            'For card purchases in Europe, your issuer may use a different final exchange basis than the reference result shown here.'
+            'This pair is usually about travel and spending, so bank spread and card treatment matter more than tiny spot-rate moves.',
+            'If your budget is fixed in AUD, refresh the conversion before larger bookings, deposits, or last-minute transfers.',
+            'For card purchases in Europe, the amount posted to your account can differ from the reference result if your issuer uses a later timestamp or adds fees.'
         ],
         howItWorksParagraphs: [
-            'The calculator pulls a live AUD/EUR reference rate and applies it to the exact AUD amount you enter. That makes it useful for quick checks before card spend, transfers, bookings, or euro-denominated invoices are finalized.',
-            '<strong>Why users check this pair:</strong> AUD to EUR is often tied to travel and cross-border spend rather than treasury workflows. People want to know whether an Australian-dollar budget still covers a euro hotel bill, event fee, training invoice, or supplier payment.',
-            '<strong>What can change the booked result:</strong> card issuers and transfer providers may use a different execution basis than the mid-market reference shown here, especially once weekend spreads, FX fees, or statement timing come into play.'
+            'The calculator pulls a live AUD/EUR reference rate and applies it to the Australian-dollar amount you enter. That makes it useful for quick trip planning, price comparison, and pre-payment checks before you commit.',
+            '<strong>Where this pair is most useful:</strong> AUD to EUR is often about interpreting posted euro prices from the Australian side, especially for bookings, card spend, transfers, and study-abroad or relocation costs.',
+            '<strong>Why the final card charge can differ:</strong> issuers and providers may use a later timestamp, their own spread, or separate fees, so treat the result here as a planning number rather than a guaranteed checkout total.'
         ],
         relatedLinks: [
             { url: '/currency/eur-to-aud', name: 'Convert EUR to AUD (reverse)' },
-            { url: '/currency/eur-to-cad', name: 'EUR to CAD Converter' },
             { url: '/currency/aud-to-gbp', name: 'AUD to GBP Converter' },
-            { url: '/currency/usd-to-aud', name: 'USD to AUD Converter' }
+            { url: '/currency/usd-to-aud', name: 'USD to AUD Converter' },
+            { url: '/currency/eur-to-cad', name: 'EUR to CAD Converter' }
         ],
         faq: [
-            { q: 'Is this useful for travel in Europe?', a: 'Yes. It is a strong fit for trip budgeting, hotel comparisons, and estimating card spend in euro terms before travel.' },
-            { q: 'Why can my card statement differ from this AUD to EUR result?', a: 'Card issuers can apply their own spread, fees, or booking timestamp, so the final posted amount may not exactly match the live reference rate.' },
-            { q: 'Should I convert large AUD amounts right before payment?', a: 'For time-sensitive or high-value transfers, that is wise. A refreshed check reduces the risk of relying on an outdated estimate.' },
+            { q: 'Is this page mainly for travel and spending in Europe?', a: 'Yes. It is especially useful for travel budgeting, booking comparisons, card-spend estimates, study-abroad costs, and other euro-priced expenses viewed from an AUD budget.' },
+            { q: 'Why can my card statement differ from this AUD to EUR result?', a: 'Card issuers can apply their own spread, booking timestamp, and fees, so the final posted amount may not exactly match the live reference rate shown here.' },
+            { q: 'Should I re-check AUD to EUR before a larger booking or transfer?', a: 'For larger or time-sensitive payments, that is sensible. Re-checking close to execution reduces the chance of relying on an outdated estimate.' },
             { q: 'Can I convert the opposite direction too?', a: 'Yes. Use the reverse-pair link or swap control for EUR to AUD.' }
         ]
     },
@@ -385,38 +391,38 @@ const currencyPageOverrides = {
         title: 'EUR to AUD Converter – Live Rate, Common Amounts and Payment Planning',
         metaDescription: 'Convert Euros to Australian Dollars with a live EUR to AUD rate, common amounts, and practical guidance for travel, transfers, and invoice planning.',
         introParagraphs: [
-            'Use this page when the quote, invoice, or cost starts in euros but your budget decisions happen in Australian dollars. It gives you a fast EUR to AUD planning number for real-world review, not just a generic exchange-rate lookup.',
-            'Common examples include European contractor invoices, relocation estimates, travel costs, and recurring subscriptions billed in EUR while the paying team or household tracks spend in AUD. In other words, the page is built for budget translation: what does this euro amount mean on the Australian side?',
-            'The quick-reference table is useful when you want an instant sense of scale, and the calculator handles the exact figure. If the payment is time-sensitive, refresh close to execution because the booked AUD amount can still shift with market timing and provider spread.'
+            'EUR to AUD is the reverse-direction budgeting page: the number starts in euros, but the decision gets made in Australian dollars. That usually means you are looking at a quote, invoice, transfer, or travel cost from the European side and need to know its AUD impact quickly.',
+            'Common examples include contractor invoices, tuition or relocation charges, reimbursements, and trip costs first quoted in EUR while the actual spending plan sits in AUD. The job of this page is to translate that euro-origin number into something an Australian budget can act on.',
+            'Use the quick-reference table when you need a fast sense of scale, and the calculator when the exact EUR figure matters. If approval and payment are separated in time, refresh near execution because the booked AUD result can still move.'
         ],
         scenarios: [
-            'Estimate the Australian-dollar impact of a European supplier or contractor invoice before approval.',
-            'Compare tuition, relocation, or travel costs quoted in EUR against an AUD budget ceiling.',
-            'Translate euro contract values into AUD for planning decks, approvals, or internal reporting.',
-            'Review recurring EUR subscriptions to see whether they still fit current Australian spend limits.',
-            'Prepare a current AUD estimate before a bank transfer, reimbursement, or card payment is finalized.'
+            'Estimate the AUD effect of a European supplier or contractor invoice before approving payment.',
+            'Check whether tuition, relocation, or travel costs quoted in EUR still fit an AUD budget ceiling.',
+            'Translate euro-origin costs into AUD for approvals, reimbursement planning, or internal reporting.',
+            'Review recurring EUR subscriptions or retainers against current Australian spending limits.',
+            'Prepare an AUD estimate before a bank transfer or reimbursement is finalized from a euro-denominated amount.'
         ],
         notesHeading: 'EUR to AUD planning notes',
         notes: [
-            'If your operating budget is in AUD, even a modest exchange move can affect the final local-currency cost of a large EUR invoice.',
-            'Re-check the rate close to execution time when approval and payment happen on different days.',
-            'For recurring euro expenses, comparing today\'s rate with prior months can help explain budget drift.'
+            'If the budget owner thinks in AUD, even a moderate EUR/AUD move can change the final local-currency cost of a larger invoice.',
+            'Re-check close to execution when approval, invoicing, and payment happen on different days.',
+            'For recurring euro-origin costs, occasional re-checks help explain why the AUD impact drifts over time.'
         ],
         howItWorksParagraphs: [
-            'The tool fetches a live EUR/AUD reference rate through the exchange endpoint and multiplies it by the euro amount you enter. This gives you a fast AUD-denominated estimate without opening a spreadsheet or a banking dashboard.',
-            '<strong>Why this pair gets checked:</strong> EUR to AUD often shows up in invoice review, travel planning, relocation estimates, and recurring subscription costs where the original quote is in euros but the operating budget is in Australian dollars.',
-            '<strong>Planning tip:</strong> if approval and payment happen on different days, the final AUD number can drift enough to matter on larger invoices. That is why this page is best used as a current planning reference rather than a final settlement record.'
+            'The tool fetches a live EUR/AUD reference rate and multiplies it by the euro amount you enter. The result is a quick AUD estimate for euro-origin prices, quotes, and transfers.',
+            '<strong>Why this page is not just AUD to EUR in reverse:</strong> users here are usually starting from a quoted EUR amount and translating it into an Australian planning context, which makes invoice review and budget approval more central than pre-trip spending.',
+            '<strong>What to watch for:</strong> if the payment is executed later, the final AUD outcome can drift because of timing, spread, and provider-specific pricing.'
         ],
         relatedLinks: [
             { url: '/currency/aud-to-eur', name: 'Convert AUD to EUR (reverse)' },
             { url: '/currency/eur-to-cad', name: 'EUR to CAD Converter' },
             { url: '/currency/eur-to-usd', name: 'EUR to USD Converter' },
-            { url: '/currency/gbp-to-eur', name: 'GBP to EUR Converter' }
+            { url: '/currency/usd-to-aud', name: 'USD to AUD Converter' }
         ],
         faq: [
-            { q: 'Can I use this EUR to AUD tool for invoice review?', a: 'Yes. It is useful for fast checks and planning. For formal accounting or treasury purposes, use your approved internal source of record.' },
-            { q: 'How often should I re-check EUR to AUD before payment?', a: 'For large or time-sensitive payments, check again near execution time because the booked rate can differ from an earlier quote.' },
-            { q: 'Does this converter include transfer or card fees?', a: 'No. It shows a rate-based reference conversion only. Provider fees and spreads are separate.' },
+            { q: 'Can I use this EUR to AUD page for invoice and quote review?', a: 'Yes. It is useful for quick checks when a euro-origin amount needs to be understood in Australian dollars before approval or payment.' },
+            { q: 'How often should I re-check EUR to AUD before payment?', a: 'For larger or time-sensitive payments, check again near execution time because the booked AUD rate can differ from an earlier reference quote.' },
+            { q: 'Does this converter include transfer or card fees?', a: 'No. It shows a rate-based reference conversion only. Provider spreads, transfer costs, and card fees are separate.' },
             { q: 'Can I switch from EUR to AUD into AUD to EUR?', a: 'Yes. Use the swap option or the reverse-pair link.' }
         ]
     }
