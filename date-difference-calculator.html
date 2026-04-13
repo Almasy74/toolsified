@@ -9,17 +9,20 @@
   <meta name="description"
     content="Calculate the number of days between dates, inclusive span, weekdays, weekends, and exact calendar difference in years, months, and days." />
   <link rel="icon" type="image/png" href="/favicon.png" />
-  <link rel="stylesheet" href="/style.css?v=2.3" />
+  <link rel="stylesheet" href="/style.css?v=2.5" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
   <link rel="canonical" href="https://toolsified.com/date-difference-calculator" />
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6293439009227714"
     crossorigin="anonymous"></script>
   <script defer src="/scripts/nav.js"></script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the difference between total days and inclusive days?","acceptedAnswer":{"@type":"Answer","text":"Total days measures the gap between the two dates. Inclusive days counts both the start date and the end date as part of the span."}},{"@type":"Question","name":"How is this different from the business days calculator?","acceptedAnswer":{"@type":"Answer","text":"This page measures all calendar days. The business days calculator excludes weekends and optional holiday calendars."}},{"@type":"Question","name":"Does it include leap years?","acceptedAnswer":{"@type":"Answer","text":"Yes. Leap years are handled naturally by date arithmetic."}},{"@type":"Question","name":"Why does the result show both weeks and days?","acceptedAnswer":{"@type":"Answer","text":"Some planning contexts use weeks (sprints, school terms) while others use raw days, so the calculator provides both for convenience."}},{"@type":"Question","name":"Do time zones affect the date difference?","acceptedAnswer":{"@type":"Answer","text":"No. This tool uses date-only values without time-of-day, so time zone offsets do not change the result."}},{"@type":"Question","name":"Can I use this for age verification?","acceptedAnswer":{"@type":"Answer","text":"You can check the number of years between a birth date and today, but for legal age verification use the dedicated age calculator which handles month and day boundaries precisely."}}]}
+    </script>
 </head>
 
-<body>
+<body class="tool-body">
   <header class="site-header">
     <div class="container">
       <div class="header-content">
@@ -40,77 +43,107 @@
     </div>
   </header>
 
-  <main class="container">
-    <h1>Date Difference Calculator</h1>
-
-    <section class="card seo-content" style="margin-top:24px; text-align:left; padding:32px;">
-      <h2>Intro</h2>
-      <p>This calculator shows the total days between two dates, the inclusive date span, weekday and weekend counts,
-        and an exact calendar difference in years, months, and days. It is useful for planning deadlines, tracking
-        project durations, checking age-like intervals, and comparing date ranges without business-day filters.</p>
+  <main class="container tool-page">
+    <section class="tool-hero">
+      <div class="tool-hero-copy">
+        <p class="tool-kicker">Dates and planning</p>
+        <h1>Date Difference Calculator</h1>
+        <p class="tool-summary">Measure the total days between two dates, inclusive span, weekday and weekend counts, and exact calendar difference in one quick check.</p>
+        <div class="tool-meta">
+          <span>Calendar-aware</span>
+          <span>Runs in the browser</span>
+          <span>Good for planning and deadlines</span>
+        </div>
+      </div>
+      <aside class="tool-hero-panel">
+        <p class="tool-panel-label">Useful for</p>
+        <h2>Deadlines, durations, and date-range checks</h2>
+        <p>Use it when you need calendar distance without switching to business-day or holiday rules first.</p>
+        <div class="tool-hero-links">
+          <a href="#calculator">Total day difference</a>
+          <a href="#calculator">Inclusive span</a>
+          <a href="#calculator">Weekdays and weekends</a>
+          <a href="#calculator">Exact years, months, and days</a>
+        </div>
+      </aside>
     </section>
 
-    <div class="card" style="margin-top:24px;">
-      <div class="row">
-        <div style="flex:1;">
-          <label for="startDate" style="margin-top:0;">Start date</label>
-          <input id="startDate" type="date" />
+    <section id="calculator" class="tool-workspace">
+      <div class="card tool-workspace-card">
+        <div class="tool-workspace-header">
+          <div>
+            <p class="tool-section-label">Calculator</p>
+            <h2>Compare two dates</h2>
+          </div>
+          <p>Pick a start date and an end date to see both the simple day gap and the fuller calendar breakdown.</p>
         </div>
-        <div style="flex:1;">
-          <label for="endDate" style="margin-top:0;">End date</label>
-          <input id="endDate" type="date" />
+
+        <div class="tool-form-grid">
+          <div class="tool-field">
+            <label for="startDate">Start date</label>
+            <input id="startDate" type="date" />
+          </div>
+          <div class="tool-field">
+            <label for="endDate">End date</label>
+            <input id="endDate" type="date" />
+          </div>
         </div>
-      </div>
 
-      <button id="calcBtn" class="primary" type="button">Calculate date difference</button>
-      <div id="result" style="margin-top:20px;"></div>
-    </div>
+        <div class="tool-actions">
+          <button id="calcBtn" class="primary" type="button">Calculate date difference</button>
+        </div>
+        <div id="result" class="tool-output"></div>
+      </div>
+    </section>
 
-    <section class="card seo-content" style="margin-top:40px; text-align:left; padding:32px;">
-      <h2>How it works</h2>
-      <p>The page converts both dates into UTC date-only values, then measures the calendar span in two ways:</p>
-      <ul>
-        <li>absolute day difference using date arithmetic</li>
-        <li>exact calendar difference using stepwise year and month matching</li>
-      </ul>
-      <p><strong>Limitations:</strong> this page measures calendar dates only. It does not include time-of-day, business
-        calendars, public holidays, or legal deadline rules that may depend on local cutoff times.</p>
+    <section class="tool-support-grid">
+      <article class="card tool-support-card">
+        <p class="tool-section-label">Method</p>
+        <h2>How it works</h2>
+        <p>The page converts both dates into UTC date-only values, then measures the span in two ways.</p>
+        <ul>
+          <li>Absolute day difference using date arithmetic</li>
+          <li>Exact calendar difference using stepwise year and month matching</li>
+        </ul>
+        <p class="tool-note"><strong>Limitations:</strong> this page measures calendar dates only. It does not include time-of-day, business calendars, public holidays, or formal legal deadline rules.</p>
+      </article>
 
-      <h2>Practical use scenarios</h2>
-      <ul>
-        <li>Count days between project milestones or travel dates.</li>
-        <li>Check how long a contract, course, or event period lasts.</li>
-        <li>Compare total days with exact calendar components.</li>
-        <li>Use it as a general "days between dates" tool before switching to business-day logic.</li>
-      </ul>
-
-      <h2>Related tools</h2>
-      <div class="internal-links-cluster" style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:24px;">
-        <a href="/business-days" style="color: var(--primary-color); text-decoration: underline;">Business Days Calculator</a>
-        <a href="/age-calculator" style="color: var(--primary-color); text-decoration: underline;">Age Calculator</a>
-        <a href="/meeting-overlap" style="color: var(--primary-color); text-decoration: underline;">Meeting Overlap Finder</a>
-        <a href="/multi-timezone" style="color: var(--primary-color); text-decoration: underline;">Multi Time Zone</a>
-      </div>
-
-      <h2>FAQ</h2>
-      <div class="faq-item" style="margin-bottom:16px;">
-        <strong>What is the difference between total days and inclusive days?</strong>
-        <p>Total days measures the gap between the two dates. Inclusive days counts both the start date and the end
-          date as part of the span.</p>
-      </div>
-      <div class="faq-item" style="margin-bottom:16px;">
-        <strong>How is this different from the business days calculator?</strong>
-        <p>This page measures all calendar days. The business days calculator excludes weekends and optional holiday
-          calendars.</p>
-      </div>
-      <div class="faq-item" style="margin-bottom:16px;">
-        <strong>Does it include leap years?</strong>
-        <p>Yes. Leap years are handled naturally by date arithmetic.</p>
-      </div>
-      <div class="faq-item">
-        <strong>Can I use it for legal deadlines?</strong>
-        <p>Use it for planning only. Formal deadlines may follow jurisdiction-specific rules.</p>
-      </div>
+      <article class="card tool-support-card">
+        <p class="tool-section-label">Related</p>
+        <h2>Useful next tools</h2>
+        <div class="tool-link-cluster">
+          <a href="/business-days">Business Days Calculator</a>
+          <a href="/age-calculator">Age Calculator</a>
+          <a href="/meeting-overlap">Meeting Overlap Finder</a>
+          <a href="/multi-timezone">Multi Time Zone</a>
+        </div>
+        <div class="tool-faq-list">
+          <div class="faq-item">
+            <strong>What is the difference between total days and inclusive days?</strong>
+            <p>Total days measures the gap between the two dates. Inclusive days counts both the start date and the end date as part of the span.</p>
+          </div>
+          <div class="faq-item">
+            <strong>How is this different from the business days calculator?</strong>
+            <p>This page measures all calendar days. The business days calculator excludes weekends and optional holiday calendars.</p>
+          </div>
+          <div class="faq-item">
+            <strong>Does it include leap years?</strong>
+            <p>Yes. Leap years are handled naturally by date arithmetic.</p>
+          </div>
+          <div class="faq-item">
+            <strong>Why does the result show both weeks and days?</strong>
+            <p>Some planning contexts use weeks (sprints, school terms) while others use raw days, so the calculator provides both for convenience.</p>
+          </div>
+          <div class="faq-item">
+            <strong>Do time zones affect the date difference?</strong>
+            <p>No. This tool uses date-only values without time-of-day, so time zone offsets do not change the result.</p>
+          </div>
+          <div class="faq-item">
+            <strong>Can I use this for age verification?</strong>
+            <p>You can check the number of years between a birth date and today, but for legal age verification use the dedicated age calculator which handles month and day boundaries precisely.</p>
+          </div>
+        </div>
+      </article>
     </section>
   </main>
 

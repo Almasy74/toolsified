@@ -10,19 +10,25 @@
   <title>Toolsified - Free Calculators, Converters &amp; Planning Tools</title>
   <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="stylesheet" href="/style.css?v=2.3" />
+  <link rel="stylesheet" href="/homepage.css?v=11" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+    rel="stylesheet" />
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6293439009227714"
     crossorigin="anonymous"></script>
   <link rel="canonical" href="https://toolsified.com/" />
-  <meta property="og:title" content="Toolsified - Free Calculators, Converters & Planning Tools" />
+  <meta property="og:title" content="Toolsified - Free Calculators, Converters &amp; Planning Tools" />
   <meta property="og:description"
     content="Fast, privacy-friendly online tools for pricing, date math, unit conversion, currency checks, time zones, and crypto analysis." />
   <meta property="og:url" content="https://toolsified.com/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Toolsified" />
   <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Toolsified - Free Calculators, Converters &amp; Planning Tools" />
+  <meta name="twitter:description"
+    content="Fast, privacy-friendly online tools for pricing, date math, unit conversion, currency checks, time zones, and crypto analysis." />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -79,15 +85,19 @@
   <script defer src="/scripts/nav.js"></script>
 </head>
 
-<body>
-  <header class="site-header">
-    <div class="container">
+<body class="candidate-body">
+  <a class="candidate-skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header candidate-header">
+    <div class="candidate-shell">
       <div class="header-content">
-        <div class="logo-container">
-          <a href="/">
-            <img src="/logo.png" alt="Toolsified logo" class="logo" />
-          </a>
-        </div>
+        <a href="/" class="candidate-brand" aria-label="Toolsified home">
+          <span class="candidate-brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M13 2 5 13h5l-1 9 8-11h-5l1-9z"></path>
+            </svg>
+          </span>
+          <span class="candidate-brand-wordmark">Toolsified</span>
+        </a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mainNav"
           aria-label="Toggle navigation">Menu</button>
         <nav class="main-nav" id="mainNav">
@@ -95,293 +105,202 @@
           <a href="/multi-timezone">Time Zones</a>
           <a href="/currency">Currency</a>
           <a href="/crypto">Crypto</a>
-          <div class="nav-more">
-            <button class="nav-more-toggle" type="button" aria-expanded="false" aria-haspopup="true">More</button>
-            <div class="nav-more-menu">
-              <a href="/business-days">Business Days</a>
-              <a href="/meeting-overlap">Meeting Overlap</a>
-              <a href="/inflation-calculator">Inflation Calculator</a>
-              <a href="/crypto-tax-estimator">Crypto Tax Estimator</a>
-            </div>
-          </div>
+          <a href="#browse-tools" class="candidate-mobile-nav-link">Browse categories</a>
         </nav>
+        <a href="#browse-tools" class="candidate-header-cta">Browse categories</a>
       </div>
     </div>
   </header>
 
-  <main class="container">
-    <section class="card seo-content" style="margin-top: 24px; text-align: left; padding: 32px;">
-      <h1 style="margin-top: 0;">Welcome to Toolsified</h1>
-      <p>Toolsified is a practical collection of browser-based calculators and converters for finance, date math, time
-        planning, and quick reference work. The homepage is designed to help you reach the right tool quickly while
-        also showing how the main categories fit together.</p>
-      <p>Use it as a fast starting point when you need a live reference number, a schedule comparison, or a quick
-        calculator for percentages, taxes, loans, dates, units, currency, or crypto without signing up for a larger
-        platform.</p>
+  <main id="main-content">
+    <section class="candidate-hero">
+      <div class="candidate-shell candidate-hero-grid">
+        <div class="candidate-hero-copy">
+          <div class="candidate-hero-intro">
+            <div class="candidate-eyebrow">Browser-first tools for practical decisions</div>
+            <h1>Fast, reliable tools for calculations, conversions, and planning.</h1>
+            <p class="candidate-lead">
+              Use Toolsified for pricing checks, date math, time zones, currency references, and other fast browser-based utility work.
+            </p>
+            <div class="candidate-actions">
+              <a href="#browse-tools" class="candidate-btn candidate-btn-primary">Explore categories</a>
+            </div>
+          </div>
+          <div class="candidate-signal-row">
+            <div class="candidate-signal">No signup required</div>
+            <div class="candidate-signal">Built in the browser</div>
+            <div class="candidate-signal">Quick-reference workflow</div>
+          </div>
+        </div>
+
+        <aside class="candidate-hero-panel" aria-label="Featured entry points">
+          <div class="candidate-panel-head">
+            <div>
+              <p class="candidate-panel-kicker">Quick start</p>
+              <h2>Core routes, better first clicks</h2>
+            </div>
+            <div class="candidate-panel-shield" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 3l7 3v5c0 4.5-2.7 8.5-7 10-4.3-1.5-7-5.5-7-10V6l7-3z"></path>
+                <path d="M9.5 12.5l1.8 1.8 3.7-4.1"></path>
+              </svg>
+            </div>
+          </div>
+
+          <div class="candidate-quick-links">
+            <a href="/time-code"><span>Time-code Converter</span><span aria-hidden="true">&rarr;</span></a>
+            <a href="/currency"><span>Currency Hub</span><span aria-hidden="true">&rarr;</span></a>
+            <a href="/meeting-overlap"><span>Meeting Overlap</span><span aria-hidden="true">&rarr;</span></a>
+            <a href="/crypto/btc-to-usd"><span>BTC to USD</span><span aria-hidden="true">&rarr;</span></a>
+          </div>
+        </aside>
+      </div>
     </section>
 
-    <section style="margin-top: 32px;">
-      <h2 style="margin-bottom: 16px;">Core Hubs</h2>
-      <div class="tool-list">
-        <a href="/time-code" class="tool">
-          <span class="tool-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <circle cx="12" cy="12" r="9"></circle>
-              <path d="M12 7v5l3 2"></path>
-            </svg>
-          </span>
-          <div class="tool-content">
+    <section id="browse-tools" class="candidate-section candidate-top-tools">
+      <div class="candidate-shell">
+        <div class="candidate-grid-header">
+          <div>
+            <p class="candidate-section-label">Core tools</p>
+            <h2>Start with the main categories</h2>
+          </div>
+          <p>Start with the four categories most people use first.</p>
+        </div>
+
+        <div class="candidate-card-grid candidate-card-grid-four">
+          <a href="/time-code" class="candidate-tool-card">
+            <span class="candidate-tool-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="9"></circle>
+                <path d="M12 7v5l3 2"></path>
+              </svg>
+            </span>
             <h3>Time-code Converter</h3>
-            <p>Instantly translate natural language time codes to your local time zone.</p>
-          </div>
-        </a>
-        <a href="/multi-timezone" class="tool">
-          <span class="tool-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <circle cx="12" cy="12" r="9"></circle>
-              <path d="M3 12h18M12 3a13 13 0 0 1 0 18M12 3a13 13 0 0 0 0 18"></path>
-            </svg>
-          </span>
-          <div class="tool-content">
+            <p>Translate shorthand invite text into your local time without manual offset math.</p>
+          </a>
+          <a href="/multi-timezone" class="candidate-tool-card">
+            <span class="candidate-tool-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="9"></circle>
+                <path d="M3 12h18M12 3a13 13 0 0 1 0 18M12 3a13 13 0 0 0 0 18"></path>
+              </svg>
+            </span>
             <h3>Multi Time Zone</h3>
-            <p>Compare multiple cities and plan international meetings with ease.</p>
-          </div>
-        </a>
-        <a href="/currency" class="tool">
-          <span class="tool-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <path d="M4 7h10a3 3 0 1 1 0 6H8a3 3 0 1 0 0 6h12"></path>
-              <path d="M6 5v14M18 5v14"></path>
-            </svg>
-          </span>
-          <div class="tool-content">
+            <p>Compare city clocks side by side and plan overlaps across international teams.</p>
+          </a>
+          <a href="/currency" class="candidate-tool-card">
+            <span class="candidate-tool-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M4 7h10a3 3 0 1 1 0 6H8a3 3 0 1 0 0 6h12"></path>
+                <path d="M6 5v14M18 5v14"></path>
+              </svg>
+            </span>
             <h3>Currency Converter</h3>
-            <p>Live exchange rates for 50+ fiat currencies with local processing.</p>
-          </div>
-        </a>
-        <a href="/crypto" class="tool">
-          <span class="tool-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <circle cx="12" cy="12" r="8"></circle>
-              <path d="M10 9h3a2 2 0 1 1 0 4h-3h3a2 2 0 1 1 0 4h-3"></path>
-              <path d="M12 7v10"></path>
-            </svg>
-          </span>
-          <div class="tool-content">
+            <p>Check live FX reference rates for practical budgeting and price comparisons.</p>
+          </a>
+          <a href="/crypto" class="candidate-tool-card">
+            <span class="candidate-tool-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="8"></circle>
+                <path d="M10 9h3a2 2 0 1 1 0 4h-3h3a2 2 0 1 1 0 4h-3"></path>
+                <path d="M12 7v10"></path>
+              </svg>
+            </span>
             <h3>Crypto Profit Tracker</h3>
-            <p>Calculate historic profit and loss for major cryptocurrencies securely.</p>
-          </div>
-        </a>
+            <p>Calculate historic crypto outcomes with a clearer sense of scope and use case.</p>
+          </a>
+        </div>
+
+        <div class="candidate-chip-bar" aria-label="Popular starting points">
+          <span class="candidate-chip-label">Popular starts</span>
+          <a href="/percentage-calculator" class="candidate-chip-link">Percentage Calculator</a>
+          <a href="/vat-calculator" class="candidate-chip-link">VAT Calculator</a>
+          <a href="/date-difference-calculator" class="candidate-chip-link">Days Between Dates</a>
+          <a href="/currency/krw-to-usd" class="candidate-chip-link">KRW to USD</a>
+          <a href="/crypto/btc-to-usd" class="candidate-chip-link">BTC to USD</a>
+        </div>
       </div>
     </section>
 
-    <section style="margin-top: 32px;">
-      <h2 style="margin-bottom: 16px;">Finance &amp; Pricing</h2>
-      <div class="tool-list">
-        <a href="/percentage-calculator" class="tool">
-          <span class="tool-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <circle cx="7" cy="7" r="2.5"></circle>
-              <circle cx="17" cy="17" r="2.5"></circle>
-              <path d="M6 18 18 6"></path>
-            </svg>
-          </span>
-          <div class="tool-content">
-            <h3>Percentage Calculator</h3>
-            <p>Handle percent of a number, percent change, and markup-style checks in one place.</p>
+    <section class="candidate-section candidate-browse">
+      <div class="candidate-shell">
+        <div class="candidate-grid-header">
+          <div>
+            <p class="candidate-section-label">More calculators</p>
+            <h2>Browse the rest of the library</h2>
           </div>
-        </a>
-        <a href="/vat-calculator" class="tool">
-          <span class="tool-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <path d="M4 6h16v12H4z"></path>
-              <path d="M4 10h16M8 14h2M12 14h4"></path>
-            </svg>
-          </span>
-          <div class="tool-content">
-            <h3>VAT / Sales Tax Calculator</h3>
-            <p>Switch between tax-exclusive and tax-inclusive pricing with custom or preset rates.</p>
-          </div>
-        </a>
-        <a href="/loan-payment-calculator" class="tool">
-          <span class="tool-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <rect x="4" y="5" width="16" height="14" rx="2"></rect>
-              <path d="M8 10h8M8 14h5"></path>
-            </svg>
-          </span>
-          <div class="tool-content">
-            <h3>Loan Payment Calculator</h3>
-            <p>Estimate monthly payments, total interest, and payoff impact from extra payments.</p>
-          </div>
-        </a>
-        <a href="/inflation-calculator" class="tool">
-          <span class="tool-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <path d="M4 19h16M6 16l4-4 3 3 5-6"></path>
-              <path d="M18 9h2v2"></path>
-            </svg>
-          </span>
-          <div class="tool-content">
-            <h3>Inflation Calculator</h3>
-            <p>Estimate how purchasing power changes over time for major countries.</p>
-          </div>
-        </a>
-        <a href="/crypto-tax-estimator" class="tool">
-          <span class="tool-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <path d="M7 3h8l4 4v14H7z"></path>
-              <path d="M15 3v4h4M10 12h6M10 16h6"></path>
-            </svg>
-          </span>
-          <div class="tool-content">
-            <h3>Crypto Tax Estimator</h3>
-            <p>Get a fast tax estimate by country for your realized crypto gains.</p>
-          </div>
-        </a>
+          <p>Use this when you know the type of task, but not the exact tool yet.</p>
+        </div>
+
+        <div class="candidate-browse-grid">
+          <article class="candidate-browse-card">
+            <h3>Core hubs</h3>
+            <p>The main routes that anchor the current tool structure.</p>
+            <div class="candidate-link-grid">
+              <a href="/time-code">Time Code</a>
+              <a href="/multi-timezone">Time Zones</a>
+              <a href="/currency">Currency</a>
+              <a href="/crypto">Crypto</a>
+            </div>
+          </article>
+          <article class="candidate-browse-card">
+            <h3>Finance and pricing</h3>
+            <p>Fast-reference tools for quotes, taxes, borrowing, and budgeting.</p>
+            <div class="candidate-link-grid">
+              <a href="/percentage-calculator">Percentage Calculator</a>
+              <a href="/vat-calculator">VAT Calculator</a>
+              <a href="/loan-payment-calculator">Loan Payment Calculator</a>
+              <a href="/inflation-calculator">Inflation Calculator</a>
+            </div>
+          </article>
+          <article class="candidate-browse-card">
+            <h3>Dates and planning</h3>
+            <p>Utilities for scheduling, business-day logic, and recurring coordination work.</p>
+            <div class="candidate-link-grid">
+              <a href="/business-days">Business Days</a>
+              <a href="/date-difference-calculator">Date Difference</a>
+              <a href="/age-calculator">Age Calculator</a>
+              <a href="/meeting-overlap">Meeting Overlap</a>
+            </div>
+          </article>
+          <article class="candidate-browse-card">
+            <h3>Guides</h3>
+            <p>Educational articles that explain the concepts behind the tools.</p>
+            <div class="candidate-link-grid">
+              <a href="/guides/how-exchange-rates-work">How Exchange Rates Work</a>
+              <a href="/guides/timezone-scheduling-tips">Timezone Scheduling Tips</a>
+              <a href="/guides/percentage-calculations-explained">Percentage Calculations</a>
+              <a href="/guides/understanding-loan-amortization">Loan Amortization</a>
+            </div>
+          </article>
+          <article class="candidate-browse-card">
+            <h3>Policies and context</h3>
+            <p>Pages that explain scope, methodology, maintenance, and contact details.</p>
+            <div class="candidate-link-grid">
+              <a href="/methodology">Methodology</a>
+              <a href="/about">About</a>
+              <a href="/privacy">Privacy</a>
+              <a href="/contact">Contact</a>
+            </div>
+          </article>
+        </div>
       </div>
-    </section>
-
-    <section style="margin-top: 32px;">
-      <h2 style="margin-bottom: 16px;">Date &amp; Planning</h2>
-      <div class="tool-list">
-        <a href="/business-days" class="tool">
-          <span class="tool-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <rect x="4" y="5" width="16" height="15" rx="2"></rect>
-              <path d="M8 3v4M16 3v4M4 10h16"></path>
-            </svg>
-          </span>
-          <div class="tool-content">
-            <h3>Business Days Calculator</h3>
-            <p>Count working days between two dates with optional country holidays.</p>
-          </div>
-        </a>
-        <a href="/date-difference-calculator" class="tool">
-          <span class="tool-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <path d="M5 5h6v6H5zM13 13h6v6h-6z"></path>
-              <path d="M11 8h2M12 7v2M8 11v2h8"></path>
-            </svg>
-          </span>
-          <div class="tool-content">
-            <h3>Date Difference Calculator</h3>
-            <p>See total days, weeks, weekdays, and exact calendar difference between two dates.</p>
-          </div>
-        </a>
-        <a href="/age-calculator" class="tool">
-          <span class="tool-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <circle cx="12" cy="8" r="3"></circle>
-              <path d="M6 20a6 6 0 0 1 12 0"></path>
-              <path d="M18 5h3M19.5 3.5v3"></path>
-            </svg>
-          </span>
-          <div class="tool-content">
-            <h3>Age Calculator</h3>
-            <p>Calculate exact age by birth date, including years, months, days, and next birthday timing.</p>
-          </div>
-        </a>
-        <a href="/meeting-overlap" class="tool">
-          <span class="tool-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <circle cx="9" cy="10" r="3"></circle>
-              <circle cx="15" cy="10" r="3"></circle>
-              <path d="M4 19a5 5 0 0 1 10 0M10 19a5 5 0 0 1 10 0"></path>
-            </svg>
-          </span>
-          <div class="tool-content">
-            <h3>Meeting Overlap Finder</h3>
-            <p>Find shared working-hour windows across 2 to 5 global time zones.</p>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <section style="margin-top: 32px;">
-      <h2 style="margin-bottom: 16px;">Everyday Conversion</h2>
-      <div class="tool-list">
-        <a href="/unit-converter" class="tool">
-          <span class="tool-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <path d="M4 7h16M4 12h16M4 17h16"></path>
-              <path d="M7 4v16"></path>
-            </svg>
-          </span>
-          <div class="tool-content">
-            <h3>Unit Converter</h3>
-            <p>Convert length, weight, temperature, area, and volume with one fast utility page.</p>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <section class="card seo-content" style="margin-top: 32px; text-align: left; padding: 32px;">
-      <h2>What Toolsified is for</h2>
-      <p>Toolsified is a fast reference site for practical calculations across pricing, date logic, time planning,
-        currency, crypto, and everyday conversion workflows. The goal is to help you size, compare, and check numbers
-        quickly without requiring an account or sending unnecessary personal data through a complex app stack.</p>
-
-      <h2>Main tool categories</h2>
-      <p>The site is organized around four practical themes: <a href="/currency"
-          style="color: var(--primary-color); text-decoration: underline;">conversion hubs</a>, <a
-          href="/percentage-calculator" style="color: var(--primary-color); text-decoration: underline;">finance and
-          pricing calculators</a>, <a href="/date-difference-calculator"
-          style="color: var(--primary-color); text-decoration: underline;">date and planning tools</a>, and lightweight
-        browser-based utilities such as the <a href="/unit-converter"
-          style="color: var(--primary-color); text-decoration: underline;">unit converter</a>. That keeps the site
-        broad enough to be useful without losing the quick-answer utility profile.</p>
-
-      <h2>How the tools work</h2>
-      <p>Most tools run directly in the browser and are built for quick planning rather than formal reporting. Where
-        live or external data is used, the pages explain the source, limitations, and the difference between a
-        reference estimate and a final booked result. <a href="/methodology"
-          style="color: var(--primary-color); text-decoration: underline;">Read the methodology</a>.</p>
-
-      <h2>Popular tools</h2>
-      <p>Common starting points now include the <a href="/percentage-calculator"
-          style="color: var(--primary-color); text-decoration: underline;">percentage calculator</a>, <a
-          href="/vat-calculator" style="color: var(--primary-color); text-decoration: underline;">VAT calculator</a>,
-        <a href="/date-difference-calculator"
-          style="color: var(--primary-color); text-decoration: underline;">days between dates calculator</a>, <a
-          href="/currency/krw-to-usd" style="color: var(--primary-color); text-decoration: underline;">KRW to USD</a>,
-        and <a href="/crypto/btc-to-usd" style="color: var(--primary-color); text-decoration: underline;">Bitcoin
-          profit calculator</a>.
-      </p>
-
-      <h2>When to use Toolsified and when not to</h2>
-      <p>Use Toolsified when you need a fast reference answer, a practical estimate, or a cleaner way to compare
-        numbers across currencies, prices, dates, time zones, and crypto scenarios. It is a strong fit for planning,
-        screening, budgeting, and quick decision support.</p>
-      <p>Do not treat the site as a substitute for bank settlement quotes, tax advice, accounting source-of-record
-        data, legal review, or regulated financial guidance. Where those boundaries matter, the relevant pages link to
-        their methodology and limitations directly.</p>
-
-      <h2>Methodology and policies</h2>
-      <p>Toolsified aims to be transparent about what each tool does, where external data is involved, and what the
-        output should and should not be used for. For more detail, see the <a href="/methodology"
-          style="color: var(--primary-color); text-decoration: underline;">methodology</a>, <a href="/about"
-          style="color: var(--primary-color); text-decoration: underline;">about page</a>, <a href="/privacy"
-          style="color: var(--primary-color); text-decoration: underline;">privacy policy</a>, <a href="/terms"
-          style="color: var(--primary-color); text-decoration: underline;">terms</a>, and <a href="/contact"
-          style="color: var(--primary-color); text-decoration: underline;">contact page</a>.</p>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="footer-container">
-      <p class="footer-tagline">&copy; 2026 Toolsified &mdash; Independent web tools platform.</p>
-      <div class="footer-links">
-        <a href="/privacy">Privacy Policy</a>
-        <span>|</span>
+  <footer class="site-footer candidate-footer">
+    <div class="candidate-shell candidate-footer-shell">
+      <div>
+        <p class="candidate-footer-brand">Toolsified</p>
+        <p class="candidate-footer-copy">Fast, privacy-friendly online tools for practical calculations, conversions, and quick reference work.</p>
+      </div>
+      <div class="candidate-footer-links">
+        <a href="/privacy">Privacy</a>
         <a href="/terms">Terms</a>
-        <span>|</span>
         <a href="/about">About</a>
-        <span>|</span>
         <a href="/contact">Contact</a>
       </div>
-      <p class="footer-contact">Contact: <a href="mailto:info@toolsified.com">info@toolsified.com</a></p>
-      <p class="footer-location">Location: Norway</p>
+      <p class="candidate-footer-copy">Contact: <a href="mailto:info@toolsified.com">info@toolsified.com</a> &middot; Norway</p>
     </div>
   </footer>
 </body>

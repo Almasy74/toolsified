@@ -9,17 +9,20 @@
   <meta name="description"
     content="Calculate business days between dates with optional weekend and holiday exclusion. Includes methodology, use cases, and limitations." />
   <link rel="icon" type="image/png" href="/favicon.png" />
-  <link rel="stylesheet" href="/style.css?v=2.3" />
+  <link rel="stylesheet" href="/style.css?v=2.5" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
   <link rel="canonical" href="https://toolsified.com/business-days" />
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6293439009227714"
     crossorigin="anonymous"></script>
   <script defer src="/scripts/nav.js"></script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Are start and end dates included?","acceptedAnswer":{"@type":"Answer","text":"Yes, the range is inclusive."}},{"@type":"Question","name":"Can I exclude weekends?","acceptedAnswer":{"@type":"Answer","text":"Yes. Enable the weekend exclusion checkbox."}},{"@type":"Question","name":"Are holiday calendars complete?","acceptedAnswer":{"@type":"Answer","text":"They are practical defaults and should be validated for legal or payroll-critical processes."}},{"@type":"Question","name":"Do business days differ between countries?","acceptedAnswer":{"@type":"Answer","text":"Yes. Weekends, public holidays, and even which days count as working days vary by country, which is why the holiday calendar filter matters."}},{"@type":"Question","name":"How do bank holidays affect the count?","acceptedAnswer":{"@type":"Answer","text":"When a country calendar is selected, recognized bank holidays are excluded from the working-day total alongside weekends."}},{"@type":"Question","name":"Can I use this for project deadline estimation?","acceptedAnswer":{"@type":"Answer","text":"Yes. Enter the project start date and a target end date to see how many actual working days are available, then adjust for holidays relevant to your team."}}]}
+    </script>
 </head>
 
-<body>
+<body class="tool-body">
   <header class="site-header">
     <div class="container">
       <div class="header-content">
@@ -33,68 +36,123 @@
     </div>
   </header>
 
-  <main class="container">
-    <h1>Business Days Calculator</h1>
-
-    <section class="card seo-content" style="margin-top:24px; text-align:left; padding:32px;">
-      <h2>Intro</h2>
-      <p>This calculator counts business days between two dates and can exclude weekends and selected national holiday calendars. It is useful for contract deadlines, payroll cycles, service-level commitments, procurement lead times, and internal project planning.</p>
+  <main class="container tool-page">
+    <section class="tool-hero">
+      <div class="tool-hero-copy">
+        <p class="tool-kicker">Dates and operations</p>
+        <h1>Business Days Calculator</h1>
+        <p class="tool-summary">Count working days between two dates and optionally exclude weekends plus selected holiday calendars for a more practical planning baseline.</p>
+        <div class="tool-meta">
+          <span>Inclusive date range</span>
+          <span>Optional holiday filter</span>
+          <span>Useful for deadlines and SLAs</span>
+        </div>
+      </div>
+      <aside class="tool-hero-panel">
+        <p class="tool-panel-label">Useful for</p>
+        <h2>Contracts, payroll cycles, and service windows</h2>
+        <p>Use it when calendar days are too broad and you need a cleaner working-day estimate.</p>
+        <div class="tool-hero-links">
+          <a href="#calculator">Business-day count</a>
+          <a href="#calculator">Weekend exclusion</a>
+          <a href="#calculator">Country holiday calendars</a>
+          <a href="#calculator">Holiday list output</a>
+        </div>
+      </aside>
     </section>
 
-    <div class="card" style="margin-top:24px;">
-      <label for="startDate">Start date</label>
-      <input id="startDate" type="date" />
+    <section id="calculator" class="tool-workspace">
+      <div class="card tool-workspace-card">
+        <div class="tool-workspace-header">
+          <div>
+            <p class="tool-section-label">Calculator</p>
+            <h2>Count working days between two dates</h2>
+          </div>
+          <p>Pick a date range, decide whether weekends should count, and add a country holiday calendar when you need a tighter estimate.</p>
+        </div>
 
-      <label for="endDate">End date</label>
-      <input id="endDate" type="date" />
+        <div class="tool-form-grid">
+          <div class="tool-field">
+            <label for="startDate">Start date</label>
+            <input id="startDate" type="date" />
+          </div>
+          <div class="tool-field">
+            <label for="endDate">End date</label>
+            <input id="endDate" type="date" />
+          </div>
+        </div>
 
-      <label style="display:flex; align-items:center; gap:8px; margin-top:16px;">
-        <input id="excludeWeekends" type="checkbox" checked style="width:auto; margin-top:0;" />
-        Exclude weekends (Saturday and Sunday)
-      </label>
+        <label class="tool-toggle-row">
+          <input id="excludeWeekends" type="checkbox" checked />
+          Exclude weekends (Saturday and Sunday)
+        </label>
 
-      <label for="country">Holiday calendar (optional)</label>
-      <select id="country">
-        <option value="">No holiday filter</option>
-        <option value="US">United States</option>
-        <option value="UK">United Kingdom</option>
-        <option value="AU">Australia</option>
-        <option value="NO">Norway</option>
-      </select>
+        <div class="tool-field">
+          <label for="country">Holiday calendar (optional)</label>
+          <select id="country">
+            <option value="">No holiday filter</option>
+            <option value="US">United States</option>
+            <option value="UK">United Kingdom</option>
+            <option value="AU">Australia</option>
+            <option value="NO">Norway</option>
+          </select>
+        </div>
 
-      <button id="calcBtn" class="primary" type="button">Calculate</button>
+        <div class="tool-actions">
+          <button id="calcBtn" class="primary" type="button">Calculate</button>
+        </div>
 
-      <div id="summary" class="card" style="margin:24px 0 0; padding:20px; box-shadow:none; border:1px solid var(--border-color); display:none;"></div>
-      <div id="holidayList" style="margin-top:16px;"></div>
-    </div>
-
-    <section class="card seo-content" style="margin-top: 40px; text-align: left; padding: 32px;">
-      <h2>How it works</h2>
-      <p>The logic iterates date by date from start to end (inclusive), tracks total days, flags weekend dates, and checks holiday matches from built-in country rules. Business-day output is the remaining set after exclusions.</p>
-      <p><strong>Limitations:</strong> public holiday rules are simplified and may not include all regional observances, one-off decrees, or company-specific non-working days.</p>
-
-      <h2>Practical use scenarios</h2>
-      <ul>
-        <li>Estimate payment due dates for net terms.</li>
-        <li>Calculate SLA windows excluding weekends and holidays.</li>
-        <li>Plan onboarding timelines across countries.</li>
-        <li>Forecast staffing workload around holiday periods.</li>
-      </ul>
-
-      <h2>Related tools</h2>
-      <div class="internal-links-cluster" style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:24px;">
-        <a href="/date-difference-calculator" style="color: var(--primary-color); text-decoration: underline;">Date Difference Calculator</a>
-        <a href="/age-calculator" style="color: var(--primary-color); text-decoration: underline;">Age Calculator</a>
-        <a href="/meeting-overlap" style="color: var(--primary-color); text-decoration: underline;">Meeting Overlap Finder</a>
-        <a href="/multi-timezone" style="color: var(--primary-color); text-decoration: underline;">Multi Time Zone Converter</a>
-        <a href="/time-code" style="color: var(--primary-color); text-decoration: underline;">Time Code Converter</a>
+        <div id="summary" class="card" style="display:none;"></div>
+        <div id="holidayList"></div>
       </div>
+    </section>
 
-      <h2>FAQ</h2>
-      <div class="faq-item" style="margin-bottom:16px;"><strong>Are start and end dates included?</strong><p>Yes, the range is inclusive.</p></div>
-      <div class="faq-item" style="margin-bottom:16px;"><strong>Can I exclude weekends?</strong><p>Yes, enable the weekend exclusion checkbox.</p></div>
-      <div class="faq-item" style="margin-bottom:16px;"><strong>Are holiday calendars complete?</strong><p>They are practical defaults and should be validated for legal or payroll-critical processes.</p></div>
-      <div class="faq-item"><strong>Does the tool support custom company holidays?</strong><p>Not currently; use output as a baseline and apply internal calendar adjustments.</p></div>
+    <section class="tool-support-grid">
+      <article class="card tool-support-card">
+        <p class="tool-section-label">Method</p>
+        <h2>How it works</h2>
+        <p>The logic iterates date by date from start to end, tracks total days, flags weekend dates, and checks holiday matches from built-in country rules.</p>
+        <p>Business-day output is the remaining set after exclusions.</p>
+        <p class="tool-note"><strong>Limitations:</strong> holiday rules are simplified and may not include all regional observances, one-off decrees, or company-specific non-working days.</p>
+      </article>
+
+      <article class="card tool-support-card">
+        <p class="tool-section-label">Related</p>
+        <h2>Useful next tools</h2>
+        <div class="tool-link-cluster">
+          <a href="/date-difference-calculator">Date Difference Calculator</a>
+          <a href="/age-calculator">Age Calculator</a>
+          <a href="/meeting-overlap">Meeting Overlap Finder</a>
+          <a href="/multi-timezone">Multi Time Zone Converter</a>
+          <a href="/time-code">Time Code Converter</a>
+        </div>
+        <div class="tool-faq-list">
+          <div class="faq-item">
+            <strong>Are start and end dates included?</strong>
+            <p>Yes, the range is inclusive.</p>
+          </div>
+          <div class="faq-item">
+            <strong>Can I exclude weekends?</strong>
+            <p>Yes. Enable the weekend exclusion checkbox.</p>
+          </div>
+          <div class="faq-item">
+            <strong>Are holiday calendars complete?</strong>
+            <p>They are practical defaults and should be validated for legal or payroll-critical processes.</p>
+          </div>
+          <div class="faq-item">
+            <strong>Do business days differ between countries?</strong>
+            <p>Yes. Weekends, public holidays, and even which days count as working days vary by country, which is why the holiday calendar filter matters.</p>
+          </div>
+          <div class="faq-item">
+            <strong>How do bank holidays affect the count?</strong>
+            <p>When a country calendar is selected, recognized bank holidays are excluded from the working-day total alongside weekends.</p>
+          </div>
+          <div class="faq-item">
+            <strong>Can I use this for project deadline estimation?</strong>
+            <p>Yes. Enter the project start date and a target end date to see how many actual working days are available, then adjust for holidays relevant to your team.</p>
+          </div>
+        </div>
+      </article>
     </section>
   </main>
 

@@ -30,6 +30,12 @@
         "targetName": "Japanese Yen"
     },
     {
+        "base": "JPY",
+        "target": "USD",
+        "baseName": "Japanese Yen",
+        "targetName": "US Dollars"
+    },
+    {
         "base": "EUR",
         "target": "GBP",
         "baseName": "Euros",
@@ -48,40 +54,10 @@
         "targetName": "Canadian Dollars"
     },
     {
-        "base": "CAD",
-        "target": "USD",
-        "baseName": "Canadian Dollars",
-        "targetName": "US Dollars"
-    },
-    {
         "base": "USD",
-        "target": "AUD",
+        "target": "NOK",
         "baseName": "US Dollars",
-        "targetName": "Australian Dollars"
-    },
-    {
-        "base": "AUD",
-        "target": "USD",
-        "baseName": "Australian Dollars",
-        "targetName": "US Dollars"
-    },
-    {
-        "base": "EUR",
-        "target": "CHF",
-        "baseName": "Euros",
-        "targetName": "Swiss Francs"
-    },
-    {
-        "base": "USD",
-        "target": "CHF",
-        "baseName": "US Dollars",
-        "targetName": "Swiss Francs"
-    },
-    {
-        "base": "EUR",
-        "target": "JPY",
-        "baseName": "Euros",
-        "targetName": "Japanese Yen"
+        "targetName": "Norwegian Kroner"
     },
     {
         "base": "EUR",
@@ -94,120 +70,6 @@
         "target": "EUR",
         "baseName": "Norwegian Kroner",
         "targetName": "Euros"
-    },
-    {
-        "base": "USD",
-        "target": "NOK",
-        "baseName": "US Dollars",
-        "targetName": "Norwegian Kroner"
-    },
-    {
-        "base": "USD",
-        "target": "SEK",
-        "baseName": "US Dollars",
-        "targetName": "Swedish Krona"
-    },
-    {
-        "base": "EUR",
-        "target": "SEK",
-        "baseName": "Euros",
-        "targetName": "Swedish Krona"
-    },
-    {
-        "base": "USD",
-        "target": "INR",
-        "baseName": "US Dollars",
-        "targetName": "Indian Rupees"
-    },
-    {
-        "base": "INR",
-        "target": "USD",
-        "baseName": "Indian Rupees",
-        "targetName": "US Dollars"
-    },
-    {
-        "base": "JPY",
-        "target": "USD",
-        "baseName": "Japanese Yen",
-        "targetName": "US Dollars"
-    },
-    {
-        "base": "CHF",
-        "target": "USD",
-        "baseName": "Swiss Francs",
-        "targetName": "US Dollars"
-    },
-    {
-        "base": "CHF",
-        "target": "EUR",
-        "baseName": "Swiss Francs",
-        "targetName": "Euros"
-    },
-    {
-        "base": "GBP",
-        "target": "AUD",
-        "baseName": "British Pounds",
-        "targetName": "Australian Dollars"
-    },
-    {
-        "base": "AUD",
-        "target": "GBP",
-        "baseName": "Australian Dollars",
-        "targetName": "British Pounds"
-    },
-    {
-        "base": "EUR",
-        "target": "CAD",
-        "baseName": "Euros",
-        "targetName": "Canadian Dollars"
-    },
-    {
-        "base": "CAD",
-        "target": "EUR",
-        "baseName": "Canadian Dollars",
-        "targetName": "Euros"
-    },
-    {
-        "base": "EUR",
-        "target": "AUD",
-        "baseName": "Euros",
-        "targetName": "Australian Dollars"
-    },
-    {
-        "base": "AUD",
-        "target": "EUR",
-        "baseName": "Australian Dollars",
-        "targetName": "Euros"
-    },
-    {
-        "base": "USD",
-        "target": "CNY",
-        "baseName": "US Dollars",
-        "targetName": "Chinese Yuan"
-    },
-    {
-        "base": "CNY",
-        "target": "USD",
-        "baseName": "Chinese Yuan",
-        "targetName": "US Dollars"
-    },
-    {
-        "base": "USD",
-        "target": "NZD",
-        "baseName": "US Dollars",
-        "targetName": "New Zealand Dollars"
-    },
-    {
-        "base": "NZD",
-        "target": "USD",
-        "baseName": "New Zealand Dollars",
-        "targetName": "US Dollars"
-    },
-    {
-        "base": "USD",
-        "target": "KRW",
-        "baseName": "US Dollars",
-        "targetName": "South Korean Won"
     },
     {
         "base": "KRW",
@@ -216,87 +78,15 @@
         "targetName": "US Dollars"
     },
     {
-        "base": "USD",
-        "target": "SGD",
-        "baseName": "US Dollars",
-        "targetName": "Singapore Dollars"
-    },
-    {
-        "base": "SGD",
+        "base": "CNY",
         "target": "USD",
-        "baseName": "Singapore Dollars",
+        "baseName": "Chinese Yuan",
         "targetName": "US Dollars"
     },
     {
-        "base": "USD",
-        "target": "HKD",
-        "baseName": "US Dollars",
-        "targetName": "Hong Kong Dollars"
-    },
-    {
-        "base": "HKD",
-        "target": "USD",
-        "baseName": "Hong Kong Dollars",
-        "targetName": "US Dollars"
-    },
-    {
-        "base": "GBP",
-        "target": "CAD",
-        "baseName": "British Pounds",
-        "targetName": "Canadian Dollars"
-    },
-    {
-        "base": "CAD",
-        "target": "GBP",
-        "baseName": "Canadian Dollars",
-        "targetName": "British Pounds"
-    },
-    {
-        "base": "EUR",
-        "target": "DKK",
-        "baseName": "Euros",
-        "targetName": "Danish Kroner"
-    },
-    {
-        "base": "DKK",
+        "base": "AUD",
         "target": "EUR",
-        "baseName": "Danish Kroner",
+        "baseName": "Australian Dollars",
         "targetName": "Euros"
-    },
-    {
-        "base": "USD",
-        "target": "DKK",
-        "baseName": "US Dollars",
-        "targetName": "Danish Kroner"
-    },
-    {
-        "base": "DKK",
-        "target": "USD",
-        "baseName": "Danish Kroner",
-        "targetName": "US Dollars"
-    },
-    {
-        "base": "SEK",
-        "target": "USD",
-        "baseName": "Swedish Krona",
-        "targetName": "US Dollars"
-    },
-    {
-        "base": "NOK",
-        "target": "USD",
-        "baseName": "Norwegian Kroner",
-        "targetName": "US Dollars"
-    },
-    {
-        "base": "USD",
-        "target": "ZAR",
-        "baseName": "US Dollars",
-        "targetName": "South African Rand"
-    },
-    {
-        "base": "ZAR",
-        "target": "USD",
-        "baseName": "South African Rand",
-        "targetName": "US Dollars"
     }
 ]

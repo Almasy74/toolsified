@@ -40,14 +40,6 @@
         "targetVar": "ist"
     },
     {
-        "base": "Australia/Sydney",
-        "target": "America/Los_Angeles",
-        "baseName": "Australian Eastern Time (AET)",
-        "targetName": "Pacific Time (PT)",
-        "baseVar": "aet",
-        "targetVar": "pst"
-    },
-    {
         "base": "Europe/Berlin",
         "target": "Asia/Tokyo",
         "baseName": "Central European Time (CET)",
@@ -56,68 +48,12 @@
         "targetVar": "jst"
     },
     {
-        "base": "America/Chicago",
-        "target": "Europe/London",
-        "baseName": "Central Time (CT)",
-        "targetName": "London (GMT/BST)",
-        "baseVar": "ct",
-        "targetVar": "gmt"
-    },
-    {
-        "base": "Europe/Paris",
-        "target": "Asia/Shanghai",
-        "baseName": "Central European Time (CET)",
-        "targetName": "China Standard Time (CST)",
-        "baseVar": "cet",
-        "targetVar": "cst"
-    },
-    {
-        "base": "America/Denver",
-        "target": "Europe/London",
-        "baseName": "Mountain Time (MT)",
-        "targetName": "London (GMT/BST)",
-        "baseVar": "mt",
-        "targetVar": "gmt"
-    },
-    {
         "base": "America/Los_Angeles",
         "target": "Europe/London",
         "baseName": "Pacific Time (PT)",
         "targetName": "London (GMT/BST)",
         "baseVar": "pst",
         "targetVar": "gmt"
-    },
-    {
-        "base": "Asia/Tokyo",
-        "target": "America/New_York",
-        "baseName": "Japan Standard Time (JST)",
-        "targetName": "Eastern Time (ET)",
-        "baseVar": "jst",
-        "targetVar": "est"
-    },
-    {
-        "base": "Australia/Sydney",
-        "target": "America/New_York",
-        "baseName": "Australian Eastern Time (AET)",
-        "targetName": "Eastern Time (ET)",
-        "baseVar": "aet",
-        "targetVar": "est"
-    },
-    {
-        "base": "Asia/Dubai",
-        "target": "America/New_York",
-        "baseName": "Gulf Standard Time (GST)",
-        "targetName": "Eastern Time (ET)",
-        "baseVar": "gst",
-        "targetVar": "est"
-    },
-    {
-        "base": "Asia/Singapore",
-        "target": "America/Los_Angeles",
-        "baseName": "Singapore Time (SGT)",
-        "targetName": "Pacific Time (PT)",
-        "baseVar": "sgt",
-        "targetVar": "pst"
     },
     {
         "base": "Europe/London",
@@ -128,27 +64,19 @@
         "targetVar": "ist"
     },
     {
-        "base": "America/Los_Angeles",
-        "target": "Asia/Kolkata",
-        "baseName": "Pacific Time (PT)",
-        "targetName": "India Standard Time (IST)",
-        "baseVar": "pst",
-        "targetVar": "ist"
-    },
-    {
-        "base": "Europe/Berlin",
-        "target": "America/Los_Angeles",
-        "baseName": "Central European Time (CET)",
-        "targetName": "Pacific Time (PT)",
-        "baseVar": "cet",
-        "targetVar": "pst"
-    },
-    {
         "base": "Asia/Shanghai",
         "target": "America/New_York",
         "baseName": "China Standard Time (CST)",
         "targetName": "Eastern Time (ET)",
         "baseVar": "cst",
         "targetVar": "est"
+    },
+    {
+        "base": "America/Chicago",
+        "target": "Europe/London",
+        "baseName": "Central Time (CT)",
+        "targetName": "London (GMT/BST)",
+        "baseVar": "ct",
+        "targetVar": "gmt"
     }
 ]

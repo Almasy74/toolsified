@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-adsense-account" content="ca-pub-6293439009227714">
-    <title>[FROM_NAME] to [TO_NAME] Time Converter – Schedule Across Zones | Toolsified</title>
+    <title>[TZ_TITLE]</title>
     <meta name="description"
-        content="Convert time from [FROM_NAME] to [TO_NAME] with DST-aware logic. See exact local times, offset differences, and scheduling guidance for cross-timezone coordination." />
+        content="[TZ_META_DESCRIPTION]" />
     <meta property="og:title" content="[FROM_NAME] to [TO_NAME] Time Converter – Schedule Across Zones | Toolsified" />
     <meta property="og:description"
         content="Convert time from [FROM_NAME] to [TO_NAME] with DST-aware logic. See exact local times, offset differences, and scheduling guidance for cross-timezone coordination." />
@@ -71,8 +71,7 @@
 
         <section class="card seo-content" style="margin-top:24px; text-align:left; padding:32px;">
             <h2>What this converter helps you do</h2>
-            <p>This page converts a date and time from <strong>[FROM_NAME]</strong> to <strong>[TO_NAME]</strong> so you can schedule calls, launches, support shifts, and deadlines without manual timezone math. It is built for distributed teams, remote freelancers, students attending cross-border classes, and customer support operations that need predictable handoffs. The interface shows both local times and the offset difference so you can quickly see whether you are scheduling inside or outside normal work windows.</p>
-            <p>A practical example: if a product demo is planned at 09:30 in [FROM_NAME], this tool instantly shows the matching clock time in [TO_NAME] for the same moment. Another example is release planning: engineering can set a canonical deployment time in one region and communicate exact local equivalents to other teams. Because daylight saving transitions can shift offsets during the year, date-specific conversion is essential. This page is designed for that use case and updates output based on the selected date-time, not a static offset guess.</p>
+            [TZ_INTRO]
         </section>
 
         <div class="card" id="applet-container" style="margin-top:24px;">
@@ -106,17 +105,11 @@
 
         <section class="card seo-content" style="margin-top: 40px; text-align: left; padding: 32px;">
             <h2>How it works</h2>
-            <p>The converter uses the Luxon datetime library and IANA timezone identifiers. Your input is treated as a local date-time in [FROM_NAME], then transformed to the matching instant in [TO_NAME]. The difference column is calculated from timezone offsets at that specific moment, which is why values may change across summer and winter periods.</p>
-            <p><strong>Logic:</strong> parse local input -> bind to source timezone -> transform same instant to target timezone -> display formatted local clocks and offset delta.</p>
-            <p><strong>Limitations:</strong> this is a scheduling reference tool. It does not check public holidays, working-hour policy, meeting room availability, or calendar conflicts. For critical events, confirm in your calendar system after conversion.</p>
+            [TZ_HOW_IT_WORKS]
 
             <h2>Practical use scenarios</h2>
             <ul>
-                <li>Coordinate interviews when the recruiter and candidate are in different regions.</li>
-                <li>Translate webinar start times from [FROM_NAME] marketing announcements to [TO_NAME] local audience time.</li>
-                <li>Plan support handoff windows between global operations teams.</li>
-                <li>Verify deadline cutoffs for submissions, tenders, or releases across jurisdictions.</li>
-                <li>Prevent DST-related meeting errors during spring and autumn clock changes.</li>
+                [TZ_SCENARIOS]
             </ul>
 
             <h2>Pair-specific planning notes</h2>
@@ -132,22 +125,7 @@
             </div>
 
             <h2>FAQ</h2>
-            <div class="faq-item" style="margin-bottom: 16px;">
-                <strong>Does this [FROM_NAME] to [TO_NAME] converter handle DST automatically?</strong>
-                <p>Yes. Offsets are calculated for the selected date-time, including daylight saving transitions where applicable.</p>
-            </div>
-            <div class="faq-item" style="margin-bottom: 16px;">
-                <strong>Why is the time difference not always the same number of hours?</strong>
-                <p>Some regions switch DST on different dates or do not use DST at all, so the offset between two places can vary over the year.</p>
-            </div>
-            <div class="faq-item" style="margin-bottom: 16px;">
-                <strong>Can I use this for legal or contractual deadlines?</strong>
-                <p>You can use it as a strong reference, but critical legal deadlines should be validated against official jurisdiction and platform rules.</p>
-            </div>
-            <div class="faq-item">
-                <strong>Is any meeting data uploaded?</strong>
-                <p>The conversion runs in-browser with local datetime processing. No account is required to use the tool.</p>
-            </div>
+            [TZ_FAQ]
             <p style="font-size: 0.8rem; color: #888; margin-top: 24px;">Page last built: [BUILD_DATE].</p>
         </section>
     </main>

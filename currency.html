@@ -5,18 +5,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="google-adsense-account" content="ca-pub-6293439009227714">
-  <title>Currency Converter – Live Exchange Rates for 50+ Pairs | Toolsified</title>
+  <title>Currency Converter - Live Exchange Rates for 50+ Pairs | Toolsified</title>
   <meta name="description"
     content="Convert between 50+ currency pairs with live mid-market rates. Includes common amounts, methodology, and links to every supported pair. Free, no login." />
   <link rel="icon" type="image/png" href="/favicon.png">
-  <link rel="stylesheet" href="/style.css?v=2.3" />
+  <link rel="stylesheet" href="/style.css?v=2.5" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Space+Grotesk:wght@500;700&display=swap"
+    rel="stylesheet" />
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6293439009227714"
     crossorigin="anonymous"></script>
   <link rel="canonical" href="https://toolsified.com/currency" />
-  <meta property="og:title" content="Currency Converter – Live Exchange Rates for 50+ Pairs" />
+  <meta property="og:title" content="Currency Converter - Live Exchange Rates for 50+ Pairs" />
   <meta property="og:description" content="Convert between 50+ currency pairs with live mid-market rates. Free and instant." />
   <meta property="og:url" content="https://toolsified.com/currency" />
   <meta property="og:type" content="website" />
@@ -56,6 +57,16 @@
         "@type": "Question",
         "name": "Is login required?",
         "acceptedAnswer": { "@type": "Answer", "text": "No. All conversions run without an account." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between mid-market and retail rates?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The mid-market rate is the midpoint between buy and sell prices on currency markets. Retail rates from banks and exchange services include a markup, so you will always receive less than the mid-market rate." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use this for travel budgeting?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, as a reference baseline. Keep in mind that ATM withdrawals, card transactions, and airport kiosks each add their own fees on top of the rate shown here." }
       }
     ]
   }
@@ -63,14 +74,15 @@
   <script defer src="/scripts/nav.js"></script>
 </head>
 
-<body>
+<body class="tool-body">
   <header class="site-header">
     <div class="container">
       <div class="header-content">
         <div class="logo-container">
           <a href="/"><img src="/logo.png" alt="Toolsified logo" class="logo" /></a>
         </div>
-        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Toggle navigation">Menu</button>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mainNav"
+          aria-label="Toggle navigation">Menu</button>
         <nav class="main-nav" id="mainNav">
           <a href="/time-code">Time Code</a>
           <a href="/multi-timezone">Time Zones</a>
@@ -90,125 +102,122 @@
     </div>
   </header>
 
-  <main class="container">
-    <nav aria-label="Breadcrumb" style="font-size: 0.85rem; margin-bottom: 8px; color: #666;">
-      <a href="/" style="color: var(--primary-color);">Home</a> &rsaquo;
-      <span>Currency Converter</span>
-    </nav>
-
-    <h1>Currency Converter</h1>
-
-    <section class="card seo-content" style="margin-top:24px; text-align:left; padding:32px;">
-      <h2>What this tool does</h2>
-      <p>This currency converter gives you a live mid-market reference rate for any supported pair. Enter an amount, pick source and target currencies, and get an instant result. It is useful for travel budgeting, freelance invoicing, procurement screening, and quick FX checks before settlement.</p>
-      <p><strong>Reference rate vs. execution rate:</strong> the rate shown here is a market midpoint. When you exchange money through a bank, card, or transfer service, the provider adds spread (typically 0.3%–3%) and possibly fixed fees. This converter helps you estimate the baseline; compare execution options separately.</p>
+  <main class="container tool-page">
+    <section class="tool-hero">
+      <div class="tool-hero-copy">
+        <p class="tool-kicker">Pricing and global reference</p>
+        <h1>Currency Converter</h1>
+        <p class="tool-summary">Convert between major currencies with live mid-market reference rates for fast travel,
+          freelance, purchasing, and pricing checks.</p>
+        <div class="tool-meta">
+          <span>20 base currencies</span>
+          <span>Live reference rates</span>
+          <span>No login required</span>
+        </div>
+      </div>
+      <aside class="tool-hero-panel">
+        <p class="tool-panel-label">Popular starts</p>
+        <h2>Quick checks for the routes people open most</h2>
+        <p>Use the converter for any supported pair, or jump straight into one of the common route pages below.</p>
+        <div class="tool-hero-links">
+          <a href="/currency/usd-to-eur">USD to EUR</a>
+          <a href="/currency/eur-to-usd">EUR to USD</a>
+          <a href="/currency/usd-to-gbp">USD to GBP</a>
+          <a href="/currency/eur-to-nok">EUR to NOK</a>
+        </div>
+      </aside>
     </section>
 
-    <div class="card" style="margin-top:24px;">
-      <label for="amount">Amount:</label>
-      <input type="number" id="amount" placeholder="Enter amount" />
+    <section id="calculator" class="tool-workspace">
+      <div class="card tool-workspace-card">
+        <div class="tool-workspace-header">
+          <div>
+            <p class="tool-section-label">Converter</p>
+            <h2>Run a live exchange-rate check</h2>
+          </div>
+          <p>Enter an amount, pick the source and target currencies, and convert instantly using the latest available
+            reference feed.</p>
+        </div>
 
-      <label for="fromCurrency">From:</label>
-      <div class="row">
-        <select id="fromCurrency"></select>
-        <button id="swapBtn" class="primary" style="width:auto;">Swap</button>
+        <div class="tool-form-grid">
+          <div class="tool-field">
+            <label for="amount">Amount</label>
+            <input type="number" id="amount" placeholder="Enter amount" />
+          </div>
+          <div class="tool-field">
+            <label for="fromCurrency">From</label>
+            <select id="fromCurrency"></select>
+          </div>
+          <div class="tool-field">
+            <label for="toCurrency">To</label>
+            <select id="toCurrency"></select>
+          </div>
+          <div class="tool-field">
+            <label for="swapBtn">Direction</label>
+            <button id="swapBtn" class="primary tool-inline-action" type="button">Swap currencies</button>
+          </div>
+        </div>
+
+        <div class="tool-actions">
+          <button id="convertBtn" class="primary" type="button">Convert currency</button>
+        </div>
+
+        <div id="result" class="tool-output"></div>
+        <div id="lastUpdated"></div>
       </div>
+    </section>
 
-      <label for="toCurrency">To:</label>
-      <select id="toCurrency"></select>
+    <section class="tool-support-grid">
+      <article class="card tool-support-card">
+        <p class="tool-section-label">Method</p>
+        <h2>How to read the result</h2>
+        <p>The page returns a live mid-market reference rate. That is useful for baseline comparisons, travel planning,
+          invoice estimates, and quick FX sanity checks.</p>
+        <p class="tool-note"><strong>Limitations:</strong> banks, cards, and transfer services usually add their own
+          spread and fees. The rate shown here is a reference estimate, not a guaranteed settlement quote.</p>
+        <div class="tool-faq-list">
+          <div class="faq-item">
+            <strong>Why does my bank show a different amount?</strong>
+            <p>Providers apply spread, fees, and their own settlement timing, so their execution rate will differ from
+              a market midpoint.</p>
+          </div>
+          <div class="faq-item">
+            <strong>Should I use the hub or a pair page?</strong>
+            <p>Use this hub for quick ad hoc checks across many currencies. Use a pair page when you want a familiar
+              route, common amounts, and more pair-specific context.</p>
+          </div>
+          <div class="faq-item">
+            <strong>What is the difference between mid-market and retail rates?</strong>
+            <p>The mid-market rate is the midpoint between buy and sell prices on currency markets. Retail rates from banks and exchange services include a markup, so you will always receive less than the mid-market rate.</p>
+          </div>
+          <div class="faq-item">
+            <strong>Can I use this for travel budgeting?</strong>
+            <p>Yes, as a reference baseline. Keep in mind that ATM withdrawals, card transactions, and airport kiosks each add their own fees on top of the rate shown here.</p>
+          </div>
+        </div>
+      </article>
 
-      <button id="convertBtn" class="primary">Convert</button>
-
-      <div id="result" style="margin-top: 24px; font-size: 1.25rem; font-weight: 600;"></div>
-      <div id="lastUpdated" style="margin-top: 12px; font-size: 0.95rem; color: #555;"></div>
-    </div>
-
-    <section class="card seo-content" style="margin-top: 40px; text-align: left; padding: 32px;">
-      <h2>Popular currency pairs</h2>
-      <p>Start with one of the most-used pair pages below if you already know the exact direction you need. Detail pages add common amount references, pair-specific notes, and a clearer planning context than the generic converter alone.</p>
-      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px; margin-bottom: 24px;">
-        <a href="/currency/usd-to-eur" style="color: var(--primary-color); text-decoration: underline;">USD to EUR</a>
-        <a href="/currency/eur-to-usd" style="color: var(--primary-color); text-decoration: underline;">EUR to USD</a>
-        <a href="/currency/gbp-to-usd" style="color: var(--primary-color); text-decoration: underline;">GBP to USD</a>
-        <a href="/currency/usd-to-gbp" style="color: var(--primary-color); text-decoration: underline;">USD to GBP</a>
-        <a href="/currency/usd-to-jpy" style="color: var(--primary-color); text-decoration: underline;">USD to JPY</a>
-        <a href="/currency/eur-to-gbp" style="color: var(--primary-color); text-decoration: underline;">EUR to GBP</a>
-        <a href="/currency/usd-to-cad" style="color: var(--primary-color); text-decoration: underline;">USD to CAD</a>
-        <a href="/currency/usd-to-aud" style="color: var(--primary-color); text-decoration: underline;">USD to AUD</a>
-        <a href="/currency/eur-to-nok" style="color: var(--primary-color); text-decoration: underline;">EUR to NOK</a>
-        <a href="/currency/usd-to-inr" style="color: var(--primary-color); text-decoration: underline;">USD to INR</a>
-        <a href="/currency/krw-to-usd" style="color: var(--primary-color); text-decoration: underline;">KRW to USD</a>
-        <a href="/currency/cny-to-usd" style="color: var(--primary-color); text-decoration: underline;">CNY to USD</a>
-      </div>
-
-      <h2>All supported pairs</h2>
-      <p>Use the full list when you need a less common pair or want to jump straight into the correct detail page for the exact source and target currencies.</p>
-      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 6px; margin-bottom: 24px; font-size: 0.9rem;">
-        <a href="/currency/usd-to-eur">USD → EUR</a> <a href="/currency/eur-to-usd">EUR → USD</a>
-        <a href="/currency/gbp-to-usd">GBP → USD</a> <a href="/currency/usd-to-gbp">USD → GBP</a>
-        <a href="/currency/usd-to-jpy">USD → JPY</a> <a href="/currency/jpy-to-usd">JPY → USD</a>
-        <a href="/currency/eur-to-gbp">EUR → GBP</a> <a href="/currency/gbp-to-eur">GBP → EUR</a>
-        <a href="/currency/usd-to-cad">USD → CAD</a> <a href="/currency/cad-to-usd">CAD → USD</a>
-        <a href="/currency/usd-to-aud">USD → AUD</a> <a href="/currency/aud-to-usd">AUD → USD</a>
-        <a href="/currency/eur-to-chf">EUR → CHF</a> <a href="/currency/chf-to-eur">CHF → EUR</a>
-        <a href="/currency/usd-to-chf">USD → CHF</a> <a href="/currency/chf-to-usd">CHF → USD</a>
-        <a href="/currency/eur-to-jpy">EUR → JPY</a>
-        <a href="/currency/eur-to-nok">EUR → NOK</a> <a href="/currency/nok-to-eur">NOK → EUR</a>
-        <a href="/currency/usd-to-nok">USD → NOK</a> <a href="/currency/nok-to-usd">NOK → USD</a>
-        <a href="/currency/usd-to-sek">USD → SEK</a> <a href="/currency/sek-to-usd">SEK → USD</a>
-        <a href="/currency/eur-to-sek">EUR → SEK</a>
-        <a href="/currency/usd-to-inr">USD → INR</a> <a href="/currency/inr-to-usd">INR → USD</a>
-        <a href="/currency/usd-to-cny">USD → CNY</a> <a href="/currency/cny-to-usd">CNY → USD</a>
-        <a href="/currency/usd-to-nzd">USD → NZD</a> <a href="/currency/nzd-to-usd">NZD → USD</a>
-        <a href="/currency/usd-to-krw">USD → KRW</a> <a href="/currency/krw-to-usd">KRW → USD</a>
-        <a href="/currency/usd-to-sgd">USD → SGD</a> <a href="/currency/sgd-to-usd">SGD → USD</a>
-        <a href="/currency/usd-to-hkd">USD → HKD</a> <a href="/currency/hkd-to-usd">HKD → USD</a>
-        <a href="/currency/gbp-to-aud">GBP → AUD</a> <a href="/currency/aud-to-gbp">AUD → GBP</a>
-        <a href="/currency/eur-to-cad">EUR → CAD</a> <a href="/currency/cad-to-eur">CAD → EUR</a>
-        <a href="/currency/eur-to-aud">EUR → AUD</a> <a href="/currency/aud-to-eur">AUD → EUR</a>
-        <a href="/currency/gbp-to-cad">GBP → CAD</a> <a href="/currency/cad-to-gbp">CAD → GBP</a>
-        <a href="/currency/eur-to-dkk">EUR → DKK</a> <a href="/currency/dkk-to-eur">DKK → EUR</a>
-        <a href="/currency/usd-to-dkk">USD → DKK</a> <a href="/currency/dkk-to-usd">DKK → USD</a>
-        <a href="/currency/usd-to-zar">USD → ZAR</a> <a href="/currency/zar-to-usd">ZAR → USD</a>
-      </div>
-
-      <h2>How the conversion works</h2>
-      <p>The formula: <code>converted amount = entered amount &times; latest rate</code>. Rates are fetched from an external API feed via a serverless endpoint. Multiplication runs client-side. No account or login required.</p>
-      <p><strong>Limitations:</strong> this is a reference converter. Real settlements differ due to provider spread, card network rates, transfer fees, and timing. For formal accounting, use approved treasury rates. <a href="/methodology" style="color: var(--primary-color);">Read full methodology</a>.</p>
-
-      <h2>How to choose the right pair page</h2>
-      <p>Pick the page that matches the direction your amount starts in. If the quoted amount is in KRW and you need a USD view, use <a href="/currency/krw-to-usd" style="color: var(--primary-color); text-decoration: underline;">KRW to USD</a>, not the reverse. The pair pages are most useful when you want realistic common amounts, a clearer use-case fit, and notes that match how that pair is typically used.</p>
-
-      <h2>Common use cases</h2>
-      <ul>
-        <li><strong>Travel budgeting:</strong> estimate hotel, transport, and meal costs in your home currency before departure.</li>
-        <li><strong>Freelance invoicing:</strong> translate project value from client currency to your accounting base.</li>
-        <li><strong>Procurement:</strong> check whether foreign-currency supplier quotes fit your budget threshold.</li>
-        <li><strong>Price comparison:</strong> normalize subscriptions or offers billed in different currencies.</li>
-        <li><strong>Quick FX check:</strong> get a directional estimate before committing to a transfer.</li>
-      </ul>
-
-      <h2>Related tools</h2>
-      <div class="internal-links-cluster" style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:24px;">
-        <a href="/crypto" style="color: var(--primary-color); text-decoration: underline;">Crypto Profit Calculator</a>
-        <a href="/inflation-calculator" style="color: var(--primary-color); text-decoration: underline;">Inflation Calculator</a>
-        <a href="/methodology" style="color: var(--primary-color); text-decoration: underline;">Methodology</a>
-        <a href="/about" style="color: var(--primary-color); text-decoration: underline;">About Toolsified</a>
-      </div>
-
-      <h2>FAQ</h2>
-      <div class="faq-item" style="margin-bottom:16px;">
-        <strong>How accurate is this live currency converter?</strong>
-        <p>It uses mid-market reference rates from an external API. Actual bank or card rates include spread and fees that are not reflected here.</p>
-      </div>
-      <div class="faq-item" style="margin-bottom:16px;">
-        <strong>Why does my bank show a different amount?</strong>
-        <p>Banks apply their own spread, service fees, and settlement timing. This tool shows a market reference, not institution-specific pricing.</p>
-      </div>
-      <div class="faq-item">
-        <strong>Should I use the hub or a detail page?</strong>
-        <p>Use the hub for quick ad hoc checks across many currencies. Use a detail page when you want the exact pair, a common-amount table, and more pair-specific planning notes.</p>
-      </div>
+      <article class="card tool-support-card">
+        <p class="tool-section-label">Popular routes</p>
+        <h2>Jump straight into common pair pages</h2>
+        <div class="tool-link-grid">
+          <a href="/currency/usd-to-eur">USD to EUR</a>
+          <a href="/currency/eur-to-usd">EUR to USD</a>
+          <a href="/currency/gbp-to-usd">GBP to USD</a>
+          <a href="/currency/usd-to-gbp">USD to GBP</a>
+          <a href="/currency/usd-to-jpy">USD to JPY</a>
+          <a href="/currency/eur-to-gbp">EUR to GBP</a>
+          <a href="/currency/usd-to-cad">USD to CAD</a>
+          <a href="/currency/usd-to-aud">USD to AUD</a>
+          <a href="/currency/eur-to-nok">EUR to NOK</a>
+          <a href="/currency/usd-to-inr">USD to INR</a>
+        </div>
+        <div class="tool-link-cluster">
+          <a href="/inflation-calculator">Inflation Calculator</a>
+          <a href="/percentage-calculator">Percentage Calculator</a>
+          <a href="/methodology">Methodology</a>
+        </div>
+      </article>
     </section>
   </main>
 
@@ -216,7 +225,8 @@
     <div class="footer-container">
       <p class="footer-tagline">&copy; 2026 Toolsified - Independent web tools platform.</p>
       <div class="footer-links">
-        <a href="/privacy">Privacy Policy</a><span>|</span><a href="/terms">Terms</a><span>|</span><a href="/about">About</a><span>|</span><a href="/contact">Contact</a>
+        <a href="/privacy">Privacy Policy</a><span>|</span><a href="/terms">Terms</a><span>|</span><a href="/about">About</a><span>|</span><a
+          href="/contact">Contact</a>
       </div>
       <p class="footer-contact">Contact: <a href="mailto:info@toolsified.com">info@toolsified.com</a></p>
       <p class="footer-location">Location: Norway</p>
@@ -236,7 +246,11 @@
       const o2 = document.createElement('option'); o2.value = o2.textContent = cur; toSelect.appendChild(o2);
     });
     fromSelect.value = "USD"; toSelect.value = "EUR";
-    document.getElementById('swapBtn').onclick = () => { const t = fromSelect.value; fromSelect.value = toSelect.value; toSelect.value = t; };
+    document.getElementById('swapBtn').onclick = () => {
+      const t = fromSelect.value;
+      fromSelect.value = toSelect.value;
+      toSelect.value = t;
+    };
     document.getElementById('convertBtn').onclick = async () => {
       const amount = parseFloat(document.getElementById('amount').value);
       const from = fromSelect.value, to = toSelect.value;
@@ -246,9 +260,17 @@
       try {
         const res = await axios.get(`/.netlify/functions/convert?from=${from}&to=${to}&amount=${amount}`);
         rEl.classList.remove('skeleton-loader');
-        rEl.textContent = `${amount} ${from} = ${res.data.result.toFixed(2)} ${to}`;
+        rEl.innerHTML = `
+          <div class="card" style="margin:0; box-shadow:none; border:1px solid var(--border-color);">
+            <h3 style="margin-bottom:12px;">Result</h3>
+            <p><strong>${amount} ${from}</strong> = <strong>${res.data.result.toFixed(2)} ${to}</strong></p>
+          </div>
+        `;
         lEl.textContent = `Exchange rate last updated: ${res.data.date || "unknown"}`;
-      } catch (e) { rEl.classList.remove('skeleton-loader'); rEl.textContent = "Could not retrieve exchange rate."; }
+      } catch (e) {
+        rEl.classList.remove('skeleton-loader');
+        rEl.textContent = "Could not retrieve exchange rate.";
+      }
     };
   </script>
 </body>

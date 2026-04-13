@@ -9,17 +9,21 @@
   <meta name="description"
     content="Calculate VAT or sales tax from tax-exclusive or tax-inclusive prices. See net amount, gross amount, tax amount, and rate in one simple browser tool." />
   <link rel="icon" type="image/png" href="/favicon.png" />
-  <link rel="stylesheet" href="/style.css?v=2.3" />
+  <link rel="stylesheet" href="/style.css?v=2.5" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Space+Grotesk:wght@500;700&display=swap"
+    rel="stylesheet" />
   <link rel="canonical" href="https://toolsified.com/vat-calculator" />
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6293439009227714"
     crossorigin="anonymous"></script>
   <script defer src="/scripts/nav.js"></script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is the preset list official tax guidance?","acceptedAnswer":{"@type":"Answer","text":"No. Presets are convenience shortcuts and should be verified against the actual rules that apply to your product, service, and jurisdiction."}},{"@type":"Question","name":"Can I use this for US sales tax?","acceptedAnswer":{"@type":"Answer","text":"Yes, as a rough percentage calculator. It does not handle local filing rules, exemptions, or nexus."}},{"@type":"Question","name":"What if I only know the tax-inclusive price?","acceptedAnswer":{"@type":"Answer","text":"Select \"Price after tax\" and the tool will back out the net amount and tax portion."}},{"@type":"Question","name":"How does reverse VAT calculation work?","acceptedAnswer":{"@type":"Answer","text":"Divide the gross price by (1 + rate/100) to get the net amount, then subtract net from gross to find the tax portion."}},{"@type":"Question","name":"Does VAT apply to cross-border purchases within the EU?","acceptedAnswer":{"@type":"Answer","text":"Rules vary by transaction type and threshold; B2C sales often use the destination country rate, while B2B may use reverse charge -- consult official guidance for your situation."}},{"@type":"Question","name":"Why do VAT amounts sometimes differ by a penny due to rounding?","acceptedAnswer":{"@type":"Answer","text":"Tax authorities typically require rounding per line item, so small rounding differences can appear when you compare line-level and total-level calculations."}}]}
+    </script>
 </head>
 
-<body>
+<body class="tool-body">
   <header class="site-header">
     <div class="container">
       <div class="header-content">
@@ -40,103 +44,140 @@
     </div>
   </header>
 
-  <main class="container">
-    <h1>VAT / Sales Tax Calculator</h1>
-
-    <section class="card seo-content" style="margin-top:24px; text-align:left; padding:32px;">
-      <h2>Intro</h2>
-      <p>This calculator helps you move between tax-exclusive and tax-inclusive prices using either a preset VAT or
-        sales tax rate or a custom percentage. It is useful for invoices, retail checks, quoting work, comparing
-        supplier prices, and everyday budgeting.</p>
+  <main class="container tool-page">
+    <section class="tool-hero">
+      <div class="tool-hero-copy">
+        <p class="tool-kicker">Pricing and invoices</p>
+        <h1>VAT / Sales Tax Calculator</h1>
+        <p class="tool-summary">Move quickly between pre-tax and post-tax prices with preset VAT or sales-tax rates, or
+          use your own custom percentage.</p>
+        <div class="tool-meta">
+          <span>Exclusive to inclusive</span>
+          <span>Inclusive to exclusive</span>
+          <span>Preset or custom rates</span>
+        </div>
+      </div>
+      <aside class="tool-hero-panel">
+        <p class="tool-panel-label">Useful for</p>
+        <h2>Quoting, receipts, supplier checks, and quick budgeting</h2>
+        <p>Use it when you need the net amount, tax amount, and gross price without doing invoice math manually.</p>
+        <div class="tool-hero-links">
+          <a href="#calculator">Price before tax</a>
+          <a href="#calculator">Price after tax</a>
+          <a href="#calculator">Tax amount</a>
+          <a href="#calculator">Preset VAT or GST rates</a>
+        </div>
+      </aside>
     </section>
 
-    <div class="card" style="margin-top:24px;">
-      <label for="preset">Preset rate</label>
-      <select id="preset">
-        <option value="custom" data-rate="0">Custom rate</option>
-        <option value="NO" data-rate="25">Norway VAT 25%</option>
-        <option value="UK" data-rate="20">UK VAT 20%</option>
-        <option value="EU" data-rate="21">EU example VAT 21%</option>
-        <option value="AU" data-rate="10">Australia GST 10%</option>
-        <option value="NZ" data-rate="15">New Zealand GST 15%</option>
-        <option value="CA" data-rate="13">Canada HST example 13%</option>
-        <option value="US" data-rate="8.25">US sales tax example 8.25%</option>
-      </select>
-
-      <div class="row">
-        <div style="flex:1;">
-          <label for="mode" style="margin-top:0;">Input type</label>
-          <select id="mode">
-            <option value="exclusive">Price before tax</option>
-            <option value="inclusive">Price after tax</option>
-          </select>
+    <section id="calculator" class="tool-workspace">
+      <div class="card tool-workspace-card">
+        <div class="tool-workspace-header">
+          <div>
+            <p class="tool-section-label">Calculator</p>
+            <h2>Model a tax-inclusive or tax-exclusive price</h2>
+          </div>
+          <p>Pick a preset if it helps, choose whether your input is before or after tax, and the calculator will show
+            the full breakdown.</p>
         </div>
-        <div style="flex:1;">
-          <label for="rate" style="margin-top:0;">Tax rate (%)</label>
-          <input id="rate" type="number" min="0" step="0.01" value="25" />
+
+        <div class="tool-form-grid">
+          <div class="tool-field">
+            <label for="preset">Preset rate</label>
+            <select id="preset">
+              <option value="custom" data-rate="0">Custom rate</option>
+              <option value="NO" data-rate="25">Norway VAT 25%</option>
+              <option value="UK" data-rate="20">UK VAT 20%</option>
+              <option value="EU" data-rate="21">EU example VAT 21%</option>
+              <option value="AU" data-rate="10">Australia GST 10%</option>
+              <option value="NZ" data-rate="15">New Zealand GST 15%</option>
+              <option value="CA" data-rate="13">Canada HST example 13%</option>
+              <option value="US" data-rate="8.25">US sales tax example 8.25%</option>
+            </select>
+          </div>
+          <div class="tool-field">
+            <label for="mode">Input type</label>
+            <select id="mode">
+              <option value="exclusive">Price before tax</option>
+              <option value="inclusive">Price after tax</option>
+            </select>
+          </div>
+          <div class="tool-field">
+            <label for="rate">Tax rate (%)</label>
+            <input id="rate" type="number" min="0" step="0.01" value="25" />
+          </div>
+          <div class="tool-field">
+            <label for="amount">Amount</label>
+            <input id="amount" type="number" min="0" step="0.01" value="100" />
+          </div>
         </div>
-      </div>
 
-      <label for="amount">Amount</label>
-      <input id="amount" type="number" min="0" step="0.01" value="100" />
-
-      <button id="calcBtn" class="primary" type="button">Calculate tax</button>
-      <div id="result" style="margin-top:20px;"></div>
-    </div>
-
-    <section class="card seo-content" style="margin-top:40px; text-align:left; padding:32px;">
-      <h2>How it works</h2>
-      <p>The calculator applies a straightforward percentage formula.</p>
-      <ul>
-        <li>If your amount is before tax: <code>gross = net x (1 + rate / 100)</code></li>
-        <li>If your amount is after tax: <code>net = gross / (1 + rate / 100)</code></li>
-        <li><code>tax amount = gross - net</code></li>
-      </ul>
-      <p><strong>Limitations:</strong> this is a planning calculator, not legal or accounting advice. VAT exemptions,
-        mixed rates, import rules, reverse charge logic, state-by-state nexus rules, and invoice compliance details are
-        out of scope for this first version.</p>
-
-      <h2>Practical use scenarios</h2>
-      <ul>
-        <li>Check whether a quoted price includes tax.</li>
-        <li>Back out net value from a receipt or consumer price.</li>
-        <li>Estimate invoice totals for freelance or agency work.</li>
-        <li>Compare supplier prices across markets using the same tax logic.</li>
-      </ul>
-
-      <h2>Related tools</h2>
-      <div class="internal-links-cluster" style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:24px;">
-        <a href="/percentage-calculator" style="color: var(--primary-color); text-decoration: underline;">Percentage Calculator</a>
-        <a href="/loan-payment-calculator" style="color: var(--primary-color); text-decoration: underline;">Loan Payment Calculator</a>
-        <a href="/inflation-calculator" style="color: var(--primary-color); text-decoration: underline;">Inflation Calculator</a>
-        <a href="/currency" style="color: var(--primary-color); text-decoration: underline;">Currency Converter</a>
+        <div class="tool-actions">
+          <button id="calcBtn" class="primary" type="button">Calculate tax</button>
+        </div>
+        <div id="result" class="tool-output"></div>
       </div>
+    </section>
 
-      <h2>FAQ</h2>
-      <div class="faq-item" style="margin-bottom:16px;">
-        <strong>Is the preset list official tax guidance?</strong>
-        <p>No. Presets are convenience shortcuts for common headline rates and should be verified against the actual
-          rules that apply to your product, service, and jurisdiction.</p>
-      </div>
-      <div class="faq-item" style="margin-bottom:16px;">
-        <strong>Can I use this for US sales tax?</strong>
-        <p>Yes, as a rough percentage calculator. It does not handle local filing rules, exemptions, or nexus.</p>
-      </div>
-      <div class="faq-item" style="margin-bottom:16px;">
-        <strong>What if I only know the tax-inclusive price?</strong>
-        <p>Select "Price after tax" and the tool will back out the net amount and tax portion.</p>
-      </div>
-      <div class="faq-item">
-        <strong>Does the calculator save invoice details?</strong>
-        <p>No. Inputs stay in your browser.</p>
-      </div>
+    <section class="tool-support-grid">
+      <article class="card tool-support-card">
+        <p class="tool-section-label">Method</p>
+        <h2>How it works</h2>
+        <p>The calculator applies a straightforward percentage formula.</p>
+        <ul>
+          <li><code>gross = net x (1 + rate / 100)</code> when the input is before tax</li>
+          <li><code>net = gross / (1 + rate / 100)</code> when the input is after tax</li>
+          <li><code>tax amount = gross - net</code></li>
+        </ul>
+        <p class="tool-note"><strong>Limitations:</strong> this is a planning calculator, not legal or accounting
+          advice. Exemptions, mixed rates, import rules, reverse charge, and filing requirements are out of scope.</p>
+      </article>
+
+      <article class="card tool-support-card">
+        <p class="tool-section-label">Related</p>
+        <h2>Useful next tools</h2>
+        <div class="tool-link-cluster">
+          <a href="/percentage-calculator">Percentage Calculator</a>
+          <a href="/loan-payment-calculator">Loan Payment Calculator</a>
+          <a href="/inflation-calculator">Inflation Calculator</a>
+          <a href="/currency">Currency Converter</a>
+        </div>
+        <div class="tool-faq-list">
+          <div class="faq-item">
+            <strong>Is the preset list official tax guidance?</strong>
+            <p>No. Presets are convenience shortcuts and should be verified against the actual rules that apply to your
+              product, service, and jurisdiction.</p>
+          </div>
+          <div class="faq-item">
+            <strong>Can I use this for US sales tax?</strong>
+            <p>Yes, as a rough percentage calculator. It does not handle local filing rules, exemptions, or nexus.</p>
+          </div>
+          <div class="faq-item">
+            <strong>What if I only know the tax-inclusive price?</strong>
+            <p>Select "Price after tax" and the tool will back out the net amount and tax portion.</p>
+          </div>
+          <div class="faq-item">
+            <strong>How does reverse VAT calculation work?</strong>
+            <p>Divide the gross price by (1 + rate/100) to get the net amount, then subtract net from gross to find the tax portion.</p>
+          </div>
+          <div class="faq-item">
+            <strong>Does VAT apply to cross-border purchases within the EU?</strong>
+            <p>Rules vary by transaction type and threshold; B2C sales often use the destination country rate, while B2B may use reverse charge -- consult official guidance for your situation.</p>
+          </div>
+          <div class="faq-item">
+            <strong>Why do VAT amounts sometimes differ by a penny due to rounding?</strong>
+            <p>Tax authorities typically require rounding per line item, so small rounding differences can appear when you compare line-level and total-level calculations.</p>
+          </div>
+        </div>
+      </article>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="footer-container">
       <p class="footer-tagline">&copy; 2026 Toolsified - Independent web tools platform.</p>
-      <div class="footer-links"><a href="/privacy">Privacy Policy</a><span>|</span><a href="/terms">Terms</a><span>|</span><a href="/about">About</a><span>|</span><a href="/contact">Contact</a></div>
+      <div class="footer-links"><a href="/privacy">Privacy Policy</a><span>|</span><a href="/terms">Terms</a><span>|</span><a
+          href="/about">About</a><span>|</span><a href="/contact">Contact</a></div>
       <p class="footer-contact">Contact: <a href="mailto:info@toolsified.com">info@toolsified.com</a></p>
       <p class="footer-location">Location: Norway</p>
     </div>

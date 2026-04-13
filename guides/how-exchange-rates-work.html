@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-adsense-account" content="ca-pub-6293439009227714" />
+  <title>How Exchange Rates Work – Mid-Market, Bank Rates and What You Actually Pay | Toolsified</title>
+  <meta name="description" content="Understand how currency exchange rates work, why bank rates differ from mid-market rates, what determines spreads and fees, and how to get better conversion results." />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="stylesheet" href="/style.css?v=2.5" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="canonical" href="https://toolsified.com/guides/how-exchange-rates-work" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6293439009227714" crossorigin="anonymous"></script>
+  <script defer src="/scripts/nav.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the mid-market exchange rate?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The mid-market rate is the midpoint between the buy and sell prices on global currency markets. It is the fairest representation of a currency's value at any given moment, but most consumers never transact at this exact rate because providers add their own markup." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is my bank's exchange rate different from what I see online?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Banks and payment providers add a spread (markup) on top of the mid-market rate to cover costs and generate revenue. They may also charge flat fees, percentage-based commissions, or card network surcharges. The combined effect means you receive less foreign currency per unit than the mid-market rate suggests." }
+      },
+      {
+        "@type": "Question",
+        "name": "How can I get a better exchange rate?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Compare rates from multiple providers before converting. Avoid airport and hotel exchange counters, which typically carry the largest markups. Consider fee-free multi-currency cards for travel spending, and for large transfers look at specialist transfer services that operate with tighter spreads than traditional banks." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do exchange rates change over the weekend?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The interbank foreign exchange market is closed from Friday evening to Sunday evening (UTC). Most consumer platforms freeze rates over the weekend or apply a wider spread to account for potential Monday gaps. If your conversion is not urgent, waiting until Monday may get you a tighter spread." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is a currency spread?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The spread is the difference between the price at which a provider will sell you a currency and the price at which they will buy it back. A narrower spread means you lose less value in the conversion. Spreads vary by provider, currency pair, and transaction size." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo-container"><a href="/"><img src="/logo.png" alt="Toolsified logo" class="logo" /></a></div>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Toggle navigation">Menu</button>
+        <nav class="main-nav" id="mainNav">
+          <a href="/time-code">Time Code</a><a href="/multi-timezone">Time Zones</a><a href="/currency">Currency</a><a href="/crypto">Crypto</a>
+          <div class="nav-more"><button class="nav-more-toggle" type="button" aria-expanded="false" aria-haspopup="true">More</button>
+            <div class="nav-more-menu"><a href="/business-days">Business Days</a><a href="/meeting-overlap">Meeting Overlap</a><a href="/inflation-calculator">Inflation Calculator</a><a href="/crypto-tax-estimator">Crypto Tax Estimator</a></div>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <nav aria-label="Breadcrumb" style="font-size: 0.85rem; margin-bottom: 8px; color: #666;">
+      <a href="/" style="color: var(--primary-color);">Home</a> &rsaquo;
+      <a href="/currency" style="color: var(--primary-color);">Currency</a> &rsaquo;
+      <span>How Exchange Rates Work</span>
+    </nav>
+
+    <section class="card seo-content" style="padding: 32px; text-align: left;">
+
+      <h1>How Exchange Rates Work</h1>
+      <p>Every time you buy something abroad, send money overseas, or check a travel budget, you interact with exchange rates. Yet the number you see on Google is rarely the number you actually pay. This guide explains what exchange rates are, how they are set, why providers charge different amounts, and what you can do to keep more of your money when converting currencies.</p>
+
+      <h2>What Is an Exchange Rate?</h2>
+      <p>An exchange rate is simply the price of one currency expressed in terms of another. If the EUR/USD rate is 1.10, one euro buys 1.10 US dollars. Rates are always quoted in pairs because you are simultaneously buying one currency and selling another.</p>
+      <p>In practice, every currency pair has two prices at any given moment:</p>
+      <ul>
+        <li><strong>Bid (buy) price</strong> &ndash; the price at which the market is willing to buy the base currency from you.</li>
+        <li><strong>Ask (sell) price</strong> &ndash; the price at which the market is willing to sell the base currency to you.</li>
+      </ul>
+      <p>The midpoint between these two prices is called the <strong>mid-market rate</strong>. It is the fairest snapshot of a currency's value, and it is what most online converters &ndash; including our <a href="/currency">Currency Converter</a> &ndash; display.</p>
+
+      <h2>Mid-Market Rate vs. Bank Rate</h2>
+      <p>The mid-market rate (sometimes called the interbank rate) is the wholesale price that large financial institutions trade at. Individual consumers almost never transact at this rate. Instead, banks, card networks, and exchange bureaus quote their own retail rate, which includes a markup known as the <strong>spread</strong>.</p>
+
+      <h3>What is the spread?</h3>
+      <p>The spread is the gap between a provider's buy and sell prices. If a bank buys euros at 1.08 and sells them at 1.12, the spread is 0.04 (roughly 3.6 %). That difference is revenue for the bank.</p>
+      <p>Spreads vary widely. A large bank might add 1&ndash;3 % on common pairs like <a href="/currency/usd-to-eur">USD to EUR</a>, while an airport kiosk could charge 8&ndash;12 %. Specialist online transfer services often operate with spreads under 1 %.</p>
+      <p>When evaluating any provider, the most useful comparison is how far their quoted rate deviates from the mid-market rate at that moment. A provider advertising "zero fees" but offering a rate 4 % off the mid-market rate is not cheaper than one charging a small flat fee with a 0.5 % spread.</p>
+
+      <h2>What Determines Exchange Rates?</h2>
+      <p>Currency values are set by a complex mix of economic fundamentals and market sentiment. The major drivers include:</p>
+
+      <h3>Supply and demand</h3>
+      <p>Like any market price, exchange rates move when more people want to buy a currency (pushing it up) or sell it (pushing it down). Trade flows, tourism, and investment capital all contribute.</p>
+
+      <h3>Interest rates</h3>
+      <p>Central banks set benchmark interest rates that influence how attractive a currency is to hold. Higher rates tend to attract foreign capital, increasing demand for the currency and pushing its value up. When the US Federal Reserve raises rates while the European Central Bank holds steady, the dollar often strengthens against the euro.</p>
+
+      <h3>Inflation</h3>
+      <p>Persistently high inflation erodes a currency's purchasing power. Countries with lower, more stable inflation generally see their currencies hold value better over time compared to those with rapid price increases.</p>
+
+      <h3>Trade balance</h3>
+      <p>A country that exports more than it imports receives more foreign currency for its goods, which tends to support the value of its own currency. Persistent trade deficits can put downward pressure on a currency.</p>
+
+      <h3>Political stability and market sentiment</h3>
+      <p>Uncertainty &ndash; elections, geopolitical conflict, unexpected policy changes &ndash; can cause sharp currency moves as investors shift funds toward currencies perceived as safer. The US dollar, Swiss franc, and Japanese yen are traditional safe-haven currencies that often strengthen during periods of global stress.</p>
+
+      <h2>Why Your Bank Gives You a Different Rate</h2>
+      <p>When you convert currency through a bank, credit card, or exchange counter, the final cost comes from several layers:</p>
+      <ul>
+        <li><strong>Spread:</strong> The markup added to the mid-market rate. This is the largest cost component for most conversions.</li>
+        <li><strong>Flat fees:</strong> Some providers charge a fixed amount per transaction, regardless of size. This hurts small conversions more than large ones.</li>
+        <li><strong>Percentage fees:</strong> A commission calculated as a percentage of the transfer amount, on top of the spread.</li>
+        <li><strong>Card network surcharges:</strong> When you pay abroad with a credit or debit card, the card network (Visa, Mastercard) applies its own exchange rate, which includes a small markup. Your issuing bank may add a foreign transaction fee on top &ndash; typically 1&ndash;3 %.</li>
+        <li><strong>Timing differences:</strong> The rate you see when you initiate a transfer is not always the rate applied at settlement. Weekend conversions, batch processing, and value-date delays can shift the effective rate.</li>
+      </ul>
+      <p>The total cost of a conversion is the sum of all these components. A provider quoting a rate close to the mid-market rate but charging high flat fees may not be cheaper than one with a slightly wider spread and no fees &ndash; especially for smaller amounts.</p>
+
+      <h2>How to Get a Better Rate</h2>
+      <p>You cannot control global currency markets, but you can control how and where you convert. Here are practical steps:</p>
+
+      <h3>Compare providers before converting</h3>
+      <p>Check the mid-market rate on an independent tool like our <a href="/currency">Currency Converter</a>, then compare what different providers actually offer. The gap between the mid-market rate and the quoted rate tells you exactly what you are paying in markup. For common pairs like <a href="/currency/gbp-to-eur">GBP to EUR</a>, even a 0.5 % difference in spread can mean meaningful savings on larger sums.</p>
+
+      <h3>Avoid airport and hotel exchange counters</h3>
+      <p>These outlets operate with the widest spreads in the industry because they have a captive audience and high overhead. If you need local currency on arrival, withdrawing from an ATM with a low-fee card is almost always cheaper.</p>
+
+      <h3>Use fee-free multi-currency cards</h3>
+      <p>Several fintech providers now offer debit cards that convert at or very close to the mid-market rate with no foreign transaction fee. For day-to-day travel spending, these are hard to beat. Be aware that some apply wider spreads on weekends when markets are closed.</p>
+
+      <h3>Time non-urgent conversions</h3>
+      <p>If your transfer is not time-critical, monitoring the rate over a few days or weeks can help you pick a more favorable moment. Rates fluctuate constantly, and patience can save 1&ndash;2 % on volatile pairs. That said, trying to predict short-term moves is speculation &ndash; set a target rate you are comfortable with and act when it arrives.</p>
+
+      <h3>Negotiate for large amounts</h3>
+      <p>If you are converting a substantial sum &ndash; for a property purchase or business payment &ndash; banks and brokers will often offer a tighter spread if you ask. The threshold varies, but amounts above the equivalent of $10,000 frequently qualify for better pricing.</p>
+
+      <h2>Common Mistakes When Converting Currency</h2>
+      <p>Awareness of these pitfalls can save you money and frustration:</p>
+
+      <h3>Ignoring the spread and focusing only on fees</h3>
+      <p>A "zero-fee" conversion with a 3 % spread on a $5,000 transfer costs you $150. A $10 flat fee with a 0.4 % spread costs $30. Always calculate the total cost, not just the advertised fee.</p>
+
+      <h3>Checking the rate once, paying later</h3>
+      <p>Exchange rates move throughout the day. The rate you looked up in the morning may have shifted by the time your bank processes the transaction in the afternoon. For large sums, confirm the execution rate, not just the indicative rate.</p>
+
+      <h3>Forgetting the round-trip cost</h3>
+      <p>If you convert money for a trip and bring leftover cash home, you pay the spread twice &ndash; once on the way out and once on the way back. Convert only what you expect to need, and keep leftovers in the foreign currency if you plan to visit again.</p>
+
+      <h3>Accepting dynamic currency conversion</h3>
+      <p>When paying abroad by card, a merchant may offer to charge you in your home currency instead of the local currency. This is called dynamic currency conversion (DCC), and it almost always comes with an unfavorable rate. Choose to pay in the local currency and let your own card network handle the conversion.</p>
+
+      <h3>Not accounting for intermediary banks</h3>
+      <p>International wire transfers sometimes pass through intermediary (correspondent) banks that deduct their own fees from the transfer amount. The recipient may receive less than expected. Ask your bank upfront whether intermediary fees apply and who absorbs them.</p>
+
+      <h2>When This Matters Most</h2>
+      <p>Small-value conversions &ndash; buying a coffee abroad, for example &ndash; are not worth optimizing. The scenarios where rate awareness makes a real financial difference include:</p>
+
+      <h3>Large one-off transfers</h3>
+      <p>Buying overseas property, paying international tuition, or relocating savings. A 1 % difference on a $100,000 transfer is $1,000. At this scale, comparing providers and negotiating spreads is worth the effort.</p>
+
+      <h3>Recurring international payments</h3>
+      <p>Freelancers receiving payment in a foreign currency, businesses paying overseas suppliers, or expats sending money home. Over a year of monthly transfers, a consistently better rate compounds into significant savings.</p>
+
+      <h3>Travel spending</h3>
+      <p>Extended trips or frequent travel means dozens of card transactions and potential ATM withdrawals, each carrying its own conversion cost. Switching to a card with tight spreads and no foreign transaction fee is one of the simplest ways to reduce travel costs.</p>
+
+      <p>For more detail on how our conversion tool sources its rates and handles rounding, see our <a href="/methodology">Methodology</a> page.</p>
+
+      <h2>Frequently Asked Questions</h2>
+      <div class="tool-faq-list">
+        <div class="faq-item">
+          <strong>What is the mid-market exchange rate?</strong>
+          <p>The mid-market rate is the midpoint between the buy and sell prices on global currency markets. It is the fairest representation of a currency's value at any given moment, but most consumers never transact at this exact rate because providers add their own markup.</p>
+        </div>
+        <div class="faq-item">
+          <strong>Why is my bank's exchange rate different from what I see online?</strong>
+          <p>Banks and payment providers add a spread (markup) on top of the mid-market rate to cover costs and generate revenue. They may also charge flat fees, percentage-based commissions, or card network surcharges. The combined effect means you receive less foreign currency per unit than the mid-market rate suggests.</p>
+        </div>
+        <div class="faq-item">
+          <strong>How can I get a better exchange rate?</strong>
+          <p>Compare rates from multiple providers before converting. Avoid airport and hotel exchange counters, which typically carry the largest markups. Consider fee-free multi-currency cards for travel spending, and for large transfers look at specialist transfer services that operate with tighter spreads than traditional banks.</p>
+        </div>
+        <div class="faq-item">
+          <strong>Do exchange rates change over the weekend?</strong>
+          <p>The interbank foreign exchange market is closed from Friday evening to Sunday evening (UTC). Most consumer platforms freeze rates over the weekend or apply a wider spread to account for potential Monday gaps. If your conversion is not urgent, waiting until Monday may get you a tighter spread.</p>
+        </div>
+        <div class="faq-item">
+          <strong>What is a currency spread?</strong>
+          <p>The spread is the difference between the price at which a provider will sell you a currency and the price at which they will buy it back. A narrower spread means you lose less value in the conversion. Spreads vary by provider, currency pair, and transaction size.</p>
+        </div>
+      </div>
+
+      <p style="font-size: 0.85rem; color: #666; margin-top: 24px;">Written by the Toolsified team. <a href="/about" style="color: var(--primary-color);">About us</a> | <a href="/methodology" style="color: var(--primary-color);">Our methodology</a> | Last updated: April 2026</p>
+
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <p class="footer-tagline">&copy; 2026 Toolsified - Independent web tools platform.</p>
+      <div class="footer-links"><a href="/privacy">Privacy Policy</a><span>|</span><a href="/terms">Terms</a><span>|</span><a href="/about">About</a><span>|</span><a href="/contact">Contact</a></div>
+      <p class="footer-contact">Contact: <a href="mailto:info@toolsified.com">info@toolsified.com</a></p>
+      <p class="footer-location">Location: Norway</p>
+    </div>
+  </footer>
+</body>
+</html>

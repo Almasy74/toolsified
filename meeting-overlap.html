@@ -7,40 +7,125 @@
   <title>Meeting Overlap Finder | Best Shared Windows Across Time Zones - Toolsified</title>
   <meta name="description" content="Find overlapping working hours across 2-5 time zones with transparent logic, practical examples, and scheduling guidance." />
   <link rel="icon" type="image/png" href="/favicon.png" />
-  <link rel="stylesheet" href="/style.css?v=2.3" />
+  <link rel="stylesheet" href="/style.css?v=2.5" />
   <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/luxon@3/build/global/luxon.min.js"></script>
   <link rel="canonical" href="https://toolsified.com/meeting-overlap" />
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6293439009227714" crossorigin="anonymous"></script>
   <script defer src="/scripts/nav.js"></script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What if no full overlap exists?","acceptedAnswer":{"@type":"Answer","text":"The tool returns best partial windows and indicates how many zones are covered."}},{"@type":"Question","name":"How many zones can I compare?","acceptedAnswer":{"@type":"Answer","text":"Between 2 and 5 unique zones."}},{"@type":"Question","name":"Does this include daylight saving?","acceptedAnswer":{"@type":"Answer","text":"Yes. Time-zone conversion uses date-aware offsets."}},{"@type":"Question","name":"How do I find the best time across three or more zones?","acceptedAnswer":{"@type":"Answer","text":"Add all relevant zones, set the workday range, and the tool will surface the longest window where all participants are within working hours."}},{"@type":"Question","name":"What is the minimum overlap needed for a productive meeting?","acceptedAnswer":{"@type":"Answer","text":"That depends on the agenda, but most teams find 30 minutes too short for discussion. Aim for at least a 60-minute shared window when possible."}},{"@type":"Question","name":"How do recurring meetings handle DST transitions?","acceptedAnswer":{"@type":"Answer","text":"Re-run the overlap finder after each DST change, since the shift can move or eliminate a shared window that previously worked."}}]}
+    </script>
 </head>
-<body>
+<body class="tool-body">
   <header class="site-header"><div class="container"><div class="header-content"><div class="logo-container"><a href="/"><img src="/logo.png" alt="Toolsified logo" class="logo" /></a></div><button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Toggle navigation">Menu</button><nav class="main-nav" id="mainNav"><a href="/time-code">Time Code</a><a href="/multi-timezone">Time Zones</a><a href="/currency">Currency</a><a href="/crypto">Crypto</a><div class="nav-more"><button class="nav-more-toggle" type="button" aria-expanded="false" aria-haspopup="true">More</button><div class="nav-more-menu"><a href="/business-days">Business Days</a><a href="/meeting-overlap">Meeting Overlap</a><a href="/inflation-calculator">Inflation Calculator</a><a href="/crypto-tax-estimator">Crypto Tax Estimator</a></div></div></nav></div></div></header>
 
-  <main class="container">
-    <h1>Meeting Overlap Finder</h1>
-    <section class="card seo-content" style="margin-top:24px; text-align:left; padding:32px;"><h2>Intro</h2><p>This tool identifies shared working windows across teams in different time zones. It is designed for distributed teams, consulting projects, customer success calls, and global operations where schedule fairness matters.</p></section>
+  <main class="container tool-page">
+    <section class="tool-hero">
+      <div class="tool-hero-copy">
+        <p class="tool-kicker">Scheduling across regions</p>
+        <h1>Meeting Overlap Finder</h1>
+        <p class="tool-summary">Find shared working windows across two to five time zones when schedule fairness matters more than a single headquarters clock.</p>
+        <div class="tool-meta">
+          <span>2 to 5 time zones</span>
+          <span>Date-aware offsets</span>
+          <span>Good for distributed teams</span>
+        </div>
+      </div>
+      <aside class="tool-hero-panel">
+        <p class="tool-panel-label">Useful for</p>
+        <h2>Weekly planning, customer calls, and follow-the-sun operations</h2>
+        <p>Use it when you need to identify a realistic overlap window before sending calendar invites.</p>
+        <div class="tool-hero-links">
+          <a href="#calculator">Full overlap windows</a>
+          <a href="#calculator">Best partial overlap</a>
+          <a href="#calculator">Custom workday hours</a>
+          <a href="#calculator">Multiple team time zones</a>
+        </div>
+      </aside>
+    </section>
 
-    <div class="card" style="margin-top:24px;">
-      <label for="meetingDate">Meeting date</label><input id="meetingDate" type="date" />
-      <div class="row" style="margin-top:16px;"><div style="flex:1;"><label for="workStart" style="margin-top:0;">Workday start</label><input id="workStart" type="number" min="0" max="23" value="9" /></div><div style="flex:1;"><label for="workEnd" style="margin-top:0;">Workday end</label><input id="workEnd" type="number" min="1" max="24" value="17" /></div></div>
-      <h2 style="font-size:1.2rem; margin-top:20px;">Time zones (2 to 5)</h2><div id="zoneRows"></div><button id="addZoneBtn" class="primary" type="button" style="margin-top:12px;">Add time zone</button><button id="findBtn" class="primary" type="button">Find overlap</button><div id="result" style="margin-top:20px;"></div>
-    </div>
+    <section id="calculator" class="tool-workspace">
+      <div class="card tool-workspace-card">
+        <div class="tool-workspace-header">
+          <div>
+            <p class="tool-section-label">Calculator</p>
+            <h2>Find a workable meeting window</h2>
+          </div>
+          <p>Choose the date, define the local workday range, add the relevant time zones, and let the tool surface the best overlap.</p>
+        </div>
 
-    <section class="card seo-content" style="margin-top:40px; text-align:left; padding:32px;">
-      <h2>How it works</h2>
-      <p>The algorithm scans 30-minute slots across a day in UTC, maps each slot into selected local zones, and counts how many zones are within the defined workday range. It then returns full overlap windows or the best partial windows when full overlap is impossible.</p>
-      <p><strong>Limitations:</strong> the result does not account for personal availability, calendar conflicts, local holidays, or organization-specific meeting policies.</p>
-      <h2>Practical use scenarios</h2>
-      <ul><li>Weekly planning for US-Europe-APAC teams.</li><li>Incident command calls that need at least partial overlap.</li><li>Customer workshops with distributed stakeholders.</li><li>Recruiting panels across multiple offices.</li></ul>
-      <h2>Related tools</h2>
-      <div class="internal-links-cluster" style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:24px;"><a href="/multi-timezone" style="color: var(--primary-color); text-decoration: underline;">Multi Time Zone Converter</a><a href="/time-code" style="color: var(--primary-color); text-decoration: underline;">Time Code Converter</a><a href="/business-days" style="color: var(--primary-color); text-decoration: underline;">Business Days Calculator</a></div>
-      <h2>FAQ</h2>
-      <div class="faq-item" style="margin-bottom:16px;"><strong>What if no full overlap exists?</strong><p>The tool returns best partial windows and indicates how many zones are covered.</p></div>
-      <div class="faq-item" style="margin-bottom:16px;"><strong>How many zones can I compare?</strong><p>Between 2 and 5 unique zones.</p></div>
-      <div class="faq-item" style="margin-bottom:16px;"><strong>Does this include daylight saving?</strong><p>Yes, timezone conversion uses date-aware offsets.</p></div>
-      <div class="faq-item"><strong>Is this a calendar booking tool?</strong><p>No. Use this for overlap discovery, then schedule in your calendar platform.</p></div>
+        <div class="tool-form-grid">
+          <div class="tool-field">
+            <label for="meetingDate">Meeting date</label>
+            <input id="meetingDate" type="date" />
+          </div>
+          <div class="tool-field">
+            <label for="workStart">Workday start</label>
+            <input id="workStart" type="number" min="0" max="23" value="9" />
+          </div>
+          <div class="tool-field">
+            <label for="workEnd">Workday end</label>
+            <input id="workEnd" type="number" min="1" max="24" value="17" />
+          </div>
+        </div>
+
+        <h3 class="tool-subsection-title">Time zones (2 to 5)</h3>
+        <div id="zoneRows"></div>
+
+        <div class="tool-actions">
+          <button id="addZoneBtn" class="primary tool-inline-action" type="button">Add time zone</button>
+          <button id="findBtn" class="primary" type="button">Find overlap</button>
+        </div>
+        <div id="result" class="tool-output"></div>
+      </div>
+    </section>
+
+    <section class="tool-support-grid">
+      <article class="card tool-support-card">
+        <p class="tool-section-label">Method</p>
+        <h2>How it works</h2>
+        <p>The algorithm scans 30-minute slots across a day in UTC, maps each slot into selected local zones, and counts how many zones are within the defined workday range.</p>
+        <p>It returns full overlap windows or the best partial windows when full overlap is impossible.</p>
+        <p class="tool-note"><strong>Limitations:</strong> the result does not account for personal availability, calendar conflicts, local holidays, or organization-specific meeting policies.</p>
+      </article>
+
+      <article class="card tool-support-card">
+        <p class="tool-section-label">Related</p>
+        <h2>Useful next tools</h2>
+        <div class="tool-link-cluster">
+          <a href="/multi-timezone">Multi Time Zone Converter</a>
+          <a href="/time-code">Time Code Converter</a>
+          <a href="/business-days">Business Days Calculator</a>
+        </div>
+        <div class="tool-faq-list">
+          <div class="faq-item">
+            <strong>What if no full overlap exists?</strong>
+            <p>The tool returns best partial windows and indicates how many zones are covered.</p>
+          </div>
+          <div class="faq-item">
+            <strong>How many zones can I compare?</strong>
+            <p>Between 2 and 5 unique zones.</p>
+          </div>
+          <div class="faq-item">
+            <strong>Does this include daylight saving?</strong>
+            <p>Yes. Time-zone conversion uses date-aware offsets.</p>
+          </div>
+          <div class="faq-item">
+            <strong>How do I find the best time across three or more zones?</strong>
+            <p>Add all relevant zones, set the workday range, and the tool will surface the longest window where all participants are within working hours.</p>
+          </div>
+          <div class="faq-item">
+            <strong>What is the minimum overlap needed for a productive meeting?</strong>
+            <p>That depends on the agenda, but most teams find 30 minutes too short for discussion. Aim for at least a 60-minute shared window when possible.</p>
+          </div>
+          <div class="faq-item">
+            <strong>How do recurring meetings handle DST transitions?</strong>
+            <p>Re-run the overlap finder after each DST change, since the shift can move or eliminate a shared window that previously worked.</p>
+          </div>
+        </div>
+      </article>
     </section>
   </main>
 

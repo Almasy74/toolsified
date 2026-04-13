@@ -33,7 +33,7 @@
         ]
     }
     </script>
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is this suitable for official tax reporting?","acceptedAnswer":{"@type":"Answer","text":"Use it for planning only, then reconcile with complete transaction records and local tax rules."}},{"@type":"Question","name":"Can I use this to compare hypothetical sell dates?","acceptedAnswer":{"@type":"Answer","text":"Yes, changing the sell date is a common way to test timing sensitivity."}},{"@type":"Question","name":"Does holding period change this tool calculation?","acceptedAnswer":{"@type":"Answer","text":"The formula itself is date-rate based; holding period mainly matters in downstream tax treatment."}},{"@type":"Question","name":"Can this ETH calculator replace exchange account statements?","acceptedAnswer":{"@type":"Answer","text":"No. Exchange statements remain authoritative for executed prices and fees."}}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does this include gas fees paid in ETH?","acceptedAnswer":{"@type":"Answer","text":"No. Gas fees are transaction-specific and not captured by daily reference rates. Subtract your actual gas costs for a more accurate net figure."}},{"@type":"Question","name":"Why might my euro profit on ETH differ from the dollar profit?","acceptedAnswer":{"@type":"Answer","text":"The EUR/USD exchange rate adds a second variable. If the euro strengthened against the dollar during your holding period, your euro profit will be smaller than the dollar equivalent, and vice versa."}},{"@type":"Question","name":"Can I estimate profit on ETH received as DeFi yield?","acceptedAnswer":{"@type":"Answer","text":"You can add yield amounts as separate rows, but the tool does not track DeFi protocols, reward schedules, or compounding logic."}},{"@type":"Question","name":"Is this suitable for German crypto tax planning?","acceptedAnswer":{"@type":"Answer","text":"It provides a rough estimate. German tax rules include holding-period exemptions and specific cost basis requirements that this tool does not implement. Use it for orientation, then consult a tax advisor."}}]}</script>
     <script defer src="/scripts/nav.js"></script>
 </head>
 
@@ -75,8 +75,9 @@
 
         <section class="card seo-content" style="margin-top:24px; text-align:left; padding:32px;">
             <h2>What this tool estimates</h2>
-            <p>This page estimates historical profit or loss for <strong>Ethereum (ETH)</strong> positions priced in <strong>Euros (EUR)</strong>. Add one or more transactions with buy and sell dates to see estimated gain per row. This is a <strong>planning tool</strong>, not a tax filing engine or broker statement replacement.</p>
-            <p><strong>Not included:</strong> trading fees, slippage, intraday price variation, staking rewards, gas costs, or jurisdiction-specific tax rules. Treat output as a directional estimate and reconcile with exchange records for official reporting.</p>
+            <p>This page estimates historical profit or loss for <strong>Ethereum (ETH)</strong> positions priced in <strong>Euros (EUR)</strong>. It serves European holders who need a euro-denominated view of their ETH trades for personal review, portfolio updates, or preliminary tax planning.</p>
+<p>Add one or more transactions with buy and sell dates to see estimated gain per row. Like the BTC-to-EUR pair, the result reflects both ETH price movements and EUR/USD dynamics, so euro-denominated gains can diverge noticeably from dollar-denominated ones.</p>
+<p><strong>Not included:</strong> gas costs, DeFi yield, staking rewards, NFT proceeds, or EU member-state-specific tax rules. Treat output as a directional estimate and reconcile with exchange and wallet records for official reporting.</p>
         </section>
 
         <div class="card" style="margin-top: 0; padding: 24px;">
@@ -128,19 +129,19 @@
 <p><a href="/crypto/btc-to-usd" style="color: var(--primary-color); text-decoration: underline;">Bitcoin to US Dollars Calculator</a></p>
 <p><a href="/crypto/btc-to-eur" style="color: var(--primary-color); text-decoration: underline;">Bitcoin to Euros Calculator</a></p>
 <p><a href="/crypto/sol-to-usd" style="color: var(--primary-color); text-decoration: underline;">Solana to US Dollars Calculator</a></p>
-<p><a href="/currency/usd-to-nzd" style="color: var(--primary-color); text-decoration: underline;">USD to NZD Converter</a></p>
+<p><a href="/currency/gbp-to-usd" style="color: var(--primary-color); text-decoration: underline;">GBP to USD Converter</a></p>
                 <p><a href="/crypto" style="color: var(--primary-color); text-decoration: underline;">Back to Crypto Tools Hub</a></p>
                 <p><a href="/crypto-tax-estimator" style="color: var(--primary-color); text-decoration: underline;">Crypto Tax Estimator</a></p>
                 <p><a href="/methodology" style="color: var(--primary-color); text-decoration: underline;">Methodology and data sources</a></p>
             </div>
 
             <h2>FAQ</h2>
-            <div class="faq-item" style="margin-bottom: 16px;"><strong>Is this suitable for official tax reporting?</strong><p>Use it for planning only, then reconcile with complete transaction records and local tax rules.</p></div>
-<div class="faq-item" style="margin-bottom: 16px;"><strong>Can I use this to compare hypothetical sell dates?</strong><p>Yes, changing the sell date is a common way to test timing sensitivity.</p></div>
-<div class="faq-item" style="margin-bottom: 16px;"><strong>Does holding period change this tool calculation?</strong><p>The formula itself is date-rate based; holding period mainly matters in downstream tax treatment.</p></div>
-<div class="faq-item" style="margin-bottom: 16px;"><strong>Can this ETH calculator replace exchange account statements?</strong><p>No. Exchange statements remain authoritative for executed prices and fees.</p></div>
+            <div class="faq-item" style="margin-bottom: 16px;"><strong>Does this include gas fees paid in ETH?</strong><p>No. Gas fees are transaction-specific and not captured by daily reference rates. Subtract your actual gas costs for a more accurate net figure.</p></div>
+<div class="faq-item" style="margin-bottom: 16px;"><strong>Why might my euro profit on ETH differ from the dollar profit?</strong><p>The EUR/USD exchange rate adds a second variable. If the euro strengthened against the dollar during your holding period, your euro profit will be smaller than the dollar equivalent, and vice versa.</p></div>
+<div class="faq-item" style="margin-bottom: 16px;"><strong>Can I estimate profit on ETH received as DeFi yield?</strong><p>You can add yield amounts as separate rows, but the tool does not track DeFi protocols, reward schedules, or compounding logic.</p></div>
+<div class="faq-item" style="margin-bottom: 16px;"><strong>Is this suitable for German crypto tax planning?</strong><p>It provides a rough estimate. German tax rules include holding-period exemptions and specific cost basis requirements that this tool does not implement. Use it for orientation, then consult a tax advisor.</p></div>
 
-            <p style="font-size: 0.8rem; color: #888; margin-top: 24px;">Page last built: 2026-03-23. Historical rates are fetched on each calculation.</p>
+            <p style="font-size: 0.8rem; color: #888; margin-top: 24px;">Page last built: 2026-04-13. Historical rates are fetched on each calculation.</p>
         </section>
     </main>
 

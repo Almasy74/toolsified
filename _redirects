@@ -43,5 +43,111 @@
 /last-updated        /last-updated.html    200
 /methodology         /methodology.html     200
 
+# Guide pages (clean URLs)
+/guides/how-exchange-rates-work        /guides/how-exchange-rates-work.html       200
+/guides/timezone-scheduling-tips       /guides/timezone-scheduling-tips.html      200
+/guides/percentage-calculations-explained /guides/percentage-calculations-explained.html 200
+/guides/understanding-loan-amortization /guides/understanding-loan-amortization.html 200
+
+# 301 redirects for consolidated currency pair pages
+/currency/cad-to-usd/*    /currency  301!
+/currency/cad-to-usd       /currency  301!
+/currency/usd-to-aud/*    /currency  301!
+/currency/usd-to-aud       /currency  301!
+/currency/aud-to-usd/*    /currency  301!
+/currency/aud-to-usd       /currency  301!
+/currency/eur-to-chf/*    /currency  301!
+/currency/eur-to-chf       /currency  301!
+/currency/usd-to-chf/*    /currency  301!
+/currency/usd-to-chf       /currency  301!
+/currency/eur-to-jpy/*    /currency  301!
+/currency/eur-to-jpy       /currency  301!
+/currency/usd-to-sek/*    /currency  301!
+/currency/usd-to-sek       /currency  301!
+/currency/eur-to-sek/*    /currency  301!
+/currency/eur-to-sek       /currency  301!
+/currency/usd-to-inr/*    /currency  301!
+/currency/usd-to-inr       /currency  301!
+/currency/inr-to-usd/*    /currency  301!
+/currency/inr-to-usd       /currency  301!
+/currency/chf-to-usd/*    /currency  301!
+/currency/chf-to-usd       /currency  301!
+/currency/chf-to-eur/*    /currency  301!
+/currency/chf-to-eur       /currency  301!
+/currency/gbp-to-aud/*    /currency  301!
+/currency/gbp-to-aud       /currency  301!
+/currency/aud-to-gbp/*    /currency  301!
+/currency/aud-to-gbp       /currency  301!
+/currency/eur-to-cad/*    /currency  301!
+/currency/eur-to-cad       /currency  301!
+/currency/cad-to-eur/*    /currency  301!
+/currency/cad-to-eur       /currency  301!
+/currency/eur-to-aud/*    /currency  301!
+/currency/eur-to-aud       /currency  301!
+/currency/usd-to-cny/*    /currency  301!
+/currency/usd-to-cny       /currency  301!
+/currency/usd-to-nzd/*    /currency  301!
+/currency/usd-to-nzd       /currency  301!
+/currency/nzd-to-usd/*    /currency  301!
+/currency/nzd-to-usd       /currency  301!
+/currency/usd-to-krw/*    /currency  301!
+/currency/usd-to-krw       /currency  301!
+/currency/usd-to-sgd/*    /currency  301!
+/currency/usd-to-sgd       /currency  301!
+/currency/sgd-to-usd/*    /currency  301!
+/currency/sgd-to-usd       /currency  301!
+/currency/usd-to-hkd/*    /currency  301!
+/currency/usd-to-hkd       /currency  301!
+/currency/hkd-to-usd/*    /currency  301!
+/currency/hkd-to-usd       /currency  301!
+/currency/gbp-to-cad/*    /currency  301!
+/currency/gbp-to-cad       /currency  301!
+/currency/cad-to-gbp/*    /currency  301!
+/currency/cad-to-gbp       /currency  301!
+/currency/eur-to-dkk/*    /currency  301!
+/currency/eur-to-dkk       /currency  301!
+/currency/dkk-to-eur/*    /currency  301!
+/currency/dkk-to-eur       /currency  301!
+/currency/usd-to-dkk/*    /currency  301!
+/currency/usd-to-dkk       /currency  301!
+/currency/dkk-to-usd/*    /currency  301!
+/currency/dkk-to-usd       /currency  301!
+/currency/sek-to-usd/*    /currency  301!
+/currency/sek-to-usd       /currency  301!
+/currency/nok-to-usd/*    /currency  301!
+/currency/nok-to-usd       /currency  301!
+/currency/usd-to-zar/*    /currency  301!
+/currency/usd-to-zar       /currency  301!
+/currency/zar-to-usd/*    /currency  301!
+/currency/zar-to-usd       /currency  301!
+
+# 301 redirects for consolidated timezone pair pages
+/time-zone/aet-to-pst/*   /multi-timezone  301!
+/time-zone/aet-to-pst      /multi-timezone  301!
+/time-zone/cet-to-cst/*   /multi-timezone  301!
+/time-zone/cet-to-cst      /multi-timezone  301!
+/time-zone/mt-to-gmt/*    /multi-timezone  301!
+/time-zone/mt-to-gmt       /multi-timezone  301!
+/time-zone/jst-to-est/*   /multi-timezone  301!
+/time-zone/jst-to-est      /multi-timezone  301!
+/time-zone/aet-to-est/*   /multi-timezone  301!
+/time-zone/aet-to-est      /multi-timezone  301!
+/time-zone/gst-to-est/*   /multi-timezone  301!
+/time-zone/gst-to-est      /multi-timezone  301!
+/time-zone/sgt-to-pst/*   /multi-timezone  301!
+/time-zone/sgt-to-pst      /multi-timezone  301!
+/time-zone/pst-to-ist/*   /multi-timezone  301!
+/time-zone/pst-to-ist      /multi-timezone  301!
+/time-zone/cet-to-pst/*   /multi-timezone  301!
+/time-zone/cet-to-pst      /multi-timezone  301!
+
 # Redirect www to apex domain
 https://www.toolsified.com/* https://toolsified.com/:splat 301!
+
+# Redesign preview
+/redesign-preview   /redesign-preview/            301!
+/redesign-preview/  /redesign-preview/index.html  200
+
+# Static homepage launch candidate
+/homepage-candidate   /homepage-candidate/            301!
+/homepage-candidate/  /homepage-candidate/index.html  200

@@ -9,17 +9,20 @@
   <meta name="description"
     content="Calculate percent of a number, percentage increase or decrease, percent difference, and add or subtract percentages in one quick browser-based tool." />
   <link rel="icon" type="image/png" href="/favicon.png" />
-  <link rel="stylesheet" href="/style.css?v=2.3" />
+  <link rel="stylesheet" href="/style.css?v=2.5" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
   <link rel="canonical" href="https://toolsified.com/percentage-calculator" />
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6293439009227714"
     crossorigin="anonymous"></script>
   <script defer src="/scripts/nav.js"></script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the difference between percentage change and percentage points?","acceptedAnswer":{"@type":"Answer","text":"Percentage change measures relative movement, while percentage points describe the direct gap between two percentages."}},{"@type":"Question","name":"Can I use this for discounts and markups?","acceptedAnswer":{"@type":"Answer","text":"Yes. The add/subtract section is useful for quick discount and markup checks."}},{"@type":"Question","name":"Why does percent change fail when the starting value is zero?","acceptedAnswer":{"@type":"Answer","text":"Because the formula divides by the starting value, and division by zero is undefined."}},{"@type":"Question","name":"How do I calculate compound percentage growth over multiple periods?","acceptedAnswer":{"@type":"Answer","text":"Multiply the base by (1 + rate/100) raised to the number of periods instead of adding the same percentage each time."}},{"@type":"Question","name":"What is the difference between markup and margin?","acceptedAnswer":{"@type":"Answer","text":"Markup is the percentage added to cost, while margin is the percentage of the selling price that is profit -- so a 50% markup equals a 33.3% margin."}},{"@type":"Question","name":"When should I use percentage difference instead of percentage change?","acceptedAnswer":{"@type":"Answer","text":"Use percentage difference when neither value is a clear baseline, such as comparing two independent measurements, and percentage change when one value came before the other."}}]}
+    </script>
 </head>
 
-<body>
+<body class="tool-body">
   <header class="site-header">
     <div class="container">
       <div class="header-content">
@@ -40,116 +43,146 @@
     </div>
   </header>
 
-  <main class="container">
-    <h1>Percentage Calculator</h1>
-
-    <section class="card seo-content" style="margin-top:24px; text-align:left; padding:32px;">
-      <h2>Intro</h2>
-      <p>This calculator covers the most common percentage questions in one place: percent of a number, what percent one
-        number is of another, percentage increase or decrease, and adding or subtracting a percentage from a starting
-        value. It is useful for discounts, margins, markups, budgeting, classroom math, and quick business checks.</p>
+  <main class="container tool-page">
+    <section class="tool-hero">
+      <div class="tool-hero-copy">
+        <p class="tool-kicker">Pricing and quick math</p>
+        <h1>Percentage Calculator</h1>
+        <p class="tool-summary">Handle percent of a number, percentage change, and simple increases or decreases in one place without jumping between different formulas.</p>
+        <div class="tool-meta">
+          <span>Runs in the browser</span>
+          <span>No signup required</span>
+          <span>Useful for pricing and budgets</span>
+        </div>
+      </div>
+      <aside class="tool-hero-panel">
+        <p class="tool-panel-label">Covers</p>
+        <h2>Four common percentage checks in one flow</h2>
+        <p>Use it for discounts, markups, KPI movement, classroom math, and quick commercial sanity checks.</p>
+        <div class="tool-hero-links">
+          <a href="#calculator">Percent of a number</a>
+          <a href="#calculator">What percent one number is of another</a>
+          <a href="#calculator">Percentage change</a>
+          <a href="#calculator">Add or subtract a percentage</a>
+        </div>
+      </aside>
     </section>
 
-    <div class="card" style="margin-top:24px;">
-      <h2 style="font-size:1.2rem;">1. What is X% of Y?</h2>
-      <div class="row">
-        <div style="flex:1;">
-          <label for="percentRate" style="margin-top:0;">Percent</label>
-          <input id="percentRate" type="number" step="0.01" value="25" />
+    <section id="calculator" class="tool-workspace">
+      <div class="card tool-workspace-card">
+        <div class="tool-workspace-header">
+          <div>
+            <p class="tool-section-label">Calculator</p>
+            <h2>Run the percentage math</h2>
+          </div>
+          <p>Each section answers a slightly different percentage question, so you can use the right formula without thinking about setup first.</p>
         </div>
-        <div style="flex:1;">
-          <label for="percentBase" style="margin-top:0;">Number</label>
-          <input id="percentBase" type="number" step="0.01" value="240" />
+
+        <h3 class="tool-subsection-title">1. What is X% of Y?</h3>
+        <div class="tool-form-grid">
+          <div class="tool-field">
+            <label for="percentRate">Percent</label>
+            <input id="percentRate" type="number" step="0.01" value="25" />
+          </div>
+          <div class="tool-field">
+            <label for="percentBase">Number</label>
+            <input id="percentBase" type="number" step="0.01" value="240" />
+          </div>
         </div>
-      </div>
 
-      <h2 style="font-size:1.2rem; margin-top:20px;">2. X is what percent of Y?</h2>
-      <div class="row">
-        <div style="flex:1;">
-          <label for="partValue" style="margin-top:0;">Part</label>
-          <input id="partValue" type="number" step="0.01" value="18" />
+        <h3 class="tool-subsection-title">2. X is what percent of Y?</h3>
+        <div class="tool-form-grid">
+          <div class="tool-field">
+            <label for="partValue">Part</label>
+            <input id="partValue" type="number" step="0.01" value="18" />
+          </div>
+          <div class="tool-field">
+            <label for="wholeValue">Whole</label>
+            <input id="wholeValue" type="number" step="0.01" value="72" />
+          </div>
         </div>
-        <div style="flex:1;">
-          <label for="wholeValue" style="margin-top:0;">Whole</label>
-          <input id="wholeValue" type="number" step="0.01" value="72" />
+
+        <h3 class="tool-subsection-title">3. Percentage change</h3>
+        <div class="tool-form-grid">
+          <div class="tool-field">
+            <label for="fromValue">From</label>
+            <input id="fromValue" type="number" step="0.01" value="80" />
+          </div>
+          <div class="tool-field">
+            <label for="toValue">To</label>
+            <input id="toValue" type="number" step="0.01" value="100" />
+          </div>
         </div>
-      </div>
 
-      <h2 style="font-size:1.2rem; margin-top:20px;">3. Percentage change</h2>
-      <div class="row">
-        <div style="flex:1;">
-          <label for="fromValue" style="margin-top:0;">From</label>
-          <input id="fromValue" type="number" step="0.01" value="80" />
+        <h3 class="tool-subsection-title">4. Add or subtract a percentage</h3>
+        <div class="tool-form-grid">
+          <div class="tool-field">
+            <label for="adjustBase">Starting value</label>
+            <input id="adjustBase" type="number" step="0.01" value="150" />
+          </div>
+          <div class="tool-field">
+            <label for="adjustRate">Percent</label>
+            <input id="adjustRate" type="number" step="0.01" value="12" />
+          </div>
         </div>
-        <div style="flex:1;">
-          <label for="toValue" style="margin-top:0;">To</label>
-          <input id="toValue" type="number" step="0.01" value="100" />
+
+        <div class="tool-actions">
+          <button id="calcBtn" class="primary" type="button">Calculate percentages</button>
         </div>
+        <div id="result" class="tool-output"></div>
       </div>
+    </section>
 
-      <h2 style="font-size:1.2rem; margin-top:20px;">4. Add or subtract a percentage</h2>
-      <div class="row">
-        <div style="flex:1;">
-          <label for="adjustBase" style="margin-top:0;">Starting value</label>
-          <input id="adjustBase" type="number" step="0.01" value="150" />
+    <section class="tool-support-grid">
+      <article class="card tool-support-card">
+        <p class="tool-section-label">Method</p>
+        <h2>How it works</h2>
+        <p>The page uses standard percentage formulas directly in the browser.</p>
+        <ul>
+          <li><code>percent of number = rate / 100 x base</code></li>
+          <li><code>what percent = part / whole x 100</code></li>
+          <li><code>percentage change = (new - old) / old x 100</code></li>
+          <li><code>adjusted value = base x (1 +/- rate / 100)</code></li>
+        </ul>
+        <p class="tool-note"><strong>Limitations:</strong> this gives the math only. You still need the right business interpretation for margin, markup, percentage points, or absolute change.</p>
+      </article>
+
+      <article class="card tool-support-card">
+        <p class="tool-section-label">Related</p>
+        <h2>Useful next tools</h2>
+        <div class="tool-link-cluster">
+          <a href="/vat-calculator">VAT Calculator</a>
+          <a href="/loan-payment-calculator">Loan Payment Calculator</a>
+          <a href="/inflation-calculator">Inflation Calculator</a>
+          <a href="/unit-converter">Unit Converter</a>
         </div>
-        <div style="flex:1;">
-          <label for="adjustRate" style="margin-top:0;">Percent</label>
-          <input id="adjustRate" type="number" step="0.01" value="12" />
+        <div class="tool-faq-list">
+          <div class="faq-item">
+            <strong>What is the difference between percentage change and percentage points?</strong>
+            <p>Percentage change measures relative movement, while percentage points describe the direct gap between two percentages.</p>
+          </div>
+          <div class="faq-item">
+            <strong>Can I use this for discounts and markups?</strong>
+            <p>Yes. The add/subtract section is useful for quick discount and markup checks.</p>
+          </div>
+          <div class="faq-item">
+            <strong>Why does percent change fail when the starting value is zero?</strong>
+            <p>Because the formula divides by the starting value, and division by zero is undefined.</p>
+          </div>
+          <div class="faq-item">
+            <strong>How do I calculate compound percentage growth over multiple periods?</strong>
+            <p>Multiply the base by (1 + rate/100) raised to the number of periods instead of adding the same percentage each time.</p>
+          </div>
+          <div class="faq-item">
+            <strong>What is the difference between markup and margin?</strong>
+            <p>Markup is the percentage added to cost, while margin is the percentage of the selling price that is profit -- so a 50% markup equals a 33.3% margin.</p>
+          </div>
+          <div class="faq-item">
+            <strong>When should I use percentage difference instead of percentage change?</strong>
+            <p>Use percentage difference when neither value is a clear baseline, such as comparing two independent measurements, and percentage change when one value came before the other.</p>
+          </div>
         </div>
-      </div>
-
-      <button id="calcBtn" class="primary" type="button">Calculate percentages</button>
-      <div id="result" style="margin-top:20px;"></div>
-    </div>
-
-    <section class="card seo-content" style="margin-top:40px; text-align:left; padding:32px;">
-      <h2>How it works</h2>
-      <p>The page uses standard percentage formulas directly in the browser.</p>
-      <ul>
-        <li><code>percent of number = rate / 100 x base</code></li>
-        <li><code>what percent = part / whole x 100</code></li>
-        <li><code>percentage change = (new - old) / old x 100</code></li>
-        <li><code>adjusted value = base x (1 +/- rate / 100)</code></li>
-      </ul>
-      <p><strong>Limitations:</strong> this tool does not decide whether your business context should use margin,
-        markup, percentage-point change, or absolute change. It gives the math; you still need the right commercial or
-        reporting interpretation.</p>
-
-      <h2>Practical use scenarios</h2>
-      <ul>
-        <li>Check discounts and markups during shopping or procurement.</li>
-        <li>Measure salary changes, price increases, or KPI movement.</li>
-        <li>Convert ratios into percentages for reporting or schoolwork.</li>
-        <li>Quickly test what happens when a number goes up or down by a chosen percentage.</li>
-      </ul>
-
-      <h2>Related tools</h2>
-      <div class="internal-links-cluster" style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:24px;">
-        <a href="/vat-calculator" style="color: var(--primary-color); text-decoration: underline;">VAT Calculator</a>
-        <a href="/loan-payment-calculator" style="color: var(--primary-color); text-decoration: underline;">Loan Payment Calculator</a>
-        <a href="/inflation-calculator" style="color: var(--primary-color); text-decoration: underline;">Inflation Calculator</a>
-        <a href="/unit-converter" style="color: var(--primary-color); text-decoration: underline;">Unit Converter</a>
-      </div>
-
-      <h2>FAQ</h2>
-      <div class="faq-item" style="margin-bottom:16px;">
-        <strong>What is the difference between percentage change and percentage points?</strong>
-        <p>Percentage change compares relative growth or decline, while percentage points describe the direct difference
-          between two percentage values.</p>
-      </div>
-      <div class="faq-item" style="margin-bottom:16px;">
-        <strong>Can I use this for discounts and markups?</strong>
-        <p>Yes. The add/subtract section is useful for rough discount and markup checks.</p>
-      </div>
-      <div class="faq-item" style="margin-bottom:16px;">
-        <strong>Why does percent change fail when the starting value is zero?</strong>
-        <p>Because the formula divides by the starting value, and division by zero is undefined.</p>
-      </div>
-      <div class="faq-item">
-        <strong>Does the tool store my numbers?</strong>
-        <p>No. The calculation runs in your browser.</p>
-      </div>
+      </article>
     </section>
   </main>
 

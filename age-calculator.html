@@ -9,17 +9,21 @@
   <meta name="description"
     content="Calculate exact age by date of birth, including years, months, days, total weeks, total days, and time until next birthday." />
   <link rel="icon" type="image/png" href="/favicon.png" />
-  <link rel="stylesheet" href="/style.css?v=2.3" />
+  <link rel="stylesheet" href="/style.css?v=2.5" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Space+Grotesk:wght@500;700&display=swap"
+    rel="stylesheet" />
   <link rel="canonical" href="https://toolsified.com/age-calculator" />
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6293439009227714"
     crossorigin="anonymous"></script>
   <script defer src="/scripts/nav.js"></script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does this account for leap years?","acceptedAnswer":{"@type":"Answer","text":"Yes. Leap years are handled naturally through date arithmetic."}},{"@type":"Question","name":"Can I calculate age on a future date?","acceptedAnswer":{"@type":"Answer","text":"Yes. The reference date can be today, a past date, or a future date."}},{"@type":"Question","name":"What if the birthday is February 29?","acceptedAnswer":{"@type":"Answer","text":"The calculator keeps the birth date intact and handles non-leap years through clamped calendar logic."}},{"@type":"Question","name":"Do different countries calculate legal age differently?","acceptedAnswer":{"@type":"Answer","text":"Yes. Some jurisdictions consider you a year older on the day before your birthday, while others use the birthday itself -- always check local rules for legal eligibility."}},{"@type":"Question","name":"Can I see my age in months or weeks instead of years?","acceptedAnswer":{"@type":"Answer","text":"Yes. The results include total completed calendar months, total weeks, and total days alongside the year-based breakdown."}},{"@type":"Question","name":"Does my time zone affect the calculated age?","acceptedAnswer":{"@type":"Answer","text":"This tool uses date-only logic without time-of-day, so the result depends on the calendar dates you enter rather than your local time zone."}}]}
+    </script>
 </head>
 
-<body>
+<body class="tool-body">
   <header class="site-header">
     <div class="container">
       <div class="header-content">
@@ -40,79 +44,115 @@
     </div>
   </header>
 
-  <main class="container">
-    <h1>Age Calculator</h1>
-
-    <section class="card seo-content" style="margin-top:24px; text-align:left; padding:32px;">
-      <h2>Intro</h2>
-      <p>This calculator shows exact age from a birth date to a chosen "as of" date. It returns years, months, days,
-        total months, total weeks, total days, and the timing of the next birthday. It is useful for forms, planning,
-        eligibility checks, and quick personal reference.</p>
+  <main class="container tool-page">
+    <section class="tool-hero">
+      <div class="tool-hero-copy">
+        <p class="tool-kicker">Dates and personal reference</p>
+        <h1>Age Calculator</h1>
+        <p class="tool-summary">Calculate exact age from a birth date to any chosen date, including years, months,
+          days, total weeks, total days, and time until the next birthday.</p>
+        <div class="tool-meta">
+          <span>Date-only logic</span>
+          <span>No signup required</span>
+          <span>Good for forms and planning</span>
+        </div>
+      </div>
+      <aside class="tool-hero-panel">
+        <p class="tool-panel-label">Useful for</p>
+        <h2>Forms, eligibility checks, and quick age reference</h2>
+        <p>Use it when you need a precise age breakdown rather than a rounded year estimate.</p>
+        <div class="tool-hero-links">
+          <a href="#calculator">Exact years, months, and days</a>
+          <a href="#calculator">Total weeks and total days</a>
+          <a href="#calculator">Next birthday timing</a>
+          <a href="#calculator">Past or future reference dates</a>
+        </div>
+      </aside>
     </section>
 
-    <div class="card" style="margin-top:24px;">
-      <div class="row">
-        <div style="flex:1;">
-          <label for="birthDate" style="margin-top:0;">Date of birth</label>
-          <input id="birthDate" type="date" />
+    <section id="calculator" class="tool-workspace">
+      <div class="card tool-workspace-card">
+        <div class="tool-workspace-header">
+          <div>
+            <p class="tool-section-label">Calculator</p>
+            <h2>Compare birth date and reference date</h2>
+          </div>
+          <p>Choose a date of birth and an "as of" date to get a precise calendar-based age breakdown.</p>
         </div>
-        <div style="flex:1;">
-          <label for="asOfDate" style="margin-top:0;">As of date</label>
-          <input id="asOfDate" type="date" />
+
+        <div class="tool-form-grid">
+          <div class="tool-field">
+            <label for="birthDate">Date of birth</label>
+            <input id="birthDate" type="date" />
+          </div>
+          <div class="tool-field">
+            <label for="asOfDate">As of date</label>
+            <input id="asOfDate" type="date" />
+          </div>
         </div>
-      </div>
 
-      <button id="calcBtn" class="primary" type="button">Calculate age</button>
-      <div id="result" style="margin-top:20px;"></div>
-    </div>
+        <div class="tool-actions">
+          <button id="calcBtn" class="primary" type="button">Calculate age</button>
+        </div>
+        <div id="result" class="tool-output"></div>
+      </div>
+    </section>
 
-    <section class="card seo-content" style="margin-top:40px; text-align:left; padding:32px;">
-      <h2>How it works</h2>
-      <p>The calculator compares the birth date and reference date using calendar-aware year and month steps, then adds
-        remaining days. This produces a precise date-based age rather than a rounded year estimate.</p>
-      <p><strong>Limitations:</strong> this is a date-only tool. It does not use time of birth, time zones, or legal
-        definitions that may vary in formal eligibility settings.</p>
+    <section class="tool-support-grid">
+      <article class="card tool-support-card">
+        <p class="tool-section-label">Method</p>
+        <h2>How it works</h2>
+        <p>The calculator compares the birth date and reference date using calendar-aware year and month steps, then
+          adds the remaining days.</p>
+        <p>This produces a precise date-based age rather than a rounded year estimate.</p>
+        <p class="tool-note"><strong>Limitations:</strong> this is a date-only tool. It does not use time of birth,
+          time zones, or legal definitions that may vary in formal eligibility settings.</p>
+      </article>
 
-      <h2>Practical use scenarios</h2>
-      <ul>
-        <li>Check exact age for forms, school, or sports registration.</li>
-        <li>See how many days or weeks have passed since birth.</li>
-        <li>Find the next birthday and how long remains.</li>
-        <li>Measure age on a historical or future date.</li>
-      </ul>
-
-      <h2>Related tools</h2>
-      <div class="internal-links-cluster" style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:24px;">
-        <a href="/date-difference-calculator" style="color: var(--primary-color); text-decoration: underline;">Date Difference Calculator</a>
-        <a href="/business-days" style="color: var(--primary-color); text-decoration: underline;">Business Days Calculator</a>
-        <a href="/multi-timezone" style="color: var(--primary-color); text-decoration: underline;">Multi Time Zone</a>
-        <a href="/time-code" style="color: var(--primary-color); text-decoration: underline;">Time Code Converter</a>
-      </div>
-
-      <h2>FAQ</h2>
-      <div class="faq-item" style="margin-bottom:16px;">
-        <strong>Does this account for leap years?</strong>
-        <p>Yes. Leap years are handled naturally through date arithmetic.</p>
-      </div>
-      <div class="faq-item" style="margin-bottom:16px;">
-        <strong>Can I calculate age on a future date?</strong>
-        <p>Yes. The reference date can be today, a past date, or a future date.</p>
-      </div>
-      <div class="faq-item" style="margin-bottom:16px;">
-        <strong>What if the birthday is February 29?</strong>
-        <p>The calculator keeps the birth date intact and handles non-leap years through clamped calendar logic.</p>
-      </div>
-      <div class="faq-item">
-        <strong>Is this suitable for legal age checks?</strong>
-        <p>Use it as a reference. Formal eligibility rules may depend on local law and specific cutoff wording.</p>
-      </div>
+      <article class="card tool-support-card">
+        <p class="tool-section-label">Related</p>
+        <h2>Useful next tools</h2>
+        <div class="tool-link-cluster">
+          <a href="/date-difference-calculator">Date Difference Calculator</a>
+          <a href="/business-days">Business Days Calculator</a>
+          <a href="/multi-timezone">Multi Time Zone</a>
+          <a href="/time-code">Time Code Converter</a>
+        </div>
+        <div class="tool-faq-list">
+          <div class="faq-item">
+            <strong>Does this account for leap years?</strong>
+            <p>Yes. Leap years are handled naturally through date arithmetic.</p>
+          </div>
+          <div class="faq-item">
+            <strong>Can I calculate age on a future date?</strong>
+            <p>Yes. The reference date can be today, a past date, or a future date.</p>
+          </div>
+          <div class="faq-item">
+            <strong>What if the birthday is February 29?</strong>
+            <p>The calculator keeps the birth date intact and handles non-leap years through clamped calendar logic.</p>
+          </div>
+          <div class="faq-item">
+            <strong>Do different countries calculate legal age differently?</strong>
+            <p>Yes. Some jurisdictions consider you a year older on the day before your birthday, while others use the birthday itself -- always check local rules for legal eligibility.</p>
+          </div>
+          <div class="faq-item">
+            <strong>Can I see my age in months or weeks instead of years?</strong>
+            <p>Yes. The results include total completed calendar months, total weeks, and total days alongside the year-based breakdown.</p>
+          </div>
+          <div class="faq-item">
+            <strong>Does my time zone affect the calculated age?</strong>
+            <p>This tool uses date-only logic without time-of-day, so the result depends on the calendar dates you enter rather than your local time zone.</p>
+          </div>
+        </div>
+      </article>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="footer-container">
       <p class="footer-tagline">&copy; 2026 Toolsified - Independent web tools platform.</p>
-      <div class="footer-links"><a href="/privacy">Privacy Policy</a><span>|</span><a href="/terms">Terms</a><span>|</span><a href="/about">About</a><span>|</span><a href="/contact">Contact</a></div>
+      <div class="footer-links"><a href="/privacy">Privacy Policy</a><span>|</span><a href="/terms">Terms</a><span>|</span><a
+          href="/about">About</a><span>|</span><a href="/contact">Contact</a></div>
       <p class="footer-contact">Contact: <a href="mailto:info@toolsified.com">info@toolsified.com</a></p>
       <p class="footer-location">Location: Norway</p>
     </div>

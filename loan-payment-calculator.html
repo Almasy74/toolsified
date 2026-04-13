@@ -9,17 +9,20 @@
   <meta name="description"
     content="Estimate loan payments, total interest, payoff timeline, and the impact of extra monthly payments with a simple browser-based amortization calculator." />
   <link rel="icon" type="image/png" href="/favicon.png" />
-  <link rel="stylesheet" href="/style.css?v=2.3" />
+  <link rel="stylesheet" href="/style.css?v=2.5" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
   <link rel="canonical" href="https://toolsified.com/loan-payment-calculator" />
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6293439009227714"
     crossorigin="anonymous"></script>
   <script defer src="/scripts/nav.js"></script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does this replace a lender quote?","acceptedAnswer":{"@type":"Answer","text":"No. Use it for planning only. Actual offers depend on fees, credit profile, taxes, insurance, and lender policy."}},{"@type":"Question","name":"What does the extra payment field do?","acceptedAnswer":{"@type":"Answer","text":"It adds the same extra amount every month and re-simulates the balance until payoff."}},{"@type":"Question","name":"Can I use a zero interest rate?","acceptedAnswer":{"@type":"Answer","text":"Yes. In that case the payment is simply the loan amount divided by the number of months."}},{"@type":"Question","name":"How does a fixed rate differ from a variable rate in this calculator?","acceptedAnswer":{"@type":"Answer","text":"This calculator assumes a fixed rate for the entire term; variable-rate loans can change periodically, so the actual payment schedule may shift after each rate adjustment."}},{"@type":"Question","name":"Do biweekly payments save more than monthly payments?","acceptedAnswer":{"@type":"Answer","text":"Yes, because you make 26 half-payments per year (equivalent to 13 monthly payments), which reduces the principal faster and cuts total interest."}},{"@type":"Question","name":"What does APR include that the interest rate does not?","acceptedAnswer":{"@type":"Answer","text":"APR folds in lender fees, points, and certain closing costs, giving a broader picture of borrowing cost than the nominal interest rate alone."}}]}
+    </script>
 </head>
 
-<body>
+<body class="tool-body">
   <header class="site-header">
     <div class="container">
       <div class="header-content">
@@ -40,86 +43,112 @@
     </div>
   </header>
 
-  <main class="container">
-    <h1>Loan Payment Calculator</h1>
-
-    <section class="card seo-content" style="margin-top:24px; text-align:left; padding:32px;">
-      <h2>Intro</h2>
-      <p>This calculator estimates monthly loan payments, total interest, and payoff speed using a standard amortization
-        formula. It also lets you test the effect of an extra monthly payment. It is useful for mortgages, auto loans,
-        personal loans, and quick budgeting before you compare formal lender offers.</p>
+  <main class="container tool-page">
+    <section class="tool-hero">
+      <div class="tool-hero-copy">
+        <p class="tool-kicker">Borrowing and planning</p>
+        <h1>Loan Payment Calculator</h1>
+        <p class="tool-summary">Estimate monthly payments, total interest, payoff speed, and the effect of extra monthly payments before you compare formal lender offers.</p>
+        <div class="tool-meta">
+          <span>Amortization formula</span>
+          <span>Extra payment scenario</span>
+          <span>Useful for rough affordability checks</span>
+        </div>
+      </div>
+      <aside class="tool-hero-panel">
+        <p class="tool-panel-label">Useful for</p>
+        <h2>Monthly payment checks before formal quotes</h2>
+        <p>Use it for mortgages, auto loans, personal loans, and payoff what-if scenarios.</p>
+        <div class="tool-hero-links">
+          <a href="#calculator">Monthly payment estimate</a>
+          <a href="#calculator">Total interest view</a>
+          <a href="#calculator">Payoff timeline</a>
+          <a href="#calculator">Extra payment impact</a>
+        </div>
+      </aside>
     </section>
 
-    <div class="card" style="margin-top:24px;">
-      <div class="row">
-        <div style="flex:1;">
-          <label for="principal" style="margin-top:0;">Loan amount</label>
-          <input id="principal" type="number" min="0" step="0.01" value="250000" />
+    <section id="calculator" class="tool-workspace">
+      <div class="card tool-workspace-card">
+        <div class="tool-workspace-header">
+          <div>
+            <p class="tool-section-label">Calculator</p>
+            <h2>Model a loan scenario</h2>
+          </div>
+          <p>Enter loan amount, rate, term, and any extra monthly payment to see how the repayment picture changes.</p>
         </div>
-        <div style="flex:1;">
-          <label for="rate" style="margin-top:0;">Annual interest rate (%)</label>
-          <input id="rate" type="number" min="0" step="0.01" value="6.5" />
+
+        <div class="tool-form-grid">
+          <div class="tool-field">
+            <label for="principal">Loan amount</label>
+            <input id="principal" type="number" min="0" step="0.01" value="250000" />
+          </div>
+          <div class="tool-field">
+            <label for="rate">Annual interest rate (%)</label>
+            <input id="rate" type="number" min="0" step="0.01" value="6.5" />
+          </div>
+          <div class="tool-field">
+            <label for="years">Loan term (years)</label>
+            <input id="years" type="number" min="1" step="1" value="30" />
+          </div>
+          <div class="tool-field">
+            <label for="extra">Extra monthly payment (optional)</label>
+            <input id="extra" type="number" min="0" step="0.01" value="0" />
+          </div>
         </div>
-      </div>
 
-      <div class="row">
-        <div style="flex:1;">
-          <label for="years" style="margin-top:0;">Loan term (years)</label>
-          <input id="years" type="number" min="1" step="1" value="30" />
+        <div class="tool-actions">
+          <button id="calcBtn" class="primary" type="button">Calculate loan</button>
         </div>
-        <div style="flex:1;">
-          <label for="extra" style="margin-top:0;">Extra monthly payment (optional)</label>
-          <input id="extra" type="number" min="0" step="0.01" value="0" />
+        <div id="result" class="tool-output"></div>
+      </div>
+    </section>
+
+    <section class="tool-support-grid">
+      <article class="card tool-support-card">
+        <p class="tool-section-label">Method</p>
+        <h2>How it works</h2>
+        <p>The standard monthly payment uses the amortization formula <code>P x r / (1 - (1 + r)^-n)</code>, where <code>P</code> is principal, <code>r</code> is monthly interest rate, and <code>n</code> is the number of monthly payments.</p>
+        <p>When an extra payment is added, the calculator simulates the loan month by month until the balance reaches zero.</p>
+        <p class="tool-note"><strong>Limitations:</strong> this is an estimate only. It does not include origination fees, insurance, property tax, closing costs, variable-rate resets, or lender-specific rounding rules.</p>
+      </article>
+
+      <article class="card tool-support-card">
+        <p class="tool-section-label">Related</p>
+        <h2>Useful next tools</h2>
+        <div class="tool-link-cluster">
+          <a href="/percentage-calculator">Percentage Calculator</a>
+          <a href="/vat-calculator">VAT Calculator</a>
+          <a href="/inflation-calculator">Inflation Calculator</a>
+          <a href="/currency">Currency Converter</a>
         </div>
-      </div>
-
-      <button id="calcBtn" class="primary" type="button">Calculate loan</button>
-      <div id="result" style="margin-top:20px;"></div>
-    </div>
-
-    <section class="card seo-content" style="margin-top:40px; text-align:left; padding:32px;">
-      <h2>How it works</h2>
-      <p>The standard monthly payment uses the amortization formula <code>P x r / (1 - (1 + r)^-n)</code>, where
-        <code>P</code> is principal, <code>r</code> is monthly interest rate, and <code>n</code> is the number of
-        monthly payments. When an extra payment is added, the calculator simulates the loan month by month until the
-        balance reaches zero.</p>
-      <p><strong>Limitations:</strong> this is an estimate only. It does not include origination fees, insurance,
-        property tax, closing costs, variable-rate resets, or lender-specific rounding and disclosure rules.</p>
-
-      <h2>Practical use scenarios</h2>
-      <ul>
-        <li>Estimate monthly affordability before you apply.</li>
-        <li>Compare shorter versus longer loan terms.</li>
-        <li>See how extra monthly payments reduce interest and payoff time.</li>
-        <li>Build a rough repayment plan before using lender documents.</li>
-      </ul>
-
-      <h2>Related tools</h2>
-      <div class="internal-links-cluster" style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:24px;">
-        <a href="/percentage-calculator" style="color: var(--primary-color); text-decoration: underline;">Percentage Calculator</a>
-        <a href="/vat-calculator" style="color: var(--primary-color); text-decoration: underline;">VAT Calculator</a>
-        <a href="/inflation-calculator" style="color: var(--primary-color); text-decoration: underline;">Inflation Calculator</a>
-        <a href="/currency" style="color: var(--primary-color); text-decoration: underline;">Currency Converter</a>
-      </div>
-
-      <h2>FAQ</h2>
-      <div class="faq-item" style="margin-bottom:16px;">
-        <strong>Does this replace a lender quote?</strong>
-        <p>No. Use it for planning only. Actual offers depend on fees, credit profile, taxes, insurance, and lender
-          policy.</p>
-      </div>
-      <div class="faq-item" style="margin-bottom:16px;">
-        <strong>What does the extra payment field do?</strong>
-        <p>It adds the same extra amount every month and re-simulates the balance until payoff.</p>
-      </div>
-      <div class="faq-item" style="margin-bottom:16px;">
-        <strong>Can I use a zero interest rate?</strong>
-        <p>Yes. In that case the payment is simply the loan amount divided by the number of months.</p>
-      </div>
-      <div class="faq-item">
-        <strong>Does this include taxes and insurance?</strong>
-        <p>No. Those costs vary and need separate treatment.</p>
-      </div>
+        <div class="tool-faq-list">
+          <div class="faq-item">
+            <strong>Does this replace a lender quote?</strong>
+            <p>No. Use it for planning only. Actual offers depend on fees, credit profile, taxes, insurance, and lender policy.</p>
+          </div>
+          <div class="faq-item">
+            <strong>What does the extra payment field do?</strong>
+            <p>It adds the same extra amount every month and re-simulates the balance until payoff.</p>
+          </div>
+          <div class="faq-item">
+            <strong>Can I use a zero interest rate?</strong>
+            <p>Yes. In that case the payment is simply the loan amount divided by the number of months.</p>
+          </div>
+          <div class="faq-item">
+            <strong>How does a fixed rate differ from a variable rate in this calculator?</strong>
+            <p>This calculator assumes a fixed rate for the entire term; variable-rate loans can change periodically, so the actual payment schedule may shift after each rate adjustment.</p>
+          </div>
+          <div class="faq-item">
+            <strong>Do biweekly payments save more than monthly payments?</strong>
+            <p>Yes, because you make 26 half-payments per year (equivalent to 13 monthly payments), which reduces the principal faster and cuts total interest.</p>
+          </div>
+          <div class="faq-item">
+            <strong>What does APR include that the interest rate does not?</strong>
+            <p>APR folds in lender fees, points, and certain closing costs, giving a broader picture of borrowing cost than the nominal interest rate alone.</p>
+          </div>
+        </div>
+      </article>
     </section>
   </main>
 

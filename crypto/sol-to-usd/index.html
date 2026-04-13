@@ -33,7 +33,7 @@
         ]
     }
     </script>
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can I use this to compare hypothetical sell dates?","acceptedAnswer":{"@type":"Answer","text":"Yes, changing the sell date is a common way to test timing sensitivity."}},{"@type":"Question","name":"Does holding period change this tool calculation?","acceptedAnswer":{"@type":"Answer","text":"The formula itself is date-rate based; holding period mainly matters in downstream tax treatment."}},{"@type":"Question","name":"Can this SOL calculator replace exchange account statements?","acceptedAnswer":{"@type":"Answer","text":"No. Exchange statements remain authoritative for executed prices and fees."}},{"@type":"Question","name":"Is there account creation required for this crypto tool?","acceptedAnswer":{"@type":"Answer","text":"No account is required for basic calculations."}}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why are SOL profit estimates so sensitive to date selection?","acceptedAnswer":{"@type":"Answer","text":"Solana has experienced some of the largest price swings in crypto. A difference of even a few weeks in buy or sell date can dramatically change the estimated gain or loss."}},{"@type":"Question","name":"Does this include SOL staking rewards?","acceptedAnswer":{"@type":"Answer","text":"No. Staking rewards are distributed separately and depend on validator commission, epoch timing, and network conditions. Add them as separate rows if you want a rough estimate."}},{"@type":"Question","name":"Can I compare SOL performance against BTC or ETH?","acceptedAnswer":{"@type":"Answer","text":"You can run separate estimates on the BTC to USD and ETH to USD pages and compare results manually. This tool estimates one asset at a time."}},{"@type":"Question","name":"Is Solana historical data as reliable as Bitcoin data?","acceptedAnswer":{"@type":"Answer","text":"CoinGecko provides daily reference rates for SOL, but the data history is shorter than BTC or ETH. Very early SOL dates may have less liquid reference pricing."}}]}</script>
     <script defer src="/scripts/nav.js"></script>
 </head>
 
@@ -75,8 +75,9 @@
 
         <section class="card seo-content" style="margin-top:24px; text-align:left; padding:32px;">
             <h2>What this tool estimates</h2>
-            <p>This page estimates historical profit or loss for <strong>Solana (SOL)</strong> positions priced in <strong>US Dollars (USD)</strong>. Add one or more transactions with buy and sell dates to see estimated gain per row. This is a <strong>planning tool</strong>, not a tax filing engine or broker statement replacement.</p>
-            <p><strong>Not included:</strong> trading fees, slippage, intraday price variation, staking rewards, gas costs, or jurisdiction-specific tax rules. Treat output as a directional estimate and reconcile with exchange records for official reporting.</p>
+            <p>This page estimates historical profit or loss for <strong>Solana (SOL)</strong> positions priced in <strong>US Dollars (USD)</strong>. Solana has seen some of the largest percentage swings in the crypto market, making timing analysis particularly important for anyone who bought, sold, or is still holding SOL.</p>
+<p>Add one or more transactions with buy and sell dates to see estimated gain per row. Because SOL has experienced both rapid rallies and sharp corrections, the difference between a well-timed and poorly-timed exit can be dramatic even on moderate holdings.</p>
+<p><strong>Not included:</strong> trading fees, slippage, staking rewards, validator commissions, or jurisdiction-specific tax rules. Treat output as a directional estimate and reconcile with exchange records for official reporting.</p>
         </section>
 
         <div class="card" style="margin-top: 0; padding: 24px;">
@@ -128,19 +129,19 @@
 <p><a href="/crypto/btc-to-usd" style="color: var(--primary-color); text-decoration: underline;">Bitcoin to US Dollars Calculator</a></p>
 <p><a href="/crypto/eth-to-usd" style="color: var(--primary-color); text-decoration: underline;">Ethereum to US Dollars Calculator</a></p>
 <p><a href="/crypto/eth-to-eur" style="color: var(--primary-color); text-decoration: underline;">Ethereum to Euros Calculator</a></p>
-<p><a href="/currency/dkk-to-usd" style="color: var(--primary-color); text-decoration: underline;">DKK to USD Converter</a></p>
+<p><a href="/currency/usd-to-eur" style="color: var(--primary-color); text-decoration: underline;">USD to EUR Converter</a></p>
                 <p><a href="/crypto" style="color: var(--primary-color); text-decoration: underline;">Back to Crypto Tools Hub</a></p>
                 <p><a href="/crypto-tax-estimator" style="color: var(--primary-color); text-decoration: underline;">Crypto Tax Estimator</a></p>
                 <p><a href="/methodology" style="color: var(--primary-color); text-decoration: underline;">Methodology and data sources</a></p>
             </div>
 
             <h2>FAQ</h2>
-            <div class="faq-item" style="margin-bottom: 16px;"><strong>Can I use this to compare hypothetical sell dates?</strong><p>Yes, changing the sell date is a common way to test timing sensitivity.</p></div>
-<div class="faq-item" style="margin-bottom: 16px;"><strong>Does holding period change this tool calculation?</strong><p>The formula itself is date-rate based; holding period mainly matters in downstream tax treatment.</p></div>
-<div class="faq-item" style="margin-bottom: 16px;"><strong>Can this SOL calculator replace exchange account statements?</strong><p>No. Exchange statements remain authoritative for executed prices and fees.</p></div>
-<div class="faq-item" style="margin-bottom: 16px;"><strong>Is there account creation required for this crypto tool?</strong><p>No account is required for basic calculations.</p></div>
+            <div class="faq-item" style="margin-bottom: 16px;"><strong>Why are SOL profit estimates so sensitive to date selection?</strong><p>Solana has experienced some of the largest price swings in crypto. A difference of even a few weeks in buy or sell date can dramatically change the estimated gain or loss.</p></div>
+<div class="faq-item" style="margin-bottom: 16px;"><strong>Does this include SOL staking rewards?</strong><p>No. Staking rewards are distributed separately and depend on validator commission, epoch timing, and network conditions. Add them as separate rows if you want a rough estimate.</p></div>
+<div class="faq-item" style="margin-bottom: 16px;"><strong>Can I compare SOL performance against BTC or ETH?</strong><p>You can run separate estimates on the BTC to USD and ETH to USD pages and compare results manually. This tool estimates one asset at a time.</p></div>
+<div class="faq-item" style="margin-bottom: 16px;"><strong>Is Solana historical data as reliable as Bitcoin data?</strong><p>CoinGecko provides daily reference rates for SOL, but the data history is shorter than BTC or ETH. Very early SOL dates may have less liquid reference pricing.</p></div>
 
-            <p style="font-size: 0.8rem; color: #888; margin-top: 24px;">Page last built: 2026-03-23. Historical rates are fetched on each calculation.</p>
+            <p style="font-size: 0.8rem; color: #888; margin-top: 24px;">Page last built: 2026-04-13. Historical rates are fetched on each calculation.</p>
         </section>
     </main>
 

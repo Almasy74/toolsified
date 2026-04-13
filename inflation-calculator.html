@@ -1,56 +1,244 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="google-adsense-account" content="ca-pub-6293439009227714" />
   <title>Inflation Calculator | Purchasing Power by Year and Country - Toolsified</title>
-  <meta name="description" content="Estimate inflation-adjusted value between years with country rates, methodology notes, use cases, and FAQ guidance." />
+  <meta name="description"
+    content="Estimate inflation-adjusted value between years with country rates, methodology notes, use cases, and FAQ guidance." />
   <link rel="icon" type="image/png" href="/favicon.png" />
-  <link rel="stylesheet" href="/style.css?v=2.3" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/style.css?v=2.5" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Space+Grotesk:wght@500;700&display=swap"
+    rel="stylesheet" />
   <link rel="canonical" href="https://toolsified.com/inflation-calculator" />
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6293439009227714" crossorigin="anonymous"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6293439009227714"
+    crossorigin="anonymous"></script>
   <script defer src="/scripts/nav.js"></script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is this official inflation data?","acceptedAnswer":{"@type":"Answer","text":"It is a simplified model for educational estimation."}},{"@type":"Question","name":"Can I use this for legal indexation?","acceptedAnswer":{"@type":"Answer","text":"Use official statistics and legal guidance for binding calculations."}},{"@type":"Question","name":"Why does compounding matter?","acceptedAnswer":{"@type":"Answer","text":"Inflation accumulates year over year, so long horizons can show large differences."}},{"@type":"Question","name":"What is the difference between real and nominal value?","acceptedAnswer":{"@type":"Answer","text":"Nominal value is the amount in current dollars, while real value adjusts for inflation so you can compare purchasing power across different years."}},{"@type":"Question","name":"How can I use this for salary negotiation?","acceptedAnswer":{"@type":"Answer","text":"Compare your current salary adjusted for cumulative inflation since your last raise to see whether your real pay has grown or shrunk."}},{"@type":"Question","name":"What are the limitations of CPI as an inflation measure?","acceptedAnswer":{"@type":"Answer","text":"CPI tracks a fixed basket of goods that may not match your personal spending, and it can underweight fast-changing costs like housing or healthcare in your area."}}]}
+    </script>
 </head>
-<body>
-<header class="site-header"><div class="container"><div class="header-content"><div class="logo-container"><a href="/"><img src="/logo.png" alt="Toolsified logo" class="logo" /></a></div><button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Toggle navigation">Menu</button><nav class="main-nav" id="mainNav"><a href="/time-code">Time Code</a><a href="/multi-timezone">Time Zones</a><a href="/currency">Currency</a><a href="/crypto">Crypto</a><div class="nav-more"><button class="nav-more-toggle" type="button" aria-expanded="false" aria-haspopup="true">More</button><div class="nav-more-menu"><a href="/business-days">Business Days</a><a href="/meeting-overlap">Meeting Overlap</a><a href="/inflation-calculator">Inflation Calculator</a><a href="/crypto-tax-estimator">Crypto Tax Estimator</a></div></div></nav></div></div></header>
 
-<main class="container">
-  <h1>Inflation Calculator</h1>
-  <section class="card seo-content" style="margin-top:24px; text-align:left; padding:32px;"><h2>Intro</h2><p>This calculator estimates how purchasing power changes over time between two years. It is useful for salary comparisons, long-term budgeting, savings goals, and historical price context.</p></section>
+<body class="tool-body">
+  <header class="site-header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo-container"><a href="/"><img src="/logo.png" alt="Toolsified logo" class="logo" /></a></div>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mainNav"
+          aria-label="Toggle navigation">Menu</button>
+        <nav class="main-nav" id="mainNav">
+          <a href="/time-code">Time Code</a><a href="/multi-timezone">Time Zones</a><a href="/currency">Currency</a><a
+            href="/crypto">Crypto</a>
+          <div class="nav-more"><button class="nav-more-toggle" type="button" aria-expanded="false"
+              aria-haspopup="true">More</button>
+            <div class="nav-more-menu"><a href="/business-days">Business Days</a><a href="/meeting-overlap">Meeting
+                Overlap</a><a href="/inflation-calculator">Inflation Calculator</a><a
+                href="/crypto-tax-estimator">Crypto Tax Estimator</a></div>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
 
-  <div class="card" style="margin-top:24px;">
-    <label for="amount">Amount</label><input id="amount" type="number" min="0" step="0.01" value="100" />
-    <label for="country">Country/Region</label><select id="country"><option value="US">United States (USD)</option><option value="UK">United Kingdom (GBP)</option><option value="NO">Norway (NOK)</option><option value="EA">Euro Area (EUR)</option></select>
-    <div class="row"><div style="flex:1;"><label for="startYear" style="margin-top:0;">From year</label><select id="startYear"></select></div><div style="flex:1;"><label for="endYear" style="margin-top:0;">To year</label><select id="endYear"></select></div></div>
-    <button id="calcBtn" class="primary" type="button">Calculate inflation</button>
-    <div id="result" style="margin-top:20px;"></div>
-  </div>
+  <main class="container tool-page">
+    <section class="tool-hero">
+      <div class="tool-hero-copy">
+        <p class="tool-kicker">Historical price context</p>
+        <h1>Inflation Calculator</h1>
+        <p class="tool-summary">Estimate how purchasing power changes between years so you can compare salaries, budgets,
+          and prices in a more realistic way.</p>
+        <div class="tool-meta">
+          <span>Country-specific examples</span>
+          <span>Year-by-year compounding</span>
+          <span>Good for context, not accounting close</span>
+        </div>
+      </div>
+      <aside class="tool-hero-panel">
+        <p class="tool-panel-label">Useful for</p>
+        <h2>Salary context, long-term planning, and historical price comparisons</h2>
+        <p>Use it to translate an amount from one year into estimated purchasing power in a later year.</p>
+        <div class="tool-hero-links">
+          <a href="#calculator">Amount and country</a>
+          <a href="#calculator">From year and to year</a>
+          <a href="#calculator">Adjusted value</a>
+          <a href="#calculator">Year-by-year breakdown</a>
+        </div>
+      </aside>
+    </section>
 
-  <section class="card seo-content" style="margin-top:40px; text-align:left; padding:32px;">
-    <h2>How it works</h2>
-    <p>The tool compounds annual inflation rates year by year from selected start year to end year. Formula: <code>adjusted value = amount x product(1 + annual rate)</code>.</p>
-    <p><strong>Limitations:</strong> this is an educational estimate based on simplified annual CPI-like rates and does not replace official national statistics for legal or contractual use.</p>
-    <h2>Practical use scenarios</h2>
-    <ul><li>Compare historical salary offers in today's purchasing power.</li><li>Estimate how much savings targets should be adjusted over time.</li><li>Add inflation context to project or grant budgeting.</li><li>Explain long-term cost growth in presentations.</li></ul>
-    <h2>Related tools</h2>
-    <div class="internal-links-cluster" style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:24px;"><a href="/percentage-calculator" style="color: var(--primary-color); text-decoration: underline;">Percentage Calculator</a><a href="/vat-calculator" style="color: var(--primary-color); text-decoration: underline;">VAT Calculator</a><a href="/loan-payment-calculator" style="color: var(--primary-color); text-decoration: underline;">Loan Payment Calculator</a><a href="/currency" style="color: var(--primary-color); text-decoration: underline;">Currency Converter</a><a href="/crypto-tax-estimator" style="color: var(--primary-color); text-decoration: underline;">Crypto Tax Estimator</a></div>
-    <h2>FAQ</h2>
-    <div class="faq-item" style="margin-bottom:16px;"><strong>Is this official inflation data?</strong><p>It is a simplified model for educational estimation.</p></div>
-    <div class="faq-item" style="margin-bottom:16px;"><strong>Can I use this for legal indexation?</strong><p>Use official statistics and legal guidance for binding calculations.</p></div>
-    <div class="faq-item" style="margin-bottom:16px;"><strong>Why does compounding matter?</strong><p>Inflation accumulates year over year, so long horizons can show large differences.</p></div>
-    <div class="faq-item"><strong>Does this include taxes or fees?</strong><p>No, it models inflation only.</p></div>
-  </section>
-</main>
+    <section id="calculator" class="tool-workspace">
+      <div class="card tool-workspace-card">
+        <div class="tool-workspace-header">
+          <div>
+            <p class="tool-section-label">Calculator</p>
+            <h2>Compare purchasing power across years</h2>
+          </div>
+          <p>Choose the amount, region, and years you want to compare, and the calculator will compound the annual
+            inflation rates across the selected period.</p>
+        </div>
 
-<footer class="site-footer"><div class="footer-container"><p class="footer-tagline">&copy; 2026 Toolsified - Independent web tools platform.</p><div class="footer-links"><a href="/privacy">Privacy Policy</a><span>|</span><a href="/terms">Terms</a><span>|</span><a href="/about">About</a><span>|</span><a href="/contact">Contact</a></div></div></footer>
+        <div class="tool-form-grid">
+          <div class="tool-field">
+            <label for="amount">Amount</label>
+            <input id="amount" type="number" min="0" step="0.01" value="100" />
+          </div>
+          <div class="tool-field">
+            <label for="country">Country/Region</label>
+            <select id="country">
+              <option value="US">United States (USD)</option>
+              <option value="UK">United Kingdom (GBP)</option>
+              <option value="NO">Norway (NOK)</option>
+              <option value="EA">Euro Area (EUR)</option>
+            </select>
+          </div>
+          <div class="tool-field">
+            <label for="startYear">From year</label>
+            <select id="startYear"></select>
+          </div>
+          <div class="tool-field">
+            <label for="endYear">To year</label>
+            <select id="endYear"></select>
+          </div>
+        </div>
 
-<script>
-const rates={US:{2000:3.4,2001:2.8,2002:1.6,2003:2.3,2004:2.7,2005:3.4,2006:3.2,2007:2.9,2008:3.8,2009:-0.4,2010:1.6,2011:3.2,2012:2.1,2013:1.5,2014:1.6,2015:0.1,2016:1.3,2017:2.1,2018:2.4,2019:1.8,2020:1.2,2021:4.7,2022:8.0,2023:4.1,2024:3.3,2025:2.9,2026:2.5},UK:{2000:0.8,2001:1.2,2002:1.3,2003:1.4,2004:1.3,2005:2.1,2006:2.3,2007:2.3,2008:3.6,2009:2.2,2010:3.3,2011:4.5,2012:2.8,2013:2.6,2014:1.5,2015:0.0,2016:0.7,2017:2.7,2018:2.5,2019:1.8,2020:0.9,2021:2.6,2022:9.1,2023:7.3,2024:3.5,2025:2.8,2026:2.2},NO:{2000:3.1,2001:3.0,2002:1.3,2003:2.5,2004:0.5,2005:1.5,2006:2.3,2007:0.8,2008:3.8,2009:2.2,2010:2.5,2011:1.2,2012:0.8,2013:2.1,2014:2.0,2015:2.2,2016:3.6,2017:1.9,2018:2.7,2019:2.2,2020:1.3,2021:3.5,2022:5.8,2023:5.5,2024:4.1,2025:3.0,2026:2.5},EA:{2000:2.1,2001:2.3,2002:2.2,2003:2.1,2004:2.1,2005:2.2,2006:2.2,2007:2.1,2008:3.3,2009:0.3,2010:1.6,2011:2.7,2012:2.5,2013:1.3,2014:0.4,2015:0.0,2016:0.2,2017:1.5,2018:1.8,2019:1.2,2020:0.3,2021:2.6,2022:8.4,2023:5.4,2024:2.7,2025:2.3,2026:2.0}};
-const currencyByCountry={US:"USD",UK:"GBP",NO:"NOK",EA:"EUR"};const yearMin=2000;const yearMax=2026;const startYear=document.getElementById("startYear");const endYear=document.getElementById("endYear");for(let y=yearMin;y<=yearMax;y+=1){startYear.innerHTML+=`<option value="${y}">${y}</option>`;endYear.innerHTML+=`<option value="${y}">${y}</option>`;}startYear.value="2000";endYear.value="2026";
-function formatMoney(value,currency){return new Intl.NumberFormat("en-US",{style:"currency",currency,maximumFractionDigits:2}).format(value);}function runCalc(){const amount=Number(document.getElementById("amount").value);const country=document.getElementById("country").value;const from=Number(startYear.value);const to=Number(endYear.value);if(!(amount>=0))return alert("Please enter a valid amount.");if(from>=to)return alert("From year must be earlier than to year.");let factor=1;const rows=[];for(let y=from+1;y<=to;y+=1){const rate=rates[country][y]??0;factor*=(1+rate/100);rows.push(`<tr><td>${y}</td><td>${rate.toFixed(1)}%</td></tr>`);}const adjusted=amount*factor;const change=((factor-1)*100);const ccy=currencyByCountry[country];document.getElementById("result").innerHTML=`<div class="card" style="margin:0; box-shadow:none; border:1px solid var(--border-color);"><h3 style="margin-bottom:8px;">Result</h3><p>${formatMoney(amount,ccy)} in ${from} has estimated purchasing power of</p><p style="font-size:1.4rem; font-weight:700; margin:8px 0;">${formatMoney(adjusted,ccy)} in ${to}</p><p>Cumulative inflation: <strong>${change.toFixed(1)}%</strong></p><div class="table-container" style="margin-top:16px;"><table><thead><tr><th>Year</th><th>Inflation</th></tr></thead><tbody>${rows.join("")}</tbody></table></div></div>`;}document.getElementById("calcBtn").addEventListener("click",runCalc);
-</script>
+        <div class="tool-actions">
+          <button id="calcBtn" class="primary" type="button">Calculate inflation</button>
+        </div>
+        <div id="result" class="tool-output"></div>
+      </div>
+    </section>
+
+    <section class="tool-support-grid">
+      <article class="card tool-support-card">
+        <p class="tool-section-label">Method</p>
+        <h2>How it works</h2>
+        <p>The tool compounds annual inflation rates year by year from the selected start year to the selected end
+          year.</p>
+        <p>Formula: <code>adjusted value = amount x product(1 + annual rate)</code>.</p>
+        <p class="tool-note"><strong>Limitations:</strong> this is an educational estimate based on simplified annual
+          CPI-like rates and does not replace official national statistics for legal or contractual use.</p>
+      </article>
+
+      <article class="card tool-support-card">
+        <p class="tool-section-label">Related</p>
+        <h2>Useful next tools</h2>
+        <div class="tool-link-cluster">
+          <a href="/percentage-calculator">Percentage Calculator</a>
+          <a href="/vat-calculator">VAT Calculator</a>
+          <a href="/loan-payment-calculator">Loan Payment Calculator</a>
+          <a href="/currency">Currency Converter</a>
+        </div>
+        <div class="tool-faq-list">
+          <div class="faq-item">
+            <strong>Is this official inflation data?</strong>
+            <p>It is a simplified model for educational estimation.</p>
+          </div>
+          <div class="faq-item">
+            <strong>Can I use this for legal indexation?</strong>
+            <p>Use official statistics and legal guidance for binding calculations.</p>
+          </div>
+          <div class="faq-item">
+            <strong>Why does compounding matter?</strong>
+            <p>Inflation accumulates year over year, so long horizons can show large differences.</p>
+          </div>
+          <div class="faq-item">
+            <strong>What is the difference between real and nominal value?</strong>
+            <p>Nominal value is the amount in current dollars, while real value adjusts for inflation so you can compare purchasing power across different years.</p>
+          </div>
+          <div class="faq-item">
+            <strong>How can I use this for salary negotiation?</strong>
+            <p>Compare your current salary adjusted for cumulative inflation since your last raise to see whether your real pay has grown or shrunk.</p>
+          </div>
+          <div class="faq-item">
+            <strong>What are the limitations of CPI as an inflation measure?</strong>
+            <p>CPI tracks a fixed basket of goods that may not match your personal spending, and it can underweight fast-changing costs like housing or healthcare in your area.</p>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <p class="footer-tagline">&copy; 2026 Toolsified - Independent web tools platform.</p>
+      <div class="footer-links"><a href="/privacy">Privacy Policy</a><span>|</span><a href="/terms">Terms</a><span>|</span><a
+          href="/about">About</a><span>|</span><a href="/contact">Contact</a></div>
+      <p class="footer-contact">Contact: <a href="mailto:info@toolsified.com">info@toolsified.com</a></p>
+      <p class="footer-location">Location: Norway</p>
+    </div>
+  </footer>
+
+  <script>
+    const rates = {
+      US: { 2000: 3.4, 2001: 2.8, 2002: 1.6, 2003: 2.3, 2004: 2.7, 2005: 3.4, 2006: 3.2, 2007: 2.9, 2008: 3.8, 2009: -0.4, 2010: 1.6, 2011: 3.2, 2012: 2.1, 2013: 1.5, 2014: 1.6, 2015: 0.1, 2016: 1.3, 2017: 2.1, 2018: 2.4, 2019: 1.8, 2020: 1.2, 2021: 4.7, 2022: 8.0, 2023: 4.1, 2024: 3.3, 2025: 2.9, 2026: 2.5 },
+      UK: { 2000: 0.8, 2001: 1.2, 2002: 1.3, 2003: 1.4, 2004: 1.3, 2005: 2.1, 2006: 2.3, 2007: 2.3, 2008: 3.6, 2009: 2.2, 2010: 3.3, 2011: 4.5, 2012: 2.8, 2013: 2.6, 2014: 1.5, 2015: 0.0, 2016: 0.7, 2017: 2.7, 2018: 2.5, 2019: 1.8, 2020: 0.9, 2021: 2.6, 2022: 9.1, 2023: 7.3, 2024: 3.5, 2025: 2.8, 2026: 2.2 },
+      NO: { 2000: 3.1, 2001: 3.0, 2002: 1.3, 2003: 2.5, 2004: 0.5, 2005: 1.5, 2006: 2.3, 2007: 0.8, 2008: 3.8, 2009: 2.2, 2010: 2.5, 2011: 1.2, 2012: 0.8, 2013: 2.1, 2014: 2.0, 2015: 2.2, 2016: 3.6, 2017: 1.9, 2018: 2.7, 2019: 2.2, 2020: 1.3, 2021: 3.5, 2022: 5.8, 2023: 5.5, 2024: 4.1, 2025: 3.0, 2026: 2.5 },
+      EA: { 2000: 2.1, 2001: 2.3, 2002: 2.2, 2003: 2.1, 2004: 2.1, 2005: 2.2, 2006: 2.2, 2007: 2.1, 2008: 3.3, 2009: 0.3, 2010: 1.6, 2011: 2.7, 2012: 2.5, 2013: 1.3, 2014: 0.4, 2015: 0.0, 2016: 0.2, 2017: 1.5, 2018: 1.8, 2019: 1.2, 2020: 0.3, 2021: 2.6, 2022: 8.4, 2023: 5.4, 2024: 2.7, 2025: 2.3, 2026: 2.0 }
+    };
+    const currencyByCountry = { US: "USD", UK: "GBP", NO: "NOK", EA: "EUR" };
+    const yearMin = 2000;
+    const yearMax = 2026;
+    const startYear = document.getElementById("startYear");
+    const endYear = document.getElementById("endYear");
+
+    for (let y = yearMin; y <= yearMax; y += 1) {
+      startYear.innerHTML += `<option value="${y}">${y}</option>`;
+      endYear.innerHTML += `<option value="${y}">${y}</option>`;
+    }
+    startYear.value = "2000";
+    endYear.value = "2026";
+
+    function formatMoney(value, currency) {
+      return new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency,
+        maximumFractionDigits: 2
+      }).format(value);
+    }
+
+    function runCalc() {
+      const amount = Number(document.getElementById("amount").value);
+      const country = document.getElementById("country").value;
+      const from = Number(startYear.value);
+      const to = Number(endYear.value);
+      if (!(amount >= 0)) return alert("Please enter a valid amount.");
+      if (from >= to) return alert("From year must be earlier than to year.");
+
+      let factor = 1;
+      const rows = [];
+      for (let y = from + 1; y <= to; y += 1) {
+        const rate = rates[country][y] ?? 0;
+        factor *= (1 + rate / 100);
+        rows.push(`<tr><td>${y}</td><td>${rate.toFixed(1)}%</td></tr>`);
+      }
+
+      const adjusted = amount * factor;
+      const change = (factor - 1) * 100;
+      const ccy = currencyByCountry[country];
+
+      document.getElementById("result").innerHTML = `
+        <div class="card" style="margin:0; box-shadow:none; border:1px solid var(--border-color);">
+          <h3 style="margin-bottom:8px;">Result</h3>
+          <p>${formatMoney(amount, ccy)} in ${from} has estimated purchasing power of</p>
+          <p style="font-size:1.4rem; font-weight:700; margin:8px 0;">${formatMoney(adjusted, ccy)} in ${to}</p>
+          <p>Cumulative inflation: <strong>${change.toFixed(1)}%</strong></p>
+          <div class="table-container" style="margin-top:16px;">
+            <table>
+              <thead><tr><th>Year</th><th>Inflation</th></tr></thead>
+              <tbody>${rows.join("")}</tbody>
+            </table>
+          </div>
+        </div>
+      `;
+    }
+
+    document.getElementById("calcBtn").addEventListener("click", runCalc);
+    runCalc();
+  </script>
 </body>
+
 </html>

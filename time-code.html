@@ -9,25 +9,30 @@
   <meta name="description"
     content="Convert time code expressions like '2pm EDT' to local time with parser logic, DST awareness, practical examples, and FAQ guidance." />
   <link rel="icon" type="image/png" href="/favicon.png">
-  <link rel="stylesheet" href="/style.css?v=2.3" />
+  <link rel="stylesheet" href="/style.css?v=2.5" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Space+Grotesk:wght@500;700&display=swap"
+    rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/luxon@3/build/global/luxon.min.js"></script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6293439009227714"
     crossorigin="anonymous"></script>
   <link rel="canonical" href="https://toolsified.com/time-code" />
   <script defer src="/scripts/nav.js"></script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can I convert one time code to multiple time zones at once?","acceptedAnswer":{"@type":"Answer","text":"Yes. Add additional target zones and the same parsed source time will be rendered for each location."}},{"@type":"Question","name":"Why does this differ from a static UTC offset calculator?","acceptedAnswer":{"@type":"Answer","text":"This converter is date-aware and applies daylight saving rules. Static offset tools often ignore seasonal transitions."}},{"@type":"Question","name":"What if the abbreviation cannot be mapped?","acceptedAnswer":{"@type":"Answer","text":"If the parser cannot recognize the abbreviation, you will be prompted to clarify the input."}},{"@type":"Question","name":"Does it understand military (24-hour) time?","acceptedAnswer":{"@type":"Answer","text":"Yes. Enter times like 14:00 CET or 0800 PST and the parser will recognize the 24-hour format without needing AM/PM."}},{"@type":"Question","name":"Can I paste a time directly from a chat message?","acceptedAnswer":{"@type":"Answer","text":"Yes. Copy the relevant snippet such as let's meet at 3pm EDT and paste it into the input field. The parser extracts the time and abbreviation automatically."}},{"@type":"Question","name":"What if a timezone abbreviation maps to multiple zones?","acceptedAnswer":{"@type":"Answer","text":"Some abbreviations like CST can mean US Central, China Standard, or Cuba Standard. The parser defaults to the most common mapping, so verify the output if your context is non-US."}}]}
+    </script>
 </head>
 
-<body>
+<body class="tool-body">
   <header class="site-header">
     <div class="container">
       <div class="header-content">
         <div class="logo-container">
           <a href="/"><img src="/logo.png" alt="Toolsified logo" class="logo" /></a>
         </div>
-        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Toggle navigation">Menu</button>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mainNav"
+          aria-label="Toggle navigation">Menu</button>
         <nav class="main-nav" id="mainNav">
           <a href="/time-code">Time Code</a>
           <a href="/multi-timezone">Time Zones</a>
@@ -47,117 +52,123 @@
     </div>
   </header>
 
-  <main class="container">
-    <h1>Time-code Converter</h1>
-
-    <section class="card seo-content" style="margin-top:24px; text-align:left; padding:32px;">
-      <h2>Intro</h2>
-      <p>This page converts shorthand time expressions such as "2pm EDT", "tomorrow 15:00 CET", or "next Monday 08:00 PST" into your local time and any additional time zones you choose. It is built for quick checks when a message includes a timezone code but not a ready-made calendar event.</p>
-
-      <h2>What this tool category is for</h2>
-      <p>Time-code tools are useful when invites, launch notes, support handoffs, or community announcements rely on abbreviations like EDT, PDT, GMT, CEST, or BST. Instead of manually counting offsets or guessing whether daylight saving applies, you can parse the phrase and see an explicit local result with ISO output and UTC offset.</p>
-      <p>This category works best for operational clarity: checking what a shorthand time means, comparing the same moment across zones, and turning informal scheduling text into something easier to verify and share.</p>
+  <main class="container tool-page">
+    <section class="tool-hero">
+      <div class="tool-hero-copy">
+        <p class="tool-kicker">Time parsing and verification</p>
+        <h1>Time-code Converter</h1>
+        <p class="tool-summary">Convert shorthand expressions such as "2pm EDT" or "next Monday 08:00 CET" into your
+          local time and any extra time zones you want to verify.</p>
+        <div class="tool-meta">
+          <span>Date-aware parsing</span>
+          <span>DST-sensitive output</span>
+          <span>Useful for invites and handoffs</span>
+        </div>
+      </div>
+      <aside class="tool-hero-panel">
+        <p class="tool-panel-label">Examples</p>
+        <h2>Parse shorthand before it turns into a scheduling mistake</h2>
+        <p>This is strongest when a message includes an abbreviation but not a ready-made calendar event.</p>
+        <div class="tool-hero-links">
+          <a href="#calculator">2pm EDT</a>
+          <a href="#calculator">tomorrow 15:00 CET</a>
+          <a href="#calculator">next Monday 08:00 PST</a>
+          <a href="#calculator">Compare across extra zones</a>
+        </div>
+      </aside>
     </section>
 
-    <div class="card" style="margin-top:24px;">
-      <label for="codeInput">Time code (for example <strong>2pm EDT</strong>, <strong>tomorrow 15 CEST</strong>, or <strong>next monday 08:00 CET</strong>):</label>
-      <input id="codeInput" placeholder="e.g. 2pm edt or 'next friday 09:00 cet'" />
+    <section id="calculator" class="tool-workspace">
+      <div class="card tool-workspace-card">
+        <div class="tool-workspace-header">
+          <div>
+            <p class="tool-section-label">Converter</p>
+            <h2>Parse a time code into clear local output</h2>
+          </div>
+          <p>Paste the shorthand time, confirm where you are, and optionally add more zones when you need to verify the
+            same moment across teams.</p>
+        </div>
 
-      <label for="zoneRows">Where I am:</label>
-      <div id="zoneRows"></div>
+        <div class="tool-field tool-field-full">
+          <label for="codeInput">Time code</label>
+          <input id="codeInput" placeholder="e.g. 2pm edt or next friday 09:00 cet" />
+        </div>
 
-      <label for="addZone">Show also in these time zones:</label>
-      <button id="addZone" class="primary" type="button">Add time zone</button>
+        <div class="tool-field tool-field-full">
+          <label for="zoneRows">Where I am</label>
+          <div id="zoneRows"></div>
+        </div>
 
-      <button id="convertBtn" class="primary" type="button">Convert</button>
+        <div class="tool-actions">
+          <button id="addZone" class="primary tool-inline-action" type="button">Add time zone</button>
+          <button id="convertBtn" class="primary" type="button">Convert</button>
+        </div>
 
-      <div class="table-container">
-        <table id="resultTbl" style="display:none">
-          <thead>
-            <tr>
-              <th>Time zone</th>
-              <th>Time formats</th>
-            </tr>
-          </thead>
-          <tbody id="resultBody"></tbody>
-        </table>
+        <div class="table-container tool-compact-table">
+          <table id="resultTbl" style="display:none">
+            <thead>
+              <tr>
+                <th>Time zone</th>
+                <th>Time formats</th>
+              </tr>
+            </thead>
+            <tbody id="resultBody"></tbody>
+          </table>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <section class="card seo-content" style="margin-top:40px; text-align:left; padding:32px;">
-      <h2>How time-code conversion works</h2>
-      <p>The converter follows a simple pipeline: detect the timezone abbreviation, map it to a canonical IANA timezone, resolve any date words such as "tomorrow" or "next Monday", then render the same moment in your selected output zones. Results include local time, ISO 8601 output, and explicit UTC offset.</p>
-      <p>This matters because static UTC offset math often fails when daylight saving changes, regions switch on different dates, or the source abbreviation is season-specific such as EST versus EDT.</p>
+    <section class="tool-support-grid">
+      <article class="card tool-support-card">
+        <p class="tool-section-label">Method</p>
+        <h2>How time-code conversion works</h2>
+        <p>The converter detects the time-zone abbreviation, maps it to a canonical IANA zone, resolves date words
+          such as "tomorrow" or "next Monday", and then renders the same moment in your selected output zones.</p>
+        <p>Results include local time, ISO 8601 output, and explicit UTC offset, which matters because static UTC math
+          often fails during daylight-saving transitions.</p>
+        <p class="tool-note"><strong>Limitations:</strong> abbreviations can be globally ambiguous and very informal
+          phrases may not parse reliably. Mission-critical schedules should still be confirmed in an official calendar
+          system.</p>
+      </article>
 
-      <h2>When time codes become ambiguous</h2>
-      <p>Time-code conversion becomes harder when the source text is incomplete or when the abbreviation is reused globally. For example, CST can mean US Central Standard Time or China Standard Time, and IST can refer to India or Israel depending on context.</p>
-      <p>Best practice is to include three things whenever possible: the time, the abbreviation, and the date context. "2pm" alone is weak input. "2pm EDT tomorrow" is much easier to interpret consistently. Near DST transitions or midnight boundaries, it is safest to confirm with the sender and include an ISO timestamp in the final message.</p>
-
-      <h2>All supported time codes</h2>
-      <p>These are the dedicated time-code detail pages currently available on Toolsified:</p>
-      <div class="internal-links-cluster" style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:24px;">
-        <a href="/time-code/convert-edt-to-local-time" style="color: var(--primary-color); text-decoration: underline;">Convert EDT to Local Time</a>
-        <a href="/time-code/convert-pdt-to-local-time" style="color: var(--primary-color); text-decoration: underline;">Convert PDT to Local Time</a>
-        <a href="/time-code/convert-gmt-to-local-time" style="color: var(--primary-color); text-decoration: underline;">Convert GMT to Local Time</a>
-        <a href="/time-code/convert-cest-to-local-time" style="color: var(--primary-color); text-decoration: underline;">Convert CEST to Local Time</a>
-        <a href="/time-code/convert-bst-to-local-time" style="color: var(--primary-color); text-decoration: underline;">Convert BST to Local Time</a>
-      </div>
-      <p>Use these detail pages when you regularly work with one specific code and want examples, FAQ, and adjacent links for that abbreviation.</p>
-
-      <h2>Popular time conversion tools</h2>
-      <div class="internal-links-cluster" style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:24px;">
-        <a href="/time-zone/pst-to-est" style="color: var(--primary-color); text-decoration: underline;">PST to EST Converter</a>
-        <a href="/time-zone/gmt-to-est" style="color: var(--primary-color); text-decoration: underline;">GMT to EST Converter</a>
-        <a href="/time-zone/pst-to-gmt" style="color: var(--primary-color); text-decoration: underline;">PST to GMT Converter</a>
-        <a href="/time-zone/gmt-to-ist" style="color: var(--primary-color); text-decoration: underline;">GMT to IST Converter</a>
-        <a href="/multi-timezone" style="color: var(--primary-color); text-decoration: underline;">Multi Time Zone Converter</a>
-      </div>
-      <p>These tools are a better fit when you already know both source and target zones and want a direct corridor converter rather than text parsing.</p>
-
-      <h2>Common use cases</h2>
-      <ul>
-        <li>Converting meeting invites that only include an abbreviation</li>
-        <li>Checking launch or webinar times before forwarding them internally</li>
-        <li>Translating recruiter interview messages into your local time</li>
-        <li>Preparing handoff notes for distributed support or incident teams</li>
-        <li>Turning chat shorthand into ISO timestamps for docs, email, or runbooks</li>
-      </ul>
-
-      <h2>Limitations</h2>
-      <ul>
-        <li>Timezone abbreviations can be globally ambiguous without context</li>
-        <li>Very informal phrases may not parse reliably</li>
-        <li>The tool does not validate legal deadlines, calendars, holidays, or meeting availability</li>
-        <li>Mission-critical schedules should still be confirmed in an official calendar system</li>
-      </ul>
-      <p>This category is designed for operational clarity and faster verification, not contractual validation.</p>
-
-      <h2>Related tools</h2>
-      <div class="internal-links-cluster" style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:24px;">
-        <a href="/meeting-overlap" style="color: var(--primary-color); text-decoration: underline;">Meeting Overlap Finder</a>
-        <a href="/multi-timezone" style="color: var(--primary-color); text-decoration: underline;">Multi Time Zone Converter</a>
-        <a href="/time-zone/pst-to-est" style="color: var(--primary-color); text-decoration: underline;">PST to EST Converter</a>
-        <a href="/time-zone/gmt-to-ist" style="color: var(--primary-color); text-decoration: underline;">GMT to IST Converter</a>
-        <a href="/methodology" style="color: var(--primary-color); text-decoration: underline;">Methodology and data sources</a>
-      </div>
-
-      <h2>FAQ</h2>
-      <div class="faq-item" style="margin-bottom: 16px;">
-        <strong>Can I convert one time code to multiple time zones at once?</strong>
-        <p>Yes. Add additional target zones and the same parsed source time will be rendered for each location.</p>
-      </div>
-      <div class="faq-item" style="margin-bottom: 16px;">
-        <strong>Why does this differ from a static UTC offset calculator?</strong>
-        <p>This converter is date-aware and applies daylight saving rules. Static offset tools often ignore seasonal transitions.</p>
-      </div>
-      <div class="faq-item" style="margin-bottom: 16px;">
-        <strong>What if the abbreviation cannot be mapped?</strong>
-        <p>If the parser cannot recognize the abbreviation, you will be prompted to clarify the input.</p>
-      </div>
-      <div class="faq-item" style="margin-bottom: 16px;">
-        <strong>Does Toolsified store the text I paste?</strong>
-        <p>No account is required. Input is processed in-browser for immediate conversion output.</p>
-      </div>
+      <article class="card tool-support-card">
+        <p class="tool-section-label">Related</p>
+        <h2>Useful next tools</h2>
+        <div class="tool-link-cluster">
+          <a href="/meeting-overlap">Meeting Overlap Finder</a>
+          <a href="/multi-timezone">Multi Time Zone Converter</a>
+          <a href="/time-zone/pst-to-est">PST to EST Converter</a>
+          <a href="/time-zone/gmt-to-ist">GMT to IST Converter</a>
+          <a href="/methodology">Methodology and data sources</a>
+        </div>
+        <div class="tool-faq-list">
+          <div class="faq-item">
+            <strong>Can I convert one time code to multiple time zones at once?</strong>
+            <p>Yes. Add additional target zones and the same parsed source time will be rendered for each location.</p>
+          </div>
+          <div class="faq-item">
+            <strong>Why does this differ from a static UTC offset calculator?</strong>
+            <p>This converter is date-aware and applies daylight saving rules. Static offset tools often ignore seasonal
+              transitions.</p>
+          </div>
+          <div class="faq-item">
+            <strong>What if the abbreviation cannot be mapped?</strong>
+            <p>If the parser cannot recognize the abbreviation, you will be prompted to clarify the input.</p>
+          </div>
+          <div class="faq-item">
+            <strong>Does it understand military (24-hour) time?</strong>
+            <p>Yes. Enter times like "14:00 CET" or "0800 PST" and the parser will recognize the 24-hour format without needing AM/PM.</p>
+          </div>
+          <div class="faq-item">
+            <strong>Can I paste a time directly from a chat message?</strong>
+            <p>Yes. Copy the relevant snippet such as "let's meet at 3pm EDT" and paste it into the input field. The parser extracts the time and abbreviation automatically.</p>
+          </div>
+          <div class="faq-item">
+            <strong>What if a timezone abbreviation maps to multiple zones?</strong>
+            <p>Some abbreviations like CST can mean US Central, China Standard, or Cuba Standard. The parser defaults to the most common mapping, so verify the output if your context is non-US.</p>
+          </div>
+        </div>
+      </article>
     </section>
   </main>
 
@@ -165,7 +176,8 @@
     <div class="footer-container">
       <p class="footer-tagline">&copy; 2026 Toolsified - Independent web tools platform.</p>
       <div class="footer-links">
-        <a href="/privacy">Privacy Policy</a><span>|</span><a href="/terms">Terms</a><span>|</span><a href="/about">About</a><span>|</span><a href="/contact">Contact</a>
+        <a href="/privacy">Privacy Policy</a><span>|</span><a href="/terms">Terms</a><span>|</span><a href="/about">About</a><span>|</span><a
+          href="/contact">Contact</a>
       </div>
       <p class="footer-contact">Contact: <a href="mailto:info@toolsified.com">info@toolsified.com</a></p>
       <p class="footer-location">Location: Norway</p>
