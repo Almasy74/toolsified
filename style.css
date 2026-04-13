@@ -87,6 +87,38 @@ a:focus-visible {
   display: block;
 }
 
+/* Unified brand mark (SVG logo) – shared across all pages */
+.site-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  white-space: nowrap;
+}
+
+.site-brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #0d5f88 0%, #1183af 100%);
+  color: #fff;
+  box-shadow: 0 14px 28px -20px rgba(13, 95, 136, 0.9);
+}
+
+.site-brand-mark svg {
+  width: 18px;
+  height: 18px;
+}
+
+.site-brand-wordmark {
+  color: #163246;
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
 .main-nav {
   display: flex;
   align-items: center;
